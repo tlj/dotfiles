@@ -74,7 +74,101 @@ if is_bootstrap then
   return
 end
 
-require('plugins')
-require('settings')
-require('theme')
-require('maps')
+-- LSP init
+local lsp = require('lsp-zero')
+lsp.preset('recommended')
+lsp.setup()
+
+require'toggle_lsp_diagnostics'.init()
+
+-- DAP Debugger
+require('dap-go').setup()
+require('dapui').setup()
+require('telescope').load_extension('dap')
+
+local dap, dapui =require("dap"),require("dapui")
+dap.listeners.after.event_initialized["dapui_config"]=function()
+  dapui.open()
+end
+dap.listeners.before.event_terminated["dapui_config"]=function()
+  dapui.close()
+end
+dap.listeners.before.event_exited["dapui_config"]=function()
+  dapui.close()
+end
+
+vim.fn.sign_define('DapBreakpoint',{ text ='🟥', texthl ='', linehl ='', numhl =''})
+vim.fn.sign_define('DapStopped',{ text ='▶️', texthl ='', linehl ='', numhl =''})
+
+-- Theme
+vim.opt.signcolumn = 'yes'
+vim.opt.termguicolors = true
+
+vim.cmd('colorscheme catppuccin-mocha')
+
+-- Feline bar
+require('feline').setup()
+require('feline').winbar.setup()
+
+-- Other plugins
+require('nvim-tree').setup()
+
+-- TreeSitter
+require'nvim-treesitter.configs'.setup {
+  ensure_installed = { "go", "lua" },     -- one of "all", "language", or a list of languages
+  highlight = {
+    enable = true,              -- false will disable the whole extension
+    disable = { "lua" },  -- list of language that will be disabled
+  },
+}
+
+-- Folding through TreeSitter
+local vim = vim
+local opt = vim.opt
+
+opt.foldenable = false
+opt.foldmethod = "expr"
+opt.foldexpr = "nvim_treesitter#foldexpr()"
+
+-- Tree settings
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
+-- Set leader to space
+vim.g.mapleader = " "
+
+-- Enable line numbers
+vim.wo.number = true
+
+-- Save undo history
+vim.o.undofile = true
+
+-- Two spaces as indent
+vim.opt.tabstop = 2
+vim.opt.shiftwidth = 2
+vim.opt.softtabstop = 2
+vim.opt.expandtab = true
+
+
+-- Maps
+local map = vim.api.nvim_set_keymap
+map('n', '<leader>dtb', '<cmd>lua require"dap".toggle_breakpoint()<CR>', {noremap = true, silent = false})
+map('n', '<leader>dc', '<cmd>lua require"dap".continue()<CR>', {noremap = true, silent = false})
+map('n', '<leader>dsv', '<cmd>lua require"dap".step_over()<CR>', {noremap=true, silent=false})
+map('n', '<leader>dsi', '<cmd>lua require"dap".step_info()<CR>', {noremap=true, silent=false})
+map('n', '<leader>dcc', '<cmd>Telescope dap commands<CR>', {})
+map('n', '<leader>dap', '<cmd>lua require"dapui".toggle()<cr>', {})
+
+map('n', '<leader>ff', '<cmd>lua require"telescope.builtin".find_files()<cr>', {})
+map('n', '<leader>fg', '<cmd>lua require"telescope.builtin".live_grep()<cr>', {})
+map('n', '<leader>fs', '<cmd>lua require"telescope.builtin".grep_string()<cr>', {})
+map('n', '<leader>fb', '<cmd>lua require"telescope.builtin".buffers()<cr>', {})
+map('n', '<leader>fh', '<cmd>lua require"telescope.builtin".help_tags()<cr>', {})
+map('n', '<leader>gs', '<cmd>lua require"telescope.builtin".git_status()<cr>', {})
+
+map('n', '<leader>tt', '<cmd>NvimTreeToggle<cr>', {})
+map('n', '<leader>td', '<cmd>Telescope diagnostics<cr>', {})
+
+map('n', '<leader>rr', '<cmd>lua vim.lsp.buf.rename()<cr>', {})
+
+
