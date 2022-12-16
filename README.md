@@ -1,17 +1,17 @@
 # tlj dotfiles
 
-## Requirements
+## Install the dotfiles and dependencies
 
-*GNU stow*
-
-```shell
-brew install stow
-```
-
-## Install the dotfiles
+The make script support MacOS and Linux and will install dotfiles, dependencies and common tools, like fd, ripgrep, neovim and homebrew.
 
 ```shell
 make 
+```
+
+If you only want to install the dotfiles there is a command for just doing that:
+
+```shell
+make dotfiles
 ```
 
 ## Dependencies
@@ -29,12 +29,6 @@ Find the correct repo for your terminal on https://github.com/catppuccin/catppuc
 https://ohmyz.sh/#install
 
 The .zshrc installed by stow will try to load a ~/.zshrc-local file which has any special zsh config for the local computer, which shouldn't be shared. This file needs to be reated to avoid a warning on startup.
-
-### Neovim
-
-```shell
-brew install ripgrep fd
-```
 
 ## Known issues
 
