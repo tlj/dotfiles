@@ -16,6 +16,14 @@ make dotfiles
 
 ## Dependencies
 
+### Ubersicht
+
+https://tracesof.net/uebersicht/
+
+### Simple bar lite
+
+https://github.com/Jean-Tinland/simple-bar-lite
+
 ### Patched font
 
 Clone https://github.com/Karmenzind/monaco-nerd-fonts and set the font for your terminal to use the correct Monaco Nerd Font.
