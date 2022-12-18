@@ -9,6 +9,7 @@ ifndef STOW
 		$(error "stow is not available, please install stow.")
 endif
 	stow --verbose --target=$$HOME --restow */
+	ln -s `pwd`/ubersicht/custom-settings.json ~/Library/Application\ Support/Übersicht/widgets/simple-bar-lite/custom-settings.json
 
 delete:
 ifndef STOW

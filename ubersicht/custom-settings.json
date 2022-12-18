@@ -1,0 +1,35 @@
+{
+  "yabaiPath": "/opt/homebrew/bin/yabai",
+  "dataWidgets": {
+    "battery": {
+      "enabled": false
+    },
+    "input": {
+      "enabled": false
+    },
+    "output": {
+      "enabled": false
+    },
+    "network": {
+      "enabled": false
+    },
+    "dateTime": {
+      "enabled": true
+    }
+  },
+  "theme": {
+    "dark": {
+      "main": "#1e1e1e",
+      "mainAlt": "#313244",
+      "red": "#f38ba8",
+      "green": "#a6e3a1",
+      "blue": "#89b4fa",
+      "yellow": "#f0e2af",
+      "orange": "#fab387",
+      "magenta": "#cba6f7",
+      "cyan": "#74c7ec",
+      "foreground": "#cdd6f4"
+    },
+    "barOpacity": "1.0"
+  }
+}
