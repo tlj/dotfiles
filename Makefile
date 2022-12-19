@@ -9,6 +9,7 @@ ifndef STOW
 		$(error "stow is not available, please install stow.")
 endif
 	stow --verbose --target=$$HOME --restow */
+	rm ~/Library/Application\ Support/Übersicht/widgets/simple-bar-lite/custom-settings.json
 	ln -s `pwd`/ubersicht/custom-settings.json ~/Library/Application\ Support/Übersicht/widgets/simple-bar-lite/custom-settings.json
 
 delete:
@@ -24,7 +25,11 @@ ifndef BREW
 	/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 endif
 	@echo "Installing ripgrep, fd and neovim"
-	brew install ripgrep fd neovim
+	brew install ripgrep fd neovim git lazygit composer
+	@echo "Installing kitty terminal"
+	brew install --cask kitty ubersicht
+	@echo "Installing simple-bar-lite"
+	if [ ! -d "${HOME}/Library/Application Support/Übersicht/widgets/simple-bar-lite" ]; then git clone https://github.com/Jean-Tinland/simple-bar-lite ${HOME}/Library/Application\ Support/Übersicht/widgets/simple-bar-lite; fi
 endif
 ifeq ($(UNAME), Linux)
 	@echo "Installing ripgrep, fd-find and neovim"
