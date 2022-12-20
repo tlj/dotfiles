@@ -61,7 +61,7 @@ if [[ $systemName == "Linux" ]]; then
 fi
 
 echo "Installing dotfiles"
-stow --target=$HOME --restow kitty/ lazygit/ nvim/ skhd/ yabai/ zsh/ simplebar/
+stow --target=$HOME --restow kitty/ lazygit/ nvim/ skhd/ yabai/ zsh/ simplebar/ k9s/
 
 
 
