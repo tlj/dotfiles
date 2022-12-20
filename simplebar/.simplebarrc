@@ -45,7 +45,7 @@
     "processWidget": false,
     "weatherWidget": false,
     "batteryWidget": true,
-    "wifiWidget": false,
+    "wifiWidget": true,
     "vpnWidget": false,
     "zoomWidget": false,
     "soundWidget": true,
