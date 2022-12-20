@@ -18,6 +18,7 @@ require('packer').startup(function(use)
   use 'leoluz/nvim-dap-go'
   use { "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap"} }
   use 'WhoIsSethDaniel/toggle-lsp-diagnostics.nvim'
+  use { 'kessejones/git-blame-line.nvim' }
   use {
     'nvim-tree/nvim-tree.lua',
     requires = {
@@ -34,6 +35,14 @@ require('packer').startup(function(use)
         'nvim-tree/nvim-web-devicons'
       }
     }
+  }
+  use {
+  'debugloop/telescope-undo.nvim',
+    requires = { 'nvim-telescope/telescope.nvim' },
+    config = function()
+      require("telescope").load_extension("undo")
+      -- optional: vim.keymap.set("n", "<leader>u", "<cmd>Telescope undo<cr>")
+    end,
   }
   use 'nvim-telescope/telescope-dap.nvim'
   use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
@@ -58,6 +67,13 @@ require('packer').startup(function(use)
       {'L3MON4D3/LuaSnip'},
       {'rafamadriz/friendly-snippets'},
     }
+  }
+
+  use {
+    'rmagatti/goto-preview',
+    config = function()
+      require('goto-preview').setup {}
+    end
   }
 
   if is_bootstrap then
@@ -100,6 +116,18 @@ end
 vim.fn.sign_define('DapBreakpoint',{ text ='🟥', texthl ='', linehl ='', numhl =''})
 vim.fn.sign_define('DapStopped',{ text ='▶️', texthl ='', linehl ='', numhl =''})
 
+-- Git blamer inline
+require'git-blame-line'.setup({
+    git = {
+        default_message = 'Not committed yet',
+        blame_format = '%an - %ar - %s' -- see https://git-scm.com/docs/pretty-formats
+    },
+    view = {
+        left_padding_size = 5,
+        enable_cursor_hold = false
+    }
+})
+
 -- Theme
 vim.opt.signcolumn = 'yes'
 vim.opt.termguicolors = true
@@ -109,6 +137,19 @@ vim.cmd('colorscheme catppuccin-mocha')
 -- Feline bar
 require('feline').setup()
 require('feline').winbar.setup()
+
+-- undo
+require("telescope").setup({
+  extensions = {
+    undo = {
+      side_by_side = true,
+      layout_strategy = "vertical",
+      layout_config = {
+        preview_height = 0.8,
+      },
+    },
+  },
+})
 
 -- Other plugins
 require('nvim-tree').setup()
@@ -165,10 +206,13 @@ map('n', '<leader>fs', '<cmd>lua require"telescope.builtin".grep_string()<cr>', 
 map('n', '<leader>fb', '<cmd>lua require"telescope.builtin".buffers()<cr>', {})
 map('n', '<leader>fh', '<cmd>lua require"telescope.builtin".help_tags()<cr>', {})
 map('n', '<leader>gs', '<cmd>lua require"telescope.builtin".git_status()<cr>', {})
+map('n', '<leader>gb', '<cmd>GitBlameLineToggle<cr>', {})
+map('n', "gp", "<cmd>lua require('goto-preview').goto_preview_definition()<CR>", {})
 
 map('n', '<leader>tt', '<cmd>NvimTreeToggle<cr>', {})
 map('n', '<leader>td', '<cmd>Telescope diagnostics<cr>', {})
 
 map('n', '<leader>rr', '<cmd>lua vim.lsp.buf.rename()<cr>', {})
+map("n", "<leader>u", "<cmd>Telescope undo<cr>", {})
 
 
