@@ -113,6 +113,21 @@ dap.listeners.before.event_exited["dapui_config"]=function()
   dapui.close()
 end
 
+dap.adapters.php = {
+  type = 'executable',
+  command = 'node',
+  args = { '/Users/tjohnsen/src/vscode-php-debug/out/phpDebug.js' }
+}
+
+dap.configurations.php = {
+  {
+    type = 'php',
+    request = 'launch',
+    name = 'Listen for Xdebug',
+    port = 8090
+  }
+}
+
 vim.fn.sign_define('DapBreakpoint',{ text ='🟥', texthl ='', linehl ='', numhl =''})
 vim.fn.sign_define('DapStopped',{ text ='▶️', texthl ='', linehl ='', numhl =''})
 
@@ -156,15 +171,14 @@ require('nvim-tree').setup()
 
 -- TreeSitter
 require'nvim-treesitter.configs'.setup {
-  ensure_installed = { "go", "lua" },     -- one of "all", "language", or a list of languages
+  ensure_installed = "all",     -- one of "all", "language", or a list of languages
   highlight = {
     enable = true,              -- false will disable the whole extension
-    disable = { "lua" },  -- list of language that will be disabled
+    disable = { },  -- list of language that will be disabled
   },
 }
 
 -- Folding through TreeSitter
-local vim = vim
 local opt = vim.opt
 
 opt.foldenable = false
@@ -190,14 +204,33 @@ vim.opt.shiftwidth = 2
 vim.opt.softtabstop = 2
 vim.opt.expandtab = true
 
+-- 
+require'lspconfig'.sumneko_lua.setup {
+    settings = {
+        Lua = {
+            diagnostics = {
+                globals = { 'vim' }
+            }
+        }
+    }
+}
+
+-- sapi preview
+require('sapi-preview').setup({package = 'tennis/v3/en'})
+vim.keymap.set('n', '<leader>sg', '<cmd>lua require"sapi-preview".endpoint_with_urn()<cr>', {})
+vim.keymap.set('n', '<leader>sr', '<cmd>lua require"sapi-preview".recents()<cr>', {})
+vim.keymap.set('n', '<leader>se', '<cmd>lua require"sapi-preview".endpoints()<cr>', {})
+vim.keymap.set('n', '<leader>su', '<cmd>lua require"sapi-preview".update_endpoints()<cr>', {})
+vim.keymap.set('n', '<leader>sp', '<cmd>lua require"sapi-preview".select_package()<cr>', {})
 
 -- Maps
 local map = vim.api.nvim_set_keymap
-map('n', '<leader>dtb', '<cmd>lua require"dap".toggle_breakpoint()<CR>', {noremap = true, silent = false})
+map('n', '<leader>db', '<cmd>lua require"dap".toggle_breakpoint()<CR>', {noremap = true, silent = false})
 map('n', '<leader>dc', '<cmd>lua require"dap".continue()<CR>', {noremap = true, silent = false})
-map('n', '<leader>dsv', '<cmd>lua require"dap".step_over()<CR>', {noremap=true, silent=false})
-map('n', '<leader>dsi', '<cmd>lua require"dap".step_info()<CR>', {noremap=true, silent=false})
-map('n', '<leader>dcc', '<cmd>Telescope dap commands<CR>', {})
+map('n', '<leader>ds', '<cmd>lua require"dap".stop()<CR>', {})
+map('n', '<leader>do', '<cmd>lua require"dap".step_over()<CR>', {noremap=true, silent=false})
+map('n', '<leader>di', '<cmd>lua require"dap".step_into()<CR>', {noremap=true, silent=false})
+map('n', '<leader>dt', '<cmd>Telescope dap commands<CR>', {})
 map('n', '<leader>dap', '<cmd>lua require"dapui".toggle()<cr>', {})
 
 map('n', '<leader>ff', '<cmd>lua require"telescope.builtin".find_files()<cr>', {})
@@ -207,12 +240,22 @@ map('n', '<leader>fb', '<cmd>lua require"telescope.builtin".buffers()<cr>', {})
 map('n', '<leader>fh', '<cmd>lua require"telescope.builtin".help_tags()<cr>', {})
 map('n', '<leader>gs', '<cmd>lua require"telescope.builtin".git_status()<cr>', {})
 map('n', '<leader>gb', '<cmd>GitBlameLineToggle<cr>', {})
-map('n', "gp", "<cmd>lua require('goto-preview').goto_preview_definition()<CR>", {})
 
 map('n', '<leader>tt', '<cmd>NvimTreeToggle<cr>', {})
 map('n', '<leader>td', '<cmd>Telescope diagnostics<cr>', {})
-
-map('n', '<leader>rr', '<cmd>lua vim.lsp.buf.rename()<cr>', {})
 map("n", "<leader>u", "<cmd>Telescope undo<cr>", {})
 
+-- lsp
+vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, {})
+vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, {})
 
+vim.keymap.set('n', 'gp', "<cmd>lua require('goto-preview').goto_preview_definition()<CR>", {})
+vim.keymap.set('n', 'gd', vim.lsp.buf.definition, {})
+vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, {})
+vim.keymap.set('n', 'gr', require('telescope.builtin').lsp_references, {})
+
+vim.api.nvim_create_autocmd('LspAttach', {
+  callback = function(args)
+    vim.keymap.set('n', 'K', vim.lsp.buf.hover, { buffer = args.buf })
+  end,
+})

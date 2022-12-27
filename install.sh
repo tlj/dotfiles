@@ -60,6 +60,12 @@ if [[ $systemName == "Linux" ]]; then
   sudo apt install ripgrep fd-find neovim
 fi
 
+echo "Installing PHP DAP adapter..."
+git clone https://github.com/xdebug/vscode-php-debug.git ~/src/vscode-php-debug
+cd ~/src/vscode-php-debug
+npm install && npm run build
+cd -
+
 echo "Installing dotfiles"
 stow --target=$HOME --restow kitty/ lazygit/ nvim/ skhd/ yabai/ zsh/ simplebar/ k9s/
 

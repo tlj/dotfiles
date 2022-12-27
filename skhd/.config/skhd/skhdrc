@@ -35,7 +35,7 @@ ctrl + alt - l : \
     yabai -m window --resize left:100:0
 
 # Float and center window
-shift + alt - c : yabai -m window --toggle float;\
+shift + alt - space : yabai -m window --toggle float;\
                 yabai -m window --grid 4:4:1:1:2:2
 
 # Set insertion point for focused container
@@ -46,6 +46,9 @@ shift + ctrl + alt - l : yabai -m window --insert east
 
 # Float / Unfloat window
 shift + alt - space : yabai -m window --toggle float
+
+# toggle vertical/horizontal split
+alt - space : yabai -m window --toggle split
 
 # Make fullscreen
 alt - f         : yabai -m window --toggle zoom-fullscreen

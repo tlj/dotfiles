@@ -1,7 +1,8 @@
 #!/usr/bin/env sh
 
-yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
-sudo yabai --load-sa
+# do this only if SIP is patched
+#yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
+#sudo yabai --load-sa
 
 yabai -m config window_gap                    2
 
@@ -17,6 +18,8 @@ yabai -m config auto_balance                  on
 yabai -m config mouse_modifer                 ctrl
 yabai -m config mouse_action1                 move
 yabai -m config mouse_action2                 resize
+
+yabai -m config --space 6 layout float
 
 # general space settings
 yabai -m config external_bar all:26:0
@@ -70,3 +73,7 @@ yabai -m rule --add title="popup"               manage=off
 #yabai -m config window_border_width          6
 #yabai -m config active_window_border_color   0xffff3050
 #yabai -m config normal_window_border_color   0xffaaaaaa
+
+yabai -m signal --add event=space_changed \
+    action="osascript -e 'tell application \"Übersicht\" to refresh widget id \"simple-bar-index-jsx\"'"
+
