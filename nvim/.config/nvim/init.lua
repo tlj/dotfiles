@@ -14,11 +14,18 @@ require('packer').startup(function(use)
   use "EdenEast/nightfox.nvim"
   use { "catppuccin/nvim", as = "catppuccin" }
   use 'mfussenegger/nvim-dap'
+  use 'theHamsta/nvim-dap-virtual-text'
   use 'feline-nvim/feline.nvim'
   use 'leoluz/nvim-dap-go'
-  use { "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap"} }
+  use { "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" } }
   use 'WhoIsSethDaniel/toggle-lsp-diagnostics.nvim'
   use { 'kessejones/git-blame-line.nvim' }
+
+  -- for lua dev
+  use { 'milisims/nvim-luaref' }
+  use { 'folke/lua-dev.nvim' }
+  --
+
   use {
     'nvim-tree/nvim-tree.lua',
     requires = {
@@ -37,7 +44,7 @@ require('packer').startup(function(use)
     }
   }
   use {
-  'debugloop/telescope-undo.nvim',
+    'debugloop/telescope-undo.nvim',
     requires = { 'nvim-telescope/telescope.nvim' },
     config = function()
       require("telescope").load_extension("undo")
@@ -51,21 +58,21 @@ require('packer').startup(function(use)
     'VonHeikemen/lsp-zero.nvim',
     requires = {
       -- LSP Support
-      {'neovim/nvim-lspconfig'},
-      {'williamboman/mason.nvim'},
-      {'williamboman/mason-lspconfig.nvim'},
+      { 'neovim/nvim-lspconfig' },
+      { 'williamboman/mason.nvim' },
+      { 'williamboman/mason-lspconfig.nvim' },
 
       -- Autocompletion
-      {'hrsh7th/nvim-cmp'},
-      {'hrsh7th/cmp-buffer'},
-      {'hrsh7th/cmp-path'},
-      {'saadparwaiz1/cmp_luasnip'},
-      {'hrsh7th/cmp-nvim-lsp'},
-      {'hrsh7th/cmp-nvim-lua'},
+      { 'hrsh7th/nvim-cmp' },
+      { 'hrsh7th/cmp-buffer' },
+      { 'hrsh7th/cmp-path' },
+      { 'saadparwaiz1/cmp_luasnip' },
+      { 'hrsh7th/cmp-nvim-lsp' },
+      { 'hrsh7th/cmp-nvim-lua' },
 
       -- Snippets
-      {'L3MON4D3/LuaSnip'},
-      {'rafamadriz/friendly-snippets'},
+      { 'L3MON4D3/LuaSnip' },
+      { 'rafamadriz/friendly-snippets' },
     }
   }
 
@@ -95,21 +102,21 @@ local lsp = require('lsp-zero')
 lsp.preset('recommended')
 lsp.setup()
 
-require'toggle_lsp_diagnostics'.init()
+require 'toggle_lsp_diagnostics'.init()
 
 -- DAP Debugger
 require('dap-go').setup()
 require('dapui').setup()
 require('telescope').load_extension('dap')
 
-local dap, dapui =require("dap"),require("dapui")
-dap.listeners.after.event_initialized["dapui_config"]=function()
+local dap, dapui = require("dap"), require("dapui")
+dap.listeners.after.event_initialized["dapui_config"] = function()
   dapui.open()
 end
-dap.listeners.before.event_terminated["dapui_config"]=function()
+dap.listeners.before.event_terminated["dapui_config"] = function()
   dapui.close()
 end
-dap.listeners.before.event_exited["dapui_config"]=function()
+dap.listeners.before.event_exited["dapui_config"] = function()
   dapui.close()
 end
 
@@ -128,19 +135,19 @@ dap.configurations.php = {
   }
 }
 
-vim.fn.sign_define('DapBreakpoint',{ text ='🟥', texthl ='', linehl ='', numhl =''})
-vim.fn.sign_define('DapStopped',{ text ='▶️', texthl ='', linehl ='', numhl =''})
+vim.fn.sign_define('DapBreakpoint', { text = '🟥', texthl = '', linehl = '', numhl = '' })
+vim.fn.sign_define('DapStopped', { text = '▶️', texthl = '', linehl = '', numhl = '' })
 
 -- Git blamer inline
-require'git-blame-line'.setup({
-    git = {
-        default_message = 'Not committed yet',
-        blame_format = '%an - %ar - %s' -- see https://git-scm.com/docs/pretty-formats
-    },
-    view = {
-        left_padding_size = 5,
-        enable_cursor_hold = false
-    }
+require 'git-blame-line'.setup({
+  git = {
+    default_message = 'Not committed yet',
+    blame_format = '%an - %ar - %s' -- see https://git-scm.com/docs/pretty-formats
+  },
+  view = {
+    left_padding_size = 5,
+    enable_cursor_hold = false
+  }
 })
 
 -- Theme
@@ -170,11 +177,11 @@ require("telescope").setup({
 require('nvim-tree').setup()
 
 -- TreeSitter
-require'nvim-treesitter.configs'.setup {
-  ensure_installed = "all",     -- one of "all", "language", or a list of languages
+require 'nvim-treesitter.configs'.setup {
+  ensure_installed = "all", -- one of "all", "language", or a list of languages
   highlight = {
-    enable = true,              -- false will disable the whole extension
-    disable = { },  -- list of language that will be disabled
+    enable = true, -- false will disable the whole extension
+    disable = {}, -- list of language that will be disabled
   },
 }
 
@@ -204,36 +211,38 @@ vim.opt.shiftwidth = 2
 vim.opt.softtabstop = 2
 vim.opt.expandtab = true
 
--- 
-require'lspconfig'.sumneko_lua.setup {
-    settings = {
-        Lua = {
-            diagnostics = {
-                globals = { 'vim' }
-            }
-        }
+--
+require 'lspconfig'.sumneko_lua.setup {
+  settings = {
+    Lua = {
+      diagnostics = {
+        globals = { 'vim' }
+      }
     }
+  }
 }
 
 -- sapi preview
-require('sapi-preview').setup({package = 'tennis/v3/en'})
+require('sapi-preview').setup()
 vim.keymap.set('n', '<leader>sg', '<cmd>lua require"sapi-preview".endpoint_with_urn()<cr>', {})
 vim.keymap.set('n', '<leader>sr', '<cmd>lua require"sapi-preview".recents()<cr>', {})
 vim.keymap.set('n', '<leader>se', '<cmd>lua require"sapi-preview".endpoints()<cr>', {})
-vim.keymap.set('n', '<leader>su', '<cmd>lua require"sapi-preview".update_endpoints()<cr>', {})
+vim.keymap.set('n', '<leader>su', '<cmd>lua require"sapi-preview".refresh_endpoints()<cr>', {})
 vim.keymap.set('n', '<leader>sp', '<cmd>lua require"sapi-preview".select_package()<cr>', {})
+vim.keymap.set('n', '<leader>sb', '<cmd>lua require"sapi-preview".select_base_url()<cr>', {})
+
 
 -- Maps
 local map = vim.api.nvim_set_keymap
-map('n', '<leader>db', '<cmd>lua require"dap".toggle_breakpoint()<CR>', {noremap = true, silent = false})
-map('n', '<leader>dc', '<cmd>lua require"dap".continue()<CR>', {noremap = true, silent = false})
+map('n', '<leader>db', '<cmd>lua require"dap".toggle_breakpoint()<CR>', { noremap = true, silent = false })
+map('n', '<leader>dc', '<cmd>lua require"dap".continue()<CR>', { noremap = true, silent = false })
 map('n', '<leader>ds', '<cmd>lua require"dap".stop()<CR>', {})
-map('n', '<leader>do', '<cmd>lua require"dap".step_over()<CR>', {noremap=true, silent=false})
-map('n', '<leader>di', '<cmd>lua require"dap".step_into()<CR>', {noremap=true, silent=false})
+map('n', '<leader>do', '<cmd>lua require"dap".step_over()<CR>', { noremap = true, silent = false })
+map('n', '<leader>di', '<cmd>lua require"dap".step_into()<CR>', { noremap = true, silent = false })
 map('n', '<leader>dt', '<cmd>Telescope dap commands<CR>', {})
 map('n', '<leader>dap', '<cmd>lua require"dapui".toggle()<cr>', {})
 
-map('n', '<leader>ff', '<cmd>lua require"telescope.builtin".find_files()<cr>', {})
+map('n', '<leader>ff', '<cmd>lua require"telescope.builtin".find_files({hidden = true})<cr>', {})
 map('n', '<leader>fg', '<cmd>lua require"telescope.builtin".live_grep()<cr>', {})
 map('n', '<leader>fs', '<cmd>lua require"telescope.builtin".grep_string()<cr>', {})
 map('n', '<leader>fb', '<cmd>lua require"telescope.builtin".buffers()<cr>', {})
