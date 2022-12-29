@@ -28,6 +28,7 @@
   "plenary.nvim": { "branch": "master", "commit": "4b7e52044bbb84242158d977a50c4cbcd85070c7" },
   "sapi-preview.nvim": { "branch": "master", "commit": "f827afa6883475d8d52bc3fac9d290c60fb11150" },
   "sqlite.lua": { "branch": "master", "commit": "53cac3fdb5f5e4e63e243232b6eccf3c764ae18a" },
+  "startup.nvim": { "branch": "master", "commit": "b060480d2e647534faf70fa1263fe7623b77b0ce" },
   "telescope-dap.nvim": { "branch": "master", "commit": "313d2ea12ae59a1ca51b62bf01fc941a983d9c9c" },
   "telescope-undo.nvim": { "branch": "main", "commit": "f2ca7c914134c7e6eb9275ee09863141caa77a3f" },
   "telescope.nvim": { "branch": "master", "commit": "a606bd10c79ec5989c76c49cc6f736e88b63f0da" }

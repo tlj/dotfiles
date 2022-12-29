@@ -22,6 +22,17 @@ require("lazy").setup({
   -- catppuccin theme
   "catppuccin/nvim",
 
+  {
+    "startup-nvim/startup.nvim",
+    dependencies = {
+      "nvim-telescope/telescope.nvim",
+      "nvim-lua/plenary.nvim",
+    },
+    config = function()
+      require("startup").setup()
+    end
+  },
+
   -- neovim dev stuff
   --"folke/neodev.vim",
   "milisims/nvim-luaref",
