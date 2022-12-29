@@ -9,23 +9,33 @@ if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
 end
 
 require('packer').startup(function(use)
+  -- Packer package manager
   use 'wbthomason/packer.nvim'
-  use 'joshdick/onedark.vim'
-  use "EdenEast/nightfox.nvim"
+
+  -- catppuccin theme
   use { "catppuccin/nvim", as = "catppuccin" }
+
+  -- DAP debugger
   use 'mfussenegger/nvim-dap'
   use 'theHamsta/nvim-dap-virtual-text'
-  use 'feline-nvim/feline.nvim'
   use 'leoluz/nvim-dap-go'
   use { "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" } }
-  use 'WhoIsSethDaniel/toggle-lsp-diagnostics.nvim'
+  use 'nvim-telescope/telescope-dap.nvim'
+
+  -- feline status line
+  use 'feline-nvim/feline.nvim'
+
+  -- git tools
   use { 'kessejones/git-blame-line.nvim' }
 
   -- for lua dev
   use { 'milisims/nvim-luaref' }
-  use { 'folke/lua-dev.nvim' }
-  --
+  use { 'folke/neodev.nvim' }
 
+  -- LSP tool to toggle LSP diag features (underlines, etc) on/off
+  -- use 'WhoIsSethDaniel/toggle-lsp-diagnostics.nvim'
+
+  -- Filetree window
   use {
     'nvim-tree/nvim-tree.lua',
     requires = {
@@ -33,6 +43,8 @@ require('packer').startup(function(use)
     },
     tag = 'nightly' -- optional, updated every week. (see issue #1193)
   }
+
+  -- Telescope
   use {
     'nvim-telescope/telescope.nvim', tag = '0.1.0',
     requires = {
@@ -43,6 +55,8 @@ require('packer').startup(function(use)
       }
     }
   }
+
+  -- Show the undo tree with Telescope
   use {
     'debugloop/telescope-undo.nvim',
     requires = { 'nvim-telescope/telescope.nvim' },
@@ -51,9 +65,11 @@ require('packer').startup(function(use)
       -- optional: vim.keymap.set("n", "<leader>u", "<cmd>Telescope undo<cr>")
     end,
   }
-  use 'nvim-telescope/telescope-dap.nvim'
+
+  -- Treesitter
   use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
 
+  -- LSP Zero config to automatically install language server for languages
   use {
     'VonHeikemen/lsp-zero.nvim',
     requires = {
@@ -76,11 +92,19 @@ require('packer').startup(function(use)
     }
   }
 
+  -- Show a floating preview for a definition
   use {
     'rmagatti/goto-preview',
     config = function()
       require('goto-preview').setup {}
     end
+  }
+
+  use {
+    'tlj/sapi-preview.nvim',
+    requires = {
+      'kkharji/sqlite.lua'
+    }
   }
 
   if is_bootstrap then
@@ -102,7 +126,8 @@ local lsp = require('lsp-zero')
 lsp.preset('recommended')
 lsp.setup()
 
-require 'toggle_lsp_diagnostics'.init()
+-- Disabled this and plugin. Not using it right now.
+-- require 'toggle_lsp_diagnostics'.init()
 
 -- DAP Debugger
 require('dap-go').setup()
@@ -224,13 +249,12 @@ require 'lspconfig'.sumneko_lua.setup {
 
 -- sapi preview
 require('sapi-preview').setup()
-vim.keymap.set('n', '<leader>sg', '<cmd>lua require"sapi-preview".endpoint_with_urn()<cr>', {})
-vim.keymap.set('n', '<leader>sr', '<cmd>lua require"sapi-preview".recents()<cr>', {})
-vim.keymap.set('n', '<leader>se', '<cmd>lua require"sapi-preview".endpoints()<cr>', {})
-vim.keymap.set('n', '<leader>su', '<cmd>lua require"sapi-preview".refresh_endpoints()<cr>', {})
-vim.keymap.set('n', '<leader>sp', '<cmd>lua require"sapi-preview".select_package()<cr>', {})
-vim.keymap.set('n', '<leader>sb', '<cmd>lua require"sapi-preview".select_base_url()<cr>', {})
-
+vim.keymap.set('n', '<leader>sg', '<cmd>SapiGoto<cr>', {})
+vim.keymap.set('n', '<leader>sr', '<cmd>SapiRecents<cr>', {})
+vim.keymap.set('n', '<leader>se', '<cmd>SapiEndpoints<cr>', {})
+vim.keymap.set('n', '<leader>su', '<cmd>SapiRefresh<cr>', {})
+vim.keymap.set('n', '<leader>sp', '<cmd>SapiPackage<cr>', {})
+vim.keymap.set('n', '<leader>sb', '<cmd>SapiBaseUrl<cr>', {})
 
 -- Maps
 local map = vim.api.nvim_set_keymap
