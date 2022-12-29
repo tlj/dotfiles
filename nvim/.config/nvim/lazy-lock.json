@@ -9,6 +9,7 @@
   "feline.nvim": { "branch": "master", "commit": "d48b6f92c6ccdd6654c956f437be49ea160b5b0c" },
   "friendly-snippets": { "branch": "main", "commit": "1a6a02350568d6830bcfa167c72f9b6e75e454ae" },
   "git-blame-line.nvim": { "branch": "main", "commit": "2cb9f89776b8e7d0deda84ec827406826be1d3f9" },
+  "gitsigns.nvim": { "branch": "main", "commit": "2ab3bdf0a40bab53033048c6be75bda86316b55d" },
   "goto-preview": { "branch": "main", "commit": "de58c6538f6625de52e40442337fda00e77d17b3" },
   "lazy.nvim": { "branch": "main", "commit": "717cd2f3d683e186888f1e238a19af9c7646a539" },
   "lsp-zero.nvim": { "branch": "main", "commit": "ebc745dd6d9ee7032326ba0ea5fb9ee6e91d0aae" },

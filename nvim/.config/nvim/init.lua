@@ -18,6 +18,10 @@ vim.opt.runtimepath:prepend(lazypath)
 vim.g.mapleader = " "
 vim.opt.termguicolors = true
 
+-- disable netrw for nvim tree to work
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
 require("lazy").setup({
   -- catppuccin theme
   "catppuccin/nvim",
@@ -40,6 +44,14 @@ require("lazy").setup({
   -- feline status bar
   {
     "feline-nvim/feline.nvim",
+    dependencies = {
+      {
+        "lewis6991/gitsigns.nvim",
+        config = function()
+          require("gitsigns").setup()
+        end,
+      },
+    },
     config = function()
       require('feline').setup()
       require('feline').winbar.setup()
@@ -303,9 +315,6 @@ opt.foldmethod = "expr"
 opt.foldexpr = "nvim_treesitter#foldexpr()"
 
 -- Tree settings
-vim.g.loaded_netrw = 1
-vim.g.loaded_netrwPlugin = 1
-
 -- Set leader to space
 vim.g.mapleader = " "
 
