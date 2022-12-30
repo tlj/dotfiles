@@ -15,9 +15,19 @@ end
 vim.opt.runtimepath:prepend(lazypath)
 
 require "user.options"
-require "user.mappings"
 require("lazy").setup("user.plugins")
+
+vim.api.nvim_create_autocmd("User", {
+  pattern = "VeryLazy",
+  callback = function()
+    require("user.mappings")
+  end,
+})
 
 -- Theme
 vim.cmd('colorscheme catppuccin-mocha')
 
+-- If neovim is started with a directory as argument, change to that directory
+if vim.fn.isdirectory(vim.v.argv[2]) == 1 then
+  vim.api.nvim_set_current_dir(vim.v.argv[2])
+end

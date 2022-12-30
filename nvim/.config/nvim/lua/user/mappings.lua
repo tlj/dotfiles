@@ -1,3 +1,11 @@
+local wk = require("which-key")
+wk.setup({
+  show_help = true,
+  triggers = "auto",
+  plugins = { spelling = true },
+  key_labels = { ["<leader>"] = "SPC" },
+})
+
 local opts = { noremap = true, silent = true }
 
 -- Shorten function name
@@ -25,6 +33,19 @@ keymap("n", "J", ":m .+1<CR>==", opts)
 keymap("x", "K", ":move '>+1<CR>gv-gv", opts)
 keymap("x", "J", ":move '<-2<CR>gv-gv", opts)
 
+-- Resize windows with shift-arrow keys
+keymap("n", "<S-Up>", "<cmd>resize +2<CR>", opts)
+keymap("n", "<S-Down>", "<cmd>resize -2<CR>", opts)
+keymap("n", "<S-Left>", "<cmd>vertical resize -2<CR>", opts)
+keymap("n", "<S-Right>", "<cmd>vertical resize +2<CR>", opts)
+
+-- Clear search with <esc>
+keymap("n", "<esc>", "<cmd>noh<cr><esc>", opts)
+keymap("i", "<esc>", "<cmd>noh<cr><esc>", opts)
+
+-- Save in insert mode
+keymap("i", "<C-s>", "<cmd>:w<cr><esc>", opts)
+keymap("n", "<C-s>", "<cmd>:w<cr><esc>", opts)
 
 
 
