@@ -36,11 +36,22 @@ local M = {
 
     vim.api.nvim_create_autocmd('LspAttach', {
       callback = function(args)
-        vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, {})
-        vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, {})
+        vim.keymap.set('n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<cr>', {})
+        vim.keymap.set('n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<cr>', {})
+        vim.keymap.set('n', '<leader>ra', '<cmd>lua vim.lsp.buf.range_code_action()<cr>', {})
 
-        vim.keymap.set('n', 'gd', vim.lsp.buf.definition, {})
-        vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, {})
+        vim.keymap.set('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<cr>', {})
+        vim.keymap.set('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<cr>', {})
+        vim.keymap.set('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<cr>', {})
+        vim.keymap.set('n', 'go', '<cmd>lua vim.lsp.buf.type_definitions()<cr>', {})
+        vim.keymap.set('n', 'gr', '<cmd>lua vim.lsp.buf.references()<cr>', {})
+        vim.keymap.set('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<cr>', {})
+
+        -- diagnostics
+        vim.keymap.set('n', 'gl', '<cmd>lua vim.diagnostic.open_float()<cr>', {})
+        vim.keymap.set('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<cr>', {})
+        vim.keymap.set('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<cr>', {})
+
         -- vim.keymap.set('n', 'K', vim.lsp.buf.hover, { buffer = args.buf })
       end,
     })
