@@ -2,6 +2,16 @@
 
 systemName=$(uname -s)
 
+install_with_git() {
+  REPO=$2
+  DIR=$1
+  if [[ ! -d "$DIR" ]]; then
+    git clone --quiet --depth=1 $REPO $DIR
+  else
+    git -C $DIR pull --quiet
+  fi
+}
+
 if [[ $systemName == "Darwin" ]]; then
   echo "Detected MacOS system, installing dependencies with Homebrew."
   if [[ `which brew` == "" ]]; then
@@ -10,14 +20,14 @@ if [[ $systemName == "Darwin" ]]; then
   fi
 
   echo "Installing ripgrep, fd, neovim, git, lazygit, composer, skhd, fzf"
-  brew install -q --quiet ripgrep fd neovim git lazygit composer skhd fzf
+  brew install -q --quiet ripgrep fd neovim git lazygit composer skhd fzf autojump
 
   echo "Installing Kitty terminal and Ubersicht"
   brew install -q --quiet --cask kitty ubersicht > /dev/null
 
   echo "Installing simple-bar for Ubersicht"
   if [ ! -d "${HOME}/Library/Application Support/Übersicht/widgets/simple-bar" ]; then 
-    git clone https://github.com/Jean-Tinland/simple-bar ${HOME}/Library/Application\ Support/Übersicht/widgets/simple-bar > /dev/null
+    git clone --quiet https://github.com/Jean-Tinland/simple-bar ${HOME}/Library/Application\ Support/Übersicht/widgets/simple-bar > /dev/null
   else
     git -C ${HOME}/Library/Application\ Support/Übersicht/widgets/simple-bar pull > /dev/null
   fi
@@ -28,6 +38,26 @@ if [[ $systemName == "Darwin" ]]; then
   echo "Installing Nerd Fonts"
   brew tap homebrew/cask-fonts
   brew install -q --cask font-hack-nerd-font
+
+  echo "Installing oh-my-zsh"
+  ZSH_DIR=$HOME/.oh-my-zsh
+  if [[ ! -d "$ZSH_DIR" ]]; then
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" > /dev/null
+  else
+    git -C $ZSH_DIR pull --quiet
+  fi
+
+  echo "Installing Powerlevel10k"
+  install_with_git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k https://github.com/romkatv/powerlevel10k.git 
+  
+  echo "Installing zsh-syntax-highlighting..."
+  install_with_git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting https://github.com/zsh-users/zsh-syntax-highlighting.git
+  
+  echo "Installing zsh-autosuggestions..."
+  install_with_git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions https://github.com/zsh-users/zsh-autosuggestions.git
+
+  echo "Installing fzf from git..."
+  install_with_git ~/.fzf https://github.com/junegunn/fzf.git
 
   codesign -v $(which yabai)
   if [ $? -ne 0 ]; then
