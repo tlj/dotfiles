@@ -26,8 +26,8 @@ keymap("v", "<", "<gv", opts)
 keymap("v", ">", ">gv", opts)
 
 -- Move text up and down
-keymap("n", "K", ":m .-2<CR>==", opts)
-keymap("n", "J", ":m .+1<CR>==", opts)
+-- keymap("n", "K", ":m .-2<CR>==", opts)
+-- keymap("n", "J", ":m .+1<CR>==", opts)
 
 -- Move a block in visual mode
 keymap("x", "K", ":move '>+1<CR>gv-gv", opts)
