@@ -9,11 +9,11 @@ if [[ $systemName == "Darwin" ]]; then
     exit 1
   fi
 
-  echo "Installing ripgrep, fd, neovim, git, lazygit, composer, skhd"
-  brew install --quiet ripgrep fd neovim git lazygit composer skhd
+  echo "Installing ripgrep, fd, neovim, git, lazygit, composer, skhd, fzf"
+  brew install -q --quiet ripgrep fd neovim git lazygit composer skhd fzf
 
   echo "Installing Kitty terminal and Ubersicht"
-  brew install --quiet --cask kitty ubersicht > /dev/null
+  brew install -q --quiet --cask kitty ubersicht > /dev/null
 
   echo "Installing simple-bar for Ubersicht"
   if [ ! -d "${HOME}/Library/Application Support/Übersicht/widgets/simple-bar" ]; then 
@@ -23,10 +23,11 @@ if [[ $systemName == "Darwin" ]]; then
   fi
 
   echo "Installing yabai"
-  brew install --quiet koekeishiya/formulae/yabai --head
+  brew install -q --quiet koekeishiya/formulae/yabai --head
 
-  echo "Installing Monaco Nerd Fonts"
-  curl --silent -o "~/Library/Fonts/Monaco Nerd Font Complete Mono.ttf" https://github.com/Karmenzind/monaco-nerd-fonts/raw/master/fonts/Monaco%20Nerd%20Font%20Complete%20Mono.ttf
+  echo "Installing Nerd Fonts"
+  brew tap homebrew/cask-fonts
+  brew install -q --cask font-hack-nerd-font
 
   codesign -v $(which yabai)
   if [ $? -ne 0 ]; then
@@ -57,17 +58,21 @@ fi
 
 if [[ $systemName == "Linux" ]]; then
   echo "Installing ripgrep, fd-find and neovim"
-  sudo apt install ripgrep fd-find neovim
+  sudo apt install ripgrep fd-find neovim fzf
 fi
 
 echo "Installing PHP DAP adapter..."
-git clone https://github.com/xdebug/vscode-php-debug.git ~/src/vscode-php-debug
-cd ~/src/vscode-php-debug
-npm install && npm run build
-cd -
+if [[ ! -d ~/src/vscode-php-debug ]]; then
+  git clone --quiet https://github.com/xdebug/vscode-php-debug.git ~/src/vscode-php-debug
+  cd ~/src/vscode-php-debug
+else
+  cd ~/src/vscode-php-debug
+  git pull --quiet
+fi
+npm install --silent && npm run --silent build
+cd - > /dev/null
 
 echo "Installing dotfiles"
 stow --target=$HOME --restow kitty/ lazygit/ nvim/ skhd/ yabai/ zsh/ simplebar/ k9s/
-
 
 
