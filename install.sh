@@ -19,8 +19,8 @@ if [[ $systemName == "Darwin" ]]; then
     exit 1
   fi
 
-  echo "Installing ripgrep, fd, neovim, git, lazygit, composer, skhd, fzf"
-  brew install -q --quiet ripgrep fd neovim git lazygit composer skhd fzf autojump
+  echo "Installing ripgrep, fd, neovim, git, lazygit, composer, skhd, fzf, bat, lsd"
+  brew install -q --quiet ripgrep fd neovim git lazygit composer skhd fzf autojump bat lsd
 
   echo "Installing Kitty terminal and Ubersicht"
   brew install -q --quiet --cask kitty ubersicht > /dev/null
@@ -38,6 +38,15 @@ if [[ $systemName == "Darwin" ]]; then
   echo "Installing Nerd Fonts"
   brew tap homebrew/cask-fonts
   brew install -q --cask font-hack-nerd-font
+
+  echo "Installing bat catppuccin theme"
+  BAT_THEME_DIR=$(bat --config-dir)/themes
+  if [[ ! -d "$BAT_THEME_DIR" ]]; then
+    mkdir $BAT_THEME_DIR
+  fi
+  install_with_git ~/src/bat-catppuccin https://github.com/catppuccin/bat
+  cp ~/src/bat-catppuccin/*.tmTheme $BAT_THEME_DIR
+  bat cache --build
 
   echo "Installing oh-my-zsh"
   ZSH_DIR=$HOME/.oh-my-zsh
@@ -103,6 +112,6 @@ npm install --silent && npm run --silent build
 cd - > /dev/null
 
 echo "Installing dotfiles"
-stow --target=$HOME --restow kitty/ lazygit/ nvim/ skhd/ yabai/ zsh/ simplebar/ k9s/
+stow --target=$HOME --restow kitty/ lazygit/ nvim/ skhd/ yabai/ zsh/ simplebar/ k9s/ bat/ lsd/
 
 

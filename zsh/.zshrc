@@ -119,6 +119,9 @@ export EDITOR='nvim'
 alias ibrew="arch -x86_64 /usr/local/bin/brew"
 alias n="nvim"
 alias vim="nvim"
+alias cat="bat"
+alias l="lsd"
+alias ll="lsd -l"
 
 source $HOME/.zshrc-local
 
