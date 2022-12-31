@@ -47,5 +47,11 @@ keymap("i", "<esc>", "<cmd>noh<cr><esc>", opts)
 keymap("i", "<C-s>", "<cmd>:w<cr><esc>", opts)
 keymap("n", "<C-s>", "<cmd>:w<cr><esc>", opts)
 
+-- Don't allow arrow keys, use hjkl instead
+keymap('n', "<left>", "<nop>", opts)
+keymap('n', "<right>", "<nop>", opts)
+keymap('n', "<up>", "<nop>", opts)
+keymap('n', "<down>", "<nop>", opts)
+
 
 
