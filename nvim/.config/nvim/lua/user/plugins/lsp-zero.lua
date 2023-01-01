@@ -50,7 +50,7 @@ local M = {
         vim.keymap.set('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<cr>', {})
         vim.keymap.set('n', 'go', '<cmd>lua vim.lsp.buf.type_definitions()<cr>', {})
         vim.keymap.set('n', 'gr', '<cmd>lua vim.lsp.buf.references()<cr>', {})
-        vim.keymap.set('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<cr>', {})
+        vim.keymap.set('n', '<leader>gh', '<cmd>lua vim.lsp.buf.signature_help()<cr>', {})
 
         -- diagnostics
         vim.keymap.set('n', '<leader>gl', '<cmd>Telescope diagnostics bufnr=0<cr>', {})
