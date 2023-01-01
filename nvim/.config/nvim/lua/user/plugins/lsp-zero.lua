@@ -22,6 +22,11 @@ local M = {
     -- LSP init
     local lsp = require('lsp-zero')
     lsp.preset('recommended')
+
+    lsp.set_preferences({
+      set_lsp_keymaps = {omit = {'K', '<C-k>'}}
+    })
+
     lsp.setup()
 
     require 'lspconfig'.sumneko_lua.setup {
@@ -48,6 +53,7 @@ local M = {
         vim.keymap.set('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<cr>', {})
 
         -- diagnostics
+        vim.keymap.set('n', '<leader>gl', '<cmd>Telescope diagnostics bufnr=0<cr>', {})
         vim.keymap.set('n', 'gl', '<cmd>lua vim.diagnostic.open_float()<cr>', {})
         vim.keymap.set('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<cr>', {})
         vim.keymap.set('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<cr>', {})
