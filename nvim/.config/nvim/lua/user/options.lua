@@ -22,7 +22,7 @@ local options = {
   relativenumber = false,
   numberwidth = 4,
   signcolumn = "yes", -- always show the sign column, otherwise it would shift the text each time
-  wrap = false, -- display lines as one long line
+  wrap = true, -- display lines as one long line
   scrolloff = 8, -- number of lines to keep above or below the cursor
   sidescrolloff = 8, -- number of cols to keep to the left or right of cursor
 
