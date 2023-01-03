@@ -46,4 +46,24 @@ vim.g.loaded_netrwPlugin = 1
 -- Enable line numbers
 vim.wo.number = true
 
+-- use ripgrep for grep, see 
+-- https://phelipetls.github.io/posts/extending-vim-with-ripgrep/
+-- and
+-- https://gist.github.com/lalitmee/c379ee6b5163ac3670cfbca9a356b6bb
+local executable = function(e)
+  return vim.fn.executable(e) > 0
+end
+
+local function add(value, str, sep)
+  sep = sep or ','
+  str = str or ''
+  value = type(value) == 'table' and table.concat(value, sep) or value
+  return str ~= '' and table.concat({ value, str }, sep) or value
+end
+
+if executable("rg") then
+  vim.o.grepprg =
+      [[rg --hidden --smart-case --vimgrep ]]
+  vim.o.grepformat = add('%f:%l:%c:%m', vim.o.grepformat)
+end
 
