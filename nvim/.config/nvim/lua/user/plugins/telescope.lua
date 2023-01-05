@@ -9,6 +9,14 @@ local M = {
   },
   config = function()
     require("telescope").setup({
+      defaults = {
+        file_ignore_patterns = { "node_modules", ".git" },
+      },
+      pickers = {
+        find_files = {
+          hidden = true,
+        },
+      },
       extensions = {
         undo = {
           side_by_side = true,

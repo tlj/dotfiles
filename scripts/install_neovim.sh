@@ -5,9 +5,9 @@
 
 echo "Installing Neovim..."
 if isMac; then
-  brew install -q neovim ripgrep fd fzf
+  brew install -q neovim ripgrep fd fzf luacheck
 else
-  apt-get install neovim ripgred fd-find fzf
+  apt-get install neovim ripgred fd-find fzf luacheck
 fi
 
 echo "Installing PHP DAP adapter..."

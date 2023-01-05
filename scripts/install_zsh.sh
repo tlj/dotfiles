@@ -12,7 +12,7 @@ if isMac; then
 
   echo "Installing Nerd Fonts"
   brew tap homebrew/cask-fonts
-  brew install -q --cask font-hack-nerd-font
+  brew install -q --cask font-hack-nerd-font font-fira-code-nerd-fontfont-symbols-only-nerd-font font-jetbrains-mono
 
   echo "Installing bat catppuccin theme"
   BAT_THEME_DIR=$(bat --config-dir)/themes
