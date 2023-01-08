@@ -67,3 +67,11 @@ if executable("rg") then
   vim.o.grepformat = add('%f:%l:%c:%m', vim.o.grepformat)
 end
 
+local qfgrp = vim.api.nvim_create_augroup("quickfix", { clear = true })
+vim.api.nvim_create_autocmd("FileType", { pattern = "qf", command = "setlocal norelativenumber", group = qfgrp })
+vim.api.nvim_create_autocmd("FileType", { pattern = "qf", command = "setlocal number", group = qfgrp })
+vim.api.nvim_create_autocmd("FileType", { pattern = "qf", command = "setlocal nowrap", group = qfgrp })
+vim.api.nvim_create_autocmd("FileType", { pattern = "qf", command = "setlocal scrolloff=0", group = qfgrp })
+vim.api.nvim_create_autocmd("FileType", { pattern = "qf", command = "set nobuflisted", group = qfgrp })
+vim.api.nvim_create_autocmd("FileType", { pattern = "qf", command = "nnoremap <buffer> q :cclose<cr>", group = qfgrp })
+
