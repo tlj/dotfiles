@@ -29,6 +29,10 @@ local M = {
 
     lsp.setup()
 
+    vim.diagnostic.config({
+      virtual_text = false,
+    })
+
     require 'lspconfig'.sumneko_lua.setup {
       settings = {
         Lua = {

@@ -10,7 +10,7 @@ local M = {
   config = function()
     require("telescope").setup({
       defaults = {
-        file_ignore_patterns = { "node_modules", ".git" },
+        file_ignore_patterns = { "node_modules", ".git", "var/cache", "vendor" },
         layout_strategy = "flex",
         layout_config = {
           prompt_position = "bottom",
