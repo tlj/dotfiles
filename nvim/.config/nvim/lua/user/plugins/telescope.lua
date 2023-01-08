@@ -15,6 +15,17 @@ local M = {
       pickers = {
         find_files = {
           hidden = true,
+          no_ignore = true,
+        },
+        live_grep = {
+          additional_args = function(_)
+            return {"--hidden"}
+          end
+        },
+        grep_string = {
+          additional_args = function(_)
+            return {"--hidden"}
+          end
         },
       },
       extensions = {
