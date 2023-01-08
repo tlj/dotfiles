@@ -24,7 +24,7 @@ local M = {
     lsp.preset('recommended')
 
     lsp.set_preferences({
-      set_lsp_keymaps = {omit = {'K', '<C-k>'}}
+      set_lsp_keymaps = {omit = {'K', '<C-k>', 'gi', 'gd'}}
     })
 
     lsp.setup()
@@ -45,9 +45,9 @@ local M = {
         vim.keymap.set('n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<cr>', {})
         vim.keymap.set('n', '<leader>ra', '<cmd>lua vim.lsp.buf.range_code_action()<cr>', {})
 
-        vim.keymap.set('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<cr>', {})
+--        vim.keymap.set('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<cr>', {})
         vim.keymap.set('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<cr>', {})
-        vim.keymap.set('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<cr>', {})
+--        vim.keymap.set('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<cr>', {})
         vim.keymap.set('n', 'go', '<cmd>lua vim.lsp.buf.type_definitions()<cr>', {})
         vim.keymap.set('n', 'gr', '<cmd>lua vim.lsp.buf.references()<cr>', {})
         vim.keymap.set('n', '<leader>gh', '<cmd>lua vim.lsp.buf.signature_help()<cr>', {})

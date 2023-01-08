@@ -11,6 +11,21 @@ local M = {
     require("telescope").setup({
       defaults = {
         file_ignore_patterns = { "node_modules", ".git" },
+        layout_strategy = "flex",
+        layout_config = {
+          prompt_position = "bottom",
+          height = 0.9,
+          width = 0.9,
+          flex = {
+            flip_columns = 120,
+          },
+          horizontal = {
+            preview_cutoff = 80,
+          },
+          vertical = {
+            preview_cutoff = 30,
+          }
+        }
       },
       pickers = {
         find_files = {
@@ -49,6 +64,9 @@ local M = {
     {'<leader>td', '<cmd>Telescope diagnostics<cr>' },
     {"<leader>u", "<cmd>Telescope undo<cr>" },
     {'gr', "<cmd>lua require('telescope.builtin').lsp_references()<cr>" },
+    {'gi', "<cmd>lua require('telescope.builtin').lsp_implementations()<cr>" },
+    {'gd', "<cmd>lua require('telescope.builtin').lsp_definitions()<cr>" },
+    {'q:', "<cmd>lua require('telescope.builtin').command_history()<cr>" },
   },
 }
 
