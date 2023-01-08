@@ -14,6 +14,11 @@ if isMac; then
   brew tap homebrew/cask-fonts
   brew install -q --cask font-hack-nerd-font font-fira-code-nerd-fontfont-symbols-only-nerd-font font-jetbrains-mono
 
+  echo "Installing commitizen-go"
+  brew tap lintingzhen/tap
+  brew install commitizen-go
+  commitizen-go install
+
   echo "Installing bat catppuccin theme"
   BAT_THEME_DIR=$(bat --config-dir)/themes
   if [[ ! -d "$BAT_THEME_DIR" ]]; then
@@ -42,6 +47,9 @@ if isMac; then
 
   echo "Installing fzf from git..."
   install_with_git ~/.fzf https://github.com/junegunn/fzf.git
+
+  echo "Installing lazygit..."
+  brew install lazygit
 fi
 
 stow --target=$HOME --restow kitty/ zsh/ bat/ lsd/
