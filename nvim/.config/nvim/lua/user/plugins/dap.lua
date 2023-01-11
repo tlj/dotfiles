@@ -11,7 +11,28 @@ local M = {
     {
       "rcarriga/nvim-dap-ui",
       config = function()
-        require("dapui").setup()
+        require("dapui").setup({
+          layouts = {
+            {
+                elements = {
+                { id = "scopes", size = 0.25 },
+                "breakpoints",
+                "watches",
+                "stacks",
+              },
+              size = 30,
+              position = "left",
+            },
+            {
+              elements = {
+                "repl",
+                "console"
+              },
+              size = 5,
+              position = "bottom",
+            }
+          }
+        })
       end
     },
     {
