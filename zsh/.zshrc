@@ -122,6 +122,7 @@ alias vim="nvim"
 alias cat="bat"
 alias l="lsd"
 alias ll="lsd -l"
+alias lg="lazygit"
 
 source $HOME/.zshrc-local
 
