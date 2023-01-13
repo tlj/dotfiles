@@ -15,7 +15,12 @@ end
 vim.opt.runtimepath:prepend(lazypath)
 
 require "user.options"
-require("lazy").setup("user.plugins")
+require("lazy").setup("user.plugins", {
+  dev = {
+    path = "~/src",
+    patterns = {"tlj"},
+  }
+})
 
 vim.api.nvim_create_autocmd("User", {
   pattern = "VeryLazy",

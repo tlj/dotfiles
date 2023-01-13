@@ -24,7 +24,7 @@ local M = {
     lsp.preset('recommended')
 
     lsp.set_preferences({
-      set_lsp_keymaps = {omit = {'K', '<C-k>', 'gi', 'gd'}}
+      set_lsp_keymaps = {omit = {'K', '<C-k>', 'gi', 'gd', '<F4>'}}
     })
 
     lsp.setup()
@@ -68,4 +68,4 @@ local M = {
   end
 }
 
-return M
+return {}

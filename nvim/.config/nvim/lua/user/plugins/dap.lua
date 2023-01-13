@@ -46,7 +46,13 @@ local M = {
     },
   },
   keys = {
+    { '<F4>', '<cmd>lua require"dapui".toggle()<cr>' },
+    { '<F5>', '<cmd>lua require"dap".continue()<cr>' },
+    { '<F6>', '<cmd>lua require"dap".step_over()<cr>' },
+    { '<F7>', '<cmd>lua require"dap".step_into()<cr>' },
+    { '<F8>', '<cmd>lua require"dap".step_out()<cr>' },
     { '<leader>db', '<cmd>lua require"dap".toggle_breakpoint()<CR>' },
+    { '<leader>dB', '<cmd>lua require"dap".set_brakpoint(vim.fn.input("Breakpoint condition: "))<cr>' },
     { '<leader>dc', '<cmd>lua require"dap".continue()<CR>' },
     { '<leader>ds', '<cmd>lua require"dap".stop()<CR>' },
     { '<leader>do', '<cmd>lua require"dap".step_over()<CR>' },
