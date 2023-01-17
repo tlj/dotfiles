@@ -5,7 +5,8 @@
 
 echo "Installing Neovim..."
 if isMac; then
-  brew install -q neovim ripgrep fd fzf luacheck
+  brew install -q ripgrep fd fzf luacheck
+  brew install -q --HEAD neovim 
 else
   apt-get install neovim ripgred fd-find fzf luacheck
 fi
