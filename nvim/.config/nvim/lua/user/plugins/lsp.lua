@@ -17,6 +17,25 @@ local M = {
       },
       { 'williamboman/mason-lspconfig.nvim' },
       { "folke/neodev.nvim" },
+      {
+        "ray-x/go.nvim",
+        dependencies = {
+          "ray-x/guihua.lua",
+          "nvim-treesitter/nvim-treesitter",
+        },
+        config = function()
+          require('go').setup()
+
+          local format_sync_grp = vim.api.nvim_create_augroup("GoFormat", {})
+          vim.api.nvim_create_autocmd("BufWritePre", {
+            pattern = "*.go",
+            callback = function()
+              require('go.format').goimport()
+            end,
+            group = format_sync_grp,
+          })
+        end
+      },
 
       -- complete
       {
@@ -66,7 +85,6 @@ local M = {
       })
 
       local lsp_attach = function(client, bufnr)
-        print("attaching lsp to " .. bufnr)
         local bufmap = function(mode, lhs, rhs)
           local opts = {buffer = bufnr}
           vim.keymap.set(mode, lhs, rhs, opts)
@@ -111,6 +129,7 @@ local M = {
 
         -- Move to the next diagnostic
         bufmap('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<cr>')
+
       end
 
       -- declare the client capabilities,
@@ -331,6 +350,7 @@ local M = {
           end,
         },
       })
+
     end,
   },
 }
