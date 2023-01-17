@@ -84,7 +84,7 @@ local M = {
         }
       })
 
-      local lsp_attach = function(client, bufnr)
+      local lsp_attach = function(_, bufnr)
         local bufmap = function(mode, lhs, rhs)
           local opts = {buffer = bufnr}
           vim.keymap.set(mode, lhs, rhs, opts)
@@ -246,6 +246,15 @@ local M = {
         TypeParameter = "",
       }
 
+      local check_back_space = function()
+        local col = vim.fn.col('.') - 1
+        if col == 0 or vim.fn.getline('.'):sub(col, col):match('%s') then
+          return true
+        else
+          return false
+        end
+      end
+
       cmp.setup({
         snippet = {
           expand = function(args)
@@ -254,37 +263,70 @@ local M = {
         },
 
         mapping = cmp.mapping.preset.insert {
+          -- luasnip
+          -- go to next placeholder in the snippet
+          ["<C-d>"] = cmp.mapping(function(fallback)
+            if luasnip.jumpable(1) then
+              luasnip.jump(1)
+            else
+              fallback()
+            end
+          end, {'i', 's'}),
+
+          -- go to the previous placeholder in the snippet
+          ["<C-b>"] = cmp.mapping(function(fallback)
+            if luasnip.jumpable(-1) then
+              luasnip.jump(-1)
+            else
+              fallback()
+            end
+          end, {'i', 's'}),
+
+          -- Navigate items on the list
+          ["<Up>"] = cmp.mapping.select_prev_item(),
+          ["<Down>"] = cmp.mapping.select_next_item(),
           ["<C-k>"] = cmp.mapping.select_prev_item(),
           ["<C-j>"] = cmp.mapping.select_next_item(),
-          ["<C-b>"] = cmp.mapping(cmp.mapping.scroll_docs(-1)),
-          ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(1)),
-          ["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
-          ["<C-e>"] = cmp.mapping {
-            i = cmp.mapping.abort(),
-            c = cmp.mapping.close(),
-          },
+
+          -- Scoll up and down in the completion documentation
+          ["<C-u>"] = cmp.mapping(cmp.mapping.scroll_docs(-5)),
+          ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(5)),
+
+          -- toggle completion
+          ["<C-e>"] = cmp.mapping(function(_)
+            if cmp.visible() then
+              cmp.abort()
+            else
+              cmp.complete()
+            end
+          end),
+
           -- Accept currently selected item. If none selected, `select` first item.
           -- Set `select` to `false` to only confirm explicitly selected items.
           ["<CR>"] = cmp.mapping.confirm { select = false },
+          ["<C-y>"] = cmp.mapping.confirm { select = false },
+
+          -- when menu is visible, navigate to next item
+          -- when line is empty, insert a tab character
+          -- else activate completion
           ["<Tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
-              cmp.select_next_item()
-            elseif luasnip.expandable() then
-              luasnip.expand()
-            elseif luasnip.expand_or_jumpable() then
-              luasnip.expand_or_jump()
-            else
+              cmp.select_next_item({behavior = cmp.SelectBehavior.Select})
+            elseif check_back_space() then
               fallback()
+            else
+              cmp.complete()
             end
           end, {
             "i",
             "s",
           }),
+
+          -- when menu is visible, navigate to previous item on list
+          -- else revert to default behavior
           ["<S-Tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
-              cmp.select_prev_item()
-            elseif luasnip.jumpable(-1) then
-              luasnip.jump(-1)
+              cmp.select_prev_item({behavior = cmp.SelectBehavior.Select})
             else
               fallback()
             end
@@ -293,6 +335,8 @@ local M = {
             "s",
           }),
         },
+
+
         formatting = {
           format = function(_, vim_item)
             vim_item.kind = string.format("%s %s", kind_icons[vim_item.kind], vim_item.kind)
@@ -310,23 +354,13 @@ local M = {
           behavior = cmp.ConfirmBehavior.Replace,
           select = false,
         },
- --       window = {
- --         completion = cmp.config.window.bordered {
- --           border = "rounded",
- --           winhighlight = "Normal:Normal,FloatBorder:CmpCompletionBorder,CursorLine:CmpCursorLine,Search:Search",
- --           col_offset = -3,
- --           side_padding = 1,
- --         },
- --         documentation = cmp.config.window.bordered {
- --           border = "rounded",
- --           winhighlight = "Normal:Normal,FloatBorder:CmpDocumentationBorder,CursorLine:CmpCursorLine,Search:Search",
- --           col_offset = -3,
- --           side_padding = 1,
- --         },
- --       },
- --       experimental = {
- --         ghost_text = false,
- --       },
+        window = {
+          completion = cmp.config.window.bordered(),
+          documentation = cmp.config.window.bordered(),
+        },
+        experimental = {
+          ghost_text = true,
+        },
       })
 
       cmp.setup.cmdline(":", {
