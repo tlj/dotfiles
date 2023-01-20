@@ -113,10 +113,10 @@ local M = {
         bufmap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<cr>')
 
         -- Displays hover information about the symbol under the cursor
-        bufmap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<cr>')
+        -- bufmap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<cr>')
 
         -- displays a functions signature information
-        bufmap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<cr>')
+        bufmap('n', 'K', '<cmd>lua vim.lsp.buf.signature_help()<cr>')
 
         -- Open a telescope window with diagnostics
         bufmap('n', '<leader>gl', '<cmd>Telescope diagnostics bufnr=0<cr>')
