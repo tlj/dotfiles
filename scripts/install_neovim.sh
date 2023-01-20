@@ -6,7 +6,9 @@
 echo "Installing Neovim..."
 if isMac; then
   brew install -q ripgrep fd fzf luacheck
-  brew install -q --HEAD neovim 
+
+  # brew install -q --HEAD neovim 
+  brew install -q neovim
   brew install -q npm
 else
   sudo apt-get install ripgrep fd-find fzf luarocks npm
@@ -14,7 +16,7 @@ else
 
   sudo npm install -g tree-sitter-cli
 
-  curl -sLo /tmp/neovim.deb https://github.com/neovim/neovim/releases/download/nightly/nvim-linux64.deb
+  curl -sLo /tmp/neovim.deb https://github.com/neovim/neovim/releases/download/stable/nvim-linux64.deb
   sudo dpkg -i /tmp/neovim.deb
 fi
 
