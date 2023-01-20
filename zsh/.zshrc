@@ -6,7 +6,7 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
 fi
 
 # If you come from bash you might have to change your $PATH.
-export PATH=$HOME/bin:$HOME/go/bin:/opt/homebrew/bin:/usr/local/bin:$PATH
+export PATH=$HOME/bin:$HOME/local/bin:$HOME/go/bin:/opt/homebrew/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
@@ -111,7 +111,11 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 DISABLE_AUTO_UPDATE=true
-eval "$(/opt/homebrew/bin/brew shellenv)"
+
+if [[ -f "/opt/homebrew/bin/brew" ]]; then
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+fi
+
 ulimit -S -n 4096
 
 export EDITOR='nvim'
@@ -123,6 +127,7 @@ alias cat="bat"
 alias l="lsd"
 alias ll="lsd -l"
 alias lg="lazygit"
+alias s="kitty +kitten ssh"
 
 source $HOME/.zshrc-local
 

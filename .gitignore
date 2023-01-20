@@ -4,3 +4,6 @@ nvim/.config/nvim/cache
 nvim/.config/nvim/swap
 nvim/.config/nvim/sessions
 nvim/.config/nvim/plugin/packer_compiled.lua
+
+#lazygit
+lazygit/.config/lazygit/state.yml
