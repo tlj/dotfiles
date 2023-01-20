@@ -12,10 +12,10 @@ else
   sudo apt-get install ripgrep fd-find fzf luarocks npm
   sudo luarocks install luacheck
 
+  sudo npm install -g tree-sitter-cli
+
   curl -sLo /tmp/neovim.deb https://github.com/neovim/neovim/releases/download/nightly/nvim-linux64.deb
   sudo dpkg -i /tmp/neovim.deb
-
-  sudo npm install -g tree-sitter-cli
 fi
 
 echo "Installing PHP DAP adapter..."

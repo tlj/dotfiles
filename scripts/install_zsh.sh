@@ -63,5 +63,4 @@ install_with_git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions 
 echo "Installing fzf from git..."
 install_with_git ~/.fzf https://github.com/junegunn/fzf.git
 
-
 stow --target=$HOME --restow kitty/ zsh/ bat/ lsd/
