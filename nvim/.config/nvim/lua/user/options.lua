@@ -1,36 +1,54 @@
 -- :help options
 
 local options = {
-  backup = false,         -- create a backup file 
-
-  termguicolors = true,
-
+  autowrite = true, -- enable auto write of files
+  backup = false, -- create a backup file 
+  clipboard = "unnamedplus", -- sync with system clipboard
+  cmdheight = 1,
+  completeopt = "menu,menuone,noselect",
+  conceallevel = 3, -- Hide * markup for bold and italic
+  confirm = true, -- confirm to save changes before exiting modified buffer
+  cursorline = true, -- enable highlight of current line
+  expandtab = true, -- use space instead of tabs
+  foldenable = false,
+  foldexpr = "nvim_treesitter#foldexpr()",
+  foldmethod = "expr",
+  formatoptions = "jcroqlnt", -- tcqj is default
+  grepformat = "%f:%l:%c:%m",
+  grepprg = "rg --vimgrep",
+  hidden = true, -- enable modified buffers in the background
+  ignorecase = true, -- ignore case for search functions
+  list = true, -- show some invisible characters (tabs, etc)
+  mouse = "a", -- enable mouse mode
+  number = true,
+  numberwidth = 4,
+  pumblend = 10, -- pupop blend
   pumheight = 10, -- pop up menu height
-  showmode = true, -- show --INSERT--
+  relativenumber = true,
+  scrolloff = 4, -- number of lines to keep above or below the cursor
+  sessionoptions = { "buffers", "curdir", "tabpages", "winsize" },
+  shiftwidth = 2,
+  shortmess = "filnxtToOFWIcC",
+  showmode = false, -- don't show -- INSERT --, since we use lualine
   showtabline = 2, -- always show tabs
+  sidescrolloff = 8, -- number of cols to keep to the left or right of cursor
+  signcolumn = "yes", -- always show the sign column, otherwise it would shift the text each time
+  smartcase = true, -- don't ignore case with capitals
+  smartindent = true, -- insert indents automatically
+  spelllang = { "en"},
   splitbelow = true, -- all horizontal splits go below
+  splitkeep = "screen", -- keep the cursor on the same line when opening new windows
   splitright = true, -- all vertical splits go right
   swapfile = false,
-  timeoutlen = 1000, -- time to wait for a mapped sequence to complete (in ms)
+  tabstop = 2,
+  termguicolors = true,
+  timeoutlen = 300, -- time to wait for a mapped sequence to complete (in ms)
   undofile = true,
   updatetime = 300, -- faster completion (4000ms default)
-  writebackup = false, -- if a file is being edited by another program, it is not allwed to be edited
-  expandtab = true,
-  shiftwidth = 2,
-  tabstop = 2,
-  cursorline = true,
-  relativenumber = true,
-  numberwidth = 4,
-  signcolumn = "yes", -- always show the sign column, otherwise it would shift the text each time
+  wildmode = "longest:full,full", --comand line completion mode
+  winminwidth = 5,
   wrap = true, -- display lines as one long line
-  scrolloff = 8, -- number of lines to keep above or below the cursor
-  sidescrolloff = 8, -- number of cols to keep to the left or right of cursor
-
-  showmode = false, -- don't show -- INSERT --, since we use lualine
-
-  foldenable = false,
-  foldmethod = "expr",
-  foldexpr = "nvim_treesitter#foldexpr()",
+  writebackup = false, -- if a file is being edited by another program, it is not allwed to be edited
 }
 
 for k, v in pairs(options) do
@@ -44,6 +62,9 @@ vim.g.maplocalleader = " "
 -- disable netrw for nvim tree to work
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
+
+-- Fix markdown indentation settings
+vim.g.markdown_recommended_style = 0
 
 -- Enable line numbers
 vim.wo.number = true

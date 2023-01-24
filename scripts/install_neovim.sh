@@ -16,7 +16,7 @@ else
 
   sudo npm install -g tree-sitter-cli
 
-  curl -sLo /tmp/neovim.deb https://github.com/neovim/neovim/releases/download/stable/nvim-linux64.deb
+  curl -sLo /tmp/neovim.deb https://github.com/neovim/neovim/releases/download/nightly/nvim-linux64.deb
   sudo dpkg -i /tmp/neovim.deb
 fi
 

@@ -8,7 +8,8 @@ local M = {
   },
   config = function()
     require('nvim-tree').setup()
-  end
+  end,
+  enabled = false,
 }
 
 return M

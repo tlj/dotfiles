@@ -1,12 +1,7 @@
 local M = {
   "feline-nvim/feline.nvim",
   dependencies = {
-    {
-      "lewis6991/gitsigns.nvim",
-      config = function()
-        require("gitsigns").setup()
-      end,
-    },
+    { "lewis6991/gitsigns.nvim" },
   },
   config = function()
     require('feline').setup()
