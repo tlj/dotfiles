@@ -30,6 +30,8 @@ yabai -m config external_bar all:26:0
 #yabai -m config window_gap 20
 #yabai -m config top_padding 34
 
+yabai -m rule --add app="Microsoft Defender"    manage=off
+yabai -m rule --add app="Company Portal"        manage=off
 yabai -m rule --add app="System Settings"       manage=off
 yabai -m rule --add app="System Preferences"    manage=off
 yabai -m rule --add app="App Store"             manage=off
