@@ -62,6 +62,7 @@ local M = {
     {'<leader>fh', '<cmd>lua require"telescope.builtin".help_tags()<cr>' },
     {'<leader>gs', '<cmd>lua require"telescope.builtin".git_status()<cr>' },
     {'<leader>td', '<cmd>Telescope diagnostics<cr>' },
+    {'<leader>qf', '<cmd>lua require"telescope.builtin".quickfix()<cr>' },
     {"<leader>u", "<cmd>Telescope undo<cr>" },
 --    {'gr', "<cmd>lua require('telescope.builtin').lsp_references()<cr>" },
 --    {'gi', "<cmd>lua require('telescope.builtin').lsp_implementations()<cr>" },
