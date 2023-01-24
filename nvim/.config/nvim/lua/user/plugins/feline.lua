@@ -11,7 +11,8 @@ local M = {
   config = function()
     require('feline').setup()
     require('feline').winbar.setup()
-  end
+  end,
+  enabled = false,
 }
 
 return M
