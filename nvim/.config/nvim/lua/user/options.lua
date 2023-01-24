@@ -26,6 +26,8 @@ local options = {
   scrolloff = 8, -- number of lines to keep above or below the cursor
   sidescrolloff = 8, -- number of cols to keep to the left or right of cursor
 
+  showmode = false, -- don't show -- INSERT --, since we use lualine
+
   foldenable = false,
   foldmethod = "expr",
   foldexpr = "nvim_treesitter#foldexpr()",
