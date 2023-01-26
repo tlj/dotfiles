@@ -3,6 +3,9 @@ local M = {
   dependencies = {
     "kkharji/sqlite.lua",
   },
+  enabled = function ()
+    return os.getenv("ENDPOINT_PREVIEWER_URLS") ~= ""
+  end,
   config = function()
     require("endpoint-previewer").setup()
   end,
