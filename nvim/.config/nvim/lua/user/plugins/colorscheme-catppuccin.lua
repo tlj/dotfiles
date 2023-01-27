@@ -2,6 +2,7 @@ local M = {
   "catppuccin/nvim",
   lazy = false,
   priority = 999,
+  enabled = true,
   config = function()
     require('catppuccin').setup({
       colorscheme = "mocha",

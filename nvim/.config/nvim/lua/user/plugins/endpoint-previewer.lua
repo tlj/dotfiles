@@ -3,6 +3,7 @@ local M = {
   dependencies = {
     "kkharji/sqlite.lua",
   },
+  dev = true,
   enabled = function ()
     return os.getenv("ENDPOINT_PREVIEWER_URLS") ~= ""
   end,

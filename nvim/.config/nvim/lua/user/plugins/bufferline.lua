@@ -4,6 +4,7 @@ local M = {
   dependencies = {
     'nvim-tree/nvim-web-devicons'
   },
+  enabled = false,
   config = function ()
     require('bufferline').setup({
       options = {
