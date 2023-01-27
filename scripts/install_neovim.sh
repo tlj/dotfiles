@@ -7,8 +7,8 @@ echo "Installing Neovim..."
 if isMac; then
   brew install -q ripgrep fd fzf luacheck
 
-  # brew install -q --HEAD neovim 
-  brew install -q neovim
+  brew install -q --HEAD neovim
+  #brew install -q neovim
   brew install -q npm
 else
   sudo apt-get install ripgrep fd-find fzf luarocks npm
