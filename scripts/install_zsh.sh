@@ -7,8 +7,8 @@ if isMac; then
   echo "Installing kitty..."
   brew install -q --cask kitty
 
-  echo "Installing autojump, bat and lsd..."
-  brew install -q autojump bat lsd 
+  echo "Installing autojump, bat, btop and lsd..."
+  brew install -q autojump bat lsd btop
 
   echo "Installing Nerd Fonts"
   brew tap homebrew/cask-fonts
@@ -63,4 +63,4 @@ install_with_git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions 
 echo "Installing fzf from git..."
 install_with_git ~/.fzf https://github.com/junegunn/fzf.git
 
-stow --target=$HOME --restow kitty/ zsh/ bat/ lsd/
+stow --target=$HOME --restow kitty/ btop/ zsh/ bat/ lsd/
