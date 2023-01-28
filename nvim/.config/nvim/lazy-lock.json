@@ -32,6 +32,7 @@
   "neodev.nvim": { "branch": "main", "commit": "fc20483383dac11b97df43c83db1bbbd35305172" },
   "neotest": { "branch": "master", "commit": "6676edc3078b8936df989df639900dc9a70dfc8a" },
   "neotest-go": { "branch": "main", "commit": "981406c12bd3c77eb434211a1b85b964ab5bbdd5" },
+  "nordic.nvim": { "branch": "main", "commit": "e2dbe93549d107fa95006910317bd6910159f272" },
   "nui.nvim": { "branch": "main", "commit": "b99e6cb13dc51768abc1c4c8585045a0c0459ef1" },
   "nvim": { "branch": "main", "commit": "01d11b6f4a69ca6ce8bf9a9a0b214811ba67cf8a" },
   "nvim-autopairs": { "branch": "master", "commit": "f00eb3b766c370cb34fdabc29c760338ba9e4c6c" },
@@ -54,6 +55,7 @@
   "telescope-undo.nvim": { "branch": "main", "commit": "f2ca7c914134c7e6eb9275ee09863141caa77a3f" },
   "telescope.nvim": { "branch": "master", "commit": "2f32775405f6706348b71d0bb8a15a22852a61e4" },
   "todo-comments.nvim": { "branch": "main", "commit": "74c7d28cb50b0713c881ef69bcb6cdd77d8907d1" },
+  "tokyonight.nvim": { "branch": "main", "commit": "affb21a81e6d7de073378eb86d02864c594104d9" },
   "trouble.nvim": { "branch": "main", "commit": "490f7fe6d227f4f7a64f00be8c7dcd7a508ed271" },
   "vim-illuminate": { "branch": "master", "commit": "4e1d43cdc39e35f495c7b39a78a349b4d5badad0" },
   "which-key.nvim": { "branch": "main", "commit": "e4fa445065a2bb0bbc3cca85346b67817f28e83e" }

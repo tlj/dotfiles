@@ -5,10 +5,13 @@ local M = {
   enabled = true,
   config = function()
     require('catppuccin').setup({
-      colorscheme = "mocha",
+      colorscheme = "macchiato",
       background = {
         light = "latte",
-        dark = "mocha",
+        dark = "macchiato",
+      },
+      integration = {
+        telescope = true,
       },
       transparent_background = false,
       show_end_of_buffer = false,

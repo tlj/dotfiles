@@ -30,7 +30,8 @@ vim.api.nvim_create_autocmd("User", {
 })
 
 -- Theme
-vim.cmd('colorscheme catppuccin')
+vim.cmd('colorscheme catppuccin-macchiato')
+--vim.cmd('colorscheme tokyonight')
 
 -- If neovim is started with a directory as argument, change to that directory
 if vim.fn.isdirectory(vim.v.argv[2]) == 1 then

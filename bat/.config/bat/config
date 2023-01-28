@@ -24,4 +24,4 @@
 #--map-syntax "*.ino:C++"
 #--map-syntax ".ignore:Git Ignore"
 
---theme="Catppuccin-mocha"
+--theme="Catppuccin-macchiato"
