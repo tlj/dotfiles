@@ -35,7 +35,7 @@
     "spacesExclusions": "",
     "exclusionsAsRegex": false,
     "displayAllSpacesOnAllScreens": false,
-    "hideDuplicateAppsInSpaces": false,
+    "hideDuplicateAppsInSpaces": true,
     "displayStickyWindowsSeparately": false,
     "hideEmptySpaces": false,
     "showOptionsOnHover": true,
@@ -154,6 +154,6 @@
     "userWidgetsList": {}
   },
   "customStyles": {
-    "styles": "/* your custom css styles here */\n\n.time, .date-display {\n  background-color: #1E1E2E !important;\n  color: #D9E0EE !important;\n}\n"
+    "styles": "/* your custom css styles here */\n\n.time, .date-display {\n  background-color: #000 !important;\n  color: #D9E0EE !important;\n}\n\n.simple-bar {\n  background-color: #000 !important;\n}"
   }
 }
