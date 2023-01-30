@@ -8,6 +8,10 @@ if isMac; then
   brew install -q --cask ubersicht 
   brew install -q skhd
   brew install -q koekeishiya/formulae/yabai --head
+  
+  echo "Installing Sketchybar..."
+  brew tap FelixKratz/formulae
+  brew install sketchybar
 
   install_with_git "${HOME}/Library/Application\ Support/Übersicht/widgets/simple-bar" https://github.com/Jean-Tinland/simple-bar 
 
@@ -38,4 +42,5 @@ EOF
   fi
 fi
 
-stow --target=$HOME --restow yabai/ simplebar/ skhd/
+stow --target=$HOME --restow yabai/ simplebar/ skhd/ sketchybar/
+
