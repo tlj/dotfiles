@@ -3,7 +3,7 @@
     "theme": "auto",
     "floatingBar": false,
     "noBarBg": false,
-    "noColorInData": false,
+    "noColorInData": true,
     "bottomBar": false,
     "inlineSpacesOptions": false,
     "disableNotifications": false,
@@ -12,7 +12,7 @@
     "spacesBackgroundColorAsForeground": false,
     "widgetsBackgroundColorAsForeground": false,
     "font": "Monaco Nerd Font Mono, JetBrains Mono, Monaco, Menlo, monospace",
-    "fontSize": "16px",
+    "fontSize": "12px",
     "yabaiPath": "/opt/homebrew/bin/yabai",
     "shell": "sh",
     "slidingAnimationPace": 4,
@@ -38,8 +38,8 @@
     "hideDuplicateAppsInSpaces": true,
     "displayStickyWindowsSeparately": false,
     "hideEmptySpaces": false,
-    "showOptionsOnHover": true,
-    "switchSpacesWithoutYabai": true
+    "showOptionsOnHover": false,
+    "switchSpacesWithoutYabai": false
   },
   "widgets": {
     "processWidget": false,
@@ -154,6 +154,6 @@
     "userWidgetsList": {}
   },
   "customStyles": {
-    "styles": "/* your custom css styles here */\n\n.time, .date-display {\n  background-color: #000 !important;\n  color: #D9E0EE !important;\n}\n\n.simple-bar {\n  background-color: #000 !important;\n}"
+    "styles": "/* your custom css styles here */\n\n.time, .date-display {\n  background-color: #131020 !important;\n  color: #D9E0EE !important;\n}\n\n.simple-bar {\n  background-color: #131020 !important;\n}\n\ndiv.simple-bar.simple-bar--no-shadow {\n  --bar-height: 20px;\n}\n\ndiv.simple-bar.simple-bar--no-shadow button.space__inner {\n  --item-radius: 0px;\n}\n\ndiv.simple-bar.simple-bar--no-shadow button.space__inner svg.space__icon {\n  display: none;\n}\n\n"
   }
 }
