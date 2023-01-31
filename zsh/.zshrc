@@ -132,6 +132,7 @@ alias lt="lsd --tree"
 alias lta="lsd -a --tree"
 alias lg="lazygit"
 alias s="kitty +kitten ssh"
+alias d="cd ~/dotfiles && nvim && cd -"
 
 source $HOME/.zshrc-local
 
