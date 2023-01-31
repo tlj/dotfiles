@@ -1,10 +1,10 @@
-local wk = require("which-key")
-wk.setup({
-  show_help = true,
-  triggers = "auto",
-  plugins = { spelling = true },
-  key_labels = { ["<leader>"] = "SPC" },
-})
+-- local wk = require("which-key")
+-- wk.setup({
+--   show_help = true,
+--   triggers = "auto",
+--   plugins = { spelling = true },
+--   key_labels = { ["<leader>"] = "SPC" },
+-- })
 
 local opts = { noremap = true, silent = true }
 

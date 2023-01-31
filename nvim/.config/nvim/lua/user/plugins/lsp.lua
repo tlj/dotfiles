@@ -84,7 +84,7 @@ local M = {
           'lemminx', -- xml
           'bashls', -- bash
           'yamlls', -- yaml
-          'phpactor', -- php
+          'intelephense', -- php
           'jsonls', -- json
           'html', -- html
           'gopls', -- golang
@@ -148,6 +148,16 @@ local M = {
         lsp_defaults.capabilities,
         require('cmp_nvim_lsp').default_capabilities()
       )
+
+      lspconfig.intelephense.setup({
+        settings = {
+          intelephense = {
+            telemetry = {
+              enabled = false,
+            },
+          }
+        }
+      })
 
       -- configure lua lsp support
       local servers = {

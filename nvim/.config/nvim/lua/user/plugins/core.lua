@@ -52,6 +52,7 @@ local M = {
   {
     "ggandor/leap.nvim",
     event = "VeryLazy",
+    enabled = false,
     dependencies = { { "ggandor/flit.nvim", opts = { labeled_modes = "nv" } } },
     config = function(_, opts)
       local leap = require("leap")
