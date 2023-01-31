@@ -13,4 +13,4 @@ if [[ ${#WINDOW_TITLE} -gt 50 ]]; then
   exit 0
 fi
 
-sketchybar -m --set title label="| $WINDOW_TITLE"
+sketchybar -m --set title label="│ $WINDOW_TITLE"

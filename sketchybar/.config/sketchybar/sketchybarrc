@@ -13,12 +13,13 @@ PLUGIN_DIR="$HOME/.config/sketchybar/plugins"
 # https://felixkratz.github.io/SketchyBar/config/tricks#color-picker
 
 sketchybar --bar height=20        \
-                 blur_radius=30   \
+                 blur_radius=0   \
                  position=top     \
                  sticky=off       \
-                 padding_left=10  \
-                 padding_right=10 \
-                 color=0x00131020
+                 padding_left=0  \
+                 padding_right=0 \
+                 color=0x00131020 
+                
 
 ##### Changing Defaults #####
 # We now change some default values that are applied to all further items
@@ -31,12 +32,12 @@ sketchybar --default updates=when_shown                    \
                      icon.color=0xffcad3f5                 \
                      label.font="Hack Nerd Font:Bold:14.0" \
                      label.color=0xffcad3f5                \
-                     padding_left=1                        \
-                     padding_right=1                       \
-                     label.padding_left=3                  \
-                     label.padding_right=3                 \
-                     icon.padding_left=7                   \
-                     icon.padding_right=7
+                     padding_left=4                        \
+                     padding_right=4                       \
+                     label.padding_left=4                  \
+                     label.padding_right=4                 \
+                     icon.padding_left=4                \
+                     icon.padding_right=3
 
 ##### Adding Mission Control Space Indicators #####
 # Now we add some mission control spaces:
@@ -54,8 +55,14 @@ do
                               background.color=0xff363a4f                \
                               background.corner_radius=0                 \
                               background.height=16                       \
-                              background.drawing=off                     \
+                              background.drawing=on                     \
+                              padding_left=0 \
+                              padding_right=0 \
                               label.drawing=off                          \
+                              label.padding_left=0 \
+                              label.padding_right=0 \
+                              icon.padding_left=10 \
+                              icon.padding_right=10 \
                               script="$PLUGIN_DIR/space.sh"              \
                               click_script="yabai -m space --focus $sid"
 done
@@ -97,22 +104,15 @@ sketchybar -m --add item title left \
 
 sketchybar --add item clock right                              \
            --set clock   update_freq=10                        \
-                         icon=                               \
                          script="$PLUGIN_DIR/clock.sh"         \
-#                                                                \
-#            --add item wifi right                               \
-#            --set wifi    script="$PLUGIN_DIR/wifi.sh"          \
-#                          icon=直                               \
-#            --subscribe wifi wifi_change                        \
-#                                                                \
-#            --add item volume right                             \
-#            --set volume  script="$PLUGIN_DIR/volume.sh"        \
-#            --subscribe volume volume_change                    \
-#                                                                \
-#            --add item battery right                            \
+                         icon.drawing=off \
+            --add item battery right                            \
             --set battery script="$PLUGIN_DIR/battery.sh"       \
                           update_freq=120                       \
-            --subscribe battery system_woke power_source_change
+            --subscribe battery system_woke power_source_change 
+#           --add item  cpu right                                                   \
+#           --set cpu   update_freq=10                                              \
+#                       script="$PLUGIN_DIR/cpu.sh"                                 \
 
 ##### Finalizing Setup #####
 # The below command is only needed at the end of the initial configuration to
