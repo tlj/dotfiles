@@ -153,6 +153,10 @@ local M = {
         lsp_defaults.capabilities,
         require('cmp_nvim_lsp').default_capabilities()
       )
+      lsp_defaults.capabilities.textDocument.foldingRange = {
+        dynamicRegistration = false,
+        lineFoldingOnly = true,
+      }
 
       lspconfig.intelephense.setup({
         settings = {
@@ -221,10 +225,8 @@ local M = {
         return newVirtText
       end
       require('ufo').setup({
-        provider_selector = function(bufnr, filetype, buftype)
-          return {"treesitter", "indent"}
-        end,
         fold_virt_text_handler = handler,
+        close_fold_kinds = {'imports', 'comment'},
       })
 
       -- Set how diagnostics should be displayed

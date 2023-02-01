@@ -15,6 +15,7 @@ local options = {
   foldlevel = 99,
   foldlevelstart = 99,
   foldenable = true,
+  foldmethod = 'manual',
   formatoptions = "jcroqlnt", -- tcqj is default
   grepformat = "%f:%l:%c:%m",
   grepprg = "rg --vimgrep",
