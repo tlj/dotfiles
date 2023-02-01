@@ -1,7 +1,10 @@
 local M = {
   "luukvbaal/statuscol.nvim",
   config = function()
-    require("statuscol").setup({setopt = true})
+    require("statuscol").setup({
+      setopt = true,
+      foldfunc = "builtin",
+    })
   end
 }
 

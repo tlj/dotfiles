@@ -94,6 +94,16 @@ vim.keymap.set("n", "<leader>lg", function() require'lazy.util'.float_term({ "la
 vim.keymap.set("n", "<leader>ft", function() require'lazy.util'.float_term() end, { desc = "Terminal (cwd)" })
 vim.keymap.set("t", "<esc><esc>", "<c-\\><c-n>", { desc = "Enter Normal mode" })
 
+-- ufo
+vim.keymap.set('n', 'zR', require('ufo').openAllFolds)
+vim.keymap.set('n', 'zM', require('ufo').closeAllFolds)
+vim.keymap.set('n', 'K', function() 
+  local winid = require('ufo').peekFoldedLinesUnderCursor()
+  if not winid then
+    vim.lsp.buf.hover()
+  end
+end)
+
 -- Don't allow arrow keys, use hjkl instead
 keymap('n', "<left>", "<nop>", opts)
 keymap('n', "<right>", "<nop>", opts)
