@@ -197,7 +197,7 @@ local M = {
         lspconfig[server_name].setup(options)
       end
 
-      local handler = function(virtText, lnum, endLnum, width, truncate)
+      local fold_handler = function(virtText, lnum, endLnum, width, truncate)
         local newVirtText = {}
         local suffix = ('  %d '):format(endLnum - lnum)
         local sufWidth = vim.fn.strdisplaywidth(suffix)
@@ -225,7 +225,7 @@ local M = {
         return newVirtText
       end
       require('ufo').setup({
-        fold_virt_text_handler = handler,
+        fold_virt_text_handler = fold_handler,
         close_fold_kinds = {'imports', 'comment'},
       })
 
