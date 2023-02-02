@@ -199,7 +199,7 @@ local M = {
 
       local fold_handler = function(virtText, lnum, endLnum, width, truncate)
         local newVirtText = {}
-        local suffix = ('  %d '):format(endLnum - lnum)
+        local suffix = (' << %d '):format(endLnum - lnum)
         local sufWidth = vim.fn.strdisplaywidth(suffix)
         local targetWidth = width - sufWidth
         local curWidth = 0
@@ -228,6 +228,8 @@ local M = {
         fold_virt_text_handler = fold_handler,
         close_fold_kinds = {'imports', 'comment'},
       })
+      -- Less highlight on folded line (catppuccin Mantle)
+      vim.api.nvim_command("hi folded guibg=#1e2030")
 
       -- Set how diagnostics should be displayed
       vim.diagnostic.config({

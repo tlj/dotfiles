@@ -72,6 +72,7 @@ vim.g.markdown_recommended_style = 0
 -- Enable line numbers
 vim.wo.number = true
 
+
 -- use ripgrep for grep, see 
 -- https://phelipetls.github.io/posts/extending-vim-with-ripgrep/
 -- and
