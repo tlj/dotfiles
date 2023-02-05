@@ -77,6 +77,16 @@ local M = {
           "kevinhwang91/promise-async",
         },
       },
+      {
+        "glepnir/lspsaga.nvim",
+        event = "BufRead",
+        dependencies = {
+          "nvim-tree/nvim-web-devicons",
+        },
+        config = function()
+          require("lspsaga").setup({})
+        end,
+      }
     },
     config = function()
       require("neodev").setup()
@@ -103,14 +113,23 @@ local M = {
         end
 
         -- Renames all references to the symbol under the cursor
-        bufmap('n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<cr>')
+        bufmap('n', '<leader>rn', '<cmd>Lspsaga rename<cr>')
+        bufmap('n', '<leader>rN', '<cmd>Lspsaga rename ++project<cr>')
 
         -- Selects a code action available at the current cursor position
-        bufmap('n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<cr>')
-        bufmap('x', '<leader>ca', '<cmd>lua vim.lsp.buf.range_code_action()<cr>')
+        bufmap({'n', 'v', 'x'}, '<leader>ca', '<cmd>Lspsaga code_action<cr>')
 
         -- Jump to the definition
-        bufmap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<cr>')
+        bufmap('n', 'gd', '<cmd>Lspsaga goto_definition<cr>')
+
+        -- Peek definition
+        bufmap('n', 'gp', '<cmd>Lspsaga peek_definition<cr>')
+
+        -- LSP finder - find the symbol's definition
+        -- If there is no definition, it will instead be hidden
+        -- When you use an action in finder like "open vsplit",
+        -- you can use <C-t> to jump back
+        bufmap('n', 'gh', '<cmd>Lspsaga lsp_finder<cr>')
 
         -- Jumo to desclaration
         bufmap('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<cr>')
@@ -118,8 +137,15 @@ local M = {
         -- Lists all the implementations for the symvol under the cursor
         bufmap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<cr>')
 
+        -- Call hierarchy
+        bufmap('n', '<Leader>ci', '<cmd>Lspsaga incoming_calls<cr>')
+        bufmap('n', '<Leader>co', '<cmd>Lspsaga outgoing_calls<cr>')
+
         -- Jumps to the definition of the type symbol
-        bufmap('n', 'go', '<cmd>lua vim.lsp.buf.type_definitions()<cr>')
+        -- bufmap('n', 'go', '<cmd>lua vim.lsp.buf.type_definitions()<cr>')
+
+        -- Open Code outline
+        bufmap('n', 'go', '<cmd>Lspsaga outline<cr>')
 
         -- Lists all the references
         bufmap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<cr>')
@@ -130,17 +156,21 @@ local M = {
         -- displays a functions signature information
         -- bufmap('n', 'K', '<cmd>lua vim.lsp.buf.signature_help()<cr>')
 
+        -- Hover doc
+        -- Keep window open, press K again to remove
+        bufmap('n', 'K', '<cmd>Lspsaga hover_doc ++keep<cr>')
+
         -- Open a telescope window with diagnostics
-        bufmap('n', '<leader>gl', '<cmd>Telescope diagnostics bufnr=0<cr>')
+        bufmap('n', '<leader>gl', '<cmd>Lspsaga show_buf_diagnostics<cr>')
 
         -- Show diagnostics in a floating window
-        bufmap('n', 'gl', '<cmd>lua vim.diagnostic.open_float()<cr>')
+        bufmap('n', 'gl', '<cmd>Lspsaga show_line_diagnostics<cr>')
 
         -- Move to the previous diagnostic
-        bufmap('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<cr>')
+        bufmap('n', '[d', '<cmd>Lspsaga diagnostic_jump_prev<cr>')
 
         -- Move to the next diagnostic
-        bufmap('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<cr>')
+        bufmap('n', ']d', '<cmd>Lspsaga diagnostic_jump_next<cr>')
 
       end
 

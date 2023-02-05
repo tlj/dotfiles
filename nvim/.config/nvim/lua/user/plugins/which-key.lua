@@ -1,6 +1,6 @@
 local M = {
   "folke/which-key.nvim",
-  enabled = false,
+  enabled = true,
   config = function()
     require("which-key").setup()
   end

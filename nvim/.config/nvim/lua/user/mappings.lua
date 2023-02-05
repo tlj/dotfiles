@@ -97,12 +97,12 @@ vim.keymap.set("t", "<esc><esc>", "<c-\\><c-n>", { desc = "Enter Normal mode" })
 -- ufo
 vim.keymap.set('n', 'zR', require('ufo').openAllFolds)
 vim.keymap.set('n', 'zM', require('ufo').closeAllFolds)
-vim.keymap.set('n', 'K', function() 
-  local winid = require('ufo').peekFoldedLinesUnderCursor()
-  if not winid then
-    vim.lsp.buf.hover()
-  end
-end)
+-- vim.keymap.set('n', 'K', function() 
+--   local winid = require('ufo').peekFoldedLinesUnderCursor()
+--   if not winid then
+--     vim.lsp.buf.hover()
+--   end
+-- end)
 
 -- Don't allow arrow keys, use hjkl instead
 keymap('n', "<left>", "<nop>", opts)
