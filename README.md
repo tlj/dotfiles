@@ -30,8 +30,6 @@ The make script support MacOS and Linux and will install dotfiles, dependencies 
 | [fzf](https://github.com/junegunn/fzf) | A command-line fuzzy finder |
 | [yabai](https://github.com/koekeishiya/yabai) | A tiling window manager for macOS |
 | [skhd](https://github.com/koekeishiya/skhd) | Simple hotkey daemon for MacOS |
-| [ubersicht](https://tracesof.net/uebersicht/) | Widget manager for MacOS |
-| [simple-bar](https://github.com/Jean-Tinland/simple-bar) | A yabai status bar widget for Ubersicht |
 
 
 ## Dependencies
@@ -41,8 +39,4 @@ The make script support MacOS and Linux and will install dotfiles, dependencies 
 The .zshrc installed by stow will try to load a ~/.zshrc-local file which has any special zsh config for the local computer, which shouldn't be shared. This file needs to be reated to avoid a warning on startup.
 
 ## Known issues
-
-### Ubersicht / yabai load order
-
-If yabai is loaded after Ubersicht, the space indicators stop working. If this happens, just restart Ubersicht.
 

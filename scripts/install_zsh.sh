@@ -8,7 +8,7 @@ if isMac; then
   brew install -q --cask kitty
 
   echo "Installing autojump, bat, btop and lsd..."
-  brew install -q autojump bat lsd btop
+  brew install -q autojump bat lsd btop jq
 
   echo "Installing Nerd Fonts"
   brew tap homebrew/cask-fonts

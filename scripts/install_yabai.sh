@@ -4,16 +4,13 @@
 . scripts/lib/install_with_git.sh
 
 if isMac; then
-  echo "Installing Yabai, skhd and ubersicht ..."
-  brew install -q --cask ubersicht 
+  echo "Installing Yabai, skhd ..."
   brew install -q skhd
   brew install -q koekeishiya/formulae/yabai --head
   
   echo "Installing Sketchybar..."
   brew tap FelixKratz/formulae
   brew install sketchybar
-
-  install_with_git "${HOME}/Library/Application\ Support/Übersicht/widgets/simple-bar" https://github.com/Jean-Tinland/simple-bar 
 
   codesign -v $(which yabai)
   if [ $? -ne 0 ]; then
