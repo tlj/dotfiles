@@ -46,6 +46,7 @@ local options = {
   tabstop = 2,
   termguicolors = true,
   timeoutlen = 600, -- time to wait for a mapped sequence to complete (in ms)
+  title = true,
   undofile = true,
   updatetime = 300, -- faster completion (4000ms default)
   wildmode = "longest:full,full", --comand line completion mode

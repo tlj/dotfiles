@@ -109,7 +109,11 @@ sketchybar --add item clock right                              \
             --add item battery right                            \
             --set battery script="$PLUGIN_DIR/battery.sh"       \
                           update_freq=120                       \
-            --subscribe battery system_woke power_source_change 
+            --subscribe battery system_woke power_source_change \
+            --add item pomodoro right \
+            --set pomodoro script="$PLUGIN_DIR/flow.sh" \
+                          click_script="$PLUGIN_DIR/flow_click.sh" \
+                          update_freq=1
 #           --add item  cpu right                                                   \
 #           --set cpu   update_freq=10                                              \
 #                       script="$PLUGIN_DIR/cpu.sh"                                 \

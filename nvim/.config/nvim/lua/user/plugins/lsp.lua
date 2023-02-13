@@ -253,7 +253,7 @@ local M = {
       end
       require('ufo').setup({
         fold_virt_text_handler = fold_handler,
-        close_fold_kinds = {'imports', 'comment'},
+        -- close_fold_kinds = {'imports', 'comment'},
       })
       -- Less highlight on folded line (catppuccin Mantle)
       -- vim.api.nvim_command("hi folded guibg=#1e2030")

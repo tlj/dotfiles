@@ -40,3 +40,36 @@ The .zshrc installed by stow will try to load a ~/.zshrc-local file which has an
 
 ## Known issues
 
+### Steps to install on a new Mac
+
+```bash
+git clone git@github.com:tlj/dotfiles
+```
+
+If xcode is not installed, accept the install, and re-run the git clone after xcode is installed. If you get an error about `inactive developer path`, you need to run
+```bash
+xcode-select --install
+```
+
+Dock: Move to the right, and set auto hiding on.
+System Settings:
+ * Desktop & Dock -> Disable "Automaticall Rearrange Spaces"
+ * Desktop & Dock -> Menu Bar -> Automatically hide and show the meny bar -> Always
+ * Keyboard Shortcuts -> Mission Control -> Disable Move left/right, Enable CTRL-1, etc
+ * Keyboard Shortcuts -> Modifier Keys -> Caps Lock -> Escape
+
+From ~/dotfiles/ do:
+
+```bash
+./install.sh
+```
+
+On first run this will install only homebrew. After this is done, reload the terminal
+window to ensure that the correct PATHs are loaded for homebrew to work.
+
+```bash
+brew services start yabai
+brew services start skhd
+brew services start sketchybar
+```
+
