@@ -95,7 +95,7 @@ local M = {
 
       require('mason-lspconfig').setup({
         ensure_installed = {
-          'sumneko_lua', -- lua
+          'lua_ls', -- lua
           'lemminx', -- xml
           'bashls', -- bash
           'yamlls', -- yaml
@@ -203,9 +203,6 @@ local M = {
         sumneko_lua = {
           settings = {
             Lua = {
-              completion = {
-                callSnippet = "Replace"
-              },
               diagnostics = {
                 globals = { 'vim' }
               }
@@ -259,7 +256,7 @@ local M = {
         close_fold_kinds = {'imports', 'comment'},
       })
       -- Less highlight on folded line (catppuccin Mantle)
-      vim.api.nvim_command("hi folded guibg=#1e2030")
+      -- vim.api.nvim_command("hi folded guibg=#1e2030")
 
       -- Set how diagnostics should be displayed
       vim.diagnostic.config({

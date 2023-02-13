@@ -1,12 +1,10 @@
 local M = {
-  "folke/tokyonight.nvim",
+  "Shatur/neovim-ayu",
   lazy = false,
   priority = 999,
   enabled = true,
   config = function()
-    require("tokyonight").setup({
-      style = "storm",
-    })
+    require 'ayu' .setup({})
   end
 }
 

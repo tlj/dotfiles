@@ -1,12 +1,10 @@
 local M = {
-  "folke/tokyonight.nvim",
+  "rebelot/kanagawa.nvim",
   lazy = false,
   priority = 999,
   enabled = true,
   config = function()
-    require("tokyonight").setup({
-      style = "storm",
-    })
+    require 'kanagawa' .load()
   end
 }
 

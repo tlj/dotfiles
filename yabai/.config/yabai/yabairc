@@ -77,9 +77,6 @@ yabai -m rule --add title="popup"               manage=off
 #yabai -m config active_window_border_color   0xffff3050
 #yabai -m config normal_window_border_color   0xffaaaaaa
 
-yabai -m signal --add event=space_changed \
-    action="osascript -e 'tell application \"Übersicht\" to refresh widget id \"simple-bar-index-jsx\"'"
-
 # S K E T C H Y B A R  E V E N T S
 yabai -m signal --add event=window_focused action="sketchybar -m --trigger window_focus &> /dev/null"
 yabai -m signal --add event=window_title_changed action="sketchybar -m --trigger title_change &> /dev/null"
