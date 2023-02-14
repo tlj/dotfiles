@@ -38,7 +38,8 @@ EOF
     codesign -fs 'yabai-cert' $(which yabai)
   fi
   defaults write com.apple.dock workspaces-swoosh-animation-off -bool YES
-  killall Dock
+  osascript -e "tell application \"System Events\" to tell every desktop to set picture to \"$(pwd)/wallpapers/gruvbox_orange_dark.png\" as POSIX file"
+ killall Dock
 fi
 
 stow --target=$HOME --restow yabai/ simplebar/ skhd/ sketchybar/
