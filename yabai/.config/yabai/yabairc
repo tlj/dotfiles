@@ -4,7 +4,12 @@
 #yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
 #sudo yabai --load-sa
 
-yabai -m config window_gap                    2
+MAIN_DISPLAY=$(system_profiler SPDisplaysDataType | grep -B 3 'Main Display:' | awk '/Display Type/ {print $3}')
+
+YABAI_TOP_MARGIN=20
+if [[ $MAIN_DISPLAY == "Built-in" ]]; then
+  YABAI_TOP_MARGIN=32
+fi
 
 yabai -m config layout                        bsp
 yabai -m config focus_follows_mouse           off
@@ -22,7 +27,7 @@ yabai -m config mouse_action2                 resize
 yabai -m config --space 6 layout float
 
 # general space settings
-yabai -m config external_bar all:20:0
+yabai -m config external_bar all:${YABAI_TOP_MARGIN}:0
 #yabai -m config top_padding 25
 #yabai -m config botton_padding 25
 #yabai -m config left_padding 25
@@ -62,11 +67,11 @@ yabai -m rule --add title="popup"               manage=off
 
 # general space settings
 #yabai -m config layout                       bsp
-#yabai -m config top_padding                  1
-#yabai -m config bottom_padding               1
-#yabai -m config left_padding                 1
-#yabai -m config right_padding                1
-#yabai -m config window_gap                   03
+yabai -m config top_padding                  6
+yabai -m config bottom_padding               6
+yabai -m config left_padding                 6
+yabai -m config right_padding                6
+yabai -m config window_gap                   6
 
 # SIP Required
 # prevent border from being under the active window

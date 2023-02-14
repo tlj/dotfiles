@@ -37,6 +37,8 @@ EOF
     echo "Signing $(which yabai) with 'yabai-cert'"
     codesign -fs 'yabai-cert' $(which yabai)
   fi
+  defaults write com.apple.dock workspaces-swoosh-animation-off -bool YES
+  killall Dock
 fi
 
 stow --target=$HOME --restow yabai/ simplebar/ skhd/ sketchybar/
