@@ -69,6 +69,7 @@ local M = {
   {
     "lukas-reineke/indent-blankline.nvim",
     event = "BufReadPost",
+    version = "2.20.8",
     opts = {
       char = "▏",
       filetype_exclude = { "help", "alpha", "dashboard", "neo-tree", "Trouble", "lazy" },
