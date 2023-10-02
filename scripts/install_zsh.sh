@@ -26,8 +26,8 @@ else
   curl -sLo /tmp/lsd.deb https://github.com/Peltoche/lsd/releases/download/0.23.1/lsd_0.23.1_amd64.deb
   sudo dpkg -i /tmp/lsd.deb
 
-  echo "Install bat and autojump..."
-  sudo apt install autojump bat
+  echo "Install bat, delta and autojump..."
+  sudo apt install autojump bat git-delta
   mkdir -p ~/.local/bin
   if [[ ! -f ~/.local/bin/bat ]]; then
     ln -s /usr/bin/batcat ~/.local/bin/bat

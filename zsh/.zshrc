@@ -6,7 +6,7 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
 fi
 
 # If you come from bash you might have to change your $PATH.
-export PATH=$HOME/bin:$HOME/.local/bin:$HOME/go/bin:/opt/homebrew/bin:/usr/local/bin:$PATH
+export PATH=$HOME/bin:$HOME/.local/bin:$HOME/go/bin:$HOME/dotfiles/bin:/opt/homebrew/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
@@ -133,6 +133,19 @@ alias lta="lsd -a --tree"
 alias lg="lazygit"
 alias s="kitty +kitten ssh"
 alias d="cd ~/dotfiles && nvim && cd -"
+
+gs() {
+  preview="git diff $@ --color=always -- {-1}"
+  git diff $@ --name-only | fzf -m --ansi --preview $preview
+}
+
+git_show() {
+  git show ${1:0:7}
+}
+
+gitlog() {
+  git log --oneline | fzf --preview "~/dotfiles/bin/preview.sh {}" --preview-window=right:60%
+}
 
 source $HOME/.zshrc-local
 
