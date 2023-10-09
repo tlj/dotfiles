@@ -200,11 +200,14 @@ local M = {
 
       -- configure lua lsp support
       local servers = {
-        sumneko_lua = {
+        lua_ls = {
           settings = {
             Lua = {
               diagnostics = {
                 globals = { 'vim' }
+              },
+              workspace = {
+                checkThirdParty = false,
               }
             }
           }

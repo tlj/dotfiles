@@ -30,7 +30,7 @@ vim.api.nvim_create_autocmd("User", {
 })
 
 -- Theme
-vim.cmd('colorscheme gruvbox')
+vim.cmd('colorscheme melange')
 -- vim.cmd('colorscheme catppuccin-macchiato')
 -- vim.cmd('colorscheme ayu-dark')
 -- vim.cmd('colorscheme tokyonight')

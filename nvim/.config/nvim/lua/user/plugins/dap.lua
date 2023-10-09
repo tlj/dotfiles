@@ -10,6 +10,7 @@ local M = {
     },
     {
       "rcarriga/nvim-dap-ui",
+      enabled = false,
       config = function()
         require("dapui").setup({
           layouts = {
@@ -46,7 +47,7 @@ local M = {
     },
   },
   keys = {
-    { '<F4>', '<cmd>lua require"dapui".toggle()<cr>' },
+    -- { '<F4>', '<cmd>lua require"dapui".toggle()<cr>' },
     { '<F5>', '<cmd>lua require"dap".continue()<cr>' },
     { '<F6>', '<cmd>lua require"dap".step_over()<cr>' },
     { '<F7>', '<cmd>lua require"dap".step_into()<cr>' },
