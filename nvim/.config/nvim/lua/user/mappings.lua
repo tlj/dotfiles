@@ -57,8 +57,8 @@ keymap("i", "<esc>", "<cmd>noh<cr><esc>", opts)
 keymap("n", "<leader>ur", "<Cmd>nohlsearch<Bar>diffupdate<Bar>normal! <C-L><CR>", { desc = "Redraw / clear hlsearch / diff update" })
 
 -- Save in insert mode
-keymap("i", "<C-s>", "<cmd>:w<cr><esc>", opts)
-keymap("n", "<C-s>", "<cmd>:w<cr><esc>", opts)
+-- keymap("i", "<C-s>", "<cmd>:w<cr><esc>", opts)
+-- keymap("n", "<C-s>", "<cmd>:w<cr><esc>", opts)
 
 -- windows
 keymap("n", "<leader>ww", "<C-W>p", { desc = "Other window" })
