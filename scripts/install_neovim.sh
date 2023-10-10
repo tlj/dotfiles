@@ -22,7 +22,7 @@ if isMac; then
   fi
 
   # Install neovide from binary
-  if ~/nvim-macos/bin/neovide --version | grep -q --only-matching "${NEOVIDE_VERSION}"; then
+  if /Applications/neovide.app/Contents/MacOS/neovide --version | grep -q --only-matching "${NEOVIDE_VERSION}"; then
     echo "Already have Neovide v${NEOVIDE_VERSION}."
   else
     echo "Installing Neovide v${NEOVIDE_VERSION}..."
