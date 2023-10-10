@@ -24,7 +24,7 @@ on run argv
 		if running_pid > 0 then
 			set frontmost of every process whose unix id is running_pid to true
 		else
-			do shell script "/Applications/neovide.app/Contents/MacOS/neovide --neovim-bin " & homedir & "nvim-macos/bin/nvim " & workdir
+			do shell script "cd " & workdir & "&& /Applications/neovide.app/Contents/MacOS/neovide --neovim-bin " & homedir & "nvim-macos/bin/nvim -- --cmd \"lua vim.opt.titlestring=" & workdir & "\""
 		end if
 	end tell
 end run
