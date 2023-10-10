@@ -55,9 +55,9 @@ local M = {
           layouts = {
             {
               elements = {
-                { id = "scopes", size = 0.25 },
-                { id = "watches", size = 0.25 },
-                { id = "repl", size = 0.50 },
+                { id = "scopes", size = 0.40 },
+                { id = "watches", size = 0.30 },
+                { id = "repl", size = 0.30 },
               },
               size = 10,
               position = "bottom",
@@ -85,7 +85,7 @@ local M = {
     { '<leader>db', '<cmd>lua require"dap".toggle_breakpoint()<CR>' },
     { '<leader>dB', '<cmd>lua require"dap".set_brakpoint(vim.fn.input("Breakpoint condition: "))<cr>' },
     { '<leader>dc', '<cmd>lua require"dap".continue()<CR>' },
-    { '<leader>ds', '<cmd>lua require"dap".stop()<CR>' },
+    { '<leader>ds', '<cmd>lua require"dap".close()<CR>' },
     { '<leader>do', '<cmd>lua require"dap".step_over()<CR>' },
     { '<leader>di', '<cmd>lua require"dap".step_into()<CR>' },
     { '<leader>dt', '<cmd>Telescope dap commands<CR>' },

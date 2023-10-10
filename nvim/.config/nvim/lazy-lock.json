@@ -22,7 +22,7 @@
   "guihua.lua": { "branch": "master", "commit": "5ad8dba19ce9b9fd8965598984dfdc9c119f97e4" },
   "indent-blankline.nvim": { "branch": "master", "commit": "9637670896b68805430e2f72cf5d16be5b97a22a" },
   "kanagawa.nvim": { "branch": "master", "commit": "c19b9023842697ec92caf72cd3599f7dd7be4456" },
-  "lazy.nvim": { "branch": "main", "commit": "067544c74a6336fb5eb1c414b9d164ea27b616d2" },
+  "lazy.nvim": { "branch": "main", "commit": "58e5726592a3f4a83735edfea996911d8daea002" },
   "lspsaga.nvim": { "branch": "main", "commit": "79f80724f5b47cb6f515d96b5b4c176feacfb677" },
   "lualine-diagnostic-message": { "branch": "master", "commit": "132ec94f3f5358bad91de955f05aee2f5b3e946d" },
   "lualine.nvim": { "branch": "master", "commit": "45e27ca739c7be6c49e5496d14fcf45a303c3a63" },
