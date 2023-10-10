@@ -42,6 +42,9 @@ local M = {
             return {"--hidden"}
           end
         },
+        colorscheme = {
+          enable_preview = true,
+        }
       },
       extensions = {
         undo = {
