@@ -10,26 +10,17 @@ local M = {
     },
     {
       "rcarriga/nvim-dap-ui",
-      enabled = false,
+      enabled = true,
       config = function()
         require("dapui").setup({
           layouts = {
             {
-                elements = {
-                { id = "scopes", size = 0.25 },
-                "breakpoints",
-                "watches",
-                "stacks",
-              },
-              size = 30,
-              position = "left",
-            },
-            {
               elements = {
-                "repl",
+                "scopes",
+                "watches",
                 "console"
               },
-              size = 5,
+              size = 10,
               position = "bottom",
             }
           }
@@ -47,7 +38,7 @@ local M = {
     },
   },
   keys = {
-    -- { '<F4>', '<cmd>lua require"dapui".toggle()<cr>' },
+    { '<F4>', '<cmd>lua require"dapui".toggle()<cr>' },
     { '<F5>', '<cmd>lua require"dap".continue()<cr>' },
     { '<F6>', '<cmd>lua require"dap".step_over()<cr>' },
     { '<F7>', '<cmd>lua require"dap".step_into()<cr>' },
