@@ -22,6 +22,14 @@ vim.keymap.set('v', '<D-v>', '"+P') -- Paste Visual Mode
 vim.keymap.set('c', '<D-v>', '<C-R>+') -- Paste command mode
 vim.keymap.set('i', '<D-v>', '<ESC>l"+Pli') -- Paste Insert Mode
 
+-- Move text up and down
+vim.keymap.set("n", "<D-k>", ":m .-2<CR>==")
+vim.keymap.set("n", "<D-j>", ":m .+1<CR>==")
+
+-- Move a block in visual mode
+vim.keymap.set("x", "<D-k>", ":move '>+1<CR>gv-gv")
+vim.keymap.set("x", "<D-j>", ":move '<-2<CR>gv-gv")
+
 -- reload neovide config with cmd-r
 vim.keymap.set('n', '<D-r>', '<cmd>luafile ~/.config/nvim/lua/user/neovide.lua<CR>')
 
