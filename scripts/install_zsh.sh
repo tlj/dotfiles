@@ -6,6 +6,7 @@
 if isMac; then
   echo "Installing kitty..."
   brew install -q --cask kitty
+  curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
 
   echo "Installing autojump, bat, btop and lsd..."
   brew install -q autojump bat lsd btop jq

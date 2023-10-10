@@ -122,7 +122,7 @@ export EDITOR='nvim'
 
 alias ibrew="arch -x86_64 /usr/local/bin/brew"
 alias n="nvim"
-alias nv="/Applications/neovide.app/Contents/MacOS/neovide"
+alias nv="~/dotfiles/bin/neovide.applescript $PWD "
 alias vim="nvim"
 alias cat="bat"
 alias l="lsd"
@@ -134,7 +134,7 @@ alias lta="lsd -a --tree"
 alias lg="lazygit"
 alias s="kitty +kitten ssh"
 alias d="cd ~/dotfiles && nvim && cd -"
-alias dv="cd ~/dotfiles && /Applications/neovide.app/Contents/MacOS/neovide && cd -"
+alias dv="~/dotfiles/bin/neovide.applescript $PWD ~/dotfiles"
 
 gs() {
   preview="git diff $@ --color=always -- {-1}"
