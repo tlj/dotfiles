@@ -31,7 +31,8 @@ if isMac; then
     unzip -qo /tmp/neovide.dmg.zip -d /tmp
     hdiutil attach /tmp/neovide.dmg -nobrowse -quiet
     rm ~/nvim-macos/bin &> /dev/null
-    cp /Volumes/neovide/neovide.app/Contents/MacOS/neovide ~/nvim-macos/bin
+    rm -rf /Applications/neovide.app/ &> /dev/null
+    cp -R /Volumes/neovide/neovide.app /Applications/
     hdiutil detach "$(/bin/df | /usr/bin/grep "neovide" | awk '{print $1}')" -quiet
   fi
 
