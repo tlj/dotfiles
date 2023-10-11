@@ -7,6 +7,11 @@ on run argv
 
 	set workdir to quoted form of (item 2 of argv)
 	set homedir to quoted form of (get POSIX path of (path to home folder as text))
+  set pwd to do shell script "echo $PWD"
+
+  if workdir is equal to "'.'" then
+    set workdir to quoted form of pwd
+  end if
 	
 	set running_pid to 0
 	tell application "System Events"
