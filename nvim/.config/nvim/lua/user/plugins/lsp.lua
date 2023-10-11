@@ -120,10 +120,10 @@ local M = {
         bufmap({'n', 'v', 'x'}, '<leader>ca', '<cmd>Lspsaga code_action<cr>')
 
         -- Jump to the definition
-        bufmap('n', 'gd', '<cmd>Lspsaga goto_definition<cr>')
+        bufmap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<cr>')
 
         -- Peek definition
-        bufmap('n', 'gp', '<cmd>Lspsaga peek_definition<cr>')
+        --bufmap('n', 'gp', '<cmd>Lspsaga peek_definition<cr>')
 
         -- LSP finder - find the symbol's definition
         -- If there is no definition, it will instead be hidden
@@ -131,7 +131,7 @@ local M = {
         -- you can use <C-t> to jump back
         bufmap('n', 'gh', '<cmd>Lspsaga lsp_finder<cr>')
 
-        -- Jumo to desclaration
+        -- Jumo to declaration
         bufmap('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<cr>')
 
         -- Lists all the implementations for the symvol under the cursor
