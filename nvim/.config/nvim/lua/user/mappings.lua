@@ -58,7 +58,7 @@ keymap("n", "<leader>ur", "<Cmd>nohlsearch<Bar>diffupdate<Bar>normal! <C-L><CR>"
 
 -- Save in insert mode
 -- keymap("i", "<C-s>", "<cmd>:w<cr><esc>", opts)
--- keymap("n", "<C-s>", "<cmd>:w<cr><esc>", opts)
+-- reymap("n", "<C-s>", "<cmd>:w<cr><esc>", opts)
 
 -- windows
 keymap("n", "<leader>ww", "<C-W>p", { desc = "Other window" })
@@ -91,7 +91,7 @@ keymap("o", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev search res
 vim.keymap.set("n", "<leader>lg", function() require'lazy.util'.float_term({ "lazygit" }) end, { desc = "Lazygit (cw)"})
 
 -- float term
-vim.keymap.set("n", "<leader>ft", function() require'lazy.util'.float_term() end, { desc = "Terminal (cwd)" })
+vim.keymap.set("n", "<leader>ft", "<cmd>Lspsaga term_toggle<cr>", { desc = "Terminal (cwd)" })
 vim.keymap.set("t", "<esc><esc>", "<c-\\><c-n>", { desc = "Enter Normal mode" })
 
 -- ufo
@@ -105,10 +105,10 @@ vim.keymap.set('n', 'zM', require('ufo').closeAllFolds)
 -- end)
 
 -- Don't allow arrow keys, use hjkl instead
-keymap('n', "<left>", "<nop>", opts)
-keymap('n', "<right>", "<nop>", opts)
-keymap('n', "<up>", "<nop>", opts)
-keymap('n', "<down>", "<nop>", opts)
+-- keymap('n', "<left>", "<nop>", opts)
+-- keymap('n', "<right>", "<nop>", opts)
+-- keymap('n', "<up>", "<nop>", opts)
+-- keymap('n', "<down>", "<nop>", opts)
 
 
 

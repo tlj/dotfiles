@@ -1,9 +1,9 @@
 local M = {
   "rmagatti/goto-preview",
   keys = {
-    { "gp", "<cmd>lua require('goto-preview').goto_preview_definition()<CR>" },
+    { "<leader>gp", "<cmd>lua require('goto-preview').goto_preview_definition()<CR>" },
   },
-  enabled = true,
+  enabled = false,
   config = function()
     require("goto-preview").setup({})
   end

@@ -103,6 +103,7 @@ local M = {
           'jsonls', -- json
           'html', -- html
           'gopls', -- golang
+          'cssls', -- css
         }
       })
 
@@ -123,13 +124,13 @@ local M = {
         bufmap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<cr>')
 
         -- Peek definition
-        --bufmap('n', 'gp', '<cmd>Lspsaga peek_definition<cr>')
+        bufmap('n', '<leader>gp', '<cmd>Lspsaga peek_definition<cr>')
 
         -- LSP finder - find the symbol's definition
         -- If there is no definition, it will instead be hidden
         -- When you use an action in finder like "open vsplit",
         -- you can use <C-t> to jump back
-        bufmap('n', 'gh', '<cmd>Lspsaga lsp_finder<cr>')
+        bufmap('n', 'gh', '<cmd>Lspsaga finder<cr>')
 
         -- Jumo to declaration
         bufmap('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<cr>')
