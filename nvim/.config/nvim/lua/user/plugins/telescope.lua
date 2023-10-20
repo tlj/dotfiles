@@ -10,7 +10,7 @@ local M = {
   config = function()
     require("telescope").setup({
       defaults = {
-        file_ignore_patterns = { "node_modules", ".git", "var/cache", "vendor" },
+        file_ignore_patterns = { "node_modules", "%.git", "var/cache", "%.idea", "%.vscode", "var" },
         layout_strategy = "flex",
         layout_config = {
           prompt_position = "bottom",
@@ -30,7 +30,7 @@ local M = {
       pickers = {
         find_files = {
           hidden = true,
-          no_ignore = true,
+          no_ignore = false,
         },
         live_grep = {
           additional_args = function(_)
