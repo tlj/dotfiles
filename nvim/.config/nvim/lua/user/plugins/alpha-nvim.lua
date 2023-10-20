@@ -4,6 +4,7 @@
 local razor1911 = {
   'goolord/alpha-nvim',
   dependencies = { 'nvim-tree/nvim-web-devicons' },
+  enabled = false,
   config = function(_, dashboard)
     -- close Lazy and re-open when the dashboard is ready
     if vim.o.filetype == 'lazy' then

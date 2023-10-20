@@ -1,6 +1,6 @@
 local M = {
   'rmagatti/auto-session',
-  enabled = false,
+  enabled = true,
   config = function()
     require("auto-session").setup {
       log_level = "error",
