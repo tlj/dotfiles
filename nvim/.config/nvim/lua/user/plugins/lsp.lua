@@ -52,6 +52,7 @@ local M = {
           'rafamadriz/friendly-snippets', -- Bunch of snippets
           {
             'windwp/nvim-autopairs',
+            enabled = true,
             config = function()
               require("nvim-autopairs").setup({
                 check_ts = true, -- treesitter integration
@@ -335,6 +336,7 @@ local M = {
         Event = "",
         Operator = "",
         TypeParameter = "",
+        Copilot = ""
       }
 
       local check_back_space = function()
@@ -394,7 +396,7 @@ local M = {
 
           -- Accept currently selected item. If none selected, `select` first item.
           -- Set `select` to `false` to only confirm explicitly selected items.
-          ["<CR>"] = cmp.mapping.confirm { select = false },
+          ["<CR>"] = cmp.mapping.confirm { select = true },
           ["<C-y>"] = cmp.mapping.confirm { select = false },
 
           -- when menu is visible, navigate to next item
@@ -435,6 +437,7 @@ local M = {
           end,
         },
         sources = {
+          { name = 'copilot', group_index = 2 },
           { name = 'nvim_lsp' },
           { name = 'nvim_lua' },
           { name = 'luasnip' },

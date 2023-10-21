@@ -2,7 +2,7 @@
 -- https://github.com/freddiehaddad/nvim/blob/main/lua/plugins/alpha.lua
 
 local razor1911 = {
-  'goolord/alpha-nvim',
+ 'goolord/alpha-nvim',
   dependencies = { 'nvim-tree/nvim-web-devicons' },
   enabled = false,
   config = function(_, dashboard)
