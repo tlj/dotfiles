@@ -16,6 +16,9 @@ vim.opt.runtimepath:prepend(lazypath)
 
 require "user.options"
 require("lazy").setup("user.plugins", {
+  change_detection = {
+    notify = false,
+  },
   dev = {
     path = "~/src",
     patterns = {"tlj"},
