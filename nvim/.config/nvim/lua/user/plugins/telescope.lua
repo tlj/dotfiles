@@ -54,6 +54,8 @@ local M = {
             preview_height = 0.8,
           },
         },
+        file_browser = {
+        },
       },
     })
   end,
