@@ -28,7 +28,7 @@ local M = {
       sync_install = false,
       auto_install = false,
       ignore_install = { "help" },
-      indent = { enable = false },
+      indent = { enable = true },
     }
   end
 }
