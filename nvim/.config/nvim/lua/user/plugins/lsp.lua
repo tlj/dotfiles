@@ -81,6 +81,7 @@ local M = {
       {
         "glepnir/lspsaga.nvim",
         event = "BufRead",
+        enabled = true,
         dependencies = {
           "nvim-tree/nvim-web-devicons",
         },

@@ -14,7 +14,7 @@ local M = {
       desc = "Explorer NeoTree",
     }
   },
-  enabled = false,
+  enabled = true,
   deactivate = function()
     vim.cmd([[Neotree close]])
   end,
