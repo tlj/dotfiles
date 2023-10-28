@@ -6,7 +6,7 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
 fi
 
 # If you come from bash you might have to change your $PATH.
-export PATH=/opt/homebrew/opt/ruby/bin:$HOME/nvim-macos/bin:$HOME/bin:$HOME/.local/bin:$HOME/go/bin:$HOME/dotfiles/bin:/opt/homebrew/bin:/usr/local/bin:$PATH
+export PATH=$HOME/.config/tmux/plugins/t-smart-tmux-session-manager/bin:/opt/homebrew/opt/ruby/bin:$HOME/nvim-macos/bin:$HOME/bin:$HOME/.local/bin:$HOME/go/bin:$HOME/dotfiles/bin:/opt/homebrew/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
@@ -19,6 +19,8 @@ export XDG_CONFIG_HOME="$HOME/.config"
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 #ZSH_THEME="robbyrussell"
 ZSH_THEME="powerlevel10k/powerlevel10k"
+
+T_SESSION_USE_GIT_ROOT="true"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -139,6 +141,10 @@ alias dv="~/dotfiles/bin/neovide.applescript $PWD ~/dotfiles"
 gs() {
   preview="git diff $@ --color=always -- {-1}"
   git diff $@ --name-only | fzf -m --ansi --preview $preview
+}
+
+nt() {
+  tmux new -s $(pwd | sed 's/.*\///')
 }
 
 git_show() {

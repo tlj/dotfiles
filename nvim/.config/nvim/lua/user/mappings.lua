@@ -16,10 +16,10 @@ keymap("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 keymap("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 
 -- Move to window using the <ctrl> movement keys
-keymap("n", "<C-h>", "<C-w>h", { desc = "Go to the left window" })
-keymap("n", "<C-j>", "<C-w>j", { desc = "Go to the lower window" })
-keymap("n", "<C-k>", "<C-w>k", { desc = "Go to the upper window" })
-keymap("n", "<C-l>", "<C-w>l", { desc = "Go to the right window" })
+-- keymap("n", "<C-h>", "<C-w>h", { desc = "Go to the left window" })
+-- keymap("n", "<C-j>", "<C-w>j", { desc = "Go to the lower window" })
+-- keymap("n", "<C-k>", "<C-w>k", { desc = "Go to the upper window" })
+-- keymap("n", "<C-l>", "<C-w>l", { desc = "Go to the right window" })
 
 -- Navigate buffers
 local hasbufferline, _ = pcall(require, "bufferline")
