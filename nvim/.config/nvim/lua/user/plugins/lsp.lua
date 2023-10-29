@@ -79,16 +79,52 @@ local M = {
         },
       },
       {
-        "glepnir/lspsaga.nvim",
-        event = "BufRead",
-        enabled = true,
+        "kosayoda/nvim-lightbulb",
+        config = function ()
+          require("nvim-lightbulb").setup({
+            autocmd = {
+              enabled = true,
+            },
+          })
+        end
+      },
+      {
+        "SmiteshP/nvim-navbuddy",
         dependencies = {
+          "SmiteshP/nvim-navic",
+          "MunifTanjim/nui.nvim",
+        },
+        opts = {
+          cmd = "NavBuddy",
+          lsp = {
+            auto_attach = true,
+          }
+        },
+      },
+      {
+        "weilbith/nvim-code-action-menu",
+        dependencies = {
+          "kosayoda/nvim-lightbulb",
+        },
+        cmd = "CodeActionMenu",
+      },
+      {
+        "utilyre/barbecue.nvim",
+        version = "*",
+        dependencies = {
+          "SmiteshP/nvim-navic",
           "nvim-tree/nvim-web-devicons",
         },
+        opts = {},
+      },
+      {
+        "smjonas/inc-rename.nvim",
         config = function()
-          require("lspsaga").setup({})
+          require("inc_rename").setup({
+            show_message = true,
+          })
         end,
-      }
+      },
     },
     config = function()
       require("neodev").setup()
@@ -116,23 +152,24 @@ local M = {
         end
 
         -- Renames all references to the symbol under the cursor
-        bufmap('n', '<leader>rn', '<cmd>Lspsaga rename<cr>')
-        bufmap('n', '<leader>rN', '<cmd>Lspsaga rename ++project<cr>')
+        bufmap('n', '<leader>rn', ':IncRename ')
 
         -- Selects a code action available at the current cursor position
-        bufmap({'n', 'v', 'x'}, '<leader>ca', '<cmd>Lspsaga code_action<cr>')
+        -- bufmap({'n', 'v', 'x'}, '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<cr>')
+        bufmap({'n', 'v', 'x'}, '<leader>ca', '<cmd>CodeActionMenu<cr>')
 
         -- Jump to the definition
         bufmap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<cr>')
 
         -- Peek definition
-        bufmap('n', '<leader>gp', '<cmd>Lspsaga peek_definition<cr>')
+        -- bufmap('n', '<leader>gp', '<cmd>Lspsaga peek_definition<cr>')
 
         -- LSP finder - find the symbol's definition
         -- If there is no definition, it will instead be hidden
         -- When you use an action in finder like "open vsplit",
         -- you can use <C-t> to jump back
-        bufmap('n', 'gh', '<cmd>Lspsaga finder<cr>')
+        -- removed lspsage but not sure how to replace this
+        --bufmap('n', 'gh', '<cmd>Lspsaga finder<cr>')
 
         -- Jumo to declaration
         bufmap('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<cr>')
@@ -141,14 +178,15 @@ local M = {
         bufmap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<cr>')
 
         -- Call hierarchy
-        bufmap('n', '<Leader>ci', '<cmd>Lspsaga incoming_calls<cr>')
-        bufmap('n', '<Leader>co', '<cmd>Lspsaga outgoing_calls<cr>')
+        -- bufmap('n', '<Leader>ci', '<cmd>Lspsaga incoming_calls<cr>')
+        -- bufmap('n', '<Leader>co', '<cmd>Lspsaga outgoing_calls<cr>')
 
         -- Jumps to the definition of the type symbol
         -- bufmap('n', 'go', '<cmd>lua vim.lsp.buf.type_definitions()<cr>')
 
         -- Open Code outline
-        bufmap('n', 'go', '<cmd>Lspsaga outline<cr>')
+        --bufmap('n', 'go', '<cmd>Lspsaga outline<cr>')
+        bufmap('n', '<Leader>go', ':Navbuddy<cr>')
 
         -- Lists all the references
         bufmap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<cr>')
@@ -161,19 +199,21 @@ local M = {
 
         -- Hover doc
         -- Keep window open, press K again to remove
-        bufmap('n', 'K', '<cmd>Lspsaga hover_doc ++keep<cr>')
+        --bufmap('n', 'K', '<cmd>Lspsaga hover_doc ++keep<cr>')
+        bufmap('n', 'K', '<cmd>lua vim.lsp.buf.signature_help()<cr>')
 
         -- Open a telescope window with diagnostics
-        bufmap('n', '<leader>gl', '<cmd>Lspsaga show_buf_diagnostics<cr>')
+        --bufmap('n', '<leader>gl', '<cmd>Lspsaga show_buf_diagnostics<cr>')
+        bufmap('n', '<leader>gl', '<cmd>Telescope diagnostics<cr>')
 
-        -- Show diagnostics in a floating window
-        bufmap('n', 'gl', '<cmd>Lspsaga show_line_diagnostics<cr>')
+        -- Show diagnos)tics in a floating window
+        bufmap('n', 'gl', '<cmd>lua vim.diagnostic.open_float(0, { scope = "line" })<cr>')
 
         -- Move to the previous diagnostic
-        bufmap('n', '[d', '<cmd>Lspsaga diagnostic_jump_prev<cr>')
+        --bufmap('n', '[d', '<cmd>Lspsaga diagnostic_jump_prev<cr>')
 
         -- Move to the next diagnostic
-        bufmap('n', ']d', '<cmd>Lspsaga diagnostic_jump_next<cr>')
+        --bufmap('n', ']d', '<cmd>Lspsaga diagnostic_jump_next<cr>')
 
       end
 

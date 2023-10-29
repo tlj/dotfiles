@@ -26,6 +26,7 @@ local M = {
   -- better diagnostics list and others
   {
     "folke/trouble.nvim",
+    enabled = false,
     cmd = { "TroubleToggle", "Trouble" },
     opts = { use_diagnostic_signs = true },
     keys = {

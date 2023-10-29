@@ -91,7 +91,7 @@ keymap("o", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev search res
 vim.keymap.set("n", "<leader>lg", function() require'lazy.util'.float_term({ "lazygit" }) end, { desc = "Lazygit (cw)"})
 
 -- float term
-vim.keymap.set("n", "<leader>ft", "<cmd>Lspsaga term_toggle<cr>", { desc = "Terminal (cwd)" })
+vim.keymap.set("n", "<leader>ft", function() require'lazy.util'.float_term() end, { desc = "Terminal (cwd)" })
 vim.keymap.set("t", "<esc><esc>", "<c-\\><c-n>", { desc = "Enter Normal mode" })
 
 -- ufo
