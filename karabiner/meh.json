@@ -1,23 +1,13 @@
 {
-  "title": "capslock is meh when held",
+  "title": "right option is meh when held",
   "rules": [
     {
-      "description": "capslock is meh when held",
+      "description": "right option is meh when held",
       "manipulators": [
         {
           "from": {
-            "key_code": "caps_lock",
-            "modifiers": {
-              "optional": [
-                "caps_lock"
-              ]
-            }
+            "key_code": "right_option"
           },
-          "to": [
-            {
-              "key_code":"escape"
-            }
-          ],
           "to_if_held_down": [
             {
               "key_code": "left_shift",
@@ -25,11 +15,6 @@
                 "left_control",
                 "left_option"
               ]
-            }
-          ],
-          "to_if_alone": [
-            {
-              "key_code": "escape"
             }
           ],
           "type": "basic"
