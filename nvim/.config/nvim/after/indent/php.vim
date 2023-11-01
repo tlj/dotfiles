@@ -1,3 +1,3 @@
-setlocal indentexpr = 
+setlocal indentexpr=
 setlocal autoindent
 setlocal smartindent

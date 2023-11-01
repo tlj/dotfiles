@@ -1,49 +1,45 @@
-local vim = vim
+local vim = vim 
 
--- Install lazy.nvim
+-- install lazy.nvim plugin manager
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
   vim.fn.system({
     "git",
     "clone",
     "--filter=blob:none",
-    "--single-branch",
     "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable",
     lazypath,
   })
 end
 vim.opt.runtimepath:prepend(lazypath)
 
-require "user.options"
-require("lazy").setup("user.plugins", {
+require "config.options" -- nvim options
+require "config.autocmds"
+
+-- load user mappings (no plugins)
+vim.api.nvim_create_autocmd("User", {
+  pattern = "VeryLazy",
+  callback = function()
+    require("config.mappings")
+  end,
+})
+
+-- load plugins under lua/user/plugins
+require('lazy').setup('plugins', {
   change_detection = {
     notify = false,
   },
   dev = {
     path = "~/src",
     patterns = {"tlj"},
-  }
+  },
 })
 
-vim.api.nvim_create_autocmd("User", {
-  pattern = "VeryLazy",
-  callback = function()
-    require("user.mappings")
-  end,
-})
+-- theme 
+-- vim.cmd('colorscheme gruvbox-material')
 
--- Theme
-vim.cmd('colorscheme gruvbox-material')
--- vim.cmd('colorscheme melange')
--- vim.cmd('colorscheme catppuccin-macchiato')
--- vim.cmd('colorscheme ayu-dark')
--- vim.cmd('colorscheme tokyonight')
-
--- If neovim is started with a directory as argument, change to that directory
+-- if neovim is started with a directory as an argument, change to that directory
 if vim.fn.isdirectory(vim.v.argv[2]) == 1 then
   vim.api.nvim_set_current_dir(vim.v.argv[2])
-end
-
-if vim.g.neovide then
-   require("user.neovide")
 end
