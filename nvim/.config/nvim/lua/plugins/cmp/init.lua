@@ -127,6 +127,19 @@ return {
         },
 
         mapping = cmp.mapping.preset.insert {
+          ["C-Space"] = cmp.mapping.complete({
+            config = {
+              sources = {
+                { name = 'copilot', priority = 80 },
+                { name = 'nvim_lsp', priority = 80 },
+                { name = 'nvim_lua', priority = 80 },
+                { name = 'path', priority = 40 },
+                { name = 'luasnip', priority = 10 },
+                { name = 'nvim_lsp_signature_help' },
+              },
+            },
+          }),
+
           -- luasnip
           -- go to next placeholder in the snippet
           ["<C-d>"] = cmp.mapping(function(fallback)
@@ -167,7 +180,7 @@ return {
 
           -- Accept currently selected item. If none selected, `select` first item.
           -- Set `select` to `false` to only confirm explicitly selected items.
-          ["<CR>"] = cmp.mapping.confirm { select = false },
+          ["<CR>"] = cmp.mapping.confirm { select = true },
           ["<C-y>"] = cmp.mapping.confirm { select = false },
 
           -- when menu is visible, navigate to next item
