@@ -98,6 +98,7 @@ local M = {
         },
         capabilities = { -- {{{
           dynamicRegistration = true,
+          lineFoldingOnly = true,
           textDocument = {
             completion = {
               completionItem = {

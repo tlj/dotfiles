@@ -12,10 +12,7 @@ local options = {
   expandtab = true, -- use space instead of tabs
   fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]],
   foldcolumn = '1',
-  foldlevel = 99,
-  foldlevelstart = 99,
-  foldenable = true,
-  foldmethod = 'manual',
+  foldmethod = 'indent',
   formatoptions = "jcroqlnt", -- tcqj is default
   grepformat = "%f:%l:%c:%m",
   grepprg = "rg --vimgrep",
@@ -29,7 +26,7 @@ local options = {
   pumheight = 10, -- pop up menu height
   relativenumber = true,
   scrolloff = 4, -- number of lines to keep above or below the cursor
-  sessionoptions = { "buffers", "curdir", "tabpages", "winsize" },
+  sessionoptions = { "buffers", "curdir", "tabpages", "winsize", "folds", "globals" },
   shiftwidth = 2,
   shortmess = "filnxtToOFWIcC",
   showmode = false, -- don't show -- INSERT --, since we use lualine
@@ -54,6 +51,10 @@ local options = {
   wrap = true, -- display lines as one long line
   writebackup = false, -- if a file is being edited by another program, it is not allwed to be edited
 }
+
+if vim.fn.has("nvim-0.10") == 1 then
+  options.smoothscroll = true
+end
 
 for k, v in pairs(options) do
   vim.opt[k] = v

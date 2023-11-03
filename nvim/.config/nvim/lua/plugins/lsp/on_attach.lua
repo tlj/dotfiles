@@ -21,7 +21,14 @@ local function on_attach(_, bufnr)
   -- Selects a code action available at the current cursor position
   bufmap({'n', 'v', 'x'}, '<leader>ca', '<cmd>CodeActionMenu<cr>')
   -- Hover doc
-  bufmap('n', 'K', '<cmd>lua vim.lsp.buf.signature_help()<cr>')
+  -- redefined in ufo
+  --bufmap('n', 'K', '<cmd>lua vim.lsp.buf.signature_help()<cr>')
+
+  -- add a border to the LSP floating window
+  vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(
+    vim.lsp.handlers.hover,
+    { border = 'single' }
+  )
 end
 
 return {
