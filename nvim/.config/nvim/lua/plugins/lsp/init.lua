@@ -70,6 +70,7 @@ local M = {
           'html', -- html
           'gopls', -- golang
           'cssls', -- css
+          'clangd', -- c
         },
         log_level = "error",
         diagnostics = {
