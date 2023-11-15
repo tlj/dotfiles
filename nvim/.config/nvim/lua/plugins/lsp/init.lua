@@ -71,6 +71,7 @@ local M = {
           'gopls', -- golang
           'cssls', -- css
           'clangd', -- c
+          -- 'terraformls', -- terraform
         },
         log_level = "error",
         diagnostics = {
