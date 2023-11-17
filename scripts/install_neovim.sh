@@ -4,7 +4,7 @@
 . scripts/lib/install_with_git.sh
 
 NEOVIDE_VERSION=0.11.2
-NEOVIM_VERSION=v0.9.4
+NEOVIM_VERSION=nightly
 
 echo "Installing Neovim..."
 if isMac; then
