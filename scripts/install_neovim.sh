@@ -9,7 +9,7 @@ NEOVIM_VERSION=nightly
 echo "Installing Neovim..."
 if isMac; then
   echo "Installing Neovim dependencies..."
-  brew install -q ripgrep fd fzf luacheck gnu-sed gsed bash
+  brew install -q ripgrep fd fzf luacheck gnu-sed gsed bash viu
 
   # Install neovim from binary to make sure we have the correct version always
   if ~/nvim-macos/bin/nvim --version | grep -q --only-matching "${NEOVIM_VERSION}"; then
@@ -38,7 +38,7 @@ if isMac; then
 
   brew install -q npm
 else
-  sudo apt-get install ripgrep fd-find fzf luarocks npm
+  sudo apt-get install ripgrep fd-find fzf luarocks npm viu
   sudo luarocks install luacheck
 
   sudo npm install -g tree-sitter-cli
