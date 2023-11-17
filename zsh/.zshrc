@@ -151,7 +151,8 @@ git_show() {
   git show ${1:0:7}
 }
 
-gitlog() {
+unalias glog
+glog() {
   git log --oneline | fzf --preview "~/dotfiles/bin/preview.sh {}" --preview-window=right:60%
 }
 
