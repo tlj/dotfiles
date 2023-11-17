@@ -25,5 +25,5 @@
 #--map-syntax "*.ino:C++"
 #--map-syntax ".ignore:Git Ignore"
 
---theme="Catppuccin-macchiato"
-#--theme="gruvbox-dark"
+#--theme="Catppuccin-macchiato"
+--theme="gruvbox-dark"
