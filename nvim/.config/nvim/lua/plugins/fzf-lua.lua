@@ -18,6 +18,8 @@ return {
     {'<leader>ff', '<cmd>FzfLua files<cr>' },
     {'<leader>fg', '<cmd>FzfLua live_grep<cr>' },
     {'<leader>*', '<cmd>FzfLua grep_cword<cr>' },
+    {'<leader>fw', '<cmd>FzfLua grep_cword<cr>' },
+    {'<leader>fW', '<cmd>FzfLua grep_cWORD<cr>' },
     {'<leader>fb', '<cmd>FzfLua buffers<cr>' },
     {'<leader>fh', '<cmd>FzfLua help_tags<cr>' },
     {'<leader>gs', '<cmd>FzfLua git_status<cr>' },
