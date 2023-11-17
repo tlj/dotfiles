@@ -5,15 +5,15 @@ local function on_attach(_, bufnr)
   end
 
   -- Jump to the definition
-  bufmap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<cr>')
+  bufmap('n', 'gd', '<cmd>FzfLua lsp_definitions<cr>')
   -- Jump to declaration
-  bufmap('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<cr>')
+  bufmap('n', 'gD', '<cmd>FzfLua lsp_declarations<cr>')
   -- Lists all the implementations for the symvol under the cursor
-  bufmap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<cr>')
+  bufmap('n', 'gi', '<cmd>FzfLua lsp_implementations<cr>')
   -- Lists all the references
-  bufmap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<cr>')
+  bufmap('n', 'gr', '<cmd>FzfLua lsp_references<cr>')
   -- Open a telescope window with diagnostics
-  bufmap('n', '<leader>gl', '<cmd>Telescope diagnostics<cr>')
+  bufmap('n', '<leader>gl', '<cmd>FzfLua diagnostics_document<cr>')
   -- Show diagnos)tics in a floating window
   bufmap('n', 'gl', '<cmd>lua vim.diagnostic.open_float(0, { scope = "line" })<cr>')
   -- Breadcrumb like navigation

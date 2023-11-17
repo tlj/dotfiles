@@ -121,7 +121,8 @@ local M = {
     { '<leader>ds', '<cmd>lua require"dap".close()<CR>', desc = "Close dap" },
     { '<leader>do', '<cmd>lua require"dap".step_over()<CR>', desc = "Step over" },
     { '<leader>di', '<cmd>lua require"dap".step_into()<CR>', desc = "Step into" },
-    { '<leader>dt', '<cmd>Telescope dap commands<CR>', desc = "Telescope DAP commands" },
+    { '<leader>dt', '<cmd>FzfLua dap_commands<CR>', desc = "Telescope DAP commands" },
+    { '<leader>dv', '<cmd>FzfLua dap_variables<CR>', desc = "Telescope DAP active session variables" },
     { '<leader>dap', '<cmd>lua require"dapui".toggle()<cr>', desc = "DapUI Toggle" },
   },
   config = function()

@@ -60,6 +60,7 @@ local M = {
       },
     })
   end,
+  --[[
   keys = {
     {'<leader>ff', '<cmd>lua require"telescope.builtin".find_files({hidden = true})<cr>' },
     {'<leader>fg', '<cmd>lua require"telescope.builtin".live_grep()<cr>' },
@@ -75,6 +76,7 @@ local M = {
     {'<leader>gd', "<cmd>lua require('telescope.builtin').lsp_definitions()<cr>" },
     {'q:', "<cmd>lua require('telescope.builtin').command_history()<cr>" },
   },
+  --]]
 }
 
 return M
