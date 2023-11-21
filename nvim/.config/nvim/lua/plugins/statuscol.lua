@@ -5,7 +5,8 @@ local M = {
       setopt = true,
       foldfunc = "builtin",
     })
-  end
+  end,
+  enabled = true,
 }
 
 return M

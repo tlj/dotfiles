@@ -40,6 +40,7 @@ return {
     vim.opt.foldenable = true
     vim.opt.foldmethod = "manual"
   end,
+  enabled = true,
   opts = {
     open_fold_hl_timeout = 800,
     close_fold_kinds = { "comment", "imports" },
