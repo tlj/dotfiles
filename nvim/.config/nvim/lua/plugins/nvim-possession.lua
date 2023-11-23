@@ -21,7 +21,12 @@ return {
   end,
   config = function()
     require("nvim-possession").setup({
+      autoload = false,
       autosave = true,
+      autoswitch = {
+        enable = true,
+      }
     })
   end,
+  enabled = true,
 }

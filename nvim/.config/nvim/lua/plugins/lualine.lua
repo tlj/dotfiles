@@ -1,3 +1,8 @@
+local function session_name()
+  local session = require('nvim-possession').status()
+  return session or ''
+end
+
 -- better status line
 local M = {
   'nvim-lualine/lualine.nvim',
@@ -10,6 +15,9 @@ local M = {
         theme = 'gruvbox-material',
       },
       sections = {
+        lualine_a = {
+          session_name,
+        },
         lualine_c = {
           "diagnostic-message",
         }
