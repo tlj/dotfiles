@@ -14,6 +14,8 @@ local function on_attach(_, bufnr)
   bufmap('n', 'gr', '<cmd>FzfLua lsp_references<cr>')
   -- Open a telescope window with diagnostics
   bufmap('n', '<leader>gl', '<cmd>FzfLua diagnostics_document<cr>')
+  -- Lists all the symbols in the current buffer
+  bufmap('n', '<leader>tl', '<cmd>lua require("lsp_lines").toggle()<cr>')
   -- Show diagnos)tics in a floating window
   bufmap('n', 'gl', '<cmd>lua vim.diagnostic.open_float(0, { scope = "line" })<cr>')
   -- Breadcrumb like navigation

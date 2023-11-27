@@ -43,7 +43,7 @@ return {
   enabled = true,
   opts = {
     open_fold_hl_timeout = 800,
-    close_fold_kinds = { "comment", "imports" },
+    close_fold_kinds = { "imports" },
     provider_selector = function(_, filetype, _)
       local lspWithoutFolding = { "markdown", "sh", "css", "html", "python" }
       if vim.tbl_contains(lspWithoutFolding, filetype) then
@@ -56,7 +56,7 @@ return {
   keys = {
     { "zR", function() require('ufo').openAllFolds() end , desc = "Open all folds" },
     { "zM", function() require('ufo').closeAllFolds() end, desc = "Close all folds" },
-    { "K", function() 
+    { "K", function()
       local winid = require('ufo').peekFoldedLinesUnderCursor()
       if not winid then
         vim.lsp.buf.hover()

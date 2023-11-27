@@ -42,6 +42,7 @@ return {
     config = function()
       local cmp = require("cmp")
       local ls = require("luasnip")
+      local luasnip = require("luasnip")
 
       cmp.setup({
         performance = {

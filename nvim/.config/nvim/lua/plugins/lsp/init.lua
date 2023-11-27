@@ -51,6 +51,13 @@ local M = {
     }
   },
   {
+    "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
+    init = function()
+      vim.diagnostic.config({ virtual_text = false, virtual_lines = false })
+    end,
+    opts = {},
+    event = "VeryLazy",
+  }, {
     "williamboman/mason-lspconfig.nvim",
     event = { "BufReadPre", "BufNewFile" },
     dependencies = {
