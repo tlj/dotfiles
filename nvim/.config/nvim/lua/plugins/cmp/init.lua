@@ -1,13 +1,13 @@
 -- ideas from https://github.com/arsham/shark/blob/v3.0.0/lua/plugins/cmp/init.lua
 local kind_icons = require("config.icons").kinds
 
-local check_back_space = function()
-  local col = vim.fn.col('.') - 1
-  if col == 0 or vim.fn.getline('.'):sub(col, col):match('%s') then
-    return true
-  else
+local function has_words_before()
+  if vim.api.nvim_get_option_value("buftype", { buf = 0 }) == "prompt" then
     return false
   end
+  local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+  return col ~= 0
+    and vim.api.nvim_buf_get_text(0, line - 1, 0, line - 1, col, {})[1]:match("^%s*$") == nil
 end
 
 return {
@@ -44,6 +44,24 @@ return {
       local ls = require("luasnip")
       local luasnip = require("luasnip")
 
+      local function tab_function(fallback)
+        if ls.expand_or_jumpable() then
+          ls.expand_or_jump()
+        elseif has_words_before() then
+          cmp.complete()
+        else
+          fallback()
+        end
+      end
+
+      local function shift_tab_function(fallback)
+        if ls.jumpable(-1) then
+          ls.jump(-1)
+        else
+          fallback()
+        end
+      end
+
       cmp.setup({
         performance = {
           debounce = 50,
@@ -59,12 +77,12 @@ return {
         preselect = cmp.PreselectMode.None,
 
         sources = {
-          { name = 'copilot', priority = 100 },
+          { name = 'copilot', priority = 100, keyword_length = 3 },
           { name = 'nvim_lsp', priority = 80 },
           { name = 'nvim_lua', priority = 70 },
           { name = 'luasnip', priority = 30 },
           { name = 'nvim_lsp_signature_help' },
-          { name = 'buffer' },
+          { name = 'buffer', keyword_length = 3 },
           { name = 'path' },
           {
             name = "rg",
@@ -125,6 +143,7 @@ return {
 
         experimental = {
           ghost_text = true,
+          native_menu = false,
         },
 
         mapping = cmp.mapping.preset.insert {
@@ -143,7 +162,7 @@ return {
 
           -- luasnip
           -- go to next placeholder in the snippet
-          ["<C-d>"] = cmp.mapping(function(fallback)
+          ["<C-f>"] = cmp.mapping(function(fallback)
             if luasnip.jumpable(1) then
               luasnip.jump(1)
             else
@@ -168,7 +187,7 @@ return {
 
           -- Scoll up and down in the completion documentation
           ["<C-u>"] = cmp.mapping(cmp.mapping.scroll_docs(-5)),
-          ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(5)),
+          ["<C-d>"] = cmp.mapping(cmp.mapping.scroll_docs(5)),
 
           -- toggle completion
           ["<C-e>"] = cmp.mapping(function(_)
@@ -187,31 +206,17 @@ return {
           -- when menu is visible, navigate to next item
           -- when line is empty, insert a tab character
           -- else activate completion
-          ["<Tab>"] = cmp.mapping(function(fallback)
-            if cmp.visible() then
-              cmp.select_next_item({behavior = cmp.SelectBehavior.Select})
-            elseif check_back_space() then
-              fallback()
-            else
-              cmp.complete()
-            end
-          end, {
-              "i",
-              "s",
-            }),
+          ["<Tab>"] = cmp.mapping({
+            i = vim.schedule_wrap(tab_function),
+            s = vim.schedule_wrap(tab_function),
+          }),
 
           -- when menu is visible, navigate to previous item on list
           -- else revert to default behavior
-          ["<S-Tab>"] = cmp.mapping(function(fallback)
-            if cmp.visible() then
-              cmp.select_prev_item({behavior = cmp.SelectBehavior.Select})
-            else
-              fallback()
-            end
-          end, {
-              "i",
-              "s",
-            }),
+          ["<S-Tab>"] = cmp.mapping({
+            i = vim.schedule_wrap(shift_tab_function),
+            s = vim.schedule_wrap(shift_tab_function),
+          }),
         },
 
         cmp.setup.filetype("gitcommit", {
