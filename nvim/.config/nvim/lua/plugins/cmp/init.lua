@@ -62,6 +62,8 @@ return {
         end
       end
 
+      vim.api.nvim_set_hl(0, "CmpItemKindCopilot", { fg = "#6CC644" })
+
       cmp.setup({
         performance = {
           debounce = 50,
@@ -145,20 +147,34 @@ return {
           ghost_text = true,
           native_menu = false,
         },
-
+        
         mapping = cmp.mapping.preset.insert {
-          ["<C-Space>"] = cmp.mapping.complete({
-            config = {
-              sources = {
-                { name = 'copilot', priority = 80 },
-                { name = 'nvim_lsp', priority = 80 },
-                { name = 'nvim_lua', priority = 80 },
-                { name = 'path', priority = 40 },
-                { name = 'luasnip', priority = 10 },
-                { name = 'nvim_lsp_signature_help' },
-              },
-            },
-          }),
+          -- select next/prev item in completion list
+          ["<C-n>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
+          ["<C-p>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
+
+          -- Scoll up and down in the completion documentation
+          ["<C-u>"] = cmp.mapping.scroll_docs(-5),
+          ["<C-d>"] = cmp.mapping.scroll_docs(5),
+
+          -- abort completion
+          ["<C-e>"] = cmp.mapping.abort(),
+
+          -- complete suggestion
+          ["<C-Space>"] = cmp.mapping {
+            i = cmp.mapping.complete(),
+            c = function(
+              _ --[[fallback]]
+            )
+              if cmp.visible() then
+                if not cmp.confirm { select = true } then
+                  return
+                end
+              else
+                cmp.complete()
+              end
+            end,
+          },
 
           -- luasnip
           -- go to next placeholder in the snippet
@@ -185,38 +201,13 @@ return {
           ["<C-k>"] = cmp.mapping.select_prev_item(),
           ["<C-j>"] = cmp.mapping.select_next_item(),
 
-          -- Scoll up and down in the completion documentation
-          ["<C-u>"] = cmp.mapping(cmp.mapping.scroll_docs(-5)),
-          ["<C-d>"] = cmp.mapping(cmp.mapping.scroll_docs(5)),
-
-          -- toggle completion
-          ["<C-e>"] = cmp.mapping(function(_)
-            if cmp.visible() then
-              cmp.abort()
-            else
-              cmp.complete()
-            end
-          end),
-
           -- Accept currently selected item. If none selected, `select` first item.
           -- Set `select` to `false` to only confirm explicitly selected items.
-          ["<CR>"] = cmp.mapping.confirm { select = false },
-          ["<C-y>"] = cmp.mapping.confirm { select = false },
+          ["<CR>"] = cmp.mapping.confirm { select = false, behavior = cmp.ConfirmBehavior.Insert },
+          ["<C-y>"] = cmp.mapping.confirm { select = true, behavior = cmp.ConfirmBehavior.Insert },
 
-          -- when menu is visible, navigate to next item
-          -- when line is empty, insert a tab character
-          -- else activate completion
-          ["<Tab>"] = cmp.mapping({
-            i = vim.schedule_wrap(tab_function),
-            s = vim.schedule_wrap(tab_function),
-          }),
-
-          -- when menu is visible, navigate to previous item on list
-          -- else revert to default behavior
-          ["<S-Tab>"] = cmp.mapping({
-            i = vim.schedule_wrap(shift_tab_function),
-            s = vim.schedule_wrap(shift_tab_function),
-          }),
+          ["<Tab>"] = cmp.config.disable,
+          ["<S-Tab>"] = cmp.config.disable,
         },
 
         cmp.setup.filetype("gitcommit", {
