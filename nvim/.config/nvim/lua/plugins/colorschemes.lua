@@ -1,6 +1,21 @@
 -- add colorschemes to this file
 return {
   {
+    'ribru17/bamboo.nvim',
+    lazy = false,
+    priority = 1000,
+    config = function()
+      require('bamboo').setup {
+        -- optional configuration here
+        transparent = true,
+        lualine = {
+          transparent = true,
+        }
+      }
+      require('bamboo').load()
+    end,
+  },
+  {
     'sainnhe/gruvbox-material',
     lazy = false,
     priority = 999,

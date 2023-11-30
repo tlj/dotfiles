@@ -37,7 +37,8 @@ require('lazy').setup('plugins', {
 })
 
 -- theme 
-vim.cmd('colorscheme gruvbox-material')
+-- vim.cmd('colorscheme gruvbox-material')
+vim.cmd('colorscheme bamboo')
 
 -- if neovim is started with a directory as an argument, change to that directory
 if vim.fn.isdirectory(vim.v.argv[2]) == 1 then
