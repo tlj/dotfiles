@@ -162,3 +162,5 @@ source $HOME/.zshrc-local
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+[[ ! -r /Users/thomas/.opam/opam-init/init.zsh ]] || source /Users/thomas/.opam/opam-init/init.zsh  > /dev/null 2> /dev/null

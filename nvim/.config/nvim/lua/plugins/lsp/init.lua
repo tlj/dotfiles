@@ -78,6 +78,7 @@ local M = {
           'gopls', -- golang
           'cssls', -- css
           'clangd', -- c
+          'ocamllsp', -- ocaml
           -- 'terraformls', -- terraform
         },
         log_level = "error",
@@ -156,6 +157,7 @@ local M = {
           jsonls = require("plugins.lsp.config.jsonls"),
           lua_ls = require("plugins.lsp.config.lua_ls"),
           yamlls = require("plugins.lsp.config.yamlls"),
+          ocamllsp = require("plugins.lsp.config.ocaml"),
         },
       }
       return vim.tbl_deep_extend("force", defaults, opts)
