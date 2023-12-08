@@ -3,6 +3,7 @@ local M = {
   dependencies = {
     "kkharji/sqlite.lua",
   },
+  version = "*",
   dev = true,
   enabled = function ()
     return true
