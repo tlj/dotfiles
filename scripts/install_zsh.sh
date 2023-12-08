@@ -64,4 +64,7 @@ install_with_git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions 
 echo "Installing fzf from git..."
 install_with_git ~/.fzf https://github.com/junegunn/fzf.git
 
+echo "Installing better vim mode for zsh..."
+install_with_git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-vi-mode
+
 stow --target=$HOME --restow kitty/ btop/ zsh/ bat/ lsd/

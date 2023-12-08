@@ -82,7 +82,7 @@ T_SESSION_USE_GIT_ROOT="true"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git docker kubectl terraform zsh-syntax-highlighting zsh-autosuggestions autojump dirhistory)
+plugins=(git docker kubectl terraform zsh-syntax-highlighting zsh-autosuggestions autojump dirhistory zsh-vi-mode)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -164,3 +164,5 @@ source $HOME/.zshrc-local
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 [[ ! -r /Users/thomas/.opam/opam-init/init.zsh ]] || source /Users/thomas/.opam/opam-init/init.zsh  > /dev/null 2> /dev/null
+
+
