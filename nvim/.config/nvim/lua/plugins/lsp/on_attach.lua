@@ -26,6 +26,8 @@ local function on_attach(_, bufnr)
   -- redefined in ufo
   --bufmap('n', 'K', '<cmd>lua vim.lsp.buf.signature_help()<cr>')
 
+  bufmap('n','<leader>rn','<cmd>lua vim.lsp.buf.rename()<cr>')
+
   -- add a border to the LSP floating window
   vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(
     vim.lsp.handlers.hover,
