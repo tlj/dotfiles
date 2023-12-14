@@ -1,9 +1,24 @@
 -- add colorschemes to this file
 return {
   {
+    "catppuccin/nvim",
+    lazy = false,
+    priority = 999,
+    enabled = true,
+    config = function()
+      require("catppuccin").setup({
+        transparent_background = true,
+        dim_inactive = {
+          enabled = false,
+        },
+      })
+    end
+  },
+  {
     'ribru17/bamboo.nvim',
     lazy = false,
     priority = 1000,
+    enabled = false,
     config = function()
       require('bamboo').setup {
         -- optional configuration here
@@ -19,7 +34,7 @@ return {
     'sainnhe/gruvbox-material',
     lazy = false,
     priority = 999,
-    enabled = true,
+    enabled = false,
     config = function()
       vim.g.gruvbox_material_better_performance = 1
       -- Fonts

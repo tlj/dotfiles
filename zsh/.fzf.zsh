@@ -1,7 +1,7 @@
 # Setup fzf
 # ---------
 if [[ ! "$PATH" == */.fzf/bin* ]]; then
-  PATH="${PATH:+${PATH}:}${HOME}/.fzf/bin"
+  PATH="${HOME}/.fzf/bin:${PATH:+${PATH}:}"
 fi
 
 FZF_DEFAULT_OPTS="--preview 'bat --color=always --style=numbers --line-range=:500 {}'"
