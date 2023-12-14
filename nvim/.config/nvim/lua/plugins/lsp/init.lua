@@ -6,6 +6,12 @@ local M = {
     event = { "BufReadPre", "BufNewFile" },
     dependencies = {
       "williamboman/mason.nvim",
+      "folke/neodev.nvim",
+      opts = {
+        library = {
+          plugins = {"plenary.nvim", "telescope.nvim", "nvim-treesitter"}
+        }
+      }
     }
   },
   -- Mason for autoinstalling lsps
