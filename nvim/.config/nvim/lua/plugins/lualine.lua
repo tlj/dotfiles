@@ -18,6 +18,7 @@ local M = {
       },
       sections = {
         lualine_a = {
+          'mode',
           session_name,
         },
         lualine_c = {
