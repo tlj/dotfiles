@@ -2,12 +2,13 @@
 return {
   {
     "catppuccin/nvim",
+    name = "catppuccin",
     lazy = false,
     priority = 999,
     enabled = true,
     config = function()
       require("catppuccin").setup({
-        transparent_background = true,
+        transparent_background = false,
         dim_inactive = {
           enabled = false,
         },

@@ -1,3 +1,4 @@
+-- winbar (top bar with breadcrumbs)
 return {
   "utilyre/barbecue.nvim",
   version = "*",
