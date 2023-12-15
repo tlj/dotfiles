@@ -10,7 +10,12 @@ local M = {
     -- return os.getenv("NVIM_API_BROWSER_URLS") ~= ""
   end,
   config = function()
-    require("api-browser").setup()
+    require("api-browser").setup({
+      ripgrep = {
+        command = 'rg -l -g \'*.yaml\' -g \'*.json\' -e "openapi.*3"',
+        no_ignore = true,
+      }
+    })
   end,
   keys = {
     { "<leader>sg", "<cmd>ApiBrowser endpoints_with_param<cr>", desc = "Open API endpoints valid for replacement text on cursor." },
