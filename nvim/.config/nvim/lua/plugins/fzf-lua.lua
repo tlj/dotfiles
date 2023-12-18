@@ -11,6 +11,9 @@ return {
           },
           ueberzug_scaler = "cover",
         }
+      },
+      grep = {
+        rg_opts = "--column --hidden --line-number --no-heading --color=always --smart-case --max-columns=4096 -e",
       }
     })
   end,
