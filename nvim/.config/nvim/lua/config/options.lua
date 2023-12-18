@@ -109,3 +109,8 @@ vim.api.nvim_create_autocmd("FileType", { pattern = "qf", command = "setlocal sc
 vim.api.nvim_create_autocmd("FileType", { pattern = "qf", command = "set nobuflisted", group = qfgrp })
 vim.api.nvim_create_autocmd("FileType", { pattern = "qf", command = "nnoremap <buffer> q :cclose<cr>", group = qfgrp })
 
+vim.api.nvim_create_autocmd({"BufEnter", "BufWinEnter"}, {
+  callback = function()
+    vim.diagnostic.config({virtual_text=false, update_in_insert=false})
+  end
+})

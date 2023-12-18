@@ -99,6 +99,8 @@ local M = {
             header = '',
             prefix = '',
           },
+          virtual_text = false,
+          --[[
           virtual_text = {
             spacing = 4,
             source = "if_many",
@@ -111,6 +113,7 @@ local M = {
               return "●"
             end,
           },
+          --]]
         },
         capabilities = { -- {{{
           dynamicRegistration = true,
