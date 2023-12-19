@@ -9,7 +9,7 @@ NEOVIM_VERSION=nightly
 echo "Installing Neovim..."
 if isMac; then
   echo "Installing Neovim dependencies..."
-  brew install -q ripgrep fd fzf luacheck gnu-sed gsed bash viu
+  brew install -q ripgrep fd fzf luacheck stylua gnu-sed gsed bash viu
 
   # Install neovim from binary to make sure we have the correct version always
   if ~/nvim-macos/bin/nvim --version | grep -q --only-matching "${NEOVIM_VERSION}"; then

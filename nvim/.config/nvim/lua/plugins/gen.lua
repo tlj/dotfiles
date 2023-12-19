@@ -1,6 +1,6 @@
 return {
-  "David-Kunz/gen.nvim",
-  opts = {
-    model = "mistral",
-  }
+	"David-Kunz/gen.nvim",
+	opts = {
+		model = "mistral",
+	},
 }

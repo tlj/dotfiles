@@ -1,7 +1,7 @@
 return {
-  settings = {
-    json = {
-      schemas = require("plugins.lsp.config.schemas").jsonls,
-    },
-  },
+	settings = {
+		json = {
+			schemas = require("plugins.lsp.config.schemas").jsonls,
+		},
+	},
 }

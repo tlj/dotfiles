@@ -1,8 +1,8 @@
--- better search with s 
+-- better search with s
 local M = {
-  "folke/flash.nvim",
-  event = "VeryLazy",
-  opts = {},
+	"folke/flash.nvim",
+	event = "VeryLazy",
+	opts = {},
   -- stylua: ignore
   keys = {
     { "s", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash" },

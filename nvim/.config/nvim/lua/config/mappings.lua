@@ -16,14 +16,14 @@ keymap("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 -- Navigate buffers
 local hasbufferline, _ = pcall(require, "bufferline")
 if hasbufferline then
-  keymap("n", "[b", "<cmd>BufferLineCyclePrev<cr>", { desc = "Prev buffer" })
-  keymap("n", "]b", "<cmd>BufferLineCycleNext<cr>", { desc = "Next buffer" })
+	keymap("n", "[b", "<cmd>BufferLineCyclePrev<cr>", { desc = "Prev buffer" })
+	keymap("n", "]b", "<cmd>BufferLineCycleNext<cr>", { desc = "Next buffer" })
 else
-  keymap("n", "[b", "<cmd>bprevious<cr>", { desc = "Prev buffer" })
-  keymap("n", "]b", "<cmd>bnext<cr>", { desc = "Next buffer" })
+	keymap("n", "[b", "<cmd>bprevious<cr>", { desc = "Prev buffer" })
+	keymap("n", "]b", "<cmd>bnext<cr>", { desc = "Next buffer" })
 end
 keymap("n", "<leader>bb", "<cmd>e #<cr>", { desc = "Switch to Other Buffer" })
-keymap("n", "<leader>`", "<cmd>e #<cr>", { desc = "Switch to Other Buffer "})
+keymap("n", "<leader>`", "<cmd>e #<cr>", { desc = "Switch to Other Buffer " })
 
 -- Stay in indent mode
 keymap("v", "<", "<gv", opts)
@@ -37,7 +37,7 @@ keymap("n", "<C-S-j>", ":m .+1<CR>==", opts)
 keymap("x", "<C-S-k>", ":move '>+1<CR>gv-gv", opts)
 keymap("x", "<C-S-j>", ":move '<-2<CR>gv-gv", opts)
 
--- Resize windows 
+-- Resize windows
 keymap("n", "<C-Up>", "<cmd>resize +2<CR>", opts)
 keymap("n", "<C-Down>", "<cmd>resize -2<CR>", opts)
 keymap("n", "<C-Left>", "<cmd>vertical resize -2<CR>", opts)
@@ -46,7 +46,12 @@ keymap("n", "<C-Right>", "<cmd>vertical resize +2<CR>", opts)
 -- Clear search with <esc>
 keymap("n", "<esc>", "<cmd>noh<cr><esc>", opts)
 keymap("i", "<esc>", "<cmd>noh<cr><esc>", opts)
-keymap("n", "<leader>ur", "<Cmd>nohlsearch<Bar>diffupdate<Bar>normal! <C-L><CR>", { desc = "Redraw / clear hlsearch / diff update" })
+keymap(
+	"n",
+	"<leader>ur",
+	"<Cmd>nohlsearch<Bar>diffupdate<Bar>normal! <C-L><CR>",
+	{ desc = "Redraw / clear hlsearch / diff update" }
+)
 
 -- Save in insert mode
 keymap("i", "<C-s>", "<cmd>:w<cr><esc>", opts)
@@ -69,7 +74,7 @@ keymap("i", ".", ".<c-g>u", opts)
 keymap("i", ";", ";<c-g>u", opts)
 
 -- https://github.com/mhinz/vim-galore#saner-behavior-of-n-and-n
--- The direction of n and N depends on whether / or ? was used for 
+-- The direction of n and N depends on whether / or ? was used for
 -- searching forward or backward respectively. This is pretty confusing to me.
 -- If you want n to always search forward and N backward, use this:
 keymap("n", "n", "'Nn'[v:searchforward]", { expr = true, desc = "Next search result" })
@@ -81,9 +86,12 @@ keymap("o", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev search res
 
 -- -- keymaps for non-core nvim things, but which we know is available, like lazy
 -- lazygit
-vim.keymap.set("n", "<leader>lg", function() require'lazy.util'.float_term({ "lazygit" }) end, { desc = "Lazygit (cw)"})
+vim.keymap.set("n", "<leader>lg", function()
+	require("lazy.util").float_term({ "lazygit" })
+end, { desc = "Lazygit (cw)" })
 
 -- float term
-vim.keymap.set("n", "<leader>ft", function() require'lazy.util'.float_term() end, { desc = "Terminal (cwd)" })
+vim.keymap.set("n", "<leader>ft", function()
+	require("lazy.util").float_term()
+end, { desc = "Terminal (cwd)" })
 -- vim.keymap.set("t", "<esc><esc>", "<c-\\><c-n>", { desc = "Enter Normal mode" })
-

@@ -10,27 +10,27 @@ local partial = require("luasnip.extras").partial
 
 -- Conditions {{{
 local function not_in_function()
-  return not util.is_in_function()
+	return not util.is_in_function()
 end
 
 local in_test_func = {
-  show_condition = util.is_in_test_function,
-  condition = util.is_in_test_function,
+	show_condition = util.is_in_test_function,
+	condition = util.is_in_test_function,
 }
 
 local in_test_file = {
-  show_condition = util.is_in_test_file,
-  condition = util.is_in_test_file,
+	show_condition = util.is_in_test_file,
+	condition = util.is_in_test_file,
 }
 
 local in_func = {
-  show_condition = util.is_in_function,
-  condition = util.is_in_function,
+	show_condition = util.is_in_function,
+	condition = util.is_in_function,
 }
 
 local not_in_func = {
-  show_condition = not_in_function,
-  condition = not_in_function,
+	show_condition = not_in_function,
+	condition = not_in_function,
 }
 --}}}
 

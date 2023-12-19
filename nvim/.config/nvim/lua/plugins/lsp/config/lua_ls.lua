@@ -5,40 +5,43 @@ table.insert(runtime_path, "?.lua")
 table.insert(runtime_path, "?/init.lua")
 
 return {
-  settings = {
-    Lua = {
-      runtime = {
-        special = {
-          req = "require",
-        },
-        version = "LuaJIT",
-        path = runtime_path,
-      },
-      diagnostics = {
-        globals = {
-          "vim",
-          "require",
-          "rocks",
-        },
-      },
-      workspace = {
-        -- Make the server aware of Neovim runtime files
-        library = {[vim.fn.expand('$VIMRUNTIME/lua')] = true, [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true},
-        ignoreDir = "tmp/",
-        useGitIgnore = false,
-        maxPreload = 100000000,
-        preloadFileSize = 500000,
-        checkThirdParty = false,
-      },
-      -- Do not send telemetry data containing a randomized but unique identifier
-      telemetry = {
-        enable = false,
-      },
-    },
-  },
+	settings = {
+		Lua = {
+			runtime = {
+				special = {
+					req = "require",
+				},
+				version = "LuaJIT",
+				path = runtime_path,
+			},
+			diagnostics = {
+				globals = {
+					"vim",
+					"require",
+					"rocks",
+				},
+			},
+			workspace = {
+				-- Make the server aware of Neovim runtime files
+				library = {
+					[vim.fn.expand("$VIMRUNTIME/lua")] = true,
+					[vim.fn.expand("$VIMRUNTIME/lua/vim/lsp")] = true,
+				},
+				ignoreDir = "tmp/",
+				useGitIgnore = false,
+				maxPreload = 100000000,
+				preloadFileSize = 500000,
+				checkThirdParty = false,
+			},
+			-- Do not send telemetry data containing a randomized but unique identifier
+			telemetry = {
+				enable = false,
+			},
+		},
+	},
 
-  server_capabilities = {
-    definition = true,
-    typeDefinition = true,
-  },
+	server_capabilities = {
+		definition = true,
+		typeDefinition = true,
+	},
 }

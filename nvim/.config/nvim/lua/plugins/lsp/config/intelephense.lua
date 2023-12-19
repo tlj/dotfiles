@@ -1,9 +1,9 @@
 return {
-  settings = {
-    intelephense = {
-      telemetry = {
-        enabled = false,
-      }
-    }
-  }
+	settings = {
+		intelephense = {
+			telemetry = {
+				enabled = false,
+			},
+		},
+	},
 }
