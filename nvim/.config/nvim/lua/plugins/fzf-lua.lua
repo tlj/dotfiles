@@ -3,6 +3,12 @@ return {
 	dependencies = { "nvim-tree/nvim-web-devicons" },
 	config = function()
 		require("fzf-lua").setup({
+			"max-perf",
+			winopts = {
+				preview = {
+					layout = "vertical",
+				},
+			},
 			previewers = {
 				builtin = {
 					extensions = {
