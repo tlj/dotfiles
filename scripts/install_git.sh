@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 . scripts/lib/detect_os.sh
+. scripts/lib/install_github_release.sh
 
 echo "Installing git and lazygit..."
 if isMac; then
@@ -9,8 +10,7 @@ else
   sudo apt install git stow
 
   LAZYGIT_VERSION=$(curl -s "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" | grep '"tag_name":' |  sed -E 's/.*"v*([^"]+)".*/\1/')
-  curl -Lo lazygit.tar.gz "https://github.com/jesseduffield/lazygit/releases/latest/download/lazygit_${LAZYGIT_VERSION}_Linux_x86_64.tar.gz"
-  sudo tar xf lazygit.tar.gz -C /usr/local/bin lazygit
+  install_github_release jesseduffield/lazygit lazygit_${LAZYGIT_VERSION}_Linux_x86_64.tar.gz v${LAZYGIT_VERSION}
 fi
 
 stow --target=$HOME --restow lazygit/

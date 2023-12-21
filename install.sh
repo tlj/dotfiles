@@ -3,6 +3,7 @@
 set -e
 
 scripts/install_brew.sh
+scripts/install_fuse.sh
 scripts/install_git.sh
 scripts/install_zsh.sh
 scripts/install_neovim.sh

@@ -2,8 +2,11 @@
 
 . scripts/lib/detect_os.sh
 . scripts/lib/install_with_git.sh
+. scripts/lib/install_github_release.sh
 
 NEOVIDE_VERSION=0.11.2
+VIU_VERION=v1.5.0
+STYLUA_VERSION=v0.19.1
 NEOVIM_VERSION=nightly
 
 echo "Installing Neovim..."
@@ -38,13 +41,20 @@ if isMac; then
 
   brew install -q npm
 else
-  sudo apt-get install ripgrep fd-find fzf luarocks npm viu
+  sudo apt-get install ripgrep fd-find fzf luarocks npm 
   sudo luarocks install luacheck
 
   sudo npm install -g tree-sitter-cli
+  echo "Installing stylua..."
+  install_github_release JohnnyMorganz/StyLua stylua-linux-x86_64.zip
+  echo "Installing viu..."
+  install_github_release atanunq/viu viu-x86_64-unknown-linux-musl
+  echo "Installing neovim $NEOVIM_VERSION..."
+  install_github_release neovim/neovim nvim.appimage $NEOVIM_VERSION
+  mv ~/.local/bin/neovim ~/.local/bin/nvim
 
-  curl -sLo /tmp/neovim.deb https://github.com/neovim/neovim/releases/download/nightly/nvim-linux64.deb
-  sudo dpkg -i /tmp/neovim.deb
+  #curl -sLo /tmp/neovim.deb https://github.com/neovim/neovim/releases/download/${NEOVIM_VERSION}/nvim-linux64.deb
+  #sudo dpkg -i /tmp/neovim.deb
 fi
 
 echo "Installing PHP DAP adapter..."
