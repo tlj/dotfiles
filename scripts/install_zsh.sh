@@ -2,6 +2,7 @@
 
 . scripts/lib/detect_os.sh
 . scripts/lib/install_with_git.sh
+. scripts/lib/install_github_release.sh
 
 if isMac; then
   echo "Installing kitty..."
@@ -33,6 +34,9 @@ else
   if [[ ! -f ~/.local/bin/bat ]]; then
     ln -s /usr/bin/batcat ~/.local/bin/bat
   fi
+
+  echo "Installing btop..."
+  install_github_release aristocratos/btop btop-x86_64-linux-musl.tbz
 fi
 
 echo "Installing oh-my-zsh"

@@ -15,7 +15,14 @@ install_github_release() {
     fi
     if [[ $FILE == *.zip ]]; then
       unzip -qo /tmp/$FILE -d ~/.local/bin/
-    elif [[ $FILE == *.tar.gz ]]; then
+    elif [[ $FILE == *.tbz ]]; then
+      DIRCOUNT=$(tar tjvf /tmp/$FILE | grep ^d | wc -l)
+      if [[ "$DIRCOUNT" == "0" ]]; then
+        tar xjf /tmp/$FILE -C ~/.local/bin
+      else
+        tar xjf /tmp/$FILE -C ~/.local --strip-components=2
+      fi
+    elif [[ $FILE == *.tbz ]]; then
       DIRCOUNT=$(tar tvf /tmp/$FILE | grep ^d | wc -l)
       if [[ "$DIRCOUNT" == "0" ]]; then
         tar zxf /tmp/$FILE -C ~/.local/bin
