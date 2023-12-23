@@ -23,6 +23,7 @@ local options = {
 	ignorecase = true, -- ignore case for search functions
 	inccommand = "nosplit", -- show effects of a command incrementally, don't split window
 	list = true, -- show some invisible characters (tabs, etc)
+	listchars = "tab:» ,trail:·", -- 
 	mouse = "a", -- enable mouse mode
 	number = true,
 	numberwidth = 4,
