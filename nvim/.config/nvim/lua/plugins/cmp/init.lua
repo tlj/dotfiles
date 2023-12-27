@@ -78,7 +78,7 @@ return {
 				preselect = cmp.PreselectMode.None,
 
 				sources = {
-					{ name = "copilot", priority = 100, keyword_length = 3 },
+					{ name = "copilot", priority = 100 },
 					{ name = "nvim_lsp", priority = 80 },
 					{ name = "nvim_lua", priority = 70 },
 					{ name = "luasnip", priority = 30 },

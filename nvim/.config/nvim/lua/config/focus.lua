@@ -24,9 +24,9 @@ local function kitty_padding(padding)
 	if not vim.fn.executable("kitty") then
 		return
 	end
-	local cmd = "kitty @ --to %s set-spacing padding-left=%s"
+	local cmd = "kitty @ --to %s set-spacing padding-left=%s padding-right=%s"
 	local socket = vim.fn.expand("$KITTY_LISTEN_ON")
-	vim.fn.system(cmd:format(socket, padding))
+	vim.fn.system(cmd:format(socket, padding, padding))
 	vim.cmd([[redraw]])
 end
 
