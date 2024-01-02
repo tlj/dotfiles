@@ -20,6 +20,19 @@ local function kitty_font(font)
 	vim.cmd([[redraw]])
 end
 
+local function shell_error()
+	return vim.v.shell_error ~= 0
+end
+
+local function kitty_is_retina()
+	if not vim.fn.executable("system_profiler") then
+		return false
+	end
+	local cmd = "system_profiler SPDisplaysDataType | grep 'Retina'"
+	vim.fn.system(cmd)
+	return not shell_error()
+end
+
 local function kitty_padding(padding)
 	if not vim.fn.executable("kitty") then
 		return
@@ -31,11 +44,11 @@ local function kitty_padding(padding)
 end
 
 local function enable_focus()
-  -- Make sure that the user doesn't have more than one window/buffer open at the moment
-  if #vim.api.nvim_tabpage_list_wins(0) > 1 then
+	-- Make sure that the user doesn't have more than one window/buffer open at the moment
+	if #vim.api.nvim_tabpage_list_wins(0) > 1 then
 		print("Focus mode can only be enabled when one buffer is in view.")
-    return
-  end
+		return
+	end
 
 	state.focus_enabled = true
 	vim.opt.relativenumber = false
@@ -48,8 +61,19 @@ local function enable_focus()
 
 	require("lualine").hide()
 	require("barbecue.ui").toggle(false)
-	kitty_font(20)
-	kitty_padding(400)
+
+	local fontsize = 20
+	kitty_font(fontsize)
+
+	local padpercentage = 5
+	if kitty_is_retina() then
+		padpercentage = 10
+	end
+	local winwidth = vim.api.nvim_win_get_width(0)
+	local padding = (winwidth * padpercentage / 100) * fontsize
+	vim.print("Setting padding to " .. padding)
+
+	kitty_padding(padding)
 	vim.fn.system([[tmux set status off]])
 end
 
@@ -65,7 +89,7 @@ local function disable_focus()
 		vim.opt.list = state.list
 		vim.opt.cmdheight = state.cmdheight
 
-		require("lualine").hide({unhide=true})
+		require("lualine").hide({ unhide = true })
 		require("barbecue.ui").toggle(true)
 		kitty_font(0)
 		kitty_padding("default")
@@ -92,4 +116,3 @@ vim.api.nvim_create_autocmd({ "VimLeave" }, {
 	end,
 	desc = "Reset focus settings when leaving vim.",
 })
-
