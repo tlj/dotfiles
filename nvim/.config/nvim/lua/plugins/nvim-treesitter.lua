@@ -2,7 +2,10 @@
 local M = {
 	"nvim-treesitter/nvim-treesitter",
 	build = ":TSUpdate",
-	event = { "BufReadPre", "BufReadPost" },
+	event = { "BufReadPre", "BufNewFile" },
+	dependencies = {
+		"nvim-treesitter/nvim-treesitter-textobjects",
+	},
 	config = function()
 		require("nvim-treesitter.configs").setup({
 			ensure_installed = {
