@@ -65,15 +65,12 @@ local function enable_focus()
 	local fontsize = 20
 	kitty_font(fontsize)
 
-	local padpercentage = 5
-	if kitty_is_retina() then
-		padpercentage = 10
-	end
+	local padpercentage = 10
 	local winwidth = vim.api.nvim_win_get_width(0)
-	local padding = (winwidth * padpercentage / 100) * fontsize
-	vim.print("Setting padding to " .. padding)
+	local paddingcols = (winwidth * padpercentage / 100)
+	local paddingpts = paddingcols * fontsize
 
-	kitty_padding(padding)
+	kitty_padding(paddingpts)
 	vim.fn.system([[tmux set status off]])
 end
 
