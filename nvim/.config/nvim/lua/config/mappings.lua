@@ -3,10 +3,6 @@ local opts = { noremap = true, silent = true }
 -- Shorten function name
 local keymap = vim.api.nvim_set_keymap
 
--- better up/down, goes up/down a line in soft wrap mode
-keymap("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
-keymap("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
-
 -- Move to window using the <ctrl> movement keys
 -- keymap("n", "<C-h>", "<C-w>h", { desc = "Go to the left window" })
 -- keymap("n", "<C-j>", "<C-w>j", { desc = "Go to the lower window" })
@@ -29,13 +25,21 @@ keymap("n", "<leader>`", "<cmd>e #<cr>", { desc = "Switch to Other Buffer " })
 keymap("v", "<", "<gv", opts)
 keymap("v", ">", ">gv", opts)
 
+-- better up/down, goes up/down a line in soft wrap mode
+keymap("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
+keymap("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
+
 -- Move text up and down
-keymap("n", "<C-S-k>", ":m .-2<CR>==", opts)
-keymap("n", "<C-S-j>", ":m .+1<CR>==", opts)
+keymap("v", "J", ":m .-2<CR>==", opts)
+keymap("v", "K", ":m .+1<CR>==", opts)
+
+-- Moving up and down and recenter
+keymap("n", "<C-d>", "<C-d>zz", opts)
+keymap("n", "<C-u>", "<C-u>zz", opts)
 
 -- Move a block in visual mode
-keymap("x", "<C-S-k>", ":move '>+1<CR>gv-gv", opts)
-keymap("x", "<C-S-j>", ":move '<-2<CR>gv-gv", opts)
+keymap("x", "J", ":move '>+1<CR>gv=gv", opts) -- move selected line/block up and reselect
+keymap("x", "K", ":move '<-2<CR>gv=gv", opts) --move selected line/block down and reselect
 
 -- Resize windows
 keymap("n", "<C-Up>", "<cmd>resize +2<CR>", opts)
