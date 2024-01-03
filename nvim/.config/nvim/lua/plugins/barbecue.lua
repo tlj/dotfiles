@@ -2,6 +2,8 @@
 return {
 	"utilyre/barbecue.nvim",
 	version = "*",
+	lazy = true,
+	event = "BufReadPre",
 	dependencies = {
 		"neovim/nvim-lspconfig",
 		"SmiteshP/nvim-navic",

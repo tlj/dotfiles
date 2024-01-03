@@ -34,11 +34,10 @@ return {
 		{ "<leader>gs", "<cmd>FzfLua git_status<cr>" },
 		{ "<leader>td", "<cmd>FzfLua diagnostics_workspace<cr>" },
 		{ "<leader>qf", "<cmd>FzfLua quickfix<cr>" },
-		{ "<leader>u", "<cmd>Telescope undo<cr>" },
 		{ "<leader>gr", "<cmd>FzfLua lsp_incoming_calls<cr>" },
 		{ "<leader>gi", "<cmd>FzfLua lsp_implementations<cr>" },
 		{ "<leader>gd", "<cmd>FzfLua lsp_definitions<cr>" },
-		{ "q:", "<cmd>FzfLua command_history<cr>" },
+		{ "<leader>q:", "<cmd>FzfLua command_history<cr>" },
 		{ "<leader>tm", "<cmd>FzfLua tmux_buffers<cr>" },
 	},
 }

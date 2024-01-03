@@ -3,11 +3,12 @@ local M = {
 	dependencies = {
 		"kkharji/sqlite.lua",
 	},
+	lazy = true,
+	cmd = "ApiBrowser",
 	version = "*",
 	dev = true,
 	enabled = function()
 		return true
-		-- return os.getenv("NVIM_API_BROWSER_URLS") ~= ""
 	end,
 	config = function()
 		require("api-browser").setup({

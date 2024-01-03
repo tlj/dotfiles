@@ -12,7 +12,8 @@ end
 return {
 	{
 		"hrsh7th/nvim-cmp",
-		event = { "InsertEnter", "CmdlineEnter" },
+		lazy = true,
+		event = { "InsertEnter" },
 		dependencies = {
 			"hrsh7th/cmp-buffer", -- Buffer completions
 			"hrsh7th/cmp-path", -- path competions
@@ -24,7 +25,9 @@ return {
 			"rafamadriz/friendly-snippets", -- Bunch of snippets
 			{
 				"windwp/nvim-autopairs",
-				enabled = true,
+				enabled = false,
+				lazy = true,
+				event = { "InsertEnter" },
 				config = function()
 					require("nvim-autopairs").setup({
 						check_ts = true, -- treesitter integration
