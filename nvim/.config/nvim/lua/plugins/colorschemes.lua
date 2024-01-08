@@ -1,6 +1,18 @@
 -- add colorschemes to this file
 return {
 	{
+		"rose-pine/neovim", 
+		name = "rose-pine",
+		lazy = false,
+		priority = 999,
+		enabled = true,
+		config = function()
+			require('rose-pine').setup({
+				variant = "main", -- auto, main, moon, or dawn
+			})
+		end
+	},
+	{
 		"catppuccin/nvim",
 		name = "catppuccin",
 		lazy = false,
@@ -47,8 +59,8 @@ return {
 			-- Themes
 			vim.g.gruvbox_material_foreground = "soft"
 			vim.g.gruvbox_material_background = "medium"
-			vim.g.gruvbox_material_ui_contrast = "high" -- The contrast of line numbers, indent lines, etc.
-			vim.g.gruvbox_material_float_style = "dim" -- Background of floating windows
+			vim.g.gruvbox_material_ui_contrast = "high"  -- The contrast of line numbers, indent lines, etc.
+			vim.g.gruvbox_material_float_style = "dim"   -- Background of floating windows
 			vim.g.gruvbox_material_dim_inactive_windows = 0 -- Dim inactive windows
 
 			local configuration = vim.fn["gruvbox_material#get_configuration"]()

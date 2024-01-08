@@ -12,9 +12,9 @@ local M = {
 	config = function()
 		require("lualine").setup({
 			options = {
-				theme = "catppuccin",
-				component_separators = "",
-				section_separators = { left = " ", right = "" },
+				theme = 'rose-pine',
+				-- component_separators = "",
+				-- section_separators = { left = " ", right = "" },
 			},
 			sections = {
 				lualine_a = {
