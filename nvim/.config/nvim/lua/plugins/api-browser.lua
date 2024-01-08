@@ -7,9 +7,7 @@ local M = {
 	cmd = "ApiBrowser",
 	version = "*",
 	dev = true,
-	enabled = function()
-		return true
-	end,
+	enabled = true, 
 	config = function()
 		require("api-browser").setup({
 			ripgrep = {
