@@ -165,4 +165,5 @@ source $HOME/.zshrc-local
 
 [[ ! -r /Users/thomas/.opam/opam-init/init.zsh ]] || source /Users/thomas/.opam/opam-init/init.zsh  > /dev/null 2> /dev/null
 
+bindkey '^r' fzf-history-widget
 
