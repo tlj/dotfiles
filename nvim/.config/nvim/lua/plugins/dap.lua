@@ -125,7 +125,7 @@ local M = {
 		},
 		{
 			"<leader>dB",
-			'<cmd>lua require"dap".set_brakpoint(vim.fn.input("Breakpoint condition: "))<cr>',
+			'<cmd>lua require"dap".set_breakpoint(vim.fn.input("Breakpoint condition: "))<cr>',
 			desc = "Conditional breakpoint",
 		},
 		{ "<leader>dc", '<cmd>lua require"dap".continue()<CR>', desc = "Continue debug" },
