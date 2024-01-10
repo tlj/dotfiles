@@ -167,3 +167,5 @@ source $HOME/.zshrc-local
 
 bindkey '^r' fzf-history-widget
 
+
+eval "$(atuin init zsh)"
