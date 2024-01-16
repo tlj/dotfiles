@@ -85,6 +85,7 @@ local M = {
 					"gopls", -- golang
 					"cssls", -- css
 					"clangd", -- c
+					"tailwindcss", -- TailwindCSS
 					-- 'ocamllsp', -- ocaml
 					-- 'terraformls', -- terraform
 				},

@@ -18,8 +18,11 @@ if isMac; then
 
   echo "Installing commitizen-go"
   brew tap lintingzhen/tap
-  brew install commitizen-go
+  brew install -q commitizen-go
   commitizen-go install
+
+  echo "Installing presenterm..."
+  brew install -q presenterm
 else
   echo "Install zsh.."
   sudo apt install zsh
