@@ -165,7 +165,9 @@ source $HOME/.zshrc-local
 
 [[ ! -r /Users/thomas/.opam/opam-init/init.zsh ]] || source /Users/thomas/.opam/opam-init/init.zsh  > /dev/null 2> /dev/null
 
-bindkey '^r' fzf-history-widget
+[ -f ~/.asdf/asdf.sh ] && source ~/.asdf/asdf.sh
+[ -f ~/.asdf/completions/asdf.zsh ] && source ~/.asdf/completions/asdf.zsh
 
+bindkey '^r' fzf-history-widget
 
 eval "$(atuin init zsh)"

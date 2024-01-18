@@ -1,6 +1,6 @@
 sync_address = "https://atuin.tlj.no"
 sync_frequency = "10m"
-enter_accept = true
+enter_accept = false
 
 common_subcommands = [
   "cargo",
