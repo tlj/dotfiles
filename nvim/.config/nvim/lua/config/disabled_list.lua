@@ -1,12 +1,14 @@
 ---@type table<string, table<string, boolean>>
+---HELLO_WORLD=true
+---BYE_WORLD=false
 return {
 	["tlj/api-browser.nvim"] = { enabled = true, start = true },
 	["utilyre/barbecue.nvim"] = { enabled = true, start = true },
 	["rose-pine/neovim"] = { enabled = true, start = true },
-	["catppuccin/nvim"] = { enabled = false, start = true },
-	["ribru17/bamboo.nvim"] = { enabled = false, start = true },
-	["sainnhe/gruvbox-material"] = { enabled = false, start = true },
-	["stevarc/conform.nvim"] = { enabled = true, start = true },
+	["catppuccin/nvim"] = { enabled = false, start = false },
+	["ribru17/bamboo.nvim"] = { enabled = false, start = false },
+	["sainnhe/gruvbox-material"] = { enabled = false, start = false },
+	["stevarc/conform.nvim"] = { enabled = false, start = false },
 	["zbirenbaum/copilot.lua"] = { enabled = true, start = true },
 	["zbirenbaum/copilot-cmp"] = { enabled = true, start = true },
 	["mfussenegger/nvim-dap"] = { enabled = true, start = true },
