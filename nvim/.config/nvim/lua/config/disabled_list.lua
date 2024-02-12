@@ -27,6 +27,7 @@ return {
 	["nvim-lualine/lualine.nvim"] = { enabled = true, start = true },
 	["echasnovski/mini.bufremove"] = { enabled = true, start = true },
 	["echasnovski/mini.indentscope"] = { enabled = true, start = true },
+	["nvim-neo-tree/neo-tree.nvim"] = { enabled = true, start = true },
 	["kevinhwang91/nvim-bqf"] = { enabled = true, start = true },
 	["milisims/nvim-luaref"] = { enabled = true, start = true },
 	["nvim-neotest/neotest"] = { enabled = true, start = true },
