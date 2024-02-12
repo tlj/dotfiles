@@ -7,7 +7,7 @@ local M = {
 	cmd = "ApiBrowser",
 	version = "*",
 	dev = true,
-	enabled = true, 
+	enabled = require("config.util").is_enabled("tlj/api-browser.nvim"),
 	config = function()
 		require("api-browser").setup({
 			ripgrep = {

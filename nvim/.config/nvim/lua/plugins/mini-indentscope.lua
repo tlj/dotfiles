@@ -1,9 +1,9 @@
 -- show indent guidelines
 local M = {
 	"echasnovski/mini.indentscope",
+	enabled = require("config.util").is_enabled("echasnovski/mini.indentscope"),
 	version = false, -- wait till new 0.7.0 release to put it back on semver
 	event = "BufReadPre",
-	enabled = true,
 	opts = {
 		-- symbol = "▏",
 		-- symbol = "│",

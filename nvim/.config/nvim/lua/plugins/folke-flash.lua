@@ -2,6 +2,7 @@
 local M = {
 	"folke/flash.nvim",
 	event = "VeryLazy",
+	enabled = require("config.util").is_enabled("folke/flash.nvim"),
 	opts = {},
   -- stylua: ignore
   keys = {

@@ -27,6 +27,7 @@ local M = {
 			},
 		})
 	end,
+	enabled = require("config.util").is_enabled("nvim-lualine/lualine.nvim"),
 }
 
 return M

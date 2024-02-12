@@ -1,6 +1,7 @@
 -- remove buffers
 local M = {
 	"echasnovski/mini.bufremove",
+	enabled = require("config.util").is_enabled("echasnovski/mini.bufremove"),
 	keys = {
 		{
 			"<leader>bd",

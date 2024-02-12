@@ -3,6 +3,7 @@ local M = {
 	-- lspconfig
 	{
 		"neovim/nvim-lspconfig",
+		enabled = require("config.util").is_enabled("neovim/nvim-lspconfig"),
 		event = { "BufReadPre", "BufNewFile" },
 		dependencies = {
 			"williamboman/mason.nvim",
@@ -17,6 +18,7 @@ local M = {
 	-- Mason for autoinstalling lsps
 	{
 		"williamboman/mason.nvim",
+		enabled = require("config.util").is_enabled("williamboman/mason.nvim"),
 		cmd = {
 			"Mason",
 			"MasonInstall",
@@ -34,10 +36,10 @@ local M = {
 			})
 		end,
 		lazy = true,
-		enabled = true,
 	},
 	{
 		"weilbith/nvim-code-action-menu",
+		enabled = require("config.util").is_enabled("weilbith/nvim-code-action-menu"),
 		dependencies = {
 			"kosayoda/nvim-lightbulb",
 		},
@@ -45,6 +47,7 @@ local M = {
 	},
 	{
 		"SmiteshP/nvim-navbuddy",
+		enabled = require("config.util").is_enabled("SmiteshP/nvim-navbuddy"),
 		dependencies = {
 			"SmiteshP/nvim-navic",
 			"MunifTanjim/nui.nvim",
@@ -58,6 +61,7 @@ local M = {
 	},
 	{
 		"https://git.sr.ht/~whynothugo/lsp_lines.nvim",
+		enabled = require("config.util").is_enabled("https://git.sr.ht/~whynothugo/lsp_lines.nvim"),
 		init = function()
 			vim.diagnostic.config({ virtual_text = false, virtual_lines = false })
 		end,
@@ -66,6 +70,7 @@ local M = {
 	},
 	{
 		"williamboman/mason-lspconfig.nvim",
+		enabled = require("config.util").is_enabled("williamboman/mason-lspconfig.nvim"),
 		event = { "BufReadPre", "BufNewFile" },
 		dependencies = {
 			"williamboman/mason.nvim",

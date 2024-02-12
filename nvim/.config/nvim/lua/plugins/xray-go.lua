@@ -1,5 +1,6 @@
 return {
 	"ray-x/go.nvim",
+	enabled = require("config.util").is_enabled("ray-x/go.nvim"),
 	dependencies = { -- optional packages
 		"ray-x/guihua.lua",
 		"neovim/nvim-lspconfig",

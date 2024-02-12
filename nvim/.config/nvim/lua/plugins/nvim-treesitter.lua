@@ -1,6 +1,7 @@
 -- better syntax highlighting
 local M = {
 	"nvim-treesitter/nvim-treesitter",
+	enabled = require("config.util").is_enabled("nvim-treesitter/nvim-treesitter"),
 	build = ":TSUpdate",
 	event = { "BufReadPre", "BufNewFile" },
 	dependencies = {

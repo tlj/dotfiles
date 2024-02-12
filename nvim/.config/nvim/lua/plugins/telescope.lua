@@ -1,6 +1,7 @@
 -- telescope provide pickers and previews
 local M = {
 	"nvim-telescope/telescope.nvim",
+	enabled = require("config.util").is_enabled("nvim-telescope/telescope.nvim"),
 	cmd = { "Telescope" },
 	dependencies = {
 		"nvim-lua/plenary.nvim",

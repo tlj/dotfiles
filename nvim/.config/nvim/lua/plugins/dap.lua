@@ -3,7 +3,7 @@ local M = {
 	dependencies = {
 		{
 			"theHamsta/nvim-dap-virtual-text",
-			enabled = true,
+			enabled = require("config.util").is_enabled("theHamsta/nvim-dap-virtual-text"),
 			config = function()
 				local status, nvimdapvirtualtext = pcall(require, "nvim-dap-virtual-text")
 				if not status then

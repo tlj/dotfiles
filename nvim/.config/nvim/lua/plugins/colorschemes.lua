@@ -5,7 +5,7 @@ return {
 		name = "rose-pine",
 		lazy = false,
 		priority = 999,
-		enabled = true,
+		enabled = require("config.util").is_enabled("rose-pine/neovim"),
 		config = function()
 			require('rose-pine').setup({
 				variant = "main", -- auto, main, moon, or dawn
@@ -17,7 +17,7 @@ return {
 		name = "catppuccin",
 		lazy = false,
 		priority = 999,
-		enabled = true,
+		enabled = require("config.util").is_enabled("catppuccin/nvim"),
 		config = function()
 			require("catppuccin").setup({
 				transparent_background = false,
@@ -31,7 +31,7 @@ return {
 		"ribru17/bamboo.nvim",
 		lazy = false,
 		priority = 1000,
-		enabled = false,
+		enabled = require("config.util").is_enabled("ribru17/bamboo.nvim"),
 		config = function()
 			require("bamboo").setup({
 				-- optional configuration here
@@ -47,7 +47,7 @@ return {
 		"sainnhe/gruvbox-material",
 		lazy = false,
 		priority = 999,
-		enabled = false,
+		enabled = require("config.util").is_enabled("sainnhe/gruvbox-material"),
 		config = function()
 			vim.g.gruvbox_material_better_performance = 1
 			-- Fonts

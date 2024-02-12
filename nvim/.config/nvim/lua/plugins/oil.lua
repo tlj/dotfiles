@@ -1,5 +1,6 @@
 return {
 	"stevearc/oil.nvim",
+	enabled = require("config.util").is_enabled("stevearc/oil.nvim"),
 	keys = {
 		{
 			"<leader>tt",

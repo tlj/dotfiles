@@ -1,7 +1,7 @@
 local M = {
 	{
 		"zbirenbaum/copilot.lua",
-		enabled = true,
+		enabled = require("config.util").is_enabled("zbirenbaum/copilot.lua"),
 		lazy = true,
 		event = "InsertEnter",
 		config = function()

@@ -1,5 +1,6 @@
 return {
 	"robitx/gp.nvim",
+	enabled = require("config.util").is_enabled("robitx/gp.nvim"),
 	config = function()
 		require("gp").setup({})
 		-- or setup with your own config (see Install > Configuration in Readme)

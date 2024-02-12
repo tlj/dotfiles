@@ -1,5 +1,6 @@
 return {
 	"gennaro-tedesco/nvim-possession",
+	enabled = require("config.util").is_enabled("gennaro-tedesco/nvim-possession"),
 	dependencies = {
 		"ibhagwan/fzf-lua",
 	},
@@ -28,5 +29,4 @@ return {
 			},
 		})
 	end,
-	enabled = true,
 }

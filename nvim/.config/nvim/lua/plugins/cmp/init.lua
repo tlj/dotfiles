@@ -12,6 +12,7 @@ end
 return {
 	{
 		"hrsh7th/nvim-cmp",
+		enabled = require("config.util").is_enabled("hrsh7th/nvim-cmp"),
 		lazy = true,
 		event = { "InsertEnter" },
 		dependencies = {
@@ -40,7 +41,6 @@ return {
 				end,
 			},
 		},
-		enabled = true,
 		config = function()
 			local cmp = require("cmp")
 			local ls = require("luasnip")
@@ -227,6 +227,7 @@ return {
 	},
 	{
 		"hrsh7th/nvim-cmp",
+		enabled = require("config.util").is_enabled("hrsh7th/nvim-cmp"),
 		name = "nvim-cmp.commandline",
 		dependencies = {
 			"hrsh7th/cmp-cmdline",

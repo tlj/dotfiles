@@ -2,6 +2,7 @@ return {
 	"stevearc/conform.nvim",
 	event = { "BufWritePre" },
 	cmd = { "ConformInfo" },
+	enabled = require("config.util").is_enabled("stevearc/conform.nvim"),
 	keys = {
 		{
 			-- Customize or remove this keymap to your liking

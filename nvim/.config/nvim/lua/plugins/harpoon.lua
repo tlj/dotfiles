@@ -1,6 +1,7 @@
 -- fast switching between files in a better way than regular marks
 return {
 	"ThePrimeagen/harpoon",
+	enabled = require("config.util").is_enabled("ThePrimeagen/harpoon"),
 	lazy = false,
 	branch = "harpoon2",
 	dependencies = {
