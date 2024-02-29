@@ -31,6 +31,7 @@ return {
 	["numToStr/Comment.nvim"] = { enabled = true, start = true },
 	["folke/todo-comments.nvim"] = { enabled = true, start = true },
 	["tpope/vim-sleuth"] = { enabled = true, start = true },
+	["epwalsh/obsidian.nvim"] = { enabled = true, start = true },
 	["nvim-neo-tree/neo-tree.nvim"] = { enabled = true, start = true },
 	["kevinhwang91/nvim-bqf"] = { enabled = true, start = true },
 	["milisims/nvim-luaref"] = { enabled = true, start = true },

@@ -137,6 +137,8 @@ alias lg="lazygit"
 alias s="kitty +kitten ssh"
 alias d="cd ~/dotfiles && nvim && cd -"
 alias dv="~/dotfiles/bin/neovide.applescript $PWD ~/dotfiles"
+alias op="cd ~/Documents/Obsidian/Privat && nvim && cd -"
+alias ow="cd ~/Documents/Obsidian/Work && nvim && cd -"
 
 gs() {
   preview="git diff $@ --color=always -- {-1}"
