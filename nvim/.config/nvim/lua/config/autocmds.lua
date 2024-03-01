@@ -12,6 +12,7 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 
 -- Highlight on yank
 vim.api.nvim_create_autocmd("TextYankPost", {
+	desc = "Highlight on yank",
 	callback = function()
 		vim.highlight.on_yank()
 	end,

@@ -8,8 +8,8 @@ local M = {
 		"nvim-neotest/neotest-go",
 	},
 	keys = {
-		{ "<leader>tn", '<cmd>lua require"neotest".run.run()<cr>' },
-		{ "<leader>tf", '<cmd>lua require"neotest".run.run(vim.fn.expand("%"))<cr>' },
+		{ "<leader>tn", '<cmd>lua require"neotest".run.run()<cr>', desc = "Run current test" },
+		{ "<leader>tf", '<cmd>lua require"neotest".run.run(vim.fn.expand("%"))<cr>', desc = "Run tests in file" },
 	},
 	config = function()
 		local neotest_ns = vim.api.nvim_create_namespace("neotest")

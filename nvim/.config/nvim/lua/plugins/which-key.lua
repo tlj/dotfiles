@@ -4,6 +4,24 @@ local M = {
 	enabled = require("config.util").is_enabled("folke/which-key.nvim"),
 	config = function()
 		require("which-key").setup()
+
+		require("which-key").register({
+			["<leader>b"] = { name = "+Buffers" },
+			["<leader>c"] = { name = "+Copilot" },
+			["<leader>d"] = { name = "+Debug" },
+			["<leader>f"] = { name = "+FzF/Float" },
+			["<leader>g"] = { name = "+LSP/Diagnostics" },
+			["<leader>h"] = { name = "+Harpoon/Diffview" },
+			["<leader>j"] = { name = "+Session" },
+			["<leader>l"] = { name = "+Lazygit" },
+			["<leader>o"] = { name = "+Conform" },
+			["<leader>q"] = { name = "+QuickFix" },
+			["<leader>r"] = { name = "+Rename" },
+			["<leader>s"] = { name = "+OpenAPI Browser" },
+			["<leader>t"] = { name = "+Tests, Diagnostics" },
+			["<leader>u"] = { name = "+Undo" },
+			["<leader>w"] = { name = "+Window" },
+		})
 	end,
 }
 

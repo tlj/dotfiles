@@ -11,7 +11,7 @@ local M = {
 			})
 		end,
 		keys = {
-			{ "<leader>cp", '<cmd>lua require"copilot.panel".open()<CR>' },
+			{ "<leader>cp", '<cmd>lua require"copilot.panel".open()<CR>', desc = "Open Copilot" },
 		},
 	},
 	{

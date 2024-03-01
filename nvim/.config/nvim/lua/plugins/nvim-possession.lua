@@ -9,16 +9,20 @@ return {
 		-- jj because it's easy to type
 		vim.keymap.set("n", "<leader>jj", function()
 			possession.list()
-		end)
+		end, { desc = "Session selector" }
+		)
 		vim.keymap.set("n", "<leader>jn", function()
 			possession.new()
-		end)
+		end, { desc = "New session" }
+		)
 		vim.keymap.set("n", "<leader>ju", function()
 			possession.update()
-		end)
+		end, { desc = "Update session" }
+		)
 		vim.keymap.set("n", "<leader>jd", function()
 			possession.delete()
-		end)
+		end, { desc = "Delete session" }
+		)
 	end,
 	config = function()
 		require("nvim-possession").setup({

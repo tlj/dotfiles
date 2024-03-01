@@ -4,6 +4,6 @@ return {
 	lazy = true,
 	cmd = "UndotreeToggle",
 	keys = { 
-		{ "<leader>uu", ":UndotreeToggle<CR>", { desc = "UndotreeToggle" } },
+		{ "<leader>uu", ":UndotreeToggle<CR>", desc = "UndotreeToggle" },
 	},
 }

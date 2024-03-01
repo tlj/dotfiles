@@ -48,8 +48,8 @@ keymap("n", "<C-Left>", "<cmd>vertical resize -2<CR>", opts)
 keymap("n", "<C-Right>", "<cmd>vertical resize +2<CR>", opts)
 
 -- Clear search with <esc>
-keymap("n", "<esc>", "<cmd>noh<cr><esc>", opts)
-keymap("i", "<esc>", "<cmd>noh<cr><esc>", opts)
+keymap("n", "<esc>", "<cmd>nohlsearch<cr><esc>", opts)
+keymap("i", "<esc>", "<cmd>nohlsearch<cr><esc>", opts)
 keymap(
 	"n",
 	"<leader>ur",
@@ -71,6 +71,9 @@ keymap("n", "<leader>|", "<C-W>v", { desc = "Split window right" })
 
 -- hightlights under cursor
 vim.keymap.set("n", "<leader>ui", vim.show_pos, { desc = "Inspect pos" })
+
+-- Diagnostic keymaps
+keymap("n", "<leader>qq", "<cmd>lua vim.diagnostic.setloclist()<cr>", { desc = "Quickfix list" })
 
 -- Add undo break-points
 keymap("i", ",", ",<c-g>u", opts)
