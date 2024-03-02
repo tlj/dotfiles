@@ -33,13 +33,33 @@ local function kitty_is_retina()
 	return not shell_error()
 end
 
+-- In tmux, detaching and attaching the session will not update the KITT_LISTEN_ON environment variable.
+-- So we need to manually figure out if we are in tmux and use the tmux command to get the value.
+-- This requires update-environment -r to be set in the tmux.conf
+local function get_kitty_socket()
+	local istmux = vim.fn.expand("$TMUX")
+	local socket = "/tmp/kitty"
+	if istmux == "" then
+		socket = vim.fn.expand("$KITTY_LISTEN_ON")
+	else
+		socket = vim.fn.system {"tmux", "show-environment", "KITTY_LISTEN_ON"}
+		socket = socket:gsub("KITTY_LISTEN_ON=", "")
+		socket = socket:gsub("[\n\r]", "")
+	end
+
+	return socket
+end
+
 local function kitty_padding(padding)
 	if not vim.fn.executable("kitty") then
 		return
 	end
 	local cmd = "kitty @ --to %s set-spacing padding-left=%s padding-right=%s"
-	local socket = vim.fn.expand("$KITTY_LISTEN_ON")
-	vim.fn.system(cmd:format(socket, padding, padding))
+
+	local socket = get_kitty_socket()
+
+	local fullcmd = cmd:format(socket, padding, padding)
+	vim.print(vim.fn.system(fullcmd))
 	vim.cmd([[redraw]])
 end
 

@@ -175,3 +175,6 @@ bindkey '^r' fzf-history-widget
 eval "$(atuin init zsh --disable-up-arrow)"
 bindkey '^r' _atuin_search_widget
 
+if [[ ! -z $TMUX ]]; then
+  export $(tmux show-environment | grep "^KITTY_LISTEN_ON")
+fi
