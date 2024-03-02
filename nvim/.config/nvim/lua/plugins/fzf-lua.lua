@@ -6,8 +6,15 @@ return {
 		require("fzf-lua").setup({
 			"default",
 			winopts = {
+				height = 0.9,
+				width = 0.9,
+				row = 0.3,
+				col = 0.3,
+				fullscreen = false,
 				preview = {
 					layout = "vertical",
+					vertical = "down:70%",
+					horizontal = "right:50%",
 				},
 			},
 			previewers = {
@@ -26,6 +33,9 @@ return {
 	end,
 	keys = {
 		{ "<leader>ff", "<cmd>FzfLua files<cr>" },
+		{ "<leader>gf", "<cmd>FzfLua git_files<cr>" },
+		{ "<leader>gc", "<cmd>FzfLua git_commits<cr>" },
+		{ "<leader>gh", "<cmd>FzfLua git_bcommits<cr>", desc = "History - FzfLua Git Commits (buffer)" },
 		{ "<leader>fg", "<cmd>FzfLua live_grep<cr>" },
 		{ "<leader>*", "<cmd>FzfLua grep_cword<cr>" },
 		{ "<leader>fw", "<cmd>FzfLua grep_cword<cr>" },
