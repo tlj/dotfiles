@@ -14,7 +14,7 @@ local M = {
 			["<leader>h"] = { name = "+Harpoon/Diffview" },
 			["<leader>j"] = { name = "+Session" },
 			["<leader>l"] = { name = "+Lazygit" },
-			["<leader>o"] = { name = "+Conform" },
+			["<leader>o"] = { name = "+Conform/Obsidian" },
 			["<leader>q"] = { name = "+QuickFix" },
 			["<leader>r"] = { name = "+Rename" },
 			["<leader>s"] = { name = "+OpenAPI Browser" },

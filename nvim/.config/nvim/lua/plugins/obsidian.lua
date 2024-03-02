@@ -19,6 +19,17 @@ return {
 		-- Required.
 		"nvim-lua/plenary.nvim",
 	},
+	keys = {
+		{ "<leader>od", "<cmd>ObsidianToday<CR>", desc = "Open today's note" },
+		{ "<leader>oy", "<cmd>ObsidianYesterday<CR>", desc = "Open yesterdays note" },
+		{ "<leader>om", "<cmd>ObsidianTomorrow<CR>", desc = "Open tomorrows note" },
+		{ "<leader>ot", "<cmd>ObsidianTags<CR>", desc = "Open Obsidian tags picker" },
+		{ "<leader>ob", "<cmd>ObsidianBacklinks<CR>", desc = "Open Obsidian backlinks picker" },
+		{ "<leader>oq", "<cmd>ObsidianQuickSwitch<CR>", desc = "Open Obsidian quickswitcher" },
+		{ "<leader>os", "<cmd>ObsidianSearch<CR>", desc = "Open Obsidian search" },
+		{ "<leader>or", "<cmd>ObsidianRename<CR>", desc = "Obsidian Rename, update backlinks" },
+		{ "<leader>ol", "<cmd>ObsidianLinks<CR>", desc = "Open Obsidian Links picker" },
+	},
 	opts = {
 		workspaces = {
 			{
