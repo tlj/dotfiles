@@ -11,3 +11,5 @@ go/pkg/
 .local/
 .npm/
 .cargo/
+.git/
+
