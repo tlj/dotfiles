@@ -145,6 +145,10 @@ gs() {
   git diff $@ --name-only | fzf -m --ansi --preview $preview
 }
 
+t() {
+  sesh connect $(sesh list | fzf)
+}
+
 nt() {
   tmux new -s $(pwd | sed 's/.*\///')
 }
@@ -171,6 +175,9 @@ source $HOME/.zshrc-local
 [ -f ~/.asdf/completions/asdf.zsh ] && source ~/.asdf/completions/asdf.zsh
 
 bindkey '^r' fzf-history-widget
+
+eval "$(zoxide init zsh)"
+alias cd="z"
 
 eval "$(atuin init zsh --disable-up-arrow)"
 bindkey '^r' _atuin_search_widget

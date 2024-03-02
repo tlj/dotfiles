@@ -1,0 +1,9 @@
+[[startup_scripts]]
+session_path = "~/dotfiles"
+script_path = "~/.config/sesh/scripts/nvim.sh"
+
+[[startup_scripts]]
+session_path = "~/src/v2"
+script_path = "~/.config/sesh/scripts/symfony.sh"
+
+
