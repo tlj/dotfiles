@@ -5,7 +5,9 @@
 
 echo "Installing git and lazygit..."
 if isMac; then
-  brew install -q git lazygit stow
+  brew install -q git lazygit stow gh
+  echo "Installing gh-dash..."
+  gh extension install dlvhdr/gh-dash
 else
   sudo apt install git stow
 
