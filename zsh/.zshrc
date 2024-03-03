@@ -82,7 +82,7 @@ T_SESSION_USE_GIT_ROOT="true"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git docker kubectl terraform zsh-syntax-highlighting zsh-autosuggestions autojump dirhistory zsh-vi-mode)
+plugins=(git docker terraform zsh-syntax-highlighting zsh-autosuggestions zsh-vi-mode)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -164,24 +164,23 @@ glog() {
 
 source $HOME/.zshrc-local
 
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-[[ ! -r /Users/thomas/.opam/opam-init/init.zsh ]] || source /Users/thomas/.opam/opam-init/init.zsh  > /dev/null 2> /dev/null
-
-[ -f ~/.asdf/asdf.sh ] && source ~/.asdf/asdf.sh
-[ -f ~/.asdf/completions/asdf.zsh ] && source ~/.asdf/completions/asdf.zsh
-
-bindkey '^r' fzf-history-widget
 
 eval "$(zoxide init zsh)"
 alias cd="z"
 
-eval "$(atuin init zsh --disable-up-arrow)"
-bindkey '^r' _atuin_search_widget
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 if [[ ! -z $TMUX ]]; then
   export $(tmux show-environment | grep "^KITTY_LISTEN_ON")
 fi
+
+# The plugin will auto execute this zvm_after_init function
+function zvm_after_init() {
+  # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+  [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+  [[ ! -r /Users/thomas/.opam/opam-init/init.zsh ]] || source /Users/thomas/.opam/opam-init/init.zsh  > /dev/null 2> /dev/null
+  [ -f ~/.asdf/asdf.sh ] && source ~/.asdf/asdf.sh
+  [ -f ~/.asdf/completions/asdf.zsh ] && source ~/.asdf/completions/asdf.zsh
+  #eval "$(atuin init zsh --disable-up-arrow)"
+  [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+}
