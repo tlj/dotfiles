@@ -2,7 +2,7 @@
 
 CURRENT_WINDOW=$(tmux display-message -p '#I')
 
-tmux new-window -d -n 'Server' 'make symfont-local; zsh'
+tmux new-window -d -n 'Server' 'make symfony-local; zsh'
 
 tmux select-window -t $CURRENT_WINDOW
 
