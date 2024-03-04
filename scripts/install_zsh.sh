@@ -12,6 +12,9 @@ if isMac; then
   echo "Installing autojump, bat, btop and lsd..."
   brew install -q autojump bat lsd btop jq
 
+  echo "Installing jqp..."
+  brew install noahgorstein/tap/jqp
+
   echo "Installing Nerd Fonts"
   brew tap homebrew/cask-fonts
   brew install -q --cask font-hack-nerd-font font-fira-code-nerd-font font-symbols-only-nerd-font font-jetbrains-mono
