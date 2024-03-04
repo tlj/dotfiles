@@ -10,7 +10,10 @@ if isMac; then
   curl -sL https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin &> /dev/null
 
   echo "Installing autojump, bat, btop and lsd..."
-  brew install -q autojump bat lsd btop jq
+  brew install -q autojump bat lsd btop jq starship zsh-vi-mode
+
+  echo "Installing jqp..."
+  brew install noahgorstein/tap/jqp
 
   echo "Installing jqp..."
   brew install noahgorstein/tap/jqp
@@ -81,4 +84,4 @@ echo "Installing atuin..."
 bash <(curl --proto '=https' --tlsv1.2 -sSf https://setup.atuin.sh)
 echo "If this is the first install, run: atuin reginster -u tlj -e tlj@tlj.no && atuin import auto && atuin sync"
 
-stow --target=$HOME --restow kitty/ btop/ zsh/ bat/ lsd/ atuin/
+stow --target=$HOME --restow kitty/ btop/ zsh/ bat/ lsd/ atuin/ starship/
