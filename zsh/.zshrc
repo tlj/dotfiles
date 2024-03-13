@@ -8,6 +8,9 @@ export XDG_CONFIG_HOME="$HOME/.config"
 eval "$(starship init zsh)"
 export STARSHIP_CONFIG="$HOME/.config/starship/starship.toml"
 
+# Don't auto update Homebrew on every command
+export HOMEBREW_NO_AUTO_UPDATE=1
+
 # Set up Homebrew
 if [[ -f "/opt/homebrew/bin/brew" ]]; then
   eval "$(/opt/homebrew/bin/brew shellenv)"
