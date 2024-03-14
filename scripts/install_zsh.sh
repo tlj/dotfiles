@@ -80,6 +80,9 @@ install_with_git ~/.fzf https://github.com/junegunn/fzf.git
 echo "Installing better vim mode for zsh..."
 install_with_git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-vi-mode https://github.com/jeffreytse/zsh-vi-mode.git
 
+echo "Installing zsh-autosuggestions..."
+install_with_git ~/.zsh/zsh-autosuggestions https://github.com/zsh-users/zsh-autosuggestions
+
 echo "Installing atuin..."
 bash <(curl --proto '=https' --tlsv1.2 -sSf https://setup.atuin.sh)
 echo "If this is the first install, run: atuin reginster -u tlj -e tlj@tlj.no && atuin import auto && atuin sync"

@@ -82,6 +82,7 @@ fi
 
 # Load vim mode
 source $(brew --prefix)/opt/zsh-vi-mode/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
+source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 # Load asdf, the version manager
 [ -f ~/.asdf/asdf.sh ] && source ~/.asdf/asdf.sh
