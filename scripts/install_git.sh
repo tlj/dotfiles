@@ -5,7 +5,8 @@
 
 echo "Installing git and lazygit..."
 if isMac; then
-  brew install -q git lazygit stow gh
+  brew install -q git lazygit stow gh 
+  brew install -q --cask git-credential-manager
   echo "Installing gh-dash..."
   gh extension install dlvhdr/gh-dash
 else
