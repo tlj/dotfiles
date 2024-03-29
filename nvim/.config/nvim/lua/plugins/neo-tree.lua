@@ -8,7 +8,7 @@ local M = {
 	},
 	keys = {
 		{
-			"<leader>tn",
+			"<leader>nt",
 			function()
 				require("neo-tree.command").execute({ toggle = true })
 			end,

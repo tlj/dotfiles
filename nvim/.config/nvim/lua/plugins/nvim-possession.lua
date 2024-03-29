@@ -2,7 +2,7 @@ return {
 	"gennaro-tedesco/nvim-possession",
 	enabled = require("config.util").is_enabled("gennaro-tedesco/nvim-possession"),
 	dependencies = {
-		"ibhagwan/fzf-lua",
+		"https://gitlab.com/ibhagwan/fzf-lua.git"
 	},
 	init = function()
 		local possession = require("nvim-possession")

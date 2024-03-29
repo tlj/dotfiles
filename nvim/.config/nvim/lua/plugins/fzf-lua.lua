@@ -1,5 +1,5 @@
 return {
-	"ibhagwan/fzf-lua",
+	"https://gitlab.com/ibhagwan/fzf-lua.git",
 	enabled = require("config.util").is_enabled("ibhagwan/fzf-lua"),
 	dependencies = { "nvim-tree/nvim-web-devicons" },
 	config = function()

@@ -2,6 +2,7 @@ local M = {
 	"nvim-neotest/neotest",
 	enabled = require("config.util").is_enabled("nvim-neotest/neotest"),
 	dependencies = {
+    "nvim-neotest/nvim-nio",
 		"nvim-lua/plenary.nvim",
 		"nvim-treesitter/nvim-treesitter",
 		{ "antoinemadec/FixCursorHold.nvim" },
