@@ -91,7 +91,7 @@ local M = {
 					"cssls", -- css
 					"clangd", -- c
 					"tailwindcss", -- TailwindCSS
-					"gleam", -- gleam
+					-- "gleam", -- gleam
 					-- 'ocamllsp', -- ocaml
 					-- 'terraformls', -- terraform
 				},

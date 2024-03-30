@@ -35,7 +35,7 @@ return {
 	["nvim-neo-tree/neo-tree.nvim"] = { enabled = true, start = true },
 	["krivahtoo/silicon.nvim"] = { enabled = true, start = true },
 	["emmanueltouzery/agitator.nvim"] = { enabled = false, start = false },
-	["f-person/git-blame.nvim"] = { enabled = true, start = true },
+	["f-person/git-blame.nvim"] = { enabled = false, start = false },
 	["FredeEB/tardis.nvim"] = { enabled = true, start = true },
 	["kevinhwang91/nvim-bqf"] = { enabled = true, start = true },
 	["milisims/nvim-luaref"] = { enabled = true, start = true },
@@ -50,12 +50,13 @@ return {
 	["nvim-telescope/telescope.nvim"] = { enabled = true, start = true },
 	["mbbill/undotree"] = { enabled = true, start = true },
 	["ray-x/go.nvim"] = { enabled = true, start = true },
+	["FabijanZulj/blame.nvim"] = { enabled = true, start = true },
 
 	--- LSP
 	["neovim/nvim-lspconfig"] = { enabled = true, start = true },
 	["williamboman/mason.nvim"] = { enabled = true, start = true },
 	["weilbith/nvim-code-action-menu"] = { enabled = true, start = true },
-	["SmiteshP/nvim-navbuddy"] = { enabled = true, start = true },
+	["SmiteshP/nvim-navbuddy"] = { enabled = false, start = false },
 	["https://git.sr.ht/~whynothugo/lsp_lines.nvim"] = { enabled = true, start = true },
 	["williamboman/mason-lspconfig.nvim"] = { enabled = true, start = true },
 

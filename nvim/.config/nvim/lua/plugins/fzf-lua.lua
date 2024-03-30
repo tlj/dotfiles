@@ -1,5 +1,5 @@
 return {
-	"https://gitlab.com/ibhagwan/fzf-lua.git",
+	"ibhagwan/fzf-lua",
 	enabled = require("config.util").is_enabled("ibhagwan/fzf-lua"),
 	dependencies = { "nvim-tree/nvim-web-devicons" },
 	config = function()
@@ -71,22 +71,40 @@ return {
 	end,
 	keys = {
 		{ "<leader>ff", "<cmd>FzfLua files<cr>" },
-		{ "<leader>gf", "<cmd>FzfLua git_files<cr>" },
-		{ "<leader>gc", "<cmd>FzfLua git_commits<cr>" },
-		{ "<leader>gh", "<cmd>FzfLua git_bcommits<cr>", desc = "History - FzfLua Git Commits (buffer)" },
 		{ "<leader>fg", "<cmd>FzfLua live_grep<cr>" },
 		{ "<leader>*", "<cmd>FzfLua grep_cword<cr>" },
 		{ "<leader>fw", "<cmd>FzfLua grep_cword<cr>" },
 		{ "<leader>fW", "<cmd>FzfLua grep_cWORD<cr>" },
 		{ "<leader>fb", "<cmd>FzfLua buffers<cr>" },
 		{ "<leader>fh", "<cmd>FzfLua help_tags<cr>" },
-		{ "<leader>gs", "<cmd>FzfLua git_status<cr>" },
-		{ "<leader>td", "<cmd>FzfLua diagnostics_workspace<cr>" },
 		{ "<leader>qf", "<cmd>FzfLua quickfix<cr>" },
-		{ "<leader>gr", "<cmd>FzfLua lsp_incoming_calls<cr>" },
-		{ "<leader>gi", "<cmd>FzfLua lsp_implementations<cr>" },
-		{ "<leader>gd", "<cmd>FzfLua lsp_definitions<cr>" },
 		{ "<leader>q:", "<cmd>FzfLua command_history<cr>" },
 		{ "<leader>tm", "<cmd>FzfLua tmux_buffers<cr>" },
+
+		{ "<leader>rr", "<cmd>FzfLua resume<cr>" },
+
+		-- { "<leader>gc", "<cmd>FzfLua git_commits<cr>" },
+		-- { "<leader>gf", "<cmd>FzfLua git_files<cr>" },
+		-- { "<leader>gh", "<cmd>FzfLua git_bcommits<cr>", desc = "History - FzfLua Git Commits (buffer)" },
+		-- { "<leader>gs", "<cmd>FzfLua git_status<cr>" },
+
+		{ "<leader>ga", "<cmd>FzfLua lsp_code_actions<cr>" },
+		{ "<leader>gf", "<cmd>FzfLua lsp_finder<cr>" },
+		{ "<leader>gi", "<cmd>FzfLua lsp_implementations<cr>" },
+		{ "<leader>go", "<cmd>FzfLua lsp_outgoing_calls<cr>" },
+		{ "<leader>gc", "<cmd>FzfLua lsp_incoming_calls<cr>" },
+		{ "<leader>gr", "<cmd>FzfLua lsp_references<cr>" },
+		{ "<leader>gd", "<cmd>FzfLua lsp_definitions<cr>" },
+		{ "<leader>gD", "<cmd>FzfLua lsp_declarations<cr>" },
+		{ "<leader>gt", "<cmd>FzfLua lsp_typedefs<cr>" },
+		{ "<leader>gl", "<cmd>FzfLua lsp_document_diagnostics<cr>" },
+		{ "<leader>gs", "<cmd>FzfLua lsp_document_symbols<cr>" },
+
+		{ "<leader>gj", "<cmd>FzfLua jumps<cr>" },
+		{ "<leader>gh", "<cmd>FzfLua changes<cr>" },
+
+		{ "<leader>gwl", "<cmd>FzfLua lsp_workspace_diagnostics<cr>" },
+		{ "<leader>gws", "<cmd>FzfLua lsp_workspace_symbols<cr>" },
+		{ "<leader>gwy", "<cmd>FzfLua lsp_live_workspace_symbols<cr>" },
 	},
 }
