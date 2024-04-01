@@ -63,17 +63,17 @@ echo "Installing jq and jqp..."
 asdf plugin add jq
 asdf install jq
 
-asdf plugin add jqp
+asdf plugin add jqp https://github.com/tlj/asdf-jqp
 asdf install jqp
 
 echo "Building bat cache..."
 bat cache --build > /dev/null
 
 echo "Installing zsh-vi-mode..."
-install_with_git ~/.zsh/zsh-vi-mode jeffreytse/zsh-vi-mode
+install_with_git ~/.zsh/zsh-vi-mode https://github.com/jeffreytse/zsh-vi-mode
 
 echo "Installing zsh-autosuggestions..."
-install_with_git ~/.zsh/zsh-autosuggestions zsh-users/zsh-autosuggestions
+install_with_git ~/.zsh/zsh-autosuggestions https://github.com/zsh-users/zsh-autosuggestions
 
 echo "Installing fzf from git..."
 install_with_git ~/.fzf https://github.com/junegunn/fzf.git

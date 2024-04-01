@@ -32,7 +32,7 @@ install_github_release() {
         tar zxf /tmp/$FILE -C ~/.local --strip-components=1
       fi
     elif [[ $FILE == *.tar.gz ]]; then
-      DIRCOUNT=$(tar tvf /tmp/$FILE | grep ^d | wc -l)
+      DIRCOUNT=$(tar tvf /tmp/$FILE | grep ^d | wc -l | xargs)
       if [[ "$DIRCOUNT" == "0" ]]; then
         tar zxf /tmp/$FILE -C ~/.local/bin
       else

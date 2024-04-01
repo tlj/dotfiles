@@ -71,6 +71,11 @@ glog() {
 # Put host specific configuration in this file - don't check it into git
 [ -f $HOME/.zshrc-local ] && source $HOME/.zshrc-local
 
+# Load asdf, the version manager
+[ -f ~/.asdf/asdf.sh ] && source ~/.asdf/asdf.sh
+# asdf completions
+[ -f ~/.asdf/completions/asdf.zsh ] && source ~/.asdf/completions/asdf.zsh
+
 # Load zoxide, and alias it to cd
 eval "$(~/.asdf/shims/zoxide init zsh)"
 alias cd="z"
@@ -83,11 +88,6 @@ fi
 # Load vim mode
 source ~/.zsh/zsh-vi-mode/zsh-vi-mode.plugin.zsh
 source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
-
-# Load asdf, the version manager
-[ -f ~/.asdf/asdf.sh ] && source ~/.asdf/asdf.sh
-# asdf completions
-[ -f ~/.asdf/completions/asdf.zsh ] && source ~/.asdf/completions/asdf.zsh
 
 # The plugin will auto execute this zvm_after_init function, we do this because the
 # zsh vim mode overrides some bindings, and we want to make sure it doesn't.
