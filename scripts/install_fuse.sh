@@ -5,5 +5,5 @@
 if isMac; then
   echo "No fuse available."
 else
-  sudo apt install -q fuse libfuse2
+  sudo apt install -yq fuse libfuse2
 fi

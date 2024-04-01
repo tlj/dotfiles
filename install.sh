@@ -15,5 +15,5 @@ scripts/install_ruby.sh
 scripts/install_go.sh
 scripts/install_k9s.sh
 scripts/install_tmux.sh
-scripts/install_gleam.sh
+#scripts/install_gleam.sh
 

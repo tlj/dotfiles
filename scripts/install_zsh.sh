@@ -9,8 +9,8 @@ if isMac; then
   brew install -q --cask kitty
   curl -sL https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin &> /dev/null
 
-  echo "Installing autojump, bat, btop and lsd..."
-  brew install -q autojump bat lsd btop jq starship zsh-vi-mode
+  echo "Installing autojump, btop and lsd..."
+  brew install -q autojump lsd btop jq starship zsh-vi-mode
 
   echo "Installing jqp..."
   brew install noahgorstein/tap/jqp
@@ -34,8 +34,8 @@ else
   curl -sLo /tmp/lsd.deb https://github.com/Peltoche/lsd/releases/download/0.23.1/lsd_0.23.1_amd64.deb
   sudo dpkg -i /tmp/lsd.deb
 
-  echo "Install bat and autojump..."
-  sudo apt install bat autojump 
+  echo "Install autojump..."
+  sudo apt install autojump 
   mkdir -p ~/.local/bin
 
   if [[ ! -f ~/.local/bin/bat ]]; then
@@ -44,20 +44,30 @@ else
 
   echo "Installing btop..."
   install_github_release aristocratos/btop btop-x86_64-linux-musl.tbz
-  
-  echo "Installing jqp..."
-  install_github_release noahgorstein/jqp jqp_Linux_x86_64.tar.gz
 fi
 
 echo "Installing asdf..."
 install_with_git ~/.asdf https://github.com/excid3/asdf.git
 
+. "$HOME/.asdf/asdf.sh"
+
+echo "Installing bat..."
+asdf plugin add bat
+asdf install bat
+
 echo "Installing zoxide..."
 asdf plugin add zoxide https://github.com/nyrst/asdf-zoxide.git
 asdf install zoxide
 
+echo "Installing jq and jqp..."
+asdf plugin add jq
+asdf install jq
+
+asdf plugin add jqp
+asdf install jqp
+
 echo "Building bat cache..."
-~/.local/bin/bat cache --build > /dev/null
+bat cache --build > /dev/null
 
 echo "Installing zsh-vi-mode..."
 install_with_git ~/.zsh/zsh-vi-mode jeffreytse/zsh-vi-mode

@@ -9,7 +9,7 @@ if isMac; then
   brew install -q tmux zoxide 
 else
   install_github_release nelsonenzo/tmux-appimage tmux.appimage 3.3a
-  #mv -v ~/.local/bin/tmux-appimage ~/.local/bin/tmux
+  mv -v ~/.local/bin/tmux-appimage ~/.local/bin/tmux
 fi
 
 install_with_git ~/.tmux/plugins/tpm https://github.com/tmux-plugins/tpm

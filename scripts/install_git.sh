@@ -8,7 +8,7 @@ if isMac; then
   brew install -q git lazygit stow gh 
   brew install -q --cask git-credential-manager
 else
-  sudo apt install git stow
+  sudo apt install -y git stow
 
   echo "Installing lazygit..."
   LAZYGIT_VERSION=$(curl -s "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" | grep '"tag_name":' |  sed -E 's/.*"v*([^"]+)".*/\1/')
