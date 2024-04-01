@@ -15,9 +15,6 @@ if isMac; then
   echo "Installing jqp..."
   brew install noahgorstein/tap/jqp
 
-  echo "Installing jqp..."
-  brew install noahgorstein/tap/jqp
-
   echo "Installing Nerd Fonts"
   brew tap homebrew/cask-fonts
   brew install -q --cask font-hack-nerd-font font-fira-code-nerd-font font-symbols-only-nerd-font font-jetbrains-mono
@@ -37,54 +34,38 @@ else
   curl -sLo /tmp/lsd.deb https://github.com/Peltoche/lsd/releases/download/0.23.1/lsd_0.23.1_amd64.deb
   sudo dpkg -i /tmp/lsd.deb
 
-  echo "Install bat, delta and autojump..."
-  sudo apt install autojump bat git-delta
+  echo "Install bat and autojump..."
+  sudo apt install bat autojump 
   mkdir -p ~/.local/bin
+
   if [[ ! -f ~/.local/bin/bat ]]; then
     ln -s /usr/bin/batcat ~/.local/bin/bat
   fi
 
   echo "Installing btop..."
   install_github_release aristocratos/btop btop-x86_64-linux-musl.tbz
+  
+  echo "Installing jqp..."
+  install_github_release noahgorstein/jqp jqp_Linux_x86_64.tar.gz
 fi
 
-echo "Installing oh-my-zsh"
-ZSH_DIR=$HOME/.oh-my-zsh
-if [[ ! -d "$ZSH_DIR" ]]; then
-  sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" 
-else
-  git -C $ZSH_DIR pull --quiet
-fi
+echo "Installing asdf..."
+install_with_git ~/.asdf https://github.com/excid3/asdf.git
 
-#echo "Installing bat catppuccin theme"
-#BAT_THEME_DIR=$(bat --config-dir)/themes
-#if [[ ! -d "$BAT_THEME_DIR" ]]; then
-#  mkdir -p $BAT_THEME_DIR
-#fi
-#install_with_git ~/src/bat-catppuccin https://github.com/catppuccin/bat
-#cp ~/src/bat-catppuccin/*.tmTheme $BAT_THEME_DIR
-bat cache --build > /dev/null
+echo "Installing zoxide..."
+asdf plugin add zoxide https://github.com/nyrst/asdf-zoxide.git
+asdf install zoxide
 
-echo "Installing Powerlevel10k"
-install_with_git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k https://github.com/romkatv/powerlevel10k.git 
+echo "Building bat cache..."
+~/.local/bin/bat cache --build > /dev/null
 
-echo "Installing zsh-syntax-highlighting..."
-install_with_git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting https://github.com/zsh-users/zsh-syntax-highlighting.git
+echo "Installing zsh-vi-mode..."
+install_with_git ~/.zsh/zsh-vi-mode jeffreytse/zsh-vi-mode
 
 echo "Installing zsh-autosuggestions..."
-install_with_git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions https://github.com/zsh-users/zsh-autosuggestions.git
+install_with_git ~/.zsh/zsh-autosuggestions zsh-users/zsh-autosuggestions
 
 echo "Installing fzf from git..."
 install_with_git ~/.fzf https://github.com/junegunn/fzf.git
-
-echo "Installing better vim mode for zsh..."
-install_with_git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-vi-mode https://github.com/jeffreytse/zsh-vi-mode.git
-
-echo "Installing zsh-autosuggestions..."
-install_with_git ~/.zsh/zsh-autosuggestions https://github.com/zsh-users/zsh-autosuggestions
-
-echo "Installing atuin..."
-bash <(curl --proto '=https' --tlsv1.2 -sSf https://setup.atuin.sh)
-echo "If this is the first install, run: atuin reginster -u tlj -e tlj@tlj.no && atuin import auto && atuin sync"
 
 stow --target=$HOME --restow kitty/ btop/ zsh/ bat/ lsd/ atuin/ starship/

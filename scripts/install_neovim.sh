@@ -38,13 +38,12 @@ if isMac; then
     cp -R /Volumes/neovide/neovide.app /Applications/
     hdiutil detach "$(/bin/df | /usr/bin/grep "neovide" | awk '{print $1}')" -quiet
   fi
-
-  brew install -q npm
 else
-  sudo apt-get install ripgrep fd-find fzf luarocks npm 
+  sudo apt-get install ripgrep fd-find fzf luarocks
   sudo luarocks install luacheck
 
   sudo npm install -g tree-sitter-cli
+  mkdir -p ~/.local/bin
   echo "Installing stylua..."
   install_github_release JohnnyMorganz/StyLua stylua-linux-x86_64.zip
   echo "Installing viu..."

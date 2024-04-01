@@ -10,21 +10,12 @@ else
   echo "Installing on Linux..."
 fi
 
-echo "Installing asdf..."
-install_with_git ~/.asdf https://github.com/excid3/asdf.git
-
 echo "Installing Ruby..."
 asdf plugin add ruby
-asdf install ruby latest
-asdf global ruby latest
+asdf install ruby
 
 echo "Updating Gems..."
 gem update --system
-
-echo "Installing nodejs..."
-asdf plugin add nodejs
-asdf install nodejs latest
-asdf global nodejs latest
 
 echo "Installing yarn..."
 npm install -g yarn
@@ -34,7 +25,6 @@ gem install rails
 
 echo "Installing sqlite3..."
 asdf plugin add sqlite
-asdf install sqlite latest
-asdf global sqlite latest
+asdf install sqlite
 
 stow --target=$HOME --restow asdf

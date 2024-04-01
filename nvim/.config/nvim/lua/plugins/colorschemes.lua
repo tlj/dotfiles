@@ -1,7 +1,7 @@
 -- add colorschemes to this file
 return {
 	{
-		"rose-pine/neovim", 
+		"rose-pine/neovim",
 		name = "rose-pine",
 		lazy = false,
 		priority = 999,

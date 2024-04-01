@@ -72,16 +72,16 @@ glog() {
 [ -f $HOME/.zshrc-local ] && source $HOME/.zshrc-local
 
 # Load zoxide, and alias it to cd
-eval "$(zoxide init zsh)"
+eval "$(~/.asdf/shims/zoxide init zsh)"
 alias cd="z"
 
 # If we are inside of a tmux session, we need to export the KITTY_LISTEN_ON variable
-if [[ ! -z $TMUX ]]; then
+if [[ ! -z $TMUX && -z $WSL_DISTRO_NAME ]]; then
   export $(tmux show-environment | grep "^KITTY_LISTEN_ON")
 fi
 
 # Load vim mode
-source $(brew --prefix)/opt/zsh-vi-mode/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
+source ~/.zsh/zsh-vi-mode/zsh-vi-mode.plugin.zsh
 source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 # Load asdf, the version manager
