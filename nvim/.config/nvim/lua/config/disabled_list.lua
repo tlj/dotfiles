@@ -28,7 +28,7 @@ return {
 	["echasnovski/mini.bufremove"] = { enabled = true, start = true },
 	["echasnovski/mini.indentscope"] = { enabled = false, start = false },
 	["lukas-reineke/indent-blankline.nvim"] = { enabled = true, start = true },
-	["numToStr/Comment.nvim"] = { enabled = true, start = true },
+	["numToStr/Comment.nvim"] = { enabled = false, start = false },
 	["folke/todo-comments.nvim"] = { enabled = true, start = true },
 	["tpope/vim-sleuth"] = { enabled = true, start = true },
 	["epwalsh/obsidian.nvim"] = { enabled = true, start = true },
