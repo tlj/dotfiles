@@ -55,7 +55,8 @@ return {
 	--- LSP
 	["neovim/nvim-lspconfig"] = { enabled = true, start = true },
 	["williamboman/mason.nvim"] = { enabled = true, start = true },
-	["weilbith/nvim-code-action-menu"] = { enabled = true, start = true },
+	["weilbith/nvim-code-action-menu"] = { enabled = false, start = false },
+	["kosayode/nvim-lightbulb"] = { enabled = true, start = true },
 	["SmiteshP/nvim-navbuddy"] = { enabled = false, start = false },
 	["https://git.sr.ht/~whynothugo/lsp_lines.nvim"] = { enabled = true, start = true },
 	["williamboman/mason-lspconfig.nvim"] = { enabled = true, start = true },

@@ -27,7 +27,8 @@ fi
 
 echo "Installing neovim..."
 asdf plugin add neovim
-asdf install neovim
+asdf uninstall neovim nightly 
+asdf install neovim nightly
   
 echo "Installing PHP DAP adapter..."
 install_with_git ~/src/vscode-php-debug https://github.com/xdebug/vscode-php-debug.git 

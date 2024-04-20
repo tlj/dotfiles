@@ -38,6 +38,13 @@ local M = {
 		lazy = true,
 	},
 	{
+		"kosayoda/nvim-lightbulb",
+		enabled = require("config.util").is_enabled("kosayoda/nvim-lightbulb"),
+		opts = {
+			autocmd = { enabled = true },
+		},
+	},
+	{
 		"weilbith/nvim-code-action-menu",
 		enabled = require("config.util").is_enabled("weilbith/nvim-code-action-menu"),
 		dependencies = {
@@ -90,7 +97,8 @@ local M = {
 					"gopls", -- golang
 					"cssls", -- css
 					"clangd", -- c
-					"tailwindcss", -- TailwindCSS
+					-- "tailwindcss", -- TailwindCSS
+					-- "arduino_language_server", -- Arduino
 					-- "gleam", -- gleam
 					-- 'ocamllsp', -- ocaml
 					-- 'terraformls', -- terraform
@@ -108,20 +116,6 @@ local M = {
 						prefix = "",
 					},
 					virtual_text = false,
-					--[[
-          virtual_text = {
-            spacing = 4,
-            source = "if_many",
-            prefix = function(diagnostic)
-              local signs = require("config.icons").lsp.diagnostic.upper_signs
-              local severity = vim.diagnostic.severity[diagnostic.severity]
-              if signs[severity] then
-                return signs[severity]
-              end
-              return "●"
-            end,
-          },
-          --]]
 				},
 				capabilities = { -- {{{
 					dynamicRegistration = true,
@@ -175,6 +169,7 @@ local M = {
 					lua_ls = require("plugins.lsp.config.lua_ls"),
 					yamlls = require("plugins.lsp.config.yamlls"),
 					ocamllsp = require("plugins.lsp.config.ocaml"),
+					arduino_language_server = require("plugins.lsp.config.arduino"),
 				},
 			}
 			return vim.tbl_deep_extend("force", defaults, opts)

@@ -17,7 +17,8 @@ return {
 		event = { "InsertEnter" },
 		dependencies = {
 			"hrsh7th/cmp-buffer", -- Buffer completions
-			"hrsh7th/cmp-path", -- path competions
+			"hrsh7th/cmp-path", -- path completions
+			"hrsh7th/cmp-emoji", -- emoji completions
 			"hrsh7th/cmp-nvim-lsp", -- LSP completions
 			"hrsh7th/cmp-nvim-lua", -- Lua completions
 			"hrsh7th/cmp-cmdline", -- CommandLine completions
@@ -81,8 +82,8 @@ return {
 				preselect = cmp.PreselectMode.None,
 
 				sources = {
-					{ name = "copilot", priority = 100 },
-					{ name = "nvim_lsp", priority = 80 },
+					{ name = "nvim_lsp", priority = 90 },
+					{ name = "copilot", priority = 80, group_index = 2 },
 					{ name = "nvim_lua", priority = 70 },
 					{ name = "luasnip", priority = 30 },
 					{ name = "nvim_lsp_signature_help" },
@@ -97,7 +98,7 @@ return {
 							additional_arguments = "--max-depth 6 --one-file-system --ignore-file ~/.config/nvim/scripts/rgignore",
 						},
 					},
-					{ name = "emoji", keyword_length = 1 },
+					{ name = "emoji", keyword_length = 2 },
 					{ name = "nerdfont", keyword_length = 1 },
 				},
 
