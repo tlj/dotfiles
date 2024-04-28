@@ -6,8 +6,6 @@
 
 VIU_VERION=v1.5.0
 
-. "$HOME/.asdf/asdf.sh"
-
 echo "Installing Neovim..."
 if isMac; then
   echo "Installing Neovim dependencies..."
@@ -19,16 +17,14 @@ else
   npm install -g tree-sitter-cli
   mkdir -p ~/.local/bin
   echo "Installing stylua..."
-  asdf plugin add stylua https://github.com/jc00ke/asdf-stylua.git
-  asdf install stylua
+  mise install -qy stylua
+
   echo "Installing viu..."
   install_github_release atanunq/viu viu-x86_64-unknown-linux-musl
 fi
 
 echo "Installing neovim..."
-asdf plugin add neovim
-asdf uninstall neovim nightly 
-asdf install neovim nightly
+mise install -qy neovim
   
 echo "Installing PHP DAP adapter..."
 install_with_git ~/src/vscode-php-debug https://github.com/xdebug/vscode-php-debug.git 

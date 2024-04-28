@@ -71,13 +71,10 @@ glog() {
 # Put host specific configuration in this file - don't check it into git
 [ -f $HOME/.zshrc-local ] && source $HOME/.zshrc-local
 
-# Load asdf, the version manager
-[ -f ~/.asdf/asdf.sh ] && source ~/.asdf/asdf.sh
-# asdf completions
-[ -f ~/.asdf/completions/asdf.zsh ] && source ~/.asdf/completions/asdf.zsh
+eval "$(~/.local/bin/mise activate zsh)"
 
 # Load zoxide, and alias it to cd
-eval "$(~/.asdf/shims/zoxide init zsh)"
+eval "$(zoxide init zsh)"
 alias cd="z"
 
 # If we are inside of a tmux session, we need to export the KITTY_LISTEN_ON variable

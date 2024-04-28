@@ -4,7 +4,6 @@
 . scripts/lib/install_github_release.sh
 
 echo "Installing nodejs..."
-asdf plugin add nodejs
-asdf install nodejs
+mise install -qy node
 
 stow --target=$HOME --restow lazygit/

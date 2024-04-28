@@ -26,6 +26,9 @@ if isMac; then
 
   echo "Installing presenterm..."
   brew install -q presenterm
+
+  echo "Installing mise..."
+  curl -s https://mise.jdx.dev/mise-latest-macos-arm64 > ~/.local/bin/mise
 else
   echo "Install zsh.."
   sudo apt install zsh
@@ -44,27 +47,21 @@ else
 
   echo "Installing btop..."
   install_github_release aristocratos/btop btop-x86_64-linux-musl.tbz
+
+  echo "Installing mise..."
+  curl -s https://mise.jdx.dev/mise-latest-linux-x86 > ~/.local/bin/mise
 fi
 
-echo "Installing asdf..."
-install_with_git ~/.asdf https://github.com/excid3/asdf.git
-
-. "$HOME/.asdf/asdf.sh"
+chmod a+rx ~/.local/bin/mise
 
 echo "Installing bat..."
-asdf plugin add bat
-asdf install bat
+brew install -q bat
 
 echo "Installing zoxide..."
-asdf plugin add zoxide https://github.com/nyrst/asdf-zoxide.git
-asdf install zoxide
+mise install -qy zoxide
 
 echo "Installing jq and jqp..."
-asdf plugin add jq
-asdf install jq
-
-asdf plugin add jqp https://github.com/tlj/asdf-jqp
-asdf install jqp
+mise install -qy jq jqp
 
 echo "Building bat cache..."
 bat cache --build > /dev/null

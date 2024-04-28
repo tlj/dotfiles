@@ -11,8 +11,7 @@ else
 fi
 
 echo "Installing Ruby..."
-asdf plugin add ruby
-asdf install ruby
+mise install -qy ruby
 
 echo "Updating Gems..."
 gem update --system
@@ -24,7 +23,5 @@ echo "Installing rails..."
 gem install rails
 
 echo "Installing sqlite3..."
-asdf plugin add sqlite
-asdf install sqlite
+mise install -qy sqlite
 
-stow --target=$HOME --restow asdf
