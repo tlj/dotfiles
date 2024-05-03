@@ -51,6 +51,7 @@ return {
 	["mbbill/undotree"] = { enabled = true, start = true },
 	["ray-x/go.nvim"] = { enabled = true, start = true },
 	["FabijanZulj/blame.nvim"] = { enabled = true, start = true },
+	["kndndrj/nvim-dbee"] = { enabled = true, start = true },
 
 	--- LSP
 	["neovim/nvim-lspconfig"] = { enabled = true, start = true },

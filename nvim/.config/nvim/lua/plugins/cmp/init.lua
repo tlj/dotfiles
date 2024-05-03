@@ -26,6 +26,13 @@ return {
 			"L3MON4D3/LuaSnip", -- Snippet engine
 			"rafamadriz/friendly-snippets", -- Bunch of snippets
 			{
+				"MattiasMTS/cmp-dbee",
+				dependencies = {
+					{ "kndndrj/nvim-dbee" },
+				},
+				ft = "sql",
+			},
+			{
 				"windwp/nvim-autopairs",
 				enabled = false,
 				lazy = true,
@@ -89,6 +96,7 @@ return {
 					{ name = "nvim_lsp_signature_help" },
 					{ name = "buffer", keyword_length = 3 },
 					{ name = "path" },
+					{ name = "cmp-dbee" },
 					{
 						name = "rg",
 						keyword_length = 3,
