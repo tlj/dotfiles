@@ -28,7 +28,7 @@ if [[ "$ARCH" == "aarch64" ]]; then
 else
   install_github_release lintingzhen/commitizen-go commitizen-go_1.0.3_${PLATFORM}_${ARCH}.tar.gz v1.0.3
 fi
-commitizen-go install
+sudo commitizen-go install
 
 echo "Installing lazygit..."
 LAZYGIT_VERSION=$(curl -s "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" | grep '"tag_name":' |  sed -E 's/.*"v*([^"]+)".*/\1/')
@@ -39,7 +39,7 @@ else
 fi
 
 echo "Installing gh-dash..."
-gh extension install dlvhdr/gh-dash
+GH_TOKEN=foobar gh extension install dlvhdr/gh-dash
 
 stow --target=$HOME --restow lazygit/
 
