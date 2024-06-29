@@ -20,7 +20,7 @@ else
   echo "Installing viu..."
   install_github_release atanunq/viu viu-x86_64-unknown-linux-musl
 
-  if [ "$ARCH" = "arm64" ]; then
+  if [ "$ARCH" = "aarch64" ]; then
     echo "Installing Neovim from apt..."
     apt install -qy neovim
     INSTALL_NEOVIM=0

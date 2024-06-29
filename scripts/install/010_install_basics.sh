@@ -12,20 +12,12 @@ else
   sudo apt install -y curl stow fuse libfuse2t64 bat lsd
 
   echo "Installing btop..."
-  if [[ "$ARCH" == "arm64" ]]; then
-    install_github_release aristocratos/btop btop-aarch64-linux-musl.tbz
-  else
-    install_github_release aristocratos/btop btop-${ARCH}-linux-musl.tbz
-  fi
+  install_github_release aristocratos/btop btop-${ARCH}-linux-musl.tbz
 
   ln -sfn /usr/bin/batcat ~/.local/bin/bat
 
   echo "Install LSD..."
-  if [[ "$ARCH" == "arm64" ]]; then
-    curl -sLo /tmp/lsd.deb https://github.com/Peltoche/lsd/releases/download/0.23.1/lsd_0.23.1_arm64.deb
-  else 
-    curl -sLo /tmp/lsd.deb https://github.com/Peltoche/lsd/releases/download/0.23.1/lsd_0.23.1_amd64.deb
-  fi
+  curl -sLo /tmp/lsd.deb https://github.com/Peltoche/lsd/releases/download/0.23.1/lsd_0.23.1_${ARCH}.deb
 
   sudo dpkg -i /tmp/lsd.deb
 fi
