@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 . scripts/lib/detect_os.sh
+. scripts/lib/install_with_git.sh
 . scripts/lib/install_github_release.sh
 
 echo "Installing git and lazygit..."
@@ -28,7 +29,6 @@ if [[ "$ARCH" == "aarch64" ]]; then
 else
   install_github_release lintingzhen/commitizen-go commitizen-go_1.0.3_${PLATFORM}_${ARCH}.tar.gz v1.0.3
 fi
-~/.local/bin/commitizen-go install
 
 echo "Installing lazygit..."
 LAZYGIT_VERSION=$(curl -s "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" | grep '"tag_name":' |  sed -E 's/.*"v*([^"]+)".*/\1/')
@@ -39,7 +39,11 @@ else
 fi
 
 echo "Installing gh-dash..."
-GH_TOKEN=foobar gh extension install dlvhdr/gh-dash
+install_with_git https://github.com/dlvhdr/gh-dash.git /tmp/gh-dash
+cd /tmp/gh-dash
+GH_TOKEN=foobar gh extension install .
+cd -
+rm -rf /tmp/gh-dash
 
 stow --target=$HOME --restow lazygit/
 
