@@ -32,7 +32,11 @@ commitizen-go install
 
 echo "Installing lazygit..."
 LAZYGIT_VERSION=$(curl -s "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" | grep '"tag_name":' |  sed -E 's/.*"v*([^"]+)".*/\1/')
-install_github_release jesseduffield/lazygit lazygit_${LAZYGIT_VERSION}_${PLATFORM}_${ARCH}.tar.gz v${LAZYGIT_VERSION}
+if [[ "$ARCH" == "aarch64" ]]; then
+  install_github_release jesseduffield/lazygit lazygit_${LAZYGIT_VERSION}_${PLATFORM}_arm64.tar.gz v${LAZYGIT_VERSION}
+else
+  install_github_release jesseduffield/lazygit lazygit_${LAZYGIT_VERSION}_${PLATFORM}_${ARCH}.tar.gz v${LAZYGIT_VERSION}
+fi
 
 echo "Installing gh-dash..."
 gh extension install dlvhdr/gh-dash
