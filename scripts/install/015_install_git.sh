@@ -39,11 +39,17 @@ else
 fi
 
 echo "Installing gh-dash..."
-install_with_git ~/.local/share/gh-dash https://github.com/dlvhdr/gh-dash.git
-cd /tmp/gh-dash
-GH_TOKEN=foobar gh extension install .
-cd -
-rm -rf /tmp/gh-dash
+# check if gh-dash is already installed
+GH_TOKEN=foobar
+if gh extension list | grep -q gh-dash; then
+  echo "gh-dash is already installed. Skipping..."
+else
+  install_with_git ~/.local/share/gh-dash https://github.com/dlvhdr/gh-dash.git
+  cd ~/.local/share/gh-dash
+  gh extension install .
+  cd -
+  rm -rf /tmp/gh-dash
+fi
 
 stow --target=$HOME --restow lazygit/
 
