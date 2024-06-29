@@ -28,7 +28,7 @@ if [[ "$ARCH" == "aarch64" ]]; then
 else
   install_github_release lintingzhen/commitizen-go commitizen-go_1.0.3_${PLATFORM}_${ARCH}.tar.gz v1.0.3
 fi
-sudo commitizen-go install
+~/.local/bin/commitizen-go install
 
 echo "Installing lazygit..."
 LAZYGIT_VERSION=$(curl -s "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" | grep '"tag_name":' |  sed -E 's/.*"v*([^"]+)".*/\1/')
