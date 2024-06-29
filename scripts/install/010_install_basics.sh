@@ -12,7 +12,11 @@ else
   sudo apt install -y curl stow fuse libfuse2t64 bat lsd
 
   echo "Installing btop..."
-  install_github_release aristocratos/btop btop-x86_64-linux-musl.tbz
+  if [[ "$ARCH" == "arm64" ]]; then
+    install_github_release aristocratos/btop btop-aarch64-linux-musl.tbz
+  else
+    install_github_release aristocratos/btop btop-${ARCH}-linux-musl.tbz
+  fi
 
   ln -s /usr/bin/batcat ~/.local/bin/bat
 
