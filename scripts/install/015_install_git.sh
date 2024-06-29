@@ -23,7 +23,11 @@ else
 fi
 
 echo "Installing commitizen-go..."
-install_github_release lintingzhen/commitizen-go commitizen-go_1.0.3_${PLATFORM}_${ARCH}.tar.gz v1.0.3
+if [[ "$ARCH" == "aarch64" ]]; then
+  install_github_release lintingzhen/commitizen-go commitizen-go_1.0.3_${PLATFORM}_arm64.tar.gz v1.0.3
+else
+  install_github_release lintingzhen/commitizen-go commitizen-go_1.0.3_${PLATFORM}_${ARCH}.tar.gz v1.0.3
+fi
 commitizen-go install
 
 echo "Installing lazygit..."
