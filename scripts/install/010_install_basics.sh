@@ -9,7 +9,7 @@ else
   sudo apt update -y
 
   echo "Installing basics..."
-  sudo apt install -y curl stow fuse libfuse2t64 bat lsd
+  sudo apt install -y curl stow fuse libfuse2t64 bat
 
   echo "Installing btop..."
   install_github_release aristocratos/btop btop-${ARCH}-linux-musl.tbz
