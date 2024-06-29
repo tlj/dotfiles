@@ -17,7 +17,11 @@ else
   ln -sfn /usr/bin/batcat ~/.local/bin/bat
 
   echo "Install LSD..."
-  curl -sLo /tmp/lsd.deb https://github.com/Peltoche/lsd/releases/download/0.23.1/lsd_0.23.1_${ARCH}.deb
+  if [[ "$ARCH" == "aarch64" ]]; then
+    curl -sLo /tmp/lsd.deb https://github.com/Peltoche/lsd/releases/download/v1.1.2/lsd-musl_1.1.2_arm64.deb
+  else
+    curl -sLo /tmp/lsd.deb https://github.com/Peltoche/lsd/releases/download/v1.1.2/lsd-musl_1.1.2_${ARCH}.deb
+  fi
 
   sudo dpkg -i /tmp/lsd.deb
 fi
