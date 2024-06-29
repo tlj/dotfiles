@@ -41,7 +41,7 @@ fi
 echo "Installing gh-dash..."
 # check if gh-dash is already installed
 export GH_TOKEN=foobar
-if gh extension list | grep -q gh-dash; then
+if gh extension list | grep -q "gh dash"; then
   echo "gh-dash is already installed. Skipping..."
 else
   install_with_git ~/.local/share/gh-dash https://github.com/dlvhdr/gh-dash.git
