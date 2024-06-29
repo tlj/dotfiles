@@ -29,9 +29,4 @@ fi
 echo "Building bat cache..."
 bat cache --build > /dev/null
 
-mkdir -p ~/.local/bin
-mkdir -p ~/src
-
-PATH=$HOME/.local/bin:$PATH
-
 stow --target=$HOME --restow btop/ bat/ lsd/

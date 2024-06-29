@@ -15,6 +15,11 @@ if ! isMac; then
   gsettings set org.gnome.desktop.session idle-delay 0
 fi
 
+mkdir -p ~/.local/bin
+mkdir -p ~/src
+
+PATH=$HOME/.local/bin:$PATH
+
 for script in scripts/install/*.sh; do source $script; done
 
 if ! isMac; then
