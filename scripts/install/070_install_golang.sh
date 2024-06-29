@@ -7,6 +7,6 @@ if isMac; then
   brew install -q go
 else
   sudo add-apt-repository ppa:longsleep/golang-backports
-  sudo apt update
-  sudo apt install golang-go
+  sudo apt update -y
+  sudo apt install -y golang-go
 fi

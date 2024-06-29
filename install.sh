@@ -1,19 +1,14 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-set -e
+set -e 
 
-scripts/install_brew.sh
-scripts/install_fuse.sh
-scripts/install_git.sh
-scripts/install_zsh.sh
-scripts/install_npm.sh
-scripts/install_neovim.sh
-scripts/install_alfred.sh
-#scripts/install_yabai.sh
-scripts/install_php.sh
-scripts/install_ruby.sh
-scripts/install_go.sh
-scripts/install_k9s.sh
-scripts/install_tmux.sh
-#scripts/install_gleam.sh
+OS=$(uname)
+if [[ "$OS" == "Linux" ]]; then
+  sudo apt install -y git
+fi
 
+echo "Cloning dotfiles..." 
+git clone -b master https://github.com/tlj/dotfiles.git ~/dotfiles > /dev/null
+
+cd dotfiles
+source ./setup.sh
