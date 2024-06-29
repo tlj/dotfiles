@@ -18,7 +18,7 @@ else
     install_github_release aristocratos/btop btop-${ARCH}-linux-musl.tbz
   fi
 
-  ln -s /usr/bin/batcat ~/.local/bin/bat
+  ln -sfn /usr/bin/batcat ~/.local/bin/bat
 
   echo "Install LSD..."
   curl -sLo /tmp/lsd.deb https://github.com/Peltoche/lsd/releases/download/0.23.1/lsd_0.23.1_amd64.deb
