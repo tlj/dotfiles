@@ -9,7 +9,12 @@ else
 fi
 
 echo "Installing mise for ${PLATFORM} ${ARCH}..."
-curl -o ~/.local/bin/mise https://mise.jdx.dev/mise-latest-${PLATFORM}-${ARCH}
+if [[ "$ARCH" == "aarch64" ]]; then
+  curl -o ~/.local/bin/mise https://mise.jdx.dev/mise-latest-${PLATFORM}-arm64
+else
+  curl -o ~/.local/bin/mise https://mise.jdx.dev/mise-latest-${PLATFORM}-${ARCH}
+fi
+chmod a+rx ~/.local/bin/mise
 
 eval "$(mise activate bash)"
 
