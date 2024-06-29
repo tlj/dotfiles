@@ -4,7 +4,7 @@ ruby 3.3.0
 sqlite 3.45.2
 php 8.3.4
 stylua 0.20.0
-neovim nightly
+neovim 0.9.5
 bat 0.24.0
 jq 1.7.1
 jqp 0.5.0
