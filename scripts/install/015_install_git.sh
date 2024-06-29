@@ -39,7 +39,7 @@ else
 fi
 
 echo "Installing gh-dash..."
-install_with_git /tmp/gh-dash https://github.com/dlvhdr/gh-dash.git
+install_with_git ~/.local/share/gh-dash https://github.com/dlvhdr/gh-dash.git
 cd /tmp/gh-dash
 GH_TOKEN=foobar gh extension install .
 cd -
