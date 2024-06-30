@@ -4,6 +4,8 @@ export PATH=$HOME/Library/Python/3.11/bin:/opt/homebrew/lib/ruby/gems/3.3.0/bin:
 # Make sure the XDG config home is set to a place where we expect it to be
 export XDG_CONFIG_HOME="$HOME/.config"
 
+eval "$(~/.local/bin/mise activate zsh)"
+
 # Set up the Starship prompt
 eval "$(starship init zsh)"
 export STARSHIP_CONFIG="$HOME/.config/starship/starship.toml"
@@ -70,8 +72,6 @@ glog() {
 
 # Put host specific configuration in this file - don't check it into git
 [ -f $HOME/.zshrc-local ] && source $HOME/.zshrc-local
-
-eval "$(~/.local/bin/mise activate zsh)"
 
 # Load zoxide, and alias it to cd
 eval "$(zoxide init zsh)"
