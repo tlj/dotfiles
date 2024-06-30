@@ -36,7 +36,7 @@ else
   fi
 
   echo "Installing stylua..."
-  install_github_release neovim/neovim stylua-linux-${ARCH}.zip v0.20.0
+  install_github_release JohnnyMorganz/StyLua stylua-linux-${ARCH}.zip v0.20.0
 fi
 
 echo "Installing PHP DAP adapter..."
