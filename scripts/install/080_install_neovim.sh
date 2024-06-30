@@ -21,8 +21,7 @@ else
   sudo apt-get install -y ripgrep fd-find fzf luarocks
   sudo luarocks install luacheck
 
-  eval "$(~/.local/bin/mise activate bash)"
-  npm install -g tree-sitter-cli
+  ~/.local/bin/mise exec nodejs -- npm install -g tree-sitter-cli
 
   echo "Installing viu..."
   install_github_release atanunq/viu viu-${ARCH}-unknown-linux-musl
@@ -43,8 +42,8 @@ fi
 echo "Installing PHP DAP adapter..."
 install_with_git ~/src/vscode-php-debug https://github.com/xdebug/vscode-php-debug.git 
 cd ~/src/vscode-php-debug
-npm install --silent --no-progress || true
-npm run --silent build || true
+~/.local/bin/mise exec nodejs -- npm install --silent --no-progress || true
+~/.local/bin/mise exec nodejs -- npm run --silent build || true
 cd - > /dev/null
 
 stow --target=$HOME --restow nvim/
