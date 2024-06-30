@@ -4,10 +4,8 @@ export PATH=$HOME/Library/Python/3.11/bin:/opt/homebrew/lib/ruby/gems/3.3.0/bin:
 # Make sure the XDG config home is set to a place where we expect it to be
 export XDG_CONFIG_HOME="$HOME/.config"
 
-eval "$(~/.local/bin/mise activate zsh)"
-
 # Set up the Starship prompt
-eval "$(starship init zsh)"
+eval "$(~/cargo/bin/starship init zsh)"
 export STARSHIP_CONFIG="$HOME/.config/starship/starship.toml"
 
 # Don't auto update Homebrew on every command
@@ -74,7 +72,7 @@ glog() {
 [ -f $HOME/.zshrc-local ] && source $HOME/.zshrc-local
 
 # Load zoxide, and alias it to cd
-eval "$(zoxide init zsh)"
+eval "$(~/.local/bin/mise exec zoxide -- zoxide init zsh)"
 alias cd="z"
 
 # If we are inside of a tmux session, we need to export the KITTY_LISTEN_ON variable

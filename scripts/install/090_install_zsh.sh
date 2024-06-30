@@ -5,13 +5,13 @@
 . scripts/lib/install_github_release.sh
 
 if isMac; then
-  echo "Installing autojump, btop and lsd..."
-  brew install -q starship 
 else
   echo "Install zsh.."
   sudo apt install -y zsh
-  cargo install starship --locked
 fi
+
+echo "Install starship..."
+cargo install starship --locked
 
 echo "Installing zsh-vi-mode..."
 install_with_git ~/.zsh/zsh-vi-mode https://github.com/jeffreytse/zsh-vi-mode
