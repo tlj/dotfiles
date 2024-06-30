@@ -6,5 +6,5 @@ if isMac; then
   echo "Installing Rust..."
   brew install -q rust
 else
-  sudo apt install -y rustc
+  sudo apt install -y rustc cargo
 fi
