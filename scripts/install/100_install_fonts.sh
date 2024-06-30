@@ -13,6 +13,6 @@ else
     && cd ~/.local/share/fonts \
     && unzip -o JetBrainsMono.zip \
     && rm JetBrainsMono.zip \
-    && fc-cache -fv \
+    && fc-cache -fv > /dev/null \
     && cd -
 fi
