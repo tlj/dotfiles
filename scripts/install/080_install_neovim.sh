@@ -21,7 +21,7 @@ else
   sudo apt-get install -y ripgrep fd-find fzf luarocks
   sudo luarocks install luacheck
 
-  eval "$(mise activate bash)"
+  eval "$(~/.local/bin/mise activate bash)"
   npm install -g tree-sitter-cli
 
   echo "Installing viu..."
