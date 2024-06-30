@@ -8,10 +8,16 @@ if [[ $? -ne 0 ]]; then
   exit 1
 fi
 
-echo "Cloning dotfiles..." 
-git clone -b master https://github.com/tlj/dotfiles.git ~/dotfiles > /dev/null
+REPO_LOCATION="~/.dotfiles"
 
-cd ~/dotfiles
+echo "Cloning into dotfiles..." 
+if cd "$REPO_LOCATION"; then
+  git pull > /dev/null
+else
+  git clone -b master https://github.com/tlj/dotfiles.git ~/dotfiles > /dev/null
+fi
+
+cd "$REPO_LOCATION"
 source ./setup.sh
 
 
