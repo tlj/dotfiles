@@ -4,8 +4,23 @@
 
 The make script support MacOS and Linux and will install dotfiles, dependencies and common tools, like fd, ripgrep, neovim and homebrew.
 
+### Install directly from Github.
+
+#### With Curl
+
 ```shell
-./install.sh
+curl -s https://raw.githubusercontent.com/tlj/dotfiles/master/install.sh | bash
+```
+
+#### With wget
+
+```shell
+wget -qO- https://raw.githubusercontent.com/tlj/dotfiles/master/install.sh | bash
+```
+### Check out the repository instead, then run:
+
+```shell
+./setup.sh
 ```
 
 ## Features

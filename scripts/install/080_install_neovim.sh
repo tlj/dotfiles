@@ -15,7 +15,7 @@ if isMac; then
   install_github_release neovim/neovim nvim-macos-arm64.tar.gz stable
 
   echo "Installing Stylua..."
-  install_github_release neovim/neovim stylua-macos.zip v0.20.0
+  install_github_release JohnnyMorganz/StyLua  stylua-macos-aarch64.zip v0.20.0
 
 else
   sudo apt-get install -y ripgrep fd-find fzf luarocks
