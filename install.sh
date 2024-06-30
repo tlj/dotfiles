@@ -8,7 +8,7 @@ if [[ $? -ne 0 ]]; then
   exit 1
 fi
 
-REPO_LOCATION=~/.dotfiles
+REPO_LOCATION=~/dotfiles
 
 echo "Cloning into dotfiles..." 
 if cd "$REPO_LOCATION"; then
