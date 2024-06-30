@@ -21,8 +21,6 @@ else
   sudo apt-get install -y ripgrep fd-find fzf luarocks
   sudo luarocks install luacheck
 
-  ~/.local/bin/mise exec nodejs -- npm install -g tree-sitter-cli
-
   echo "Installing viu..."
   install_github_release atanunq/viu viu-${ARCH}-unknown-linux-musl
 
@@ -38,6 +36,9 @@ else
   echo "Installing stylua..."
   install_github_release JohnnyMorganz/StyLua stylua-linux-${ARCH}.zip v0.20.0
 fi
+
+echo "Installing tree-sitter-cli..."
+cargo install tree-sitter-cli
 
 echo "Installing PHP DAP adapter..."
 install_with_git ~/src/vscode-php-debug https://github.com/xdebug/vscode-php-debug.git 
