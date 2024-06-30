@@ -8,13 +8,13 @@ if [[ $? -ne 0 ]]; then
   exit 1
 fi
 
-REPO_LOCATION="~/.dotfiles"
+REPO_LOCATION=~/.dotfiles
 
 echo "Cloning into dotfiles..." 
 if cd "$REPO_LOCATION"; then
   git pull > /dev/null
 else
-  git clone -b master https://github.com/tlj/dotfiles.git ~/dotfiles > /dev/null
+  git clone -b master https://github.com/tlj/dotfiles.git "$REPO_LOCATION" > /dev/null
 fi
 
 cd "$REPO_LOCATION"
