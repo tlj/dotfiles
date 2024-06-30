@@ -5,12 +5,18 @@
 . scripts/lib/install_github_release.sh
 
 VIU_VERION=v1.5.0
-INSTALL_NEOVIM=1
 
 echo "Installing Neovim..."
 if isMac; then
   echo "Installing Neovim dependencies..."
   brew install -q ripgrep fd fzf luacheck gnu-sed gsed bash viu silicon
+
+  echo "Installing Neovim from github..."
+  install_github_release neovim/neovim nvim-macos-arm64.tar.gz stable
+
+  echo "Installing Stylua..."
+  install_github_release neovim/neovim stylua-macos.zip v0.20.0
+
 else
   sudo apt-get install -y ripgrep fd-find fzf luarocks
   sudo luarocks install luacheck
@@ -18,20 +24,21 @@ else
   npm install -g tree-sitter-cli
 
   echo "Installing viu..."
-  install_github_release atanunq/viu viu-x86_64-unknown-linux-musl
+  install_github_release atanunq/viu viu-${ARCH}-unknown-linux-musl
 
   if [ "$ARCH" = "aarch64" ]; then
-    echo "Installing Neovim from apt..."
-    apt install -qy neovim
-    INSTALL_NEOVIM=0
+    echo "Installing Neovim from alternative github..."
+    install_github_release matsuu/neovim-aarch64-appimage nvim-v0.10.0-${ARCH}.appimage latest
+    ln -sfn ~/.local/bin/nvim-v0.10.0-${ARCH}.appimage ~/.local/bin/nvim
+  else
+    echo "Installing Neovim from github..."
+    install_github_release neovim/neovim nvim-linux64.zip stable
   fi
+
+  echo "Installing stylua..."
+  install_github_release neovim/neovim stylua-linux-${ARCH}.tar.gz v0.20.0
 fi
 
-if [ "$INSTALL_NEOVIM" = "1" ]; then
-  echo "Installing neovim..."
-  mise install -qy neovim
-fi
-  
 echo "Installing PHP DAP adapter..."
 install_with_git ~/src/vscode-php-debug https://github.com/xdebug/vscode-php-debug.git 
 cd ~/src/vscode-php-debug
