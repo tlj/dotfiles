@@ -1,19 +1,23 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-set -e
+set -e 
 
-scripts/install_brew.sh
-scripts/install_fuse.sh
-scripts/install_git.sh
-scripts/install_zsh.sh
-scripts/install_npm.sh
-scripts/install_neovim.sh
-scripts/install_alfred.sh
-#scripts/install_yabai.sh
-scripts/install_php.sh
-scripts/install_ruby.sh
-scripts/install_go.sh
-scripts/install_k9s.sh
-scripts/install_tmux.sh
-#scripts/install_gleam.sh
+git --version >/dev/null
+if [[ $? -ne 0 ]]; then
+  echo "Git is not installed. Please install git and try again."
+  exit 1
+fi
+
+REPO_LOCATION=~/.dotfiles
+
+echo "Cloning into dotfiles..." 
+if cd "$REPO_LOCATION"; then
+  git pull > /dev/null
+else
+  git clone -b master https://github.com/tlj/dotfiles.git "$REPO_LOCATION" > /dev/null
+fi
+
+cd "$REPO_LOCATION"
+source ./setup.sh
+
 

@@ -1,11 +1,11 @@
 # If you come from bash you might have to change your $PATH.
-export PATH=$HOME/Library/Python/3.11/bin:/opt/homebrew/lib/ruby/gems/3.3.0/bin:/opt/homebrew/opt/ruby/bin:$HOME/nvim-macos/bin:$HOME/bin:$HOME/.local/bin:$HOME/go/bin:$HOME/dotfiles/bin:/opt/homebrew/bin:/usr/local/bin:$PATH
+export PATH=$HOME/Library/Python/3.11/bin:/opt/homebrew/lib/ruby/gems/3.3.0/bin:/opt/homebrew/opt/ruby/bin:$HOME/nvim-macos/bin:$HOME/bin:$HOME/.local/bin:$HOME/.cargo/bin:$HOME/go/bin:$HOME/dotfiles/bin:/opt/homebrew/bin:/usr/local/bin:$PATH
 
 # Make sure the XDG config home is set to a place where we expect it to be
 export XDG_CONFIG_HOME="$HOME/.config"
 
 # Set up the Starship prompt
-eval "$(starship init zsh)"
+eval "$(~/.cargo/bin/starship init zsh)"
 export STARSHIP_CONFIG="$HOME/.config/starship/starship.toml"
 
 # Don't auto update Homebrew on every command
@@ -71,10 +71,8 @@ glog() {
 # Put host specific configuration in this file - don't check it into git
 [ -f $HOME/.zshrc-local ] && source $HOME/.zshrc-local
 
-eval "$(~/.local/bin/mise activate zsh)"
-
 # Load zoxide, and alias it to cd
-eval "$(zoxide init zsh)"
+eval "$(~/.local/bin/mise exec zoxide -- zoxide init zsh)"
 alias cd="z"
 
 # If we are inside of a tmux session, we need to export the KITTY_LISTEN_ON variable

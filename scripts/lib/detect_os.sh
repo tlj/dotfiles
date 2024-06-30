@@ -9,4 +9,10 @@ isMac() {
   fi
 }
 
+ARCH=$(uname -m)
+PLATFORM=Linux
+
+if isMac; then
+  PLATFORM=Darwin
+fi
 
