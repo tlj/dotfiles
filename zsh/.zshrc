@@ -5,7 +5,7 @@ export PATH=$HOME/Library/Python/3.11/bin:/opt/homebrew/lib/ruby/gems/3.3.0/bin:
 export XDG_CONFIG_HOME="$HOME/.config"
 
 # Set up the Starship prompt
-eval "$(~/cargo/bin/starship init zsh)"
+eval "$(~/.cargo/bin/starship init zsh)"
 export STARSHIP_CONFIG="$HOME/.config/starship/starship.toml"
 
 # Don't auto update Homebrew on every command
