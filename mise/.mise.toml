@@ -2,7 +2,7 @@
 zoxide = "0.9.4"
 nodejs = "21.7.1"
 #ruby = "3.3.0"
-sqlite = "3.45.2"
+#sqlite = "3.45.2"
 #php = "8.3.4"
 #stylua = "0.20.0"
 #neovim = "0.9.5"
