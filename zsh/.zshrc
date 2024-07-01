@@ -72,7 +72,7 @@ glog() {
 [ -f $HOME/.zshrc-local ] && source $HOME/.zshrc-local
 
 # Load zoxide, and alias it to cd
-eval "$(~/.local/bin/mise exec zoxide -- zoxide init zsh)"
+eval "$(~/.cargo/bin/zoxide init zsh)"
 alias cd="z"
 
 # If we are inside of a tmux session, we need to export the KITTY_LISTEN_ON variable

@@ -12,6 +12,9 @@ fi
 echo "Install starship..."
 cargo install starship --locked
 
+echo "Install zoxide..."
+cargo install zoxide --locked
+
 echo "Installing zsh-vi-mode..."
 install_with_git ~/.zsh/zsh-vi-mode https://github.com/jeffreytse/zsh-vi-mode
 
