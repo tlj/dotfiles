@@ -11,6 +11,7 @@ return {
 	["stevarc/conform.nvim"] = { enabled = false, start = false },
 	["zbirenbaum/copilot.lua"] = { enabled = true, start = true },
 	["zbirenbaum/copilot-cmp"] = { enabled = true, start = true },
+	["CopilotC-Nvim/CopilotChat.nvim"] = { enabled = true, start = true },
 	["mfussenegger/nvim-dap"] = { enabled = true, start = true },
 	["leoluz/nvim-dap-go"] = { enabled = true, start = true },
 	["rcarriga/nvim-dap-ui"] = { enabled = true, start = true },

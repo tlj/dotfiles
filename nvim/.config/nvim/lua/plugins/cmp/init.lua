@@ -234,66 +234,66 @@ return {
 			})
 		end,
 	},
-	{
-		"hrsh7th/nvim-cmp",
-		enabled = require("config.util").is_enabled("hrsh7th/nvim-cmp"),
-		name = "nvim-cmp.commandline",
-		dependencies = {
-			"hrsh7th/cmp-cmdline",
-		},
-		event = { "CmdlineEnter" },
-		config = function()
-			local cmp = require("cmp")
-			cmp.setup.cmdline({ "/", "?" }, {
-				mapping = cmp.mapping.preset.cmdline({
-					["<C-j>"] = {
-						c = function(fallback)
-							if cmp.visible() then
-								cmp.select_next_item()
-							else
-								fallback()
-							end
-						end,
-					},
-					["<C-k>"] = {
-						c = function(fallback)
-							if cmp.visible() then
-								cmp.select_prev_item()
-							else
-								fallback()
-							end
-						end,
-					},
-				}),
-
-				cmp.setup.cmdline(":", {
-					mapping = cmp.mapping.preset.cmdline({
-						["<C-j>"] = {
-							c = function(fallback)
-								if cmp.visible() then
-									cmp.select_next_item()
-								else
-									fallback()
-								end
-							end,
-						},
-						["<C-k>"] = {
-							c = function(fallback)
-								if cmp.visible() then
-									cmp.select_prev_item()
-								else
-									fallback()
-								end
-							end,
-						},
-					}),
-					sources = cmp.config.sources({
-						{ name = "cmdline" },
-					}, {
-						{ name = "path" },
-					}),
-				}),
-			})
-		end,
-	},
+--	{
+--		"hrsh7th/nvim-cmp",
+--		enabled = require("config.util").is_enabled("hrsh7th/nvim-cmp"),
+--		name = "nvim-cmp.commandline",
+--		dependencies = {
+--			"hrsh7th/cmp-cmdline",
+--		},
+--		event = { "CmdlineEnter" },
+--		config = function()
+--			local cmp = require("cmp")
+--			cmp.setup.cmdline({ "/", "?" }, {
+--				mapping = cmp.mapping.preset.cmdline({
+--					["<C-j>"] = {
+--						c = function(fallback)
+--							if cmp.visible() then
+--								cmp.select_next_item()
+--							else
+--								fallback()
+--							end
+--						end,
+--					},
+--					["<C-k>"] = {
+--						c = function(fallback)
+--							if cmp.visible() then
+--								cmp.select_prev_item()
+--							else
+--								fallback()
+--							end
+--						end,
+--					},
+--				}),
+--
+--				cmp.setup.cmdline(":", {
+--					mapping = cmp.mapping.preset.cmdline({
+--						["<C-j>"] = {
+--							c = function(fallback)
+--								if cmp.visible() then
+--									cmp.select_next_item()
+--								else
+--									fallback()
+--								end
+--							end,
+--						},
+--						["<C-k>"] = {
+--							c = function(fallback)
+--								if cmp.visible() then
+--									cmp.select_prev_item()
+--								else
+--									fallback()
+--								end
+--							end,
+--						},
+--					}),
+--					sources = cmp.config.sources({
+--						{ name = "cmdline" },
+--					}, {
+--						{ name = "path" },
+--					}),
+--				}),
+--			})
+--		end,
+--	},
 }

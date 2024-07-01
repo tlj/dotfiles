@@ -33,6 +33,7 @@ return {
 			matcher = "Fuzzy", -- default
 			diagnosticsDelay = "500ms",
 			symbolMatcher = "Fuzzy", -- default is FastFuzzy
+			templateExtensions = { ".tmpl" },
 		},
 	},
 
