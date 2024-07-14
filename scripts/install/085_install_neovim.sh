@@ -9,16 +9,16 @@ VIU_VERION=v1.5.0
 echo "Installing Neovim..."
 if isMac; then
   echo "Installing Neovim dependencies..."
-  brew install -q ripgrep fd fzf luacheck gnu-sed gsed bash viu silicon
+  brew install -q ripgrep fd luacheck gnu-sed gsed bash viu silicon
 
   echo "Installing Neovim from github..."
   install_github_release neovim/neovim nvim-macos-arm64.tar.gz stable
 
   echo "Installing Stylua..."
-  install_github_release JohnnyMorganz/StyLua  stylua-macos-aarch64.zip v0.20.0
+  install_github_release JohnnyMorganz/StyLua stylua-macos-aarch64.zip v0.20.0
 
 else
-  sudo apt-get install -y ripgrep fd-find fzf luarocks
+  sudo apt-get install -y ripgrep fd-find luarocks
   sudo luarocks install luacheck
 
   echo "Installing viu..."
