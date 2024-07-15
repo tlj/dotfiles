@@ -24,19 +24,11 @@ else
 fi
 
 echo "Installing commitizen-go..."
-if [[ "$ARCH" == "aarch64" ]]; then
-  install_github_release lintingzhen/commitizen-go commitizen-go_1.0.3_${PLATFORM}_arm64.tar.gz v1.0.3
-else
-  install_github_release lintingzhen/commitizen-go commitizen-go_1.0.3_${PLATFORM}_${ARCH}.tar.gz v1.0.3
-fi
+install_github_release lintingzhen/commitizen-go commitizen-go_1.0.3_${PLATFORM}_${ARCH}.tar.gz v1.0.3
 
 echo "Installing lazygit..."
 LAZYGIT_VERSION=$(curl -s "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" | grep '"tag_name":' |  sed -E 's/.*"v*([^"]+)".*/\1/')
-if [[ "$ARCH" == "aarch64" ]]; then
-  install_github_release jesseduffield/lazygit lazygit_${LAZYGIT_VERSION}_${PLATFORM}_arm64.tar.gz v${LAZYGIT_VERSION}
-else
-  install_github_release jesseduffield/lazygit lazygit_${LAZYGIT_VERSION}_${PLATFORM}_${ARCH}.tar.gz v${LAZYGIT_VERSION}
-fi
+install_github_release jesseduffield/lazygit lazygit_${LAZYGIT_VERSION}_${PLATFORM}_${ARCH}.tar.gz v${LAZYGIT_VERSION}
 
 echo "Installing gh-dash..."
 # check if gh-dash is already installed

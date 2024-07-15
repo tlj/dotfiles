@@ -3,17 +3,13 @@
 . scripts/lib/detect_os.sh
 
 if isMac; then
-  PLATFORM=macos
+  MISE_PLATFORM=macos
 else
-  PLATFORM=linux
+  MISE_PLATFORM=linux
 fi
 
-echo "Installing mise for ${PLATFORM} ${ARCH}..."
-if [[ "$ARCH" == "aarch64" ]]; then
-  curl -so ~/.local/bin/mise https://mise.jdx.dev/mise-latest-${PLATFORM}-arm64
-else
-  curl -so ~/.local/bin/mise https://mise.jdx.dev/mise-latest-${PLATFORM}-${ARCH}
-fi
+echo "Installing mise for ${MISE_PLATFORM} ${ARCH}..."
+curl -so ~/.local/bin/mise https://mise.jdx.dev/mise-latest-${MISE_PLATFORM}-${ARCH}
 chmod a+rx ~/.local/bin/mise
 
 eval "$(mise activate bash)"
