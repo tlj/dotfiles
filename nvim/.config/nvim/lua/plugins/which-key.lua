@@ -2,29 +2,26 @@
 local M = {
 	"folke/which-key.nvim",
 	enabled = require("config.util").is_enabled("folke/which-key.nvim"),
-	config = function()
-		require("which-key").setup()
-
-		require("which-key").register({
-			["<leader>b"] = { name = "+Buffers" },
-			["<leader>c"] = { name = "+Copilot" },
-			["<leader>d"] = { name = "+Debug" },
-			["<leader>f"] = { name = "+FzF/Float" },
-			["<leader>g"] = { name = "+LSP/Diagnostics" },
-			["<leader>gw"] = { name = "+Workspace Diagnostics" },
-			["<leader>h"] = { name = "+Harpoon/Diffview" },
-			["<leader>j"] = { name = "+Session" },
-			["<leader>l"] = { name = "+Lazygit" },
-			["<leader>n"] = { name = "+NeoTree" },
-			["<leader>o"] = { name = "+Conform/Obsidian" },
-			["<leader>q"] = { name = "+QuickFix" },
-			["<leader>r"] = { name = "+Rename/Resume" },
-			["<leader>s"] = { name = "+OpenAPI Browser" },
-			["<leader>t"] = { name = "+Tests, Diagnostics" },
-			["<leader>u"] = { name = "+Undo" },
-			["<leader>w"] = { name = "+Window" },
-		})
-	end,
+	opts = {},
+	keys = {
+		{ "<leader>b", group = "+Buffers" },
+		{ "<leader>c", group = "+Copilot" },
+		{ "<leader>d", group = "+Debug" },
+		{ "<leader>f", group = "+FzF/Float" },
+		{ "<leader>g", group = "+LSP/Diagnostics" },
+		{ "<leader>gw", group = "+Workspace Diagnostics" },
+		{ "<leader>h", group = "+Harpoon/Diffview" },
+		{ "<leader>j", group = "+Session" },
+		{ "<leader>l", group = "+Lazygit" },
+		{ "<leader>n", group = "+NeoTree" },
+		{ "<leader>o", group = "+Conform/Obsidian" },
+		{ "<leader>q", group = "+QuickFix" },
+		{ "<leader>r", group = "+Rename/Resume" },
+		{ "<leader>s", group = "+OpenAPI Browser" },
+		{ "<leader>t", group = "+Tests, Diagnostics" },
+		{ "<leader>u", group = "+Undo" },
+		{ "<leader>w", group = "+Window" },
+	},
 }
 
 return M
