@@ -12,7 +12,11 @@ else
   sudo apt install -y curl stow fuse libfuse2t64 bat sqlite3 cmake
 
   echo "Installing btop..."
-  install_github_release aristocratos/btop btop-${ARCH}-linux-musl.tbz
+  BTOPARCH=$ARCH
+  if [[ $ARCH == "amd64" ]]; then
+    BTOPARCH="x86_64"
+  fi
+  install_github_release aristocratos/btop btop-${BTOPARCH}-linux-musl.tbz
 
   ln -sfn /usr/bin/batcat ~/.local/bin/bat
 
