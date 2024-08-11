@@ -26,7 +26,7 @@ else
     ln -sfn ~/.local/bin/nvim-v0.10.0-aarch64.appimage ~/.local/bin/nvim
   else
     echo "Installing Neovim from github..."
-    install_github_release neovim/neovim nvim-linux64.zip stable
+    install_github_release neovim/neovim nvim-linux64.tar.gz stable
   fi
 fi
 
