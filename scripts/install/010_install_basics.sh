@@ -9,7 +9,7 @@ else
   sudo apt update -y
 
   echo "Installing basics..."
-  sudo apt install -y curl stow fuse libfuse2t64 bat sqlite3 cmake
+  sudo apt install -y curl stow fuse3 bat sqlite3 cmake
 
   echo "Installing btop..."
   install_github_release aristocratos/btop btop-${ARCH_ALT}-linux-musl.tbz
