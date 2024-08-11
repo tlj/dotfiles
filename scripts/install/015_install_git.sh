@@ -28,7 +28,7 @@ install_github_release lintingzhen/commitizen-go commitizen-go_1.0.3_${PLATFORM}
 
 echo "Installing lazygit..."
 LAZYGIT_VERSION=$(curl -s "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" | grep '"tag_name":' |  sed -E 's/.*"v*([^"]+)".*/\1/')
-install_github_release jesseduffield/lazygit lazygit_${LAZYGIT_VERSION}_${PLATFORM}_${ARCH}.tar.gz v${LAZYGIT_VERSION}
+install_github_release jesseduffield/lazygit lazygit_${LAZYGIT_VERSION}_${PLATFORM}_${ARCH_ALT}.tar.gz v${LAZYGIT_VERSION}
 
 echo "Installing gh-dash..."
 # check if gh-dash is already installed

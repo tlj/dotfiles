@@ -21,7 +21,7 @@ fi
 REPO_LOCATION=~/dotfiles
 
 echo "Cloning into dotfiles..." 
-if cd "$REPO_LOCATION"; then
+if cd "$REPO_LOCATION" &> /dev/null; then
   git pull > /dev/null
 else
   git clone -b master https://github.com/tlj/dotfiles.git "$REPO_LOCATION" > /dev/null

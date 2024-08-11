@@ -2,14 +2,17 @@
 
 SYSTEM_NAME=$(uname -s)
 ARCH=$(uname -m)
+ARCH_ALT=$ARCH
 PLATFORM=
 
 case $ARCH in
   x86)
     ARCH=amd64
+    ARCH_ALT=x86_64
     ;;
   x86_64)
     ARCH=amd64
+    ARCH_ALT=x86_64
     ;;
   armv8)
     ARCH=arm64
