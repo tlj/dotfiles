@@ -1,8 +1,22 @@
 update_github_release() {
-  GITHUB_RELEASE_CONTENT=$(curl -sL https://api.github.com/repos/$GITHUB_RELEASE_REPO/releases/latest)
-  if [[ -z $GITHUB_RELEASE_CONTENT ]]; then
-    echo "Error while fetching release info for $GITHUB_RELEASE_REPO"
-    exit
+  local response=$(curl -sL -w "%{http_code}" https://api.github.com/repos/$GITHUB_RELEASE_REPO/releases/latest -o /tmp/github_response.json)
+  local status_code=$response
+
+  if [ $status_code -eq 200 ]; then
+    GITHUB_RELEASE_CONTENT=$(cat /tmp/github_response.json)
+    echo "Successfully fetched release info for $GITHUB_RELEASE_REPO"
+  elif [ $status_code -eq 403 ]; then
+    local rate_limit_reset=$(curl -sI https://api.github.com/repos/$GITHUB_RELEASE_REPO/releases/latest | grep -i "x-ratelimit-reset" | awk '{print $2}' | tr -d '\r')
+    if [ -n "$rate_limit_reset" ]; then
+      local reset_time=$(date -d @$rate_limit_reset "+%Y-%m-%d %H:%M:%S")
+      echo "Error: GitHub API rate limit exceeded. Limit will reset at $reset_time"
+    else
+      echo "Error: GitHub API rate limit exceeded. Please try again later."
+    fi
+    exit 1
+  else
+    echo "Error while fetching release info for $GITHUB_RELEASE_REPO. Status code: $status_code"
+    exit 1
   fi
 }
 
