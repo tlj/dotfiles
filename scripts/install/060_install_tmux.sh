@@ -10,7 +10,7 @@ else
   sudo apt install -y tmux
 fi
 
-install_github_release joshmedeski/sesh sesh_${PLATFORM}_${ARCH}.tar.gz
+install_github_release joshmedeski/sesh sesh_${PLATFORM}_${ARCH_ALT}.tar.gz
 
 install_with_git ~/.tmux/plugins/tpm https://github.com/tmux-plugins/tpm
 
