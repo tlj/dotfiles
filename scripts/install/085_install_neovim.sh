@@ -31,7 +31,7 @@ else
 fi
 
 echo "Installing stylua..."
-install_github_release JohnnyMorganz/StyLua stylua-linux-${ARCH}.zip v0.20.0
+install_github_release JohnnyMorganz/StyLua stylua-linux-${ARCH_ALT}.zip v0.20.0
 
 echo "Installing tree-sitter-cli..."
 cargo install tree-sitter-cli
