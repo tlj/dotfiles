@@ -16,7 +16,7 @@ else
   echo "Installing docker-compose..."
   mkdir -p ~/.docker/cli-plugins
   install_github_release docker/compose docker-compose-${PLATFORM}-${ARCH_ALT}
-  mv ~/.config/bin/docker-compose ~/.docker/cli-plugins/docker-compose
+  mv ~/.config/bin/compose ~/.docker/cli-plugins/docker-compose
 fi
 
 echo "Installing lazydocker..."
