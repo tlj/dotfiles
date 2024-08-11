@@ -8,7 +8,11 @@ update_github_release() {
   elif [ $status_code -eq 403 ]; then
     local rate_limit_reset=$(curl -sI https://api.github.com/repos/$GITHUB_RELEASE_REPO/releases/latest | grep -i "x-ratelimit-reset" | awk '{print $2}' | tr -d '\r')
     if [ -n "$rate_limit_reset" ]; then
-      local reset_time=$(date -d @$rate_limit_reset "+%Y-%m-%d %H:%M:%S")
+      if isMac; then
+        local reset_time=$(date -r $rate_limit_reset "+%Y-%m-%d %H:%M:%S")
+      else
+        local reset_time=$(date -d @$rate_limit_reset "+%Y-%m-%d %H:%M:%S")
+      fi
       echo "Error: GitHub API rate limit exceeded. Limit will reset at $reset_time"
     else
       echo "Error: GitHub API rate limit exceeded. Please try again later."
