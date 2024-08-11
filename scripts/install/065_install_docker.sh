@@ -20,6 +20,6 @@ else
 fi
 
 echo "Installing lazydocker..."
-install_github_release jesseduffield/lazydocker lazydocker_:VERSION_NUM:_${PLATFORM}_${ARCH}.tar.gz 
+install_github_release jesseduffield/lazydocker lazydocker_:VERSION_NUM:_${PLATFORM}_${ARCH_ALT}.tar.gz 
 
 
