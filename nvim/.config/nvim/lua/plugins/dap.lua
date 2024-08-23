@@ -98,15 +98,6 @@ local M = {
 				require("telescope").load_extension("dap")
 			end,
 		},
-		{
-			"folke/which-key.nvim",
-			optional = true,
-			opts = {
-				defaults = {
-					["<leader>d"] = { name = "+debug" },
-				},
-			},
-		},
 	},
 	keys = {
 		{ "<F4>", '<cmd>lua require"dapui".toggle()<cr>' },
