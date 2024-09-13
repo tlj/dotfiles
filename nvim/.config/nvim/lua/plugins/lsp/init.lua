@@ -97,6 +97,7 @@ local M = {
 					"gopls", -- golang
 					"cssls", -- css
 					"clangd", -- c
+					"solargraph", -- ruby
 					-- "tailwindcss", -- TailwindCSS
 					-- "arduino_language_server", -- Arduino
 					-- "gleam", -- gleam
@@ -170,6 +171,7 @@ local M = {
 					yamlls = require("plugins.lsp.config.yamlls"),
 					ocamllsp = require("plugins.lsp.config.ocaml"),
 					arduino_language_server = require("plugins.lsp.config.arduino"),
+					solargraph = require("plugins.lsp.config.solargraph"),
 				},
 			}
 			return vim.tbl_deep_extend("force", defaults, opts)

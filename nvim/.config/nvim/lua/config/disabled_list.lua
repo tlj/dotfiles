@@ -7,7 +7,7 @@ return {
 	["rose-pine/neovim"] = { enabled = true, start = true },
 	["catppuccin/nvim"] = { enabled = false, start = false },
 	["ribru17/bamboo.nvim"] = { enabled = false, start = false },
-	["sainnhe/gruvbox-material"] = { enabled = false, start = false },
+	["sainnhe/gruvbox-material"] = { enabled = true, start = true },
 	["stevarc/conform.nvim"] = { enabled = false, start = false },
 	["zbirenbaum/copilot.lua"] = { enabled = true, start = true },
 	["zbirenbaum/copilot-cmp"] = { enabled = true, start = true },
@@ -58,6 +58,7 @@ return {
 	["ray-x/go.nvim"] = { enabled = true, start = true },
 	["FabijanZulj/blame.nvim"] = { enabled = true, start = true },
 	["kndndrj/nvim-dbee"] = { enabled = true, start = true },
+	["tpope/vim-rails"] = { enabled = true, start = true },
 
 	--- LSP
 	["neovim/nvim-lspconfig"] = { enabled = true, start = true },
