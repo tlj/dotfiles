@@ -2,11 +2,12 @@ local M = {
 	"nvim-neotest/neotest",
 	enabled = require("config.util").is_enabled("nvim-neotest/neotest"),
 	dependencies = {
-    "nvim-neotest/nvim-nio",
+		"nvim-neotest/nvim-nio",
 		"nvim-lua/plenary.nvim",
 		"nvim-treesitter/nvim-treesitter",
 		{ "antoinemadec/FixCursorHold.nvim" },
 		"nvim-neotest/neotest-go",
+		"olimorris/neotest-rspec",
 	},
 	keys = {
 		{ "<leader>tn", '<cmd>lua require"neotest".run.run()<cr>', desc = "Run current test" },
@@ -32,6 +33,7 @@ local M = {
 			},
 			adapters = {
 				require("neotest-go"),
+				require("neotest-rspec"),
 			},
 		})
 	end,

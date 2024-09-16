@@ -31,6 +31,7 @@ local M = {
 		config = function()
 			local path = require("mason-core.path")
 			require("mason").setup({
+				ensure_installed = { "erb-formatter", "erb-lint" },
 				install_root_dir = path.concat({ vim.fn.stdpath("cache"), "mason" }),
 				max_concurrent_installers = 4,
 			})
@@ -97,7 +98,8 @@ local M = {
 					"gopls", -- golang
 					"cssls", -- css
 					"clangd", -- c
-					"solargraph", -- ruby
+					"ruby_lsp", -- ruby
+					-- "solargraph", -- ruby
 					-- "tailwindcss", -- TailwindCSS
 					-- "arduino_language_server", -- Arduino
 					-- "gleam", -- gleam
@@ -171,7 +173,8 @@ local M = {
 					yamlls = require("plugins.lsp.config.yamlls"),
 					ocamllsp = require("plugins.lsp.config.ocaml"),
 					arduino_language_server = require("plugins.lsp.config.arduino"),
-					solargraph = require("plugins.lsp.config.solargraph"),
+					-- solargraph = require("plugins.lsp.config.solargraph"),
+					ruby_lsp = require("plugins.lsp.config.ruby_lsp"),
 				},
 			}
 			return vim.tbl_deep_extend("force", defaults, opts)
