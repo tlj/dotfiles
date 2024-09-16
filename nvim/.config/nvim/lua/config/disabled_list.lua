@@ -60,6 +60,8 @@ return {
 	["FabijanZulj/blame.nvim"] = { enabled = true, start = true },
 	["kndndrj/nvim-dbee"] = { enabled = true, start = true },
 	["tpope/vim-rails"] = { enabled = false, start = false },
+	["MeanderingProgrammer/render-markdown.nvim"] = { enabled = true, start = true },
+	["MagicDuck/grug-far.nvim"] = { enabled = true, start = true },
 
 	--- LSP
 	["neovim/nvim-lspconfig"] = { enabled = true, start = true },
