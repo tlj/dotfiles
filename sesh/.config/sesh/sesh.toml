@@ -1,7 +1,7 @@
 [[session]]
 name = "dotfiles"
 path = "~/dotfiles"
-startup_script = "~/.config/sesh/scripts/nvim.sh"
+startup_command = "~/.config/sesh/scripts/nvim.sh"
 
 [[session]]
 name = "keyboards"
@@ -10,6 +10,6 @@ path = "~/src/keyboards"
 [[session]]
 name = "v2"
 path = "~/src/v2"
-startup_script = "~/.config/sesh/scripts/symfony.sh"
+startup_command = "~/.config/sesh/scripts/symfony.sh"
 
 
