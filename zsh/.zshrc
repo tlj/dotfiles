@@ -51,12 +51,81 @@ gs() {
 
 # Connect to a tmux session or create a new one, based on zoxide
 t() {
-  sesh connect $(sesh list | fzf)
+  #sesh connect $(sesh list | fzf)
+  zellij attach $(zellij list-sessions -s | fzf)
 }
 
 # Create a new tmux session from current directory
 nt() {
-  tmux new -s $(pwd | sed 's/.*\///')
+  zellij -s $(pwd | sed 's/.*\///')
+  #tmux new -s $(pwd | sed 's/.*\///')
+}
+
+function zr() {
+  # If a session name is provided as an argument, attach to or create it
+  if [[ -n $1 ]]; then
+      if zellij ls -n | grep -E -q "^$1( \(current\))?$"; then
+        # Attach to the specified session if it exists
+        zellij a "$1"
+      else
+        # Create a new session with the specified name if it doesn't exist
+        zellij -s "$1"
+      fi
+  fi
+
+  while true; do
+    local sessions_list=("New session" "Exit")
+    local existing_sessions=($(zellij ls -s | sed 's/ (current)//'))
+
+    if [[ ${#existing_sessions[@]} -gt 0 ]]; then
+      sessions_list=("${existing_sessions[@]}" "${sessions_list[@]}")
+    fi
+
+    local choice=$(printf '%s\n' "${sessions_list[@]}" | fzf --prompt="Select an option: ")
+
+    # If the choice is empty, assume the user wants to exit
+    if [[ -z $choice ]]; then
+      break
+    fi
+
+    case $choice in
+      "New session")
+        local dir_options=("No directory" "Exit")
+        local dirs=($(zoxide query -l))
+        if [[ ${#dirs[@]} -gt 0 ]]; then
+          dir_options=("${dirs[@]}" "${dir_options[@]}")
+        fi
+        local dir_choice=$(printf '%s\n' "${dir_options[@]}" | fzf --prompt="Select a directory or choose 'No directory': ")
+
+        # If the dir_choice is empty or invalid, continue to the next iteration of the loop
+        if [[ -z $dir_choice || $dir_choice == "Exit" ]]; then
+          continue
+        fi
+
+        case $dir_choice in
+          "No directory")
+            zellij
+            ;;
+          *)
+            local session_name="$(basename $dir_choice)"
+            if [[ " ${existing_sessions[@]} " =~ " ${session_name} " ]]; then
+              # Attach to existing session
+              zellij a $session_name
+            else
+              # Create new session and change directory
+              (cd "$dir_choice" && zellij -s "$session_name")
+            fi
+            ;;
+        esac
+        ;;
+      "Exit")
+        break
+        ;;
+      *)
+        zellij a $choice
+        ;;
+    esac
+  done
 }
 
 git_show() {
@@ -67,6 +136,9 @@ git_show() {
 glog() {
   git log --oneline | fzf --preview "~/dotfiles/bin/preview.sh {}" --preview-window=right:60%
 }
+
+# Load mise
+eval "$(mise activate)"
 
 # Put host specific configuration in this file - don't check it into git
 [ -f $HOME/.zshrc-local ] && source $HOME/.zshrc-local

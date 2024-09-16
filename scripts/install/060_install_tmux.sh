@@ -14,4 +14,4 @@ install_github_release joshmedeski/sesh sesh_${PLATFORM}_${ARCH_ALT}.tar.gz
 
 install_with_git ~/.tmux/plugins/tpm https://github.com/tmux-plugins/tpm
 
-stow --target=$HOME --restow tmux/ sesh/
+stow --target=$HOME --restow tmux/ sesh/ zellij/
