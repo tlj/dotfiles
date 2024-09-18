@@ -19,11 +19,11 @@ layout {
     }
     tab name="server" {
         pane split_direction="horizontal" {
-            pane command="server" {
-                args "s"
+            pane command="bin/bundle" {
+                args "exec" "rails" "s" "-p" "5001" "-b" "0.0.0.0"
             }
-            pane command="rake" {
-                args "jobs"
+            pane command="bin/bundle" {
+                args "exec" "rake" "jobs:work"
             }
         }
     }
