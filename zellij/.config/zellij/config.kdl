@@ -4,14 +4,21 @@ keybinds {
         bind "Ctrl e" { SwitchToMode "Tmux"; }
         unbind "Ctrl b"
 
-        bind "Alt h" "Alt Left" { MoveFocusOrTab "Left"; }
-        bind "Alt j" "Alt Down" { MoveFocusOrTab "Down"; }
-        bind "Alt k" "Alt Up" { MoveFocusOrTab "Up"; }
-        bind "Alt l" "Alt Right" { MoveFocusOrTab "Right"; }
+        bind "Alt h" { MoveFocusOrTab "Left"; }
+        bind "Alt j" { MoveFocusOrTab "Down"; }
+        bind "Alt k" { MoveFocusOrTab "Up"; }
+        bind "Alt l" { MoveFocusOrTab "Right"; }
+
+        bind "Alt Left" { }
+        bind "Alt Down" { }
+        bind "Alt Up" { }
+        bind "Alt Right" { }
     }
     tmux clear-defaults=true {
         bind "Ctrl e" { Write 2; SwitchToMode "Normal"; }
         bind "Esc" { SwitchToMode "Normal"; }
+        bind "d" { Detach; }
+        bind "c" { NewTab; SwitchToMode "Normal"; }
         bind "g" { SwitchToMode "Locked"; }
         bind "p" { SwitchToMode "Pane"; }
         bind "t" { SwitchToMode "Tab"; }
@@ -22,10 +29,10 @@ keybinds {
             };
             SwitchToMode "Normal"
         }
-        bind "n" { SwitchToMode "Resize"; }
-        bind "h" { SwitchToMode "Move"; }
-        bind "s" { SwitchToMode "Scroll"; }
-        bind "o" { SwitchToMode "Session"; }
+        bind "r" { SwitchToMode "Resize"; }
+        bind "m" { SwitchToMode "Move"; }
+        bind "o" { SwitchToMode "Scroll"; }
+        bind "w" { SwitchToMode "Session"; }
         bind "s" { NewPane "Down"; SwitchToMode "Normal"; }
         bind "v" { NewPane "Right"; SwitchToMode "Normal"; }
         bind "q" { Quit; }
@@ -43,8 +50,15 @@ plugins {
     session-manager { path "session-manager"; }
 }
 
+ui {
+    pane_frames {
+        rounded_corners true
+    }
+}
+
 default_layout "compact"
 on_force_close "quit"
+copy_on_select true
 
 //plugins {
 //    tab-bar location="zellij:tab-bar"
