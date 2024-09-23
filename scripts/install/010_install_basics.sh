@@ -4,7 +4,7 @@
 . scripts/lib/install_github_release.sh
 
 if isMac; then
-  brew install -q stow btop bat sqlite
+  brew install -q stow btop bat sqlite cmake
 else
   sudo apt update -y
 
