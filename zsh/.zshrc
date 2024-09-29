@@ -51,14 +51,14 @@ gs() {
 
 # Connect to a tmux session or create a new one, based on zoxide
 t() {
-  #sesh connect $(sesh list | fzf)
-  zellij attach $(zellij list-sessions -s | fzf)
+  sesh connect $(sesh list | fzf)
+  #zellij attach $(zellij list-sessions -s | fzf)
 }
 
 # Create a new tmux session from current directory
 nt() {
-  zellij -s $(pwd | sed 's/.*\///')
-  #tmux new -s $(pwd | sed 's/.*\///')
+  #zellij -s $(pwd | sed 's/.*\///')
+  tmux new -s $(pwd | sed 's/.*\///')
 }
 
 function zr() {
