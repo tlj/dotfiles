@@ -27,6 +27,7 @@ return {
 	["robitx/gp.nvim"] = { enabled = true, start = true },
 	["ThePrimeagen/harpoon"] = { enabled = true, start = true },
 	["nvim-lualine/lualine.nvim"] = { enabled = true, start = true },
+	["echasnovski/mini.ai"] = { enabled = true, start = true },
 	["echasnovski/mini.clue"] = { enabled = true, start = true },
 	["echasnovski/mini.bufremove"] = { enabled = true, start = true },
 	["echasnovski/mini.cursorword"] = { enabled = true, start = true },
