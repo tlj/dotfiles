@@ -12,5 +12,6 @@ go = "1.23.1"
 #python = "3.12.3"
 #tmux = "latest"
 zellij = "latest"
+python = "3.12"
 
 "go:github.com/joshmedeski/sesh" = "latest"

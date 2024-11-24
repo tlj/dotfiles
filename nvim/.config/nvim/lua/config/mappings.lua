@@ -1,7 +1,7 @@
 local opts = { noremap = true, silent = true }
 
 -- Shorten function name
-local keymap = vim.api.nvim_set_keymap
+local keymap = vim.keymap.set
 
 -- Move to window using the <ctrl> movement keys
 -- keymap("n", "<C-h>", "<C-w>h", { desc = "Go to the left window" })
@@ -32,6 +32,23 @@ keymap("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 -- Move text up and down
 keymap("v", "J", ":m .-2<CR>==", opts)
 keymap("v", "K", ":m .+1<CR>==", opts)
+
+-- Paste over visual selection without overwriting the default register
+-- The "_d deletes to the black hole register, then P pastes the previous yank
+-- Useful for pasting without overwriting the default register
+keymap("x", "<leader>p", [["_dP]])
+
+-- Copy to system clipboard in normal and visual modes
+keymap({"n", "v"}, "<leader>y", [["+y]])
+
+-- Copy current line to system clipboard in normal mode
+keymap("n", "<leader>Y", [["+Y]])
+
+-- Delete to black hole
+keymap({"n", "v"}, "<leader>d", "\"_d")
+
+-- Exit normal mode with C-c
+keymap("i", "<C-c>", "<Esc>")
 
 -- Moving up and down and recenter
 keymap("n", "<C-d>", "<C-d>zz", opts)

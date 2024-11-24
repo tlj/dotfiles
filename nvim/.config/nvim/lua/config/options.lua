@@ -3,7 +3,7 @@
 local options = {
 	autowrite = true, -- enable auto write of files
 	backup = false, -- create a backup file
-	clipboard = "unnamed", -- don't sync with system clipboard, use "+ for clipboard register
+	clipboard = "", -- don't sync with system clipboard, use "+ for clipboard register
 	cmdheight = 2, -- set to 2 to avoid hit-enter prompt
 	completeopt = "menu,menuone,noselect",
 	conceallevel = 0, -- 
