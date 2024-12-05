@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 echo "Installing kitty..."
-curl -sL https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin &> /dev/null
+curl -sL https://sw.kovidgoyal.net/kitty/installer.sh | sudo sh /dev/stdin &> /dev/null
 
 if ! isMac; then
   # Create symbolic links to add kitty and kitten to PATH (assuming ~/.local/bin is in
