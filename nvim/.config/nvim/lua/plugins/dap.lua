@@ -106,14 +106,14 @@ local M = {
 		{ "<F7>", '<cmd>lua require"dap".step_into()<cr>' },
 		{ "<F8>", '<cmd>lua require"dap".step_out()<cr>' },
 		{ "<leader>db", '<cmd>lua require"dap".toggle_breakpoint()<CR>', desc = "Toggle debug breakpoint" },
-		{
-			"<leader>de",
-			function()
-				require("dapui").eval()
-			end,
-			desc = "Eval debug",
-			mode = { "n", "v" },
-		},
+		-- {
+		-- 	"<leader>de",
+		-- 	function()
+		-- 		require("dapui").eval()
+		-- 	end,
+		-- 	desc = "Eval debug",
+		-- 	mode = { "n", "v" },
+		-- },
 		{
 			"<leader>dB",
 			'<cmd>lua require"dap".set_breakpoint(vim.fn.input("Breakpoint condition: "))<cr>',

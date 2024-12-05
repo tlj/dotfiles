@@ -83,7 +83,10 @@ local M = {
 		dependencies = {
 			"williamboman/mason.nvim",
 			"neovim/nvim-lspconfig",
-			"hrsh7th/cmp-nvim-lsp",
+			{
+				"saghen/blink.cmp",
+				enabled = require("config.util").is_enabled("saghen/blink.cmp"),
+			},
 		},
 		opts = function(_, opts)
 			local defaults = {
@@ -188,14 +191,11 @@ local M = {
 				function(server_name)
 					local conf = opts.servers[server_name] or {}
 
-					local ok, cmp_caps = pcall(require, "cmp_nvim_lsp")
-					if ok then
-						cmp_caps = cmp_caps.default_capabilities()
-					end
+					local has_blink, blink = pcall(require, "blink.cmp")
 					local caps = vim.tbl_deep_extend(
 						"force",
 						vim.lsp.protocol.make_client_capabilities(),
-						cmp_caps or {},
+						has_blink and blink.get_lsp_capabilities() or {},
 						opts.capabilities or {},
 						conf.capabilities or {}
 					)

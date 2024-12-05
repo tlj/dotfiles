@@ -10,7 +10,7 @@ return {
 	["sainnhe/gruvbox-material"] = { enabled = true, start = true },
 	["stevarc/conform.nvim"] = { enabled = false, start = false },
 	["zbirenbaum/copilot.lua"] = { enabled = true, start = true },
-	["zbirenbaum/copilot-cmp"] = { enabled = true, start = true },
+	["zbirenbaum/copilot-cmp"] = { enabled = false, start = false },
 	["CopilotC-Nvim/CopilotChat.nvim"] = { enabled = false, start = false },
 	["olimorris/codecompanion.nvim"] = { enabled = true, start = true },
 	["mfussenegger/nvim-dap"] = { enabled = true, start = true },
@@ -74,5 +74,6 @@ return {
 	["williamboman/mason-lspconfig.nvim"] = { enabled = true, start = true },
 
 	--- CMP
-	["hrsh7th/nvim-cmp"] = { enabled = true, start = true },
+	["hrsh7th/nvim-cmp"] = { enabled = false, start = false },
+	["saghen/blink.cmp"] = { enabled = true, start = true },
 }
