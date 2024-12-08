@@ -2,18 +2,23 @@
 local M = {
 	"nvim-treesitter/nvim-treesitter",
 	enabled = true,
-  event = { "LazyFile", "VeryLazy" },
 	build = ":TSUpdate",
 	event = { "BufReadPre", "BufNewFile" },
 	dependencies = {
 		"nvim-treesitter/nvim-treesitter-textobjects",
 	},
+	cmd = { "TSInstall", "TSUpdate" },
 	config = function()
 		require("nvim-treesitter.configs").setup({
 			ensure_installed = {
 				"bash",
+				"comment",
 				"gitignore",
 				"go",
+				"gowork",
+				"gomod",
+				"gosum",
+				"gotmpl",
 				"help",
 				"html",
 				"javascript",

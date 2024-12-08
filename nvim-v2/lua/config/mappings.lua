@@ -19,7 +19,6 @@ else
 	keymap("n", "]b", "<cmd>bnext<cr>", { desc = "Next buffer" })
 end
 keymap("n", "<leader>bb", "<cmd>e #<cr>", { desc = "Switch to Other Buffer" })
-keymap("n", "<leader>`", "<cmd>e #<cr>", { desc = "Switch to Other Buffer " })
 
 -- Stay in indent mode
 keymap("v", "<", "<gv", opts)
