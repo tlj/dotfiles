@@ -3,6 +3,7 @@ return {
 	enabled = true,
 	lazy = true,
 	dependencies = { "nvim-tree/nvim-web-devicons" },
+	cmd = "FzfLua",
 	config = function()
 		local actions = require("fzf-lua.actions")
 		require("fzf-lua").setup({

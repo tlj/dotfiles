@@ -8,12 +8,6 @@ local M = {
 		event = { "BufReadPre", "BufNewFile" },
 		dependencies = {
 			"williamboman/mason.nvim",
-			"folke/neodev.nvim",
-			opts = {
-				library = {
-					plugins = { "plenary.nvim", "telescope.nvim", "nvim-treesitter" },
-				},
-			},
 		},
 	},
 	-- Mason for autoinstalling lsps
@@ -33,7 +27,6 @@ local M = {
 		config = function()
 			local path = require("mason-core.path")
 			require("mason").setup({
-				ensure_installed = { "erb-formatter", "erb-lint" },
 				install_root_dir = path.concat({ vim.fn.stdpath("cache"), "mason" }),
 				max_concurrent_installers = 4,
 			})
@@ -46,7 +39,6 @@ local M = {
 		dependencies = {
 			"williamboman/mason.nvim",
 			"neovim/nvim-lspconfig",
-			-- "hrsh7th/cmp-nvim-lsp",
 		},
 		opts = function(_, opts)
 			local defaults = {
@@ -60,89 +52,19 @@ local M = {
 					"html", -- html
 					"gopls", -- golang
 					"cssls", -- css
-					-- "clangd", -- c
-					-- "ruby_lsp", -- ruby
-					-- "solargraph", -- ruby
-					-- "tailwindcss", -- TailwindCSS
-					-- "arduino_language_server", -- Arduino
-					-- "gleam", -- gleam
-					-- 'ocamllsp', -- ocaml
-					-- 'terraformls', -- terraform
 				},
-				log_level = "error",
-				diagnostics = {
-					signs = true,
-					underline = true,
-					update_in_insert = false,
-					severity_sort = true,
-					float = {
-						border = "rounded",
-						source = "always",
-						header = "",
-						prefix = "",
-					},
-					virtual_text = false,
-				},
-				capabilities = { -- {{{
-					dynamicRegistration = true,
-					lineFoldingOnly = true,
-					textDocument = {
-						completion = {
-							completionItem = {
-								documentationFormat = { "markdown", "plaintext" },
-								snippetSupport = true,
-								preselectSupport = true,
-								insertReplaceSupport = true,
-								labelDetailsSupport = true,
-								deprecatedSupport = true,
-								commitCharactersSupport = true,
-								tagSupport = { valueSet = { 1 } },
-								resolveSupport = {
-									properties = {
-										"documentation",
-										"detail",
-										"additionalTextEdits",
-									},
-								},
-							},
-							dynamicRegistration = true,
-						},
-						callHierarchy = {
-							dynamicRegistration = true,
-						},
-						documentSymbol = {
-							dynamicRegistration = true,
-						},
-					},
-				}, -- }}}
-
-				server_capabilities = { -- {{{
-					workspace = {
-						didChangeWatchedFiles = {
-							dynamicRegistration = true,
-						},
-						symbol = {
-							dynamicRegistration = true,
-						},
-					},
-					workspaceSymbolProvider = true,
-				}, -- }}}
-
 				servers = {
 					gopls = require("plugins.lsp.config.gopls"),
 					intelephense = require("plugins.lsp.config.intelephense"),
 					jsonls = require("plugins.lsp.config.jsonls"),
 					lua_ls = require("plugins.lsp.config.lua_ls"),
 					yamlls = require("plugins.lsp.config.yamlls"),
-					-- ocamllsp = require("plugins.lsp.config.ocaml"),
-					-- arduino_language_server = require("plugins.lsp.config.arduino"),
-					-- solargraph = require("plugins.lsp.config.solargraph"),
-					-- ruby_lsp = require("plugins.lsp.config.ruby_lsp"),
 				},
 			}
 			return vim.tbl_deep_extend("force", defaults, opts)
 		end,
 		config = function(_, opts)
+			require("mason").setup()
 			require("mason-lspconfig").setup({
 				ensure_installed = opts.ensure_installed,
 				automatic_installation = true,

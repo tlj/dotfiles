@@ -72,10 +72,12 @@ local M = {
 		sources = {
 			providers = {
 				copilot = { name = "copilot", module = "blink-cmp-copilot" },
+				lazydev = { name = "lazydev", module = "lazydev.integrations.blink" },
+				lsp = { fallback_for = { "lazydev" } },
 				-- dadbod = { name = "DadBod", module = "vim_dadbod_completion.blink" },
 			},
 			completion = {
-				enabled_providers = { "copilot", "lsp", "path", "snippets", "buffer" },
+				enabled_providers = { "copilot", "lsp", "path", "snippets", "buffer", "lazydev" },
 				-- enabled_providers = { 'copilot', 'lsp', 'path', 'snippets', 'buffer', 'dadbod' },
 			},
 		},

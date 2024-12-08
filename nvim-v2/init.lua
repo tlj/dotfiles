@@ -1,5 +1,3 @@
-local vim = vim
-
 -- Download and install the Lazy plugin manager
 require("config/lazy")
 
@@ -15,13 +13,12 @@ require("lazy").setup({
 		notify = false,
 	},
 	spec = {
-		{ "ellisonleao/gruvbox.nvim", priority = 1000, config = true, opts = {} },
 		{ import = "plugins" },
 	},
 })
 
 -- Set colorscheme
-vim.cmd("colorscheme gruvbox")
+vim.cmd("colorscheme catppuccin-mocha")
 
 -- if neovim is started with a directory as an argument, change to that directory
 if vim.fn.isdirectory(vim.v.argv[2]) == 1 then
