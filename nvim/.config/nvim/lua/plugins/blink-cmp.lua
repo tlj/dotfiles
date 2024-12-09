@@ -11,7 +11,7 @@ local M = {
 	opts = {
 		keymap = {
 			preset = "default",
-			["<CR>"] = {},
+			["<CR>"] = { "accept", "fallback" },
 			["<Up>"] = { "select_prev", "fallback" },
 			["<Down>"] = { "select_next", "fallback" },
 		},
@@ -22,6 +22,9 @@ local M = {
 		nerd_font_variant = "mono",
 
 		completion = {
+			list = {
+				selection = "manual",
+			},
 			keyword = {
 				range = "full",
 			},
