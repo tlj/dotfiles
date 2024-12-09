@@ -17,27 +17,81 @@ local function lsp_clients()
 	return string.format(" %s %s", icons.kinds.Server, table.concat(clients, ","))
 end
 
-local function diagnostic_status()
-	local signs = icons.lsp.diagnostic.signs
-	local mode = vim.api.nvim_get_mode().mode
-	if mode == "c" or mode == "t" then
-		return " %#DiagnosticOk#" .. signs.Ok .. "%*"
-	end
-
-	local diagnostics = {
-		{ severity = vim.diagnostic.severity.ERROR, hl = "Error" },
-		{ severity = vim.diagnostic.severity.WARN, hl = "Warn" },
-		{ severity = vim.diagnostic.severity.INFO, hl = "Info" },
-		{ severity = vim.diagnostic.severity.HINT, hl = "Hint" },
+local function get_diagnostic_counts()
+	local diagnostics = vim.diagnostic.get(0)
+	local counts = {
+		errors = 0,
+		warnings = 0,
+		info = 0,
+		hints = 0,
 	}
 
 	for _, d in ipairs(diagnostics) do
-		if #vim.diagnostic.get(0, { severity = d.severity }) > 0 then
-			return string.format(" %%#Diagnostic%s#%s%%*", d.hl, signs[d.hl])
+		if d.severity == vim.diagnostic.severity.ERROR then
+			counts.errors = counts.errors + 1
+		elseif d.severity == vim.diagnostic.severity.WARN then
+			counts.warnings = counts.warnings + 1
+		elseif d.severity == vim.diagnostic.severity.INFO then
+			counts.info = counts.info + 1
+		elseif d.severity == vim.diagnostic.severity.HINT then
+			counts.hints = counts.hints + 1
 		end
 	end
 
-	return " %#DiagnosticOk#" .. signs.Ok .. "%*"
+	local parts = {}
+	local signs = icons.lsp.diagnostic.signs
+	if counts.errors > 0 then
+		table.insert(parts, "%#DiagnosticError#" .. signs.Error .. counts.errors .. "%*")
+	end
+	if counts.warnings > 0 then
+		table.insert(parts, "%#DiagnosticWarn#" .. signs.Warn .. counts.warnings .. "%*")
+	end
+	if counts.info > 0 then
+		table.insert(parts, "%#DiagnosticInfo#" .. signs.Info .. counts.info .. "%*")
+	end
+	if counts.hints > 0 then
+		table.insert(parts, "%#DiagnosticHint#" .. signs.Hint .. counts.hints .. "%*")
+	end
+
+	if #parts > 0 then
+		return " " .. table.concat(parts, " ")
+	end
+	return ""
+end
+
+local function get_diagnostic_text()
+	local diagnostics = vim.diagnostic.get(0) -- Get diagnostics for current buffer
+	if #diagnostics == 0 then
+		return ""
+	end
+
+	-- Find the most severe diagnostic
+	local max_severity = vim.diagnostic.severity.HINT
+	local most_severe = nil
+
+	for _, d in ipairs(diagnostics) do
+		if d.severity < max_severity then
+			max_severity = d.severity
+			most_severe = d
+		end
+	end
+
+	if most_severe then
+		local levels = {
+			[vim.diagnostic.severity.ERROR] = "%#DiagnosticError#",
+			[vim.diagnostic.severity.WARN] = "%#DiagnosticWarn#",
+			[vim.diagnostic.severity.INFO] = "%#DiagnosticInfo#",
+			[vim.diagnostic.severity.HINT] = "%#DiagnosticHint#",
+		}
+		-- Truncate message if it's too long
+		local msg = most_severe.message
+		if #msg > 40 then
+			msg = msg:sub(1, 37) .. "..."
+		end
+		return string.format(" %s%s%%*", levels[most_severe.severity], msg)
+	end
+
+	return ""
 end
 
 -- Function to get git branch using gitsigns
@@ -80,8 +134,8 @@ Statusline = {}
 Statusline.active = function()
 	return table.concat({
 		"%F",
-		diagnostic_status(),
 		'%{&modified ? " [+]" : ""}', -- Modified flag
+		get_diagnostic_counts(),
 		"%=",
 		git_branch(),
 		git_status(),
