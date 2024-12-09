@@ -5,30 +5,34 @@
 . scripts/lib/install_github_release.sh
 
 VIU_VERION=v1.5.0
+NVIM_VERSION=v0.10.2
 
 echo "Installing Neovim..."
 if isMac; then
   echo "Installing Neovim dependencies..."
-  brew install -q ripgrep fd luacheck gnu-sed gsed bash viu silicon
-
-  echo "Installing Neovim from github..."
-  install_github_release neovim/neovim nvim-macos-arm64.tar.gz stable
+  brew install -q ripgrep fd luacheck gnu-sed gsed bash viu silicon ninja cmake gettext curl
 else
-  sudo apt-get install -y ripgrep fd-find luarocks
+  sudo apt-get install -y ripgrep fd-find luarocks ninja-build gettext cmake unzip curl build-essential
   sudo luarocks install luacheck
 
   echo "Installing viu..."
   install_github_release atanunq/viu viu-${ARCH}-unknown-linux-musl
-
-  if isArm64; then
-    echo "Installing Neovim from alternative github..."
-    install_github_release matsuu/neovim-aarch64-appimage nvim-v0.10.0-aarch64.appimage latest
-    ln -sfn ~/.local/bin/nvim-v0.10.0-aarch64.appimage ~/.local/bin/nvim
-  else
-    echo "Installing Neovim from github..."
-    install_github_release neovim/neovim nvim-linux64.tar.gz stable
-  fi
 fi
+
+echo "Installing Neovim from source..."
+rm -rf /tmp/neovim-source
+git clone --quiet https://github.com/neovim/neovim.git /tmp/neovim-source > /dev/null
+cd /tmp/neovim-source
+if [[ ! -z "$NVIM_VERSION" ]]; then
+  echo "  Checking out version $NVIM_VERSION"
+  git switch "$NVIM_VERSION" --detach
+fi
+rm -rf build
+echo "  Building Neovim..."
+make CMAKE_BUILD_TYPE=Release CMAKE_EXTRA_FLAGS="-DCMAKE_INSTALL_PREFIX=$HOME/.local/neovim" > /dev/null
+echo "  Installing Neovim..."
+make install > /dev/null
+cd -
 
 echo "Installing stylua..."
 install_github_release JohnnyMorganz/StyLua stylua-linux-${ARCH_ALT}.zip v0.20.0

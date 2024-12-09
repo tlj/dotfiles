@@ -1,5 +1,5 @@
 # If you come from bash you might have to change your $PATH.
-export PATH=$HOME/Library/Python/3.11/bin:/opt/homebrew/lib/ruby/gems/3.3.0/bin:/opt/homebrew/opt/ruby/bin:$HOME/bin:$HOME/.local/bin:$HOME/.cargo/bin:$HOME/go/bin:$HOME/dotfiles/bin:/opt/homebrew/bin:/usr/local/bin:$PATH
+export PATH=$HOME/.local/neovim/bin:$HOME/Library/Python/3.11/bin:/opt/homebrew/lib/ruby/gems/3.3.0/bin:/opt/homebrew/opt/ruby/bin:$HOME/bin:$HOME/.local/bin:$HOME/.cargo/bin:$HOME/go/bin:$HOME/dotfiles/bin:/opt/homebrew/bin:/usr/local/bin:$PATH
 
 # Make sure the XDG config home is set to a place where we expect it to be
 export XDG_CONFIG_HOME="$HOME/.config"
