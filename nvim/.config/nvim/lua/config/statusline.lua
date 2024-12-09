@@ -133,7 +133,7 @@ Statusline = {}
 
 Statusline.active = function()
 	return table.concat({
-		"%F",
+		"%t",
 		'%{&modified ? " [+]" : ""}', -- Modified flag
 		get_diagnostic_counts(),
 		"%=",
