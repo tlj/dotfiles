@@ -1,6 +1,8 @@
+-- Search and replace plugin
 local M = {
 	"MagicDuck/grug-far.nvim",
-	enabled = require("config.util").is_enabled("MagicDuck/grug-far.nvim"),
+	enabled = true,
+	lazy = true,
 	cmd = "GrugFar",
 	keys = {
 		{
@@ -27,3 +29,4 @@ local M = {
 }
 
 return M
+

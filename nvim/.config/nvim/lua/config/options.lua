@@ -113,3 +113,4 @@ vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
 		vim.diagnostic.config({ virtual_text = false, update_in_insert = false })
 	end,
 })
+

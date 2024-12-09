@@ -2,7 +2,8 @@ return {
 	"stevearc/conform.nvim",
 	event = { "BufWritePre" },
 	cmd = { "ConformInfo" },
-	enabled = require("config.util").is_enabled("stevearc/conform.nvim"),
+	enabled = true,
+	lazy = true,
 	keys = {
 		{
 			-- Customize or remove this keymap to your liking
@@ -20,8 +21,6 @@ return {
 			-- Define your formatters
 			formatters_by_ft = {
 				lua = { "stylua" },
-				ruby = { "rubocop" },
-				eruby = { "erb-format" },
 			},
 			-- Set up format-on-save
 			-- format_on_save = { timeout_ms = 500, lsp_fallback = true },

@@ -10,6 +10,14 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 	group = format_sync_grp,
 })
 
+-- load user mappings (no plugins)
+vim.api.nvim_create_autocmd("User", {
+	pattern = "VeryLazy",
+	callback = function()
+		require("config.mappings")
+	end,
+})
+
 -- Highlight on yank
 vim.api.nvim_create_autocmd("TextYankPost", {
 	desc = "Highlight on yank",
@@ -58,3 +66,4 @@ vim.api.nvim_create_autocmd("FileType", {
 		vim.keymap.set("n", "q", "<cmd>close<cr>", { buffer = event.buf, silent = true })
 	end,
 })
+

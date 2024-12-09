@@ -19,7 +19,6 @@ else
 	keymap("n", "]b", "<cmd>bnext<cr>", { desc = "Next buffer" })
 end
 keymap("n", "<leader>bb", "<cmd>e #<cr>", { desc = "Switch to Other Buffer" })
-keymap("n", "<leader>`", "<cmd>e #<cr>", { desc = "Switch to Other Buffer " })
 
 -- Stay in indent mode
 keymap("v", "<", "<gv", opts)
@@ -110,14 +109,15 @@ keymap("o", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev search res
 
 -- -- keymaps for non-core nvim things, but which we know is available, like lazy
 -- lazygit
-vim.keymap.set("n", "<leader>lg", function()
-	require("lazy.util").float_term({ "lazygit" })
-end, { desc = "Lazygit (cw)" })
+-- vim.keymap.set("n", "<leader>lg", function()
+-- 	require("lazy.util").float_term({ "lazygit" })
+-- end, { desc = "Lazygit (cw)" })
 
--- float term
-vim.keymap.set("n", "<leader>ft", function()
-	require("lazy.util").float_term()
-end, { desc = "Terminal (cwd)" })
+-- -- float term
+-- vim.keymap.set("n", "<leader>ft", function()
+-- 	require("lazy.util").float_term()
+-- end, { desc = "Terminal (cwd)" })
 -- vim.keymap.set("t", "<esc><esc>", "<c-\\><c-n>", { desc = "Enter Normal mode" })
+
 
 

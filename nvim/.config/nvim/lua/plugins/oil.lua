@@ -1,6 +1,7 @@
 return {
 	"stevearc/oil.nvim",
-	enabled = require("config.util").is_enabled("stevearc/oil.nvim"),
+	enabled = true,
+  lazy = true,
 	keys = {
 		{
 			"<leader>tt",
@@ -38,3 +39,4 @@ return {
 	-- Optional dependencies
 	dependencies = { "nvim-tree/nvim-web-devicons" },
 }
+

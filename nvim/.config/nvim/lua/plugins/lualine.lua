@@ -1,25 +1,20 @@
-local function session_name()
-	local session = require("nvim-possession").status()
-	return session or ""
-end
-
 -- better status line
 local M = {
 	"nvim-lualine/lualine.nvim",
+	enabled = true,
 	dependencies = {
 		"Isrothy/lualine-diagnostic-message",
 	},
 	config = function()
 		require("lualine").setup({
 			options = {
-				theme = 'gruvbox-material',
+				theme = 'catppuccin',
 				-- component_separators = "",
 				-- section_separators = { left = " ", right = "" },
 			},
 			sections = {
 				lualine_a = {
 					"mode",
-					session_name,
 				},
 				lualine_c = {
 					"diagnostic-message",
@@ -27,7 +22,7 @@ local M = {
 			},
 		})
 	end,
-	enabled = require("config.util").is_enabled("nvim-lualine/lualine.nvim"),
 }
 
 return M
+

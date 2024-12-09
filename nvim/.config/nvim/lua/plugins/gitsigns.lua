@@ -1,7 +1,8 @@
 -- super fast git decorations implemented purely in lua
 local M = {
 	"lewis6991/gitsigns.nvim",
-	enabled = require("config.util").is_enabled("lewis6991/gitsigns.nvim"),
+	enabled = true,
+	lazy = true,
 	event = "BufReadPre",
 	config = function()
 		require("gitsigns").setup({

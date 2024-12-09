@@ -1,7 +1,9 @@
 return {
 	"ibhagwan/fzf-lua",
-	enabled = require("config.util").is_enabled("ibhagwan/fzf-lua"),
+	enabled = true,
+	lazy = true,
 	dependencies = { "nvim-tree/nvim-web-devicons" },
+	cmd = "FzfLua",
 	config = function()
 		local actions = require("fzf-lua.actions")
 		require("fzf-lua").setup({
@@ -108,3 +110,4 @@ return {
 		{ "<leader>gwy", "<cmd>FzfLua lsp_live_workspace_symbols<cr>", desc = "Fzf Live Workspace Symbols" },
 	},
 }
+

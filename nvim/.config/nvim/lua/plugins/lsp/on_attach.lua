@@ -19,7 +19,7 @@ local function on_attach(_, bufnr)
 	-- Show diagnos)tics in a floating window
 	bufmap("n", "gl", '<cmd>lua vim.diagnostic.open_float(0, { scope = "line" })<cr>', "Show diagnostics")
 	-- Breadcrumb like navigation
-	bufmap("n", "<Leader>go", ":Navbuddy<cr>", "Navbuddy")
+	-- bufmap("n", "<Leader>go", ":Navbuddy<cr>", "Navbuddy")
 	-- Selects a code action available at the current cursor position
 	-- bufmap({ "n", "v", "x" }, "<leader>ca", "<cmd>CodeActionMenu<cr>", "Code Action Menu")
 	-- Hover doc
@@ -39,3 +39,4 @@ end
 return {
 	on_attach = on_attach,
 }
+

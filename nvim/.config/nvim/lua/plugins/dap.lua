@@ -3,7 +3,7 @@ local M = {
 	dependencies = {
 		{
 			"theHamsta/nvim-dap-virtual-text",
-			enabled = require("config.util").is_enabled("theHamsta/nvim-dap-virtual-text"),
+			enabled = true,
 			config = function()
 				local status, nvimdapvirtualtext = pcall(require, "nvim-dap-virtual-text")
 				if not status then
@@ -50,6 +50,9 @@ local M = {
 		{
 			"rcarriga/nvim-dap-ui",
 			enabled = true,
+			dependencies = {
+				"nvim-neotest/nvim-nio"
+			},
 			config = function()
 				require("dapui").setup({
 					layouts = {
@@ -89,15 +92,6 @@ local M = {
 				},
 			},
 		},
-		{
-			"nvim-telescope/telescope-dap.nvim",
-			dependencies = {
-				"nvim-telescope/telescope.nvim",
-			},
-			config = function()
-				require("telescope").load_extension("dap")
-			end,
-		},
 	},
 	keys = {
 		{ "<F4>", '<cmd>lua require"dapui".toggle()<cr>' },
@@ -119,7 +113,16 @@ local M = {
 			'<cmd>lua require"dap".set_breakpoint(vim.fn.input("Breakpoint condition: "))<cr>',
 			desc = "Conditional breakpoint",
 		},
-		{ "<leader>dc", '<cmd>lua require"dap".continue()<CR>', desc = "Continue debug" },
+		{
+			"<leader>dc",
+			function()
+				if vim.fn.filereadable(".vscode/launch.json") then
+					require("dap.ext.vscode").load_launchjs()
+				end
+				require("dap").continue()
+			end,
+			desc = "Continue debug",
+		},
 		{ "<leader>ds", '<cmd>lua require"dap".close()<CR>', desc = "Close dap" },
 		{ "<leader>do", '<cmd>lua require"dap".step_over()<CR>', desc = "Step over" },
 		{ "<leader>di", '<cmd>lua require"dap".step_into()<CR>', desc = "Step into" },

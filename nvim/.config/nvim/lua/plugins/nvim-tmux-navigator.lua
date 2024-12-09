@@ -1,7 +1,7 @@
 -- use C-hjkl to navigate between nvim and tmux windows
 local M = {
 	"alexghergh/nvim-tmux-navigation",
-	enabled = require("config.util").is_enabled("alexghergh/nvim-tmux-navigation"),
+	enabled = true,
 	event = "VeryLazy",
 	config = function()
 		local nvim_tmux_navigator = require("nvim-tmux-navigation")
@@ -24,3 +24,4 @@ local M = {
 }
 
 return M
+

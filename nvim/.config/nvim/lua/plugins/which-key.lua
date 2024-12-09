@@ -1,7 +1,8 @@
 -- shows available key commands after a keypress
 local M = {
 	"folke/which-key.nvim",
-	enabled = require("config.util").is_enabled("folke/which-key.nvim"),
+	enabled = true,
+  event = "VeryLazy",
 	opts = {
 		defaults = {},
 		spec = {
@@ -43,3 +44,4 @@ local M = {
 }
 
 return M
+
