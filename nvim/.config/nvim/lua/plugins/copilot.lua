@@ -1,4 +1,3 @@
----@type LazySpec[]
 local M = {
 	{
 		"zbirenbaum/copilot.lua",
@@ -13,9 +12,7 @@ local M = {
 			},
 			panel = { enabled = false },
 		},
-		keys = {
-			{ "<leader>cp", '<cmd>lua require"copilot.panel".open()<CR>', desc = "Open Copilot" },
-		},
+		keys = {},
 	},
 	{
 		"CopilotC-Nvim/CopilotChat.nvim",
@@ -34,7 +31,6 @@ local M = {
 			{ "<leader>cco", "<cmd>CopilotChat<cr>", desc = "CopilotChat" },
 			{
 				"<leader>ccq",
-				---@param input string The user's input for quick chat
 				function()
 					local input = vim.fn.input("Quick Chat: ")
 					if input ~= "" then

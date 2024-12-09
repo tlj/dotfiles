@@ -11,6 +11,7 @@ return {
 			desc = "Oil file explorer",
 		},
 	},
+	cmd = "Oil",
 	opts = {
 		view_options = {
 			show_hidden = true,

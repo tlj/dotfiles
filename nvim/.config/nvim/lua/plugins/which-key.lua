@@ -2,7 +2,7 @@
 local M = {
 	"folke/which-key.nvim",
 	enabled = true,
-  event = "VeryLazy",
+	event = "VeryLazy",
 	opts = {
 		defaults = {},
 		spec = {
@@ -12,16 +12,13 @@ local M = {
 			{ "<leader>f", group = "+FzF/Float" },
 			{ "<leader>g", group = "+LSP/Diagnostics" },
 			{ "<leader>gw", group = "+Workspace Diagnostics" },
-			{ "<leader>h", group = "+Harpoon/Diffview" },
-			{ "<leader>j", group = "+Session" },
 			{ "<leader>l", group = "+Lazygit" },
-			{ "<leader>n", group = "+NeoTree" },
-			{ "<leader>o", group = "+Conform/Obsidian" },
+			{ "<leader>o", group = "+Conform" },
 			{ "<leader>q", group = "+QuickFix" },
 			{ "<leader>r", group = "+Rename/Resume" },
-			{ "<leader>s", group = "+OpenAPI Browser" },
-			{ "<leader>t", group = "+Tests, Diagnostics" },
-			{ "<leader>u", group = "+Undo" },
+			-- { "<leader>s", group = "+OpenAPI Browser" },
+			{ "<leader>t", group = "File explorer" },
+			-- { "<leader>u", group = "+Undo" },
 			{ "<leader>w", group = "+Window" },
 		},
 	},
@@ -44,4 +41,3 @@ local M = {
 }
 
 return M
-

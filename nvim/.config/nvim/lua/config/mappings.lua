@@ -3,12 +3,6 @@ local opts = { noremap = true, silent = true }
 -- Shorten function name
 local keymap = vim.keymap.set
 
--- Move to window using the <ctrl> movement keys
--- keymap("n", "<C-h>", "<C-w>h", { desc = "Go to the left window" })
--- keymap("n", "<C-j>", "<C-w>j", { desc = "Go to the lower window" })
--- keymap("n", "<C-k>", "<C-w>k", { desc = "Go to the upper window" })
--- keymap("n", "<C-l>", "<C-w>l", { desc = "Go to the right window" })
-
 -- Navigate buffers
 local hasbufferline, _ = pcall(require, "bufferline")
 if hasbufferline then
@@ -106,18 +100,4 @@ keymap("o", "n", "'Nn'[v:searchforward]", { expr = true, desc = "Next search res
 keymap("n", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev search result" })
 keymap("x", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev search result" })
 keymap("o", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev search result" })
-
--- -- keymaps for non-core nvim things, but which we know is available, like lazy
--- lazygit
--- vim.keymap.set("n", "<leader>lg", function()
--- 	require("lazy.util").float_term({ "lazygit" })
--- end, { desc = "Lazygit (cw)" })
-
--- -- float term
--- vim.keymap.set("n", "<leader>ft", function()
--- 	require("lazy.util").float_term()
--- end, { desc = "Terminal (cwd)" })
--- vim.keymap.set("t", "<esc><esc>", "<c-\\><c-n>", { desc = "Enter Normal mode" })
-
-
 

@@ -2,6 +2,7 @@ local M = {
 	"folke/snacks.nvim",
 	priority = 1000,
 	lazy = false,
+	cmd = "Snacks",
 	opts = {
 		-- your configuration comes here
 		-- or leave it empty to use the default settings
@@ -14,57 +15,13 @@ local M = {
 		words = { enabled = true },
 	},
 	keys = {
-		{
-			"<leader>lg",
-			function()
-				Snacks.lazygit()
-			end,
-			desc = "Lazygit",
-		},
-		{
-			"<leader>ll",
-			function()
-				Snacks.lazygit.log()
-			end,
-			desc = "Lazygit Log",
-		},
-		{
-			"<leader>lf",
-			function()
-				Snacks.lazygit.log_file()
-			end,
-			desc = "Lazygit File Log",
-		},
-		{
-			"<leader>lb",
-			function()
-				Snacks.git.blame_line()
-			end,
-			desc = "Lazygit Blame",
-		},
-		{
-			"<leader>ft",
-			function()
-				Snacks.terminal()
-			end,
-			desc = "Terminal",
-		},
-		{
-			"]]",
-			function()
-				Snacks.words.jump(vim.v.count1)
-			end,
-			desc = "Next Reference",
-			mode = { "n", "t" },
-		},
-		{
-			"[[",
-			function()
-				Snacks.words.jump(-vim.v.count1)
-			end,
-			desc = "Prev Reference",
-			mode = { "n", "t" },
-		},
+		{ "<leader>lg", function() Snacks.lazygit() end, desc = "Lazygit" },
+		{ "<leader>ll", function() Snacks.lazygit.log() end, desc = "Lazygit Log" },
+		{ "<leader>lf", function() Snacks.lazygit.log_file() end, desc = "Lazygit File Log" },
+		{ "<leader>lb", function() Snacks.git.blame_line() end, desc = "Lazygit Blame" },
+		{ "<leader>ft", function() Snacks.terminal() end, desc = "Terminal" }, 
+		{ "]]", function() Snacks.words.jump(vim.v.count1) end, desc = "Next Reference", mode = { "n", "t" } },
+		{ "[[", function() Snacks.words.jump(-vim.v.count1) end, desc = "Prev Reference", mode = { "n", "t" } },
 	},
 }
 
