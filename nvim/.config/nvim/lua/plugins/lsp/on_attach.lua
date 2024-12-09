@@ -29,14 +29,40 @@ local function on_attach(_, bufnr)
 	bufmap("n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<cr>", "Rename")
 
 	-- add a border to the LSP floating window
-	vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "single" })
-	vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
+	-- vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "single" })
+
+	local signs = require("config.icons").lsp.diagnostic.signs
+	vim.diagnostic.config({
 		virtual_text = false,
+		underline = true,
+		update_in_insert = false,
+		float = {
+			border = 'single',
+		},
+		signs = {
+			text = {
+				[vim.diagnostic.severity.ERROR] = signs.Error,
+				[vim.diagnostic.severity.WARN] = signs.Warn,
+				[vim.diagnostic.severity.HINT] = signs.Hint,
+				[vim.diagnostic.severity.INFO] = signs.Info,
+			},
+			numhl = {
+				[vim.diagnostic.severity.ERROR] = "DiagnosticSignError",
+				[vim.diagnostic.severity.WARN] = "DiagnosticSignWarn",
+				[vim.diagnostic.severity.HINT] = "DiagnosticSignHint",
+				[vim.diagnostic.severity.INFO] = "DiagnosticSignInfo",
+			},
+			texthl = {
+				[vim.diagnostic.severity.ERROR] = "DiagnosticSignError",
+				[vim.diagnostic.severity.WARN] = "DiagnosticSignWarn",
+				[vim.diagnostic.severity.HINT] = "DiagnosticSignHint",
+				[vim.diagnostic.severity.INFO] = "DiagnosticSignInfo",
+			},
+			linehl = {}, -- No line highlighting
+		},
 	})
-	vim.diagnostic.config({ virtual_text = false, update_in_insert = false })
 end
 
 return {
 	on_attach = on_attach,
 }
-

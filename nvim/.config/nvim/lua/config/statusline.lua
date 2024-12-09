@@ -59,41 +59,6 @@ local function get_diagnostic_counts()
 	return ""
 end
 
-local function get_diagnostic_text()
-	local diagnostics = vim.diagnostic.get(0) -- Get diagnostics for current buffer
-	if #diagnostics == 0 then
-		return ""
-	end
-
-	-- Find the most severe diagnostic
-	local max_severity = vim.diagnostic.severity.HINT
-	local most_severe = nil
-
-	for _, d in ipairs(diagnostics) do
-		if d.severity < max_severity then
-			max_severity = d.severity
-			most_severe = d
-		end
-	end
-
-	if most_severe then
-		local levels = {
-			[vim.diagnostic.severity.ERROR] = "%#DiagnosticError#",
-			[vim.diagnostic.severity.WARN] = "%#DiagnosticWarn#",
-			[vim.diagnostic.severity.INFO] = "%#DiagnosticInfo#",
-			[vim.diagnostic.severity.HINT] = "%#DiagnosticHint#",
-		}
-		-- Truncate message if it's too long
-		local msg = most_severe.message
-		if #msg > 40 then
-			msg = msg:sub(1, 37) .. "..."
-		end
-		return string.format(" %s%s%%*", levels[most_severe.severity], msg)
-	end
-
-	return ""
-end
-
 -- Function to get git branch using gitsigns
 local function git_branch()
 	local gitsigns = vim.b.gitsigns_status_dict
