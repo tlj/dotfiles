@@ -29,7 +29,7 @@ if [[ ! -z "$NVIM_VERSION" ]]; then
 fi
 rm -rf build
 echo "  Building Neovim..."
-make CMAKE_BUILD_TYPE=Release CMAKE_EXTRA_FLAGS="-DCMAKE_INSTALL_PREFIX=$HOME/.local/neovim" > /dev/null
+make CMAKE_BUILD_TYPE=Release CMAKE_EXTRA_FLAGS="-DCMAKE_INSTALL_PREFIX=$HOME/.local/neovim -Wno-dev" > /dev/null
 echo "  Installing Neovim..."
 make install > /dev/null
 cd -
