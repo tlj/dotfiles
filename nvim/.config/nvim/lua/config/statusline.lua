@@ -51,6 +51,30 @@ local function git_branch()
 	return ""
 end
 
+local function git_status()
+	local signs = vim.b.gitsigns_status_dict
+	if not signs then
+		return ""
+	end
+
+	local parts = {}
+
+	if signs.added and signs.added > 0 then
+		table.insert(parts, "%#GitSignsAdd#+" .. signs.added .. "%*")
+	end
+	if signs.removed and signs.removed > 0 then
+		table.insert(parts, "%#GitSignsDelete#-" .. signs.removed .. "%*")
+	end
+	if signs.changed and signs.changed > 0 then
+		table.insert(parts, "%#GitSignsChange#~" .. signs.changed .. "%*")
+	end
+
+	if #parts == 0 then
+		return ""
+	end
+	return " " .. table.concat(parts, " ")
+end
+
 Statusline = {}
 
 Statusline.active = function()
@@ -60,6 +84,7 @@ Statusline.active = function()
 		'%{&modified ? " [+]" : ""}', -- Modified flag
 		"%=",
 		git_branch(),
+		git_status(),
 		lsp_clients(),
 		" " .. icons.kinds.File .. "%{&filetype}",
 		" %2p%%",
@@ -77,6 +102,14 @@ vim.api.nvim_create_autocmd({ "WinEnter", "BufEnter", "FileType", "DiagnosticCha
 		vim.wo.statusline = Statusline.active()
 	end,
 	pattern = "*",
+	group = status_group,
+})
+
+vim.api.nvim_create_autocmd("User", {
+	callback = function()
+		vim.wo.statusline = Statusline.active()
+	end,
+	pattern = "GitSignsUpdate",
 	group = status_group,
 })
 
