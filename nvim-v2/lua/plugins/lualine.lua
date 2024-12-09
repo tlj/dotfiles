@@ -8,7 +8,7 @@ local M = {
 	config = function()
 		require("lualine").setup({
 			options = {
-				theme = 'gruvbox',
+				theme = 'catppuccin',
 				-- component_separators = "",
 				-- section_separators = { left = " ", right = "" },
 			},
