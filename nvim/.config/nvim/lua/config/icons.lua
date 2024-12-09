@@ -3,17 +3,19 @@ return {
 	lsp = {
 		diagnostic = {
 			signs = {
-				Error = "🤬",
-				Warn = "🤔",
-				Info = "☝️",
-				Hint = "🤓",
+				Ok = "󰄳",
+				Error = "󰅚",
+				Warn = "󰀦",
+				Info = "󰋼",
+				Hint = "󰛨",
 			},
 			upper_signs = {
 				-- We don't want to calculate these on the fly.
-				ERROR = "🤬",
-				WARN = "🤔",
-				INFO = "☝️",
-				HINT = "🤓",
+				OK = "󰄳",
+				ERROR = "󰅚",
+				WARN = "󰀦",
+				INFO = "󰋼",
+				HINT = "󰛨",
 			},
 		},
 	},
@@ -36,6 +38,7 @@ return {
 		File = " ",
 		Folder = " ",
 		Function = "󰊕 ",
+		Git = "󰊢",
 		Interface = " ",
 		Key = " ",
 		Keyword = " ",
@@ -49,6 +52,7 @@ return {
 		Package = " ",
 		Property = " ",
 		Reference = " ",
+		Server = "󰒋",
 		Snippet = " ",
 		String = " ",
 		Struct = "󰆼 ",

@@ -34,7 +34,7 @@ local options = {
 	sessionoptions = { "buffers", "curdir", "tabpages", "winsize", "folds", "globals" },
 	shiftwidth = 2,
 	shortmess = "filnxtToOFWIcC",
-	showmode = false, -- don't show -- INSERT --, since we use lualine
+	showmode = true, -- show mode in the cmd line since we want to avoid using a slow statusline
 	showtabline = 0, -- always show tabs
 	sidescrolloff = 8, -- number of cols to keep to the left or right of cursor
 	signcolumn = "yes", -- always show the sign column, otherwise it would shift the text each time
@@ -60,6 +60,11 @@ local options = {
 
 if vim.fn.has("nvim-0.10") == 1 then
 	options.smoothscroll = true
+end
+
+if vim.fn.has("nvim-0.11") == 1 then
+	options.messagesopt = "hit-enter,history:500"
+	options.cmdheight = 1
 end
 
 for k, v in pairs(options) do

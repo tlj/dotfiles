@@ -4,6 +4,9 @@ require("config/lazy")
 -- Set default Neovim options
 require("config/options")
 
+-- Set custom statusline
+require("config/statusline")
+
 -- Load autocommands
 require("config/autocmds")
 

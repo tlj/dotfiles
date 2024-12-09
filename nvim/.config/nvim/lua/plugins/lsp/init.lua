@@ -101,20 +101,30 @@ local M = {
 				end,
 			})
 
-			-- Show gutter sign symbols for diagnostics
-			local sign = function(opt)
-				vim.fn.sign_define(opt.name, {
-					texthl = opt.name,
-					text = opt.text,
-					numhl = "",
-				})
-			end
 			local signs = require("config.icons").lsp.diagnostic.signs
-
-			sign({ name = "DiagnosticSignError", text = signs.Error })
-			sign({ name = "DiagnosticSignWarn", text = signs.Warn })
-			sign({ name = "DiagnosticSignHint", text = signs.Hint })
-			sign({ name = "DiagnosticSignInfo", text = signs.Info })
+			vim.diagnostic.config({
+				signs = {
+					text = {
+						[vim.diagnostic.severity.ERROR] = signs.Error,
+						[vim.diagnostic.severity.WARN] = signs.Warn,
+						[vim.diagnostic.severity.HINT] = signs.Hint,
+						[vim.diagnostic.severity.INFO] = signs.Info,
+					},
+					numhl = {
+						[vim.diagnostic.severity.ERROR] = "DiagnosticSignError",
+						[vim.diagnostic.severity.WARN] = "DiagnosticSignWarn",
+						[vim.diagnostic.severity.HINT] = "DiagnosticSignHint",
+						[vim.diagnostic.severity.INFO] = "DiagnosticSignInfo",
+					},
+					texthl = {
+						[vim.diagnostic.severity.ERROR] = "DiagnosticSignError",
+						[vim.diagnostic.severity.WARN] = "DiagnosticSignWarn",
+						[vim.diagnostic.severity.HINT] = "DiagnosticSignHint",
+						[vim.diagnostic.severity.INFO] = "DiagnosticSignInfo",
+					},
+					linehl = {}, -- No line highlighting
+				},
+			})
 		end,
 	},
 }

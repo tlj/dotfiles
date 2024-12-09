@@ -1,7 +1,7 @@
 -- better status line
 local M = {
 	"nvim-lualine/lualine.nvim",
-	enabled = true,
+	enabled = false,
 	dependencies = {
 		"Isrothy/lualine-diagnostic-message",
 	},
