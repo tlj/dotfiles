@@ -7,3 +7,5 @@ nvim/.config/nvim/plugin/packer_compiled.lua
 
 #lazygit
 lazygit/.config/lazygit/state.yml
+.aider*
+.env

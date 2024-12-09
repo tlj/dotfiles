@@ -5,7 +5,7 @@
 . scripts/lib/install_github_release.sh
 
 VIU_VERION=v1.5.0
-NVIM_VERSION=v0.10.2
+NVIM_VERSION=
 
 echo "Installing Neovim..."
 if isMac; then
