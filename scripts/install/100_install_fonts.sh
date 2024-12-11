@@ -1,8 +1,6 @@
 #!/usr/bin/env bash
 
 . scripts/lib/detect_os.sh
-. scripts/lib/install_with_git.sh
-. scripts/lib/install_github_release.sh
 . scripts/lib/print_utils.sh
 
 print_header "Nerd Fonts"

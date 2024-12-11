@@ -1,8 +1,6 @@
 #!/usr/bin/env bash
 
 . scripts/lib/detect_os.sh
-. scripts/lib/install_with_git.sh
-. scripts/lib/install_github_release.sh
 . scripts/lib/print_utils.sh
 
 print_header "Git and LazyGit"
@@ -26,11 +24,10 @@ else
 fi
 
 echo "Installing commitizen-go..."
-install_github_release lintingzhen/commitizen-go commitizen-go_1.0.3_${PLATFORM}_${ARCH}.tar.gz v1.0.3
+ubi -v -i ~/.local/bin -p lintingzhen/commitizen-go
 
 echo "Installing lazygit..."
-LAZYGIT_VERSION=$(curl -s "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" | grep '"tag_name":' |  sed -E 's/.*"v*([^"]+)".*/\1/')
-install_github_release jesseduffield/lazygit lazygit_${LAZYGIT_VERSION}_${PLATFORM}_${ARCH_ALT}.tar.gz v${LAZYGIT_VERSION}
+ubi -v -i ~/.local/bin -p jesseduffield/lazygit
 
 echo "Installing gh-dash..."
 # check if gh-dash is already installed
@@ -38,11 +35,7 @@ export GH_TOKEN=foobar
 if gh extension list | grep -q "gh dash"; then
   echo "gh-dash is already installed. Skipping..."
 else
-  install_with_git ~/.local/share/gh-dash https://github.com/dlvhdr/gh-dash.git
-  cd ~/.local/share/gh-dash
-  gh extension install .
-  cd -
-  rm -rf /tmp/gh-dash
+  gh extension install dlvhdr/gh-dash
 fi
 
 stow --target=$HOME --restow lazygit/

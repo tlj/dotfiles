@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
 . scripts/lib/detect_os.sh
-. scripts/lib/install_github_release.sh
 . scripts/lib/print_utils.sh
 
 print_header "Basic tools and libraries"
@@ -14,7 +13,7 @@ else
   sudo apt install -y curl stow fuse3 bat sqlite3 cmake
 
   echo "Installing btop..."
-  install_github_release aristocratos/btop btop-${ARCH_ALT}-linux-musl.tbz
+  ubi -v -i ~/.local/bin -p artistocratos/btop
 
   ln -sfn /usr/bin/batcat ~/.local/bin/bat
 

@@ -1,8 +1,6 @@
 #!/usr/bin/env bash
 
 . scripts/lib/detect_os.sh
-. scripts/lib/install_with_git.sh
-. scripts/lib/install_github_release.sh
 . scripts/lib/print_utils.sh
 
 print_header "Docker"
@@ -18,11 +16,10 @@ else
 
   echo "Installing docker-compose..."
   mkdir -p ~/.docker/cli-plugins
-  install_github_release docker/compose docker-compose-${PLATFORM}-${ARCH_ALT}
+  ubi -v -i ~/.local/bin -p docker/compose
   mv ~/.local/bin/compose ~/.docker/cli-plugins/docker-compose
 fi
 
 echo "Installing lazydocker..."
-install_github_release jesseduffield/lazydocker lazydocker_:VERSION_NUM:_${PLATFORM}_${ARCH_ALT}.tar.gz 
-
+ubi -v -i ~/.local/bin -p jesseduffield/lazydocker
 

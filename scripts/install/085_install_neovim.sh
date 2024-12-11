@@ -2,7 +2,6 @@
 
 . scripts/lib/detect_os.sh
 . scripts/lib/install_with_git.sh
-. scripts/lib/install_github_release.sh
 . scripts/lib/print_utils.sh
 
 VIU_VERION=v1.5.0
@@ -12,14 +11,14 @@ print_header "Neovim"
 
 if isMac; then
   [[ $VERBOSE -eq 1 ]] && echo "  Installing Neovim dependencies..."
-  brew install -q ripgrep fd luacheck gnu-sed gsed bash viu silicon ninja cmake gettext curl
+  brew install -q ripgrep fd luacheck gnu-sed gsed bash silicon ninja cmake gettext curl
 else
   [[ $VERBOSE -eq 1 ]] && echo "  Installing Neovim dependencies..."
   sudo apt-get install -y ripgrep fd-find luarocks ninja-build gettext cmake unzip curl build-essential
   sudo luarocks install luacheck
-
-  install_github_release atanunq/viu viu-${ARCH}-unknown-linux-musl
 fi
+
+ubi -v -i ~/.local/bin -p atanunq/viu
 
 [[ $VERBOSE -eq 1 ]] && echo "  Cloning Neovim repository"
 rm -rf /tmp/neovim-source
@@ -40,7 +39,7 @@ INSTALLED_NVIM_VERSION=$($HOME/.local/neovim/bin/nvim --version | head -n1 | cut
 echo "Installed Neovim ${INSTALLED_NVIM_VERSION}"
 
 echo "Installing stylua..."
-install_github_release JohnnyMorganz/StyLua stylua-linux-${ARCH_ALT}.zip v0.20.0
+ubi -v -i ~/.local/bin -p JohnnyMorganz/stylua
 
 echo "Installing tree-sitter-cli..."
 cargo install -q tree-sitter-cli

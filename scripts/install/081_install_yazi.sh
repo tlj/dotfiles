@@ -1,8 +1,6 @@
 #!/usr/bin/env bash
 
 . scripts/lib/detect_os.sh
-. scripts/lib/install_with_git.sh
-. scripts/lib/install_github_release.sh
 . scripts/lib/print_utils.sh
 
 print_header "Yazi"
@@ -17,7 +15,6 @@ if isArm64; then
   YAZI_ARCH="aarch64"
 fi
 
-install_github_release sxyazi/yazi yazi-${YAZI_ARCH}-${YAZI_PLATFORM}.zip
-mv ~/.local/bin/yazi-${YAZI_ARCH}-${YAZI_PLATFORM}/ya* ~/.local/bin/
+ubi -v -i ~/.local/bin -p sxyazi/yazi
 
 
