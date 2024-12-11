@@ -1,9 +1,11 @@
 #!/usr/bin/env bash
 
 . scripts/lib/detect_os.sh
+. scripts/lib/print_utils.sh
+
+print_header "Golang"
 
 if isMac; then
-  echo "Installing golang..."
   brew install -q go
 else
   sudo add-apt-repository ppa:longsleep/golang-backports

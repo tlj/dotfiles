@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 
-echo "Installing kitty..."
+. scripts/lib/print_utils.sh
+
+print_header "Kitty"
+
 curl -sL https://sw.kovidgoyal.net/kitty/installer.sh | sudo sh /dev/stdin &> /dev/null
 
 if ! isMac; then

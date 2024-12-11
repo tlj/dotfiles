@@ -2,13 +2,15 @@
 
 . scripts/lib/detect_os.sh
 . scripts/lib/install_github_release.sh
+. scripts/lib/print_utils.sh
+
+print_header "Basic tools and libraries"
 
 if isMac; then
   brew install -q stow btop bat sqlite cmake
 else
   sudo apt update -y
 
-  echo "Installing basics..."
   sudo apt install -y curl stow fuse3 bat sqlite3 cmake
 
   echo "Installing btop..."

@@ -3,17 +3,19 @@
 . scripts/lib/detect_os.sh
 . scripts/lib/install_with_git.sh
 . scripts/lib/install_github_release.sh
+. scripts/lib/print_utils.sh
+
+print_header "Zsh"
 
 if ! isMac; then
-  echo "Install zsh.."
   sudo apt install -y zsh
 fi
 
 echo "Install starship..."
-cargo install starship --locked
+cargo install -q starship --locked
 
 echo "Install zoxide..."
-cargo install zoxide --locked
+cargo install -q zoxide --locked
 
 echo "Installing zsh-vi-mode..."
 install_with_git ~/.zsh/zsh-vi-mode https://github.com/jeffreytse/zsh-vi-mode

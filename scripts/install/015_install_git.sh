@@ -3,8 +3,10 @@
 . scripts/lib/detect_os.sh
 . scripts/lib/install_with_git.sh
 . scripts/lib/install_github_release.sh
+. scripts/lib/print_utils.sh
 
-echo "Installing git and lazygit..."
+print_header "Git and LazyGit"
+
 if isMac; then
   brew install -q git gh 
   brew install -q --cask git-credential-manager
