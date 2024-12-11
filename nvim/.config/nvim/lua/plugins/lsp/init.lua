@@ -52,7 +52,6 @@ local M = {
 					"html", -- html
 					"gopls", -- golang
 					"cssls", -- css
-					"shfmt", -- shfmt
 				},
 				servers = {
 					gopls = require("plugins.lsp.config.gopls"),

@@ -58,9 +58,16 @@ local M = {
 					layouts = {
 						{
 							elements = {
-								{ id = "scopes", size = 0.40 },
-								{ id = "watches", size = 0.30 },
-								{ id = "repl", size = 0.30 },
+								{ id = "scopes", size = 0.60 },
+								{ id = "watches", size = 0.20 },
+								{ id = "breakpoints", size = 0.20 },
+							},
+							size = 70,
+							position = "left",
+						},
+						{
+							elements = {
+								"repl",
 							},
 							size = 10,
 							position = "bottom",

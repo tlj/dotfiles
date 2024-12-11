@@ -7,7 +7,7 @@ return {
 	config = function()
 		local actions = require("fzf-lua.actions")
 		require("fzf-lua").setup({
-			"default",
+			"fzf-native",
 			winopts = {
 				height = 0.9,
 				width = 0.9,
