@@ -23,20 +23,15 @@ else
   sudo apt install -y git gh 
 fi
 
-echo "Installing commitizen-go..."
 ubi -v -i ~/.local/bin -p lintingzhen/commitizen-go
-
-echo "Installing lazygit..."
 ubi -v -i ~/.local/bin -p jesseduffield/lazygit
+ubi -v -i ~/.local/bin -p mislav/hub
 
 echo "Installing gh-dash..."
 # check if gh-dash is already installed
 export GH_TOKEN=foobar
-if gh extension list | grep -q "gh dash"; then
-  echo "gh-dash is already installed. Skipping..."
-else
-  gh extension install dlvhdr/gh-dash
-fi
+gh extension install dlvhdr/gh-dash
+gh extension install meiji163/gh-notify
 
 stow --target=$HOME --restow lazygit/
 

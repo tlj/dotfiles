@@ -6,11 +6,11 @@
 print_header "Basic tools and libraries"
 
 if isMac; then
-  brew install -q stow btop bat sqlite cmake
+  brew install -q stow btop bat sqlite cmake fortune cowsay
 else
   sudo apt update -y
 
-  sudo apt install -y curl stow fuse3 bat sqlite3 cmake
+  sudo apt install -y curl stow fuse3 bat sqlite3 cmake fortune cowsay
 
   echo "Installing btop..."
   ubi -v -i ~/.local/bin -p artistocratos/btop

@@ -11,6 +11,7 @@ local M = {
 			{ "<leader>d", group = "+Debug" },
 			{ "<leader>f", group = "+FzF/Float" },
 			{ "<leader>g", group = "+LSP/Diagnostics" },
+			{ "<leader>h", group = "+Gitsigns" },
 			{ "<leader>gw", group = "+Workspace Diagnostics" },
 			{ "<leader>l", group = "+Lazygit" },
 			{ "<leader>o", group = "+Conform" },

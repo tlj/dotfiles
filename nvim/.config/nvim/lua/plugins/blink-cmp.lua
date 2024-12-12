@@ -14,6 +14,7 @@ local M = {
 			["<CR>"] = { "accept", "fallback" },
 			["<Up>"] = { "select_prev", "fallback" },
 			["<Down>"] = { "select_next", "fallback" },
+			["<C-d>"] = { "select_prev", "fallback" },
 		},
 
 		highlight = {
@@ -34,7 +35,9 @@ local M = {
 				},
 			},
 			menu = {
+				border = 'single',
 				draw = {
+					treesitter = true,
 					columns = {
 						{ "label", "label_description", gap = 1 },
 						{ "kind_icon", "kind" },
@@ -48,6 +51,12 @@ local M = {
 			ghost_text = {
 				enabled = true,
 			},
+		},
+
+		fuzzy = {
+			-- controls which sorts to use and in which order, falling back to the next sort if the first one returns nil
+			-- you may pass a function instead of a string to customize the sorting
+			sorts = { "score", "kind", "label" },
 		},
 
 		sources = {

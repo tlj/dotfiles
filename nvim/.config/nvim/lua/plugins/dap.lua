@@ -1,3 +1,15 @@
+-- Nicer input
+--
+-- local function get_arguments()
+-- 	return coroutine.create(function(dap_run_co)
+-- 		local args = {}
+-- 		vim.ui.input({ prompt = "Args: " }, function(input)
+-- 			args = vim.split(input or "", " ")
+-- 			coroutine.resume(dap_run_co, args)
+-- 		end)
+-- 	end)
+-- end
+
 local M = {
 	"mfussenegger/nvim-dap",
 	dependencies = {
@@ -51,7 +63,7 @@ local M = {
 			"rcarriga/nvim-dap-ui",
 			enabled = true,
 			dependencies = {
-				"nvim-neotest/nvim-nio"
+				"nvim-neotest/nvim-nio",
 			},
 			config = function()
 				require("dapui").setup({
@@ -126,13 +138,15 @@ local M = {
 				if vim.fn.filereadable(".vscode/launch.json") then
 					require("dap.ext.vscode").load_launchjs()
 				end
-				require("dap").continue()
+				require("fzf-lua").dap_configurations()
 			end,
 			desc = "Continue debug",
 		},
-		{ "<leader>ds", '<cmd>lua require"dap".close()<CR>', desc = "Close dap" },
+		{ "<leader>dC", '<cmd>lua require"dap".run_to_cursor()<CR>', desc = "Stop debugging" },
+		{ "<leader>ds", '<cmd>lua require"dap".terminate()<CR>', desc = "Stop debugging" },
 		{ "<leader>do", '<cmd>lua require"dap".step_over()<CR>', desc = "Step over" },
 		{ "<leader>di", '<cmd>lua require"dap".step_into()<CR>', desc = "Step into" },
+		{ "<leader>dw", '<cmd>lua require"dap.ui.widgets".hover()<CR>', desc = "Hover widgets" },
 		{ "<leader>dt", "<cmd>FzfLua dap_commands<CR>", desc = "Telescope DAP commands" },
 		{ "<leader>dv", "<cmd>FzfLua dap_variables<CR>", desc = "Telescope DAP active session variables" },
 		{ "<leader>dap", '<cmd>lua require"dapui".toggle()<cr>', desc = "DapUI Toggle" },
@@ -140,12 +154,15 @@ local M = {
 	config = function()
 		local dap, dapui = require("dap"), require("dapui")
 		dap.listeners.after.event_initialized["dapui_config"] = function()
+			vim.notify("Debug session started.")
 			dapui.open()
 		end
 		dap.listeners.before.event_terminated["dapui_config"] = function()
+			vim.notify("Debug session stopped.")
 			dapui.close()
 		end
 		dap.listeners.before.event_exited["dapui_config"] = function()
+			vim.notify("Debug session stopped.")
 			dapui.close()
 		end
 
