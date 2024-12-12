@@ -10,7 +10,9 @@ if isMac; then
 else
   sudo apt update -y
 
-  sudo apt install -y curl stow fuse3 bat sqlite3 cmake fortune cowsay
+  echo "Installing basics..."
+  sudo apt install -y curl stow fuse3 bat sqlite3 cmake ca-certificates fortune cowsay
+  sudo install -m 0755 -d /etc/apt/keyrings
 
   echo "Installing btop..."
   ubi -v -i ~/.local/bin -p artistocratos/btop
