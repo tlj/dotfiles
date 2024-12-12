@@ -14,7 +14,7 @@ if isMac; then
   brew install -q ripgrep fd luacheck gnu-sed gsed bash silicon ninja cmake gettext curl
 else
   [[ $VERBOSE -eq 1 ]] && echo "  Installing Neovim dependencies..."
-  sudo apt-get install -y ripgrep fd-find luarocks ninja-build gettext cmake unzip curl build-essential
+  sudo apt-get -qq install -y ripgrep fd-find luarocks ninja-build gettext cmake unzip curl build-essential
   sudo luarocks install luacheck
 fi
 

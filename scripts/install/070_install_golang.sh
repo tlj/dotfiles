@@ -8,7 +8,7 @@ print_header "Golang"
 if isMac; then
   brew install -q go
 else
-  sudo add-apt-repository ppa:longsleep/golang-backports
-  sudo apt update -y
-  sudo apt install -y golang-go
+  sudo add-apt-repository -y ppa:longsleep/golang-backports
+  sudo apt-get -qq update -y
+  sudo apt-get -qq install -y golang-go
 fi

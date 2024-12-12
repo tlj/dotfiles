@@ -7,7 +7,7 @@
 print_header "Zsh"
 
 if ! isMac; then
-  sudo apt install -y zsh
+  sudo apt-get -qq install -y zsh
 fi
 
 echo "Install starship..."

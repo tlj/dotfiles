@@ -13,11 +13,11 @@ echo "Starting Ubuntu server hardening process..."
 
 # Update and upgrade system
 echo "Updating system packages..."
-apt update && apt upgrade -y
+apt-get -qq update && apt-get -qq upgrade -y
 
 # Install SSH and essential security packages
 echo "Installing SSH and security packages..."
-apt install -y \
+apt-get -qq install -y \
     openssh-server \
     openssh-client \
     ufw \

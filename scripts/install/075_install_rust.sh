@@ -8,5 +8,5 @@ print_header "Rust"
 if isMac; then
   brew install -q rust
 else
-  sudo apt install -y rustc cargo
+  sudo apt-get -qq install -y rustc cargo
 fi

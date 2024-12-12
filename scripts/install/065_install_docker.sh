@@ -17,9 +17,9 @@ else
     $(. /etc/os-release && echo "$UBUNTU_CODENAME") stable" | \
     sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 
-  sudo apt-get update
+  sudo apt-get -qq update
 
-  sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+  sudo apt-get -qq install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 
   sudo systemctl enable docker.service
   sudo systemctl enable containerd.service
@@ -29,9 +29,6 @@ else
 
   # Limit log size to avoid running out of disk
   echo '{"log-driver":"json-file","log-opts":{"max-size":"10m","max-file":"5"}}' | sudo tee /etc/docker/daemon.json
-
-  echo "Installing lazydocker..."
-  install_github_release jesseduffield/lazydocker lazydocker_:VERSION_NUM:_${PLATFORM}_${ARCH}.tar.gz 
 fi
 
 echo "Installing lazydocker..."

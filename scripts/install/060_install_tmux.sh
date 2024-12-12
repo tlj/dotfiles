@@ -9,7 +9,7 @@ print_header "Tmux"
 if isMac; then
   brew install -q tmux
 else
-  sudo apt install -y tmux
+  sudo apt-get -qq install -y tmux
 fi
 
 ubi -v -i ~/.local/bin -p joshmedeski/sesh

@@ -15,10 +15,17 @@ local M = {
 		dashboard = {
 			enabled = true,
 			sections = {
-				{ section = "terminal", cmd = "fortune -s -n 90 | cowsay", hl = "header", padding = 1, indent = 8, height = 11 },
+				{
+					section = "terminal",
+					cmd = "fortune -s -n 90 | cowsay",
+					hl = "header",
+					padding = 1,
+					indent = 8,
+					height = 11,
+				},
 				{ section = "keys" },
 				{
-					icon ="󱏒 ",
+					icon = "󱏒 ",
 					desc = "Oil",
 					action = function()
 						require("oil").open_float()
@@ -33,6 +40,7 @@ local M = {
 					icon = " ",
 					title = "Git Status",
 					cmd = "hub --no-pager diff --stat -B -M -C",
+					ttl = 5 * 60,
 					height = 10,
 				},
 			},
