@@ -43,6 +43,12 @@ keymap({"n", "v"}, "<leader>d", "\"_d")
 -- Exit normal mode with C-c
 keymap("i", "<C-c>", "<Esc>")
 
+-- Disable arrow keys
+keymap("n", "<Up>", "<nop>", opts)
+keymap("n", "<Down>", "<nop>", opts)
+keymap("n", "<Left>", "<nop>", opts)
+keymap("n", "<Right>", "<nop>", opts)
+
 -- Moving up and down and recenter
 keymap("n", "<C-d>", "<C-d>zz", opts)
 keymap("n", "<C-u>", "<C-u>zz", opts)
