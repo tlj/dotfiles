@@ -1,4 +1,13 @@
-local M = {
+-- blink.cmp is a completion plugin with support for LSPs and external sources
+-- that updates on every keystroke with minimal overhead (0.5-4ms async). It
+-- use a custom SIMD fuzzy searcher to easily handle >20k items. It provides
+-- extensibility via hooks into the trigger, sources and rendering pipeline.
+--
+-- This is a replacement for nvim-cmp. It's faster and easier to configure the
+-- way I want it.
+--
+-- https://github.com/Saghen/blink.cmp
+return {
 	"saghen/blink.cmp",
 	enabled = true,
 	lazy = false, -- lazy loading handled internally
@@ -35,7 +44,7 @@ local M = {
 				},
 			},
 			menu = {
-				border = 'single',
+				border = "single",
 				draw = {
 					treesitter = true,
 					columns = {
@@ -72,5 +81,3 @@ local M = {
 	},
 	opts_extend = { "sources.completion.enabled_providers" },
 }
-
-return M

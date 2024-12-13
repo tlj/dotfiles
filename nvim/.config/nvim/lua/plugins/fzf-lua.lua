@@ -1,3 +1,11 @@
+-- Improved fzf.vim written in lua 
+--
+-- Provides FzfLua commands to use selectors to simplify life. Provides fuzzy
+-- finding of files and contents.
+--
+-- This is like Telescope, but I believe it is faster.
+--
+-- https://github.com/ibhagwan/fzf-lua
 return {
 	"ibhagwan/fzf-lua",
 	enabled = true,

@@ -1,3 +1,10 @@
+-- A vim-vinegar like file explorer that lets you edit your filesystem like a 
+-- normal Neovim buffer.
+--
+-- I prefer this to navigating/editing the filesystem through a tree 
+-- navigator, and it fits my workflow perfectly.
+--
+-- https://github.com/stevearc/oil.nvim
 return {
 	"stevearc/oil.nvim",
 	enabled = true,

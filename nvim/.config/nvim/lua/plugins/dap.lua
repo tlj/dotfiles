@@ -1,3 +1,10 @@
+-- DAP nvim-dap is a Debug Adapter Protocol client implementation for Neovim. 
+--
+-- Debug applications with Neovim, using DAP and DAP UI. Debug configurations
+-- are automatically read from .vscode/launch.json if it exists.
+--
+-- https://github.com/mfussenegger/nvim-dap
+
 -- Nicer input
 --
 -- local function get_arguments()
@@ -10,7 +17,7 @@
 -- 	end)
 -- end
 
-local M = {
+return {
 	"mfussenegger/nvim-dap",
 	dependencies = {
 		{
@@ -195,5 +202,3 @@ local M = {
 		vim.api.nvim_set_hl(0, "DapStoppedLine", { default = true, link = "Visual" })
 	end,
 }
-
-return M

@@ -1,4 +1,12 @@
-local M = {
+-- A collection of small QoL plugins for Neovim.
+--
+-- I use only some of these. Not usually a fan of dashboards, but testing
+-- it with this and it works nicely. It has really good integration with
+-- Lazygit on the '<leader>l' prefix. I've also not used notifiers a lot
+-- before but this one is nice and non-intrusive, so testing it.
+--
+-- https://github.com/folke/snacks.nvim
+return {
 	"folke/snacks.nvim",
 	priority = 1000,
 	lazy = false,
@@ -126,5 +134,3 @@ local M = {
 		},
 	},
 }
-
-return M

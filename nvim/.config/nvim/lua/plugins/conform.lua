@@ -1,3 +1,11 @@
+-- Lightweight yet powerful formatter plugin for Neovim
+--
+-- Formatting through LSP doesn't always work properly, so I use this plugin
+-- to define external formatters for various filetypes. Use <Leader>oo to 
+-- trigger formatting. I will usually not enable format_on_save, as it causes
+-- changes to existing files, which could be confusing in git blame.
+--
+-- https://github.com/stevearc/conform.nvim
 return {
 	"stevearc/conform.nvim",
 	event = { "BufWritePre" },

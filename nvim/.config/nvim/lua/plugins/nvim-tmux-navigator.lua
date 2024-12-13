@@ -1,5 +1,10 @@
--- use C-hjkl to navigate between nvim and tmux windows
-local M = {
+-- Move seamlessly between vim and tmux panes with C-h,j,k,l.
+--
+-- This plugins is a must-have when working with neovim inside of tmux to 
+-- simplify the movements between neovim and tmux windows.
+--
+-- https://github.com/alexghergh/nvim-tmux-navigation
+return {
 	"alexghergh/nvim-tmux-navigation",
 	enabled = true,
 	event = "VeryLazy",
@@ -22,6 +27,3 @@ local M = {
 		{ "<C-l>", mode = { "n" }, "<cmd>NvimTmuxNavigateRight<cr>", desc = "TMux navigate right" },
 	},
 }
-
-return M
-

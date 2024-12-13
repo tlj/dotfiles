@@ -1,5 +1,10 @@
--- Search and replace plugin
-local M = {
+-- Grug find! Grug replace! Grug happy!
+--
+-- Great plugin for search and replace across multiple files with live
+-- preview. Easy to use, great name.
+--
+-- https://github.com/MagicDuck/grug-far.nvim
+return {
 	"MagicDuck/grug-far.nvim",
 	enabled = true,
 	lazy = true,
@@ -14,12 +19,12 @@ local M = {
 					transient = true,
 					prefills = {
 						filesFilter = ext and ext ~= "" and "*." .. ext or nil,
-					}
+					},
 				})
 			end,
 			mode = { "n", "v" },
 			desc = "Search and replace",
-		}
+		},
 	},
 	config = function()
 		require("grug-far").setup({
@@ -27,6 +32,3 @@ local M = {
 		})
 	end,
 }
-
-return M
-

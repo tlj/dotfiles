@@ -1,4 +1,10 @@
-local M = {
+-- Syntax aware text-objects, select, move, swap, and peek support.
+--
+-- Defines textobjects for use in navigations and manipulation, such as
+-- functions, methods, classes, etc. 
+--
+-- https://github.com/nvim-treesitter/nvim-treesitter-textobjects
+return {
 	"nvim-treesitter/nvim-treesitter-textobjects",
 	enabled = true,
 	lazy = true,
@@ -87,6 +93,3 @@ local M = {
 		--vim.keymap.set({ "n", "x", "o" }, "T", ts_repeat_move.builtin_T)
 	end,
 }
-
-return M
-

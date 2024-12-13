@@ -1,5 +1,5 @@
 -- language server support
-local M = {
+return {
 	-- lspconfig
 	{
 		"neovim/nvim-lspconfig",
@@ -104,4 +104,3 @@ local M = {
 	},
 }
 
-return M

@@ -1,4 +1,12 @@
-local M = {
+-- Github Copilot & Copilot Chat
+--
+-- AI tools for autocompletion and code generation. CopilotChat is great for
+-- talking to the LLM. After Copilot started supporting other models we default
+-- to using Claude.
+--
+-- https://github.com/zbirenbaum/copilot.lua
+-- https://github.com/CopilotC-Nvim/CopilotChat.nvim
+return {
 	{
 		"zbirenbaum/copilot.lua",
 		enabled = true,
@@ -51,5 +59,3 @@ local M = {
 		},
 	},
 }
-
-return M

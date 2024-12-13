@@ -1,5 +1,12 @@
--- super fast git decorations implemented purely in lua
-local M = {
+-- Super fast git decorations implemented purely in Lua.
+--
+-- Shows git signs in the statuscol. Very useful to keep track of what has
+-- changed in the current file. Use ]c and [c to move between changes. Keymaps
+-- are prefixed with '<leader>h' (for hunk), and there is a lot of 
+-- functionality available.
+--
+-- https://github.com/lewis6991/gitsigns.nvim
+return {
 	"lewis6991/gitsigns.nvim",
 	enabled = true,
 	lazy = true,
@@ -54,5 +61,3 @@ local M = {
 		})
 	end,
 }
-
-return M

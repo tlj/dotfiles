@@ -1,5 +1,9 @@
--- better syntax highlighting
-local M = {
+-- Nvim Treesitter configurations and abstraction layer 
+--
+-- Provides better syntax highlighting and navigation for other plugins.
+--
+-- https://github.com/nvim-treesitter/nvim-treesitter
+return {
 	"nvim-treesitter/nvim-treesitter",
 	enabled = true,
 	build = ":TSUpdate",
@@ -52,6 +56,3 @@ local M = {
 		})
 	end,
 }
-
-return M
-
