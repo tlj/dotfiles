@@ -53,6 +53,7 @@ return {
 				},
 			},
 		}, -- Beautiful declarative dashboards
+		terminal = { enabled = true }, -- Create and toggle floating/split terminals
 		--
 		animate = { enabled = false }, -- Efficient animations including over 45 easing functions (library)
 		bufdelete = { enabled = false }, -- Delete buffers without disrupting window layout
@@ -69,7 +70,6 @@ return {
 		scratch = { enabled = false }, -- Scratch buffers with a persistent file
 		scroll = { enabled = false }, -- Smooth scrolling
 		statuscolumn = { enabled = false }, -- Pretty status column
-		terminal = { enabled = true }, -- Create and toggle floating/split terminals
 		win = { enabled = false }, --  Create and manage floating windows or splits
 		zen = { enabled = false }, -- Zen mode • distraction-free coding
 	},
