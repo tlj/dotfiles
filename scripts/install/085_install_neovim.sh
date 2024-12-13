@@ -51,4 +51,4 @@ cd ~/src/vscode-php-debug
 ~/.local/bin/mise exec nodejs -- npm run --silent build || true
 cd - > /dev/null
 
-stow --target=$HOME --restow nvim/
+stow --target=$HOME --dotfiles -v --restow nvim/

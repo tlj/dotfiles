@@ -16,7 +16,7 @@ chmod a+rx ~/.local/bin/mise
 
 eval "$(mise activate bash)"
 
-stow --target=$HOME --restow mise/
+stow --target=$HOME --dotfiles -v --restow mise/
 
 mise install
 

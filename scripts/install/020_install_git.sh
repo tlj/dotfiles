@@ -35,5 +35,5 @@ else
   gh extension install meiji163/gh-notify
 fi
 
-stow --target=$HOME --restow lazygit/
+stow --target=$HOME --dotfiles -v --restow lazygit/
 

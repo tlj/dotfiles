@@ -28,4 +28,4 @@ fi
 echo "Building bat cache..."
 bat cache --build > /dev/null
 
-stow --target=$HOME --restow btop/ bat/ lsd/
+stow --target=$HOME --dotfiles -v --restow btop/ bat/ lsd/

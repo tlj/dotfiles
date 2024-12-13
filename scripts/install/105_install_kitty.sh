@@ -21,5 +21,5 @@ if ! isMac; then
   echo 'kitty.desktop' > ~/.config/xdg-terminals.list
 fi
 
-stow --target=$HOME --restow kitty/ 
+stow --target=$HOME --dotfiles -v --restow kitty/ 
 

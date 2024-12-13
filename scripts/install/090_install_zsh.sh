@@ -22,4 +22,4 @@ install_with_git ~/.zsh/zsh-vi-mode https://github.com/jeffreytse/zsh-vi-mode
 echo "Installing zsh-autosuggestions..."
 install_with_git ~/.zsh/zsh-autosuggestions https://github.com/zsh-users/zsh-autosuggestions
 
-stow --target=$HOME --restow zsh/ starship/
+stow --target=$HOME --dotfiles -v --restow zsh/ starship/

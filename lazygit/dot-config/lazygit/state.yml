@@ -1,0 +1,35 @@
+lastupdatecheck: 1697872585
+recentrepos:
+    - /Users/thomas/dotfiles
+    - /Users/thomas/src/api-browser.nvim
+    - /Users/thomas/src/svap8
+    - /Users/thomas/src/rss
+    - /Users/thomas/src/keyboards
+    - /Users/thomas/src/keyboards/qmk_firmware
+    - /Users/thomas/src/laguttak-rails
+    - /Users/thomas/src/rails8-1
+    - /Users/thomas/src/svap4
+    - /Users/thomas/src/strava_data_processor
+    - /Users/thomas/src/svap2
+    - /Users/thomas/src/laguttak-api
+    - /Users/thomas/src/laguttak
+    - /Users/thomas/src/raspi-cluster
+    - /Users/thomas/src/omakub
+    - /Users/thomas/src/svap
+    - /Users/thomas/src/keyboards/zmk
+    - /Users/thomas/src/scottokeebs
+    - /Users/thomas/src/qmk_firmware
+    - /Users/thomas/src/aoc2023
+startuppopupversion: 5
+lastversion: 0.44.1
+customcommandshistory:
+    - q
+    - ""
+hidecommandlog: false
+ignorewhitespaceindiffview: false
+diffcontextsize: 2
+renamesimilaritythreshold: 50
+localbranchsortorder: recency
+remotebranchsortorder: alphabetical
+gitlogorder: topo-order
+gitlogshowgraph: always

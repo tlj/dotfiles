@@ -16,4 +16,4 @@ ubi -v -i ~/.local/bin -p joshmedeski/sesh
 
 install_with_git ~/.tmux/plugins/tpm https://github.com/tmux-plugins/tpm
 
-stow --target=$HOME --restow tmux/ sesh/ zellij/
+stow --target=$HOME --dotfiles -v --restow tmux/ sesh/ zellij/
