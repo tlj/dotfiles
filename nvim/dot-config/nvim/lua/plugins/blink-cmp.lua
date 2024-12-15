@@ -45,6 +45,7 @@ return {
 			},
 			menu = {
 				border = "single",
+				auto_show = false,
 				draw = {
 					treesitter = true,
 					columns = {
