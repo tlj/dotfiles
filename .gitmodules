@@ -1,0 +1,12 @@
+[submodule "nvim/dot-config/nvim/pack/vendor/start/catppuccin"]
+	path = nvim/dot-config/nvim/pack/vendor/start/catppuccin
+	url = https://github.com/catppuccin/nvim
+[submodule "nvim/dot-config/nvim/pack/vendor/start/nvim-tmux-navigation"]
+	path = nvim/dot-config/nvim/pack/vendor/start/nvim-tmux-navigation
+	url = https://github.com/alexghergh/nvim-tmux-navigation
+[submodule "nvim/dot-config/nvim/pack/vendor/start/conform"]
+	path = nvim/dot-config/nvim/pack/vendor/start/conform
+	url = https://github.com/stevearc/conform.nvim
+[submodule "nvim/dot-config/nvim/pack/vendor/opt/fzf-lua"]
+	path = nvim/dot-config/nvim/pack/vendor/opt/fzf-lua
+	url = https://github.com/ibhagwan/fzf-lua
