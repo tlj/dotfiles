@@ -14,5 +14,7 @@ go = "1.23.1"
 zellij = "latest"
 python = "3.12"
 ubi = "latest"
+shfmt = "latest"
+yarn = "latest"
 
 "go:github.com/joshmedeski/sesh" = "latest"

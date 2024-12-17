@@ -93,9 +93,7 @@ end
 M.load = function(pkgname)
 	local setup = CALLBACKS[pkgname]
 	if setup then
-		vim.notify("Loading pkg " .. pkgname)
 		for _, dep in pairs(BEFORE_DEPS[pkgname] or {}) do
-			vim.notify(" Loading before dep " .. dep .. " for pkg " .. pkgname)
 			M.load(dep)
 		end
 		vim.cmd.packadd(pkgname)
@@ -103,7 +101,6 @@ M.load = function(pkgname)
 		CALLBACKS[pkgname] = nil
 
 		for _, dep in pairs(AFTER_DEPS[pkgname] or {}) do
-			vim.notify(" Loading after dep " .. dep .. " for pkg " .. pkgname)
 			M.load(dep)
 		end
 	else

@@ -9,7 +9,8 @@ vim.lsp.config("*", {
 	root_markers = { ".git" },
 })
 
-vim.lsp.enable({ "luals", "gopls" })
+-- vim.lsp.enable({ "luals", "gopls", "jsonls", "yamlls", "intelephense" })
+vim.lsp.enable({ "luals", "gopls", "yamlls", "jsonls" })
 
 local lspgroup = vim.api.nvim_create_augroup("lsp", { clear = true })
 vim.api.nvim_create_autocmd("LspAttach", {
@@ -79,6 +80,11 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		vim.diagnostic.config(diagnostic_config)
 		vim.lsp.handlers["textDocument/publishDiagnostics"] =
 			vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, diagnostic_config)
+		vim.lsp.handlers["workspace/diagnostic/refresh"] = function(_, _, ctx)
+			local ns = vim.lsp.diagnostic.get_namespace(ctx.client_id)
+			pcall(vim.diagnostic.reset, ns)
+			return true
+		end
 	end,
 })
 
