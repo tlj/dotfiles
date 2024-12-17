@@ -2,6 +2,8 @@
 -- https://ash.fail/blog/20240614-how-lazy-loading-works-in-neovim.html
 local M = {}
 
+local INIT_PLUGINS = {}
+
 local CALLBACKS = {}
 local BEFORE_DEPS = {}
 local AFTER_DEPS = {}
@@ -70,8 +72,31 @@ M.register = function(pkgname, opts)
 	end
 
 	if opts.init then
-		M.load(pkgname)
+		INIT_PLUGINS[pkgname] = opts
 	end
+end
+
+M.init = function()
+	-- Convert to array for sorting
+	local sorted = {}
+	for k, v in pairs(INIT_PLUGINS) do
+		table.insert(sorted, {
+			key = k,
+			opts = v,
+			priority = v.priority or 0, -- default to 0 if not set
+		})
+	end
+
+	-- Sort by priority
+	table.sort(sorted, function(a, b)
+		return a.priority > b.priority -- higher priority first
+	end)
+
+	for _, item in ipairs(sorted) do
+		M.load(item.key)
+	end
+
+	INIT_PLUGINS = {}
 end
 
 M.keymap = function(pkgname, mode, lhs, cmd, desc)
@@ -115,6 +140,7 @@ M.setup = function(path)
 			require(module)
 		end
 	end
+	M.init()
 end
 
 _G.plugin = M.register
