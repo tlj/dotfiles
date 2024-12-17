@@ -4,15 +4,11 @@
 -- preview. Easy to use, great name.
 --
 -- https://github.com/MagicDuck/grug-far.nvim
-return {
-	"MagicDuck/grug-far.nvim",
-	enabled = true,
-	lazy = true,
-	cmd = "GrugFar",
+plugin("grug-far", {
+	commands = { "GrugFar" },
 	keys = {
-		{
-			"<leader>rs",
-			function()
+		["<leader>rs"] = {
+			cmd = function()
 				local grug = require("grug-far")
 				local ext = vim.bo.buftype == "" and vim.fn.expand("%:e")
 				grug.grug_far({
@@ -26,9 +22,9 @@ return {
 			desc = "Search and replace",
 		},
 	},
-	config = function()
+	setup = function()
 		require("grug-far").setup({
 			headerMaxWidth = 80,
 		})
 	end,
-}
+})

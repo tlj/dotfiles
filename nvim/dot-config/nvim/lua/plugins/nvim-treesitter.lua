@@ -1,18 +1,16 @@
--- Nvim Treesitter configurations and abstraction layer 
+-- Nvim Treesitter configurations and abstraction layer
 --
 -- Provides better syntax highlighting and navigation for other plugins.
 --
 -- https://github.com/nvim-treesitter/nvim-treesitter
-return {
-	"nvim-treesitter/nvim-treesitter",
-	enabled = true,
-	build = ":TSUpdate",
-	event = { "BufReadPre", "BufNewFile" },
-	dependencies = {
-		"nvim-treesitter/nvim-treesitter-textobjects",
-	},
-	cmd = { "TSInstall", "TSUpdate" },
-	config = function()
+plugin("nvim-treesitter", {
+	-- build = ":TSUpdate",
+	-- events = { "BufReadPre", "BufNewFile" },
+	-- modules = { "nvim-treesitter-textobjects" },
+	events = { "BufReadPre", "BufNewFile" },
+	after = { "nvim-treesitter-textobjects" },
+	commands = { "TSInstall", "TSUpdate" },
+	setup = function()
 		require("nvim-treesitter.configs").setup({
 			ensure_installed = {
 				"bash",
@@ -55,4 +53,4 @@ return {
 			},
 		})
 	end,
-}
+})

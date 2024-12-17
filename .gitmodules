@@ -4,9 +4,63 @@
 [submodule "nvim/dot-config/nvim/pack/vendor/start/nvim-tmux-navigation"]
 	path = nvim/dot-config/nvim/pack/vendor/start/nvim-tmux-navigation
 	url = https://github.com/alexghergh/nvim-tmux-navigation
-[submodule "nvim/dot-config/nvim/pack/vendor/start/conform"]
-	path = nvim/dot-config/nvim/pack/vendor/start/conform
-	url = https://github.com/stevearc/conform.nvim
 [submodule "nvim/dot-config/nvim/pack/vendor/opt/fzf-lua"]
 	path = nvim/dot-config/nvim/pack/vendor/opt/fzf-lua
 	url = https://github.com/ibhagwan/fzf-lua
+[submodule "nvim/dot-config/nvim/pack/vendor/opt/oil"]
+	path = nvim/dot-config/nvim/pack/vendor/opt/oil
+	url = https://github.com/stevearc/oil.nvim
+[submodule "nvim/dot-config/nvim/pack/vendor/opt/conform"]
+	path = nvim/dot-config/nvim/pack/vendor/opt/conform
+	url = https://github.com/stevearc/conform.nvim
+[submodule "nvim/dot-config/nvim/pack/vendor/opt/copilot"]
+	path = nvim/dot-config/nvim/pack/vendor/opt/copilot
+	url = https://github.com/zbirenbaum/copilot.lua
+[submodule "nvim/dot-config/nvim/pack/vendor/opt/copilotchat"]
+	path = nvim/dot-config/nvim/pack/vendor/opt/copilotchat
+	url = https://github.com/CopilotC-Nvim/CopilotChat.nvim
+[submodule "nvim/dot-config/nvim/pack/vendor/opt/plenary"]
+	path = nvim/dot-config/nvim/pack/vendor/opt/plenary
+	url = https://github.com/nvim-lua/plenary.nvim
+[submodule "nvim/dot-config/nvim/pack/vendor/opt/gitsigns"]
+	path = nvim/dot-config/nvim/pack/vendor/opt/gitsigns
+	url = https://github.com/lewis6991/gitsigns.nvim
+[submodule "nvim/dot-config/nvim/pack/vendor/opt/grug-far"]
+	path = nvim/dot-config/nvim/pack/vendor/opt/grug-far
+	url = https://github.com/MagicDuck/grug-far.nvim
+[submodule "nvim/dot-config/nvim/pack/vendor/opt/lazydev"]
+	path = nvim/dot-config/nvim/pack/vendor/opt/lazydev
+	url = https://github.com/folke/lazydev.nvim
+[submodule "nvim/dot-config/nvim/pack/vendor/opt/nvim-web-devicons"]
+	path = nvim/dot-config/nvim/pack/vendor/opt/nvim-web-devicons
+	url = https://github.com/nvim-tree/nvim-web-devicons
+[submodule "nvim/dot-config/nvim/pack/vendor/opt/nvim-treesitter"]
+	path = nvim/dot-config/nvim/pack/vendor/opt/nvim-treesitter
+	url = https://github.com/nvim-treesitter/nvim-treesitter
+[submodule "nvim/dot-config/nvim/pack/vendor/opt/treewalker"]
+	path = nvim/dot-config/nvim/pack/vendor/opt/treewalker
+	url = https://github.com/aaronik/treewalker.nvim
+[submodule "nvim/dot-config/nvim/pack/vendor/start/blink.cmp"]
+	path = nvim/dot-config/nvim/pack/vendor/start/blink.cmp
+	url = https://github.com/saghen/blink.cmp
+[submodule "nvim/dot-config/nvim/pack/vendor/opt/blink-cmp-copilot"]
+	path = nvim/dot-config/nvim/pack/vendor/opt/blink-cmp-copilot
+	url = https://github.com/giuxtaposition/blink-cmp-copilot
+[submodule "nvim/dot-config/nvim/pack/vendor/opt/nvim-dap"]
+	path = nvim/dot-config/nvim/pack/vendor/opt/nvim-dap
+	url = https://github.com/mfussenegger/nvim-dap
+[submodule "nvim/dot-config/nvim/pack/vendor/opt/nvim-dap-virtual-text"]
+	path = nvim/dot-config/nvim/pack/vendor/opt/nvim-dap-virtual-text
+	url = https://github.com/theHamsta/nvim-dap-virtual-text
+[submodule "nvim/dot-config/nvim/pack/vendor/opt/nvim-dap-go"]
+	path = nvim/dot-config/nvim/pack/vendor/opt/nvim-dap-go
+	url = https://github.com/leoluz/nvim-dap-go
+[submodule "nvim/dot-config/nvim/pack/vendor/opt/nvim-dap-ui"]
+	path = nvim/dot-config/nvim/pack/vendor/opt/nvim-dap-ui
+	url = https://github.com/rcarriga/nvim-dap-ui
+[submodule "nvim/dot-config/nvim/pack/vendor/opt/nvim-nio"]
+	path = nvim/dot-config/nvim/pack/vendor/opt/nvim-nio
+	url = https://github.com/nvim-neotest/nvim-nio
+[submodule "nvim/dot-config/nvim/pack/vendor/start/nvim-notify"]
+	path = nvim/dot-config/nvim/pack/vendor/start/nvim-notify
+	url = https://github.com/rcarriga/nvim-notify

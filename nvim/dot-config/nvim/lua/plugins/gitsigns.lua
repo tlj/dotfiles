@@ -2,16 +2,13 @@
 --
 -- Shows git signs in the statuscol. Very useful to keep track of what has
 -- changed in the current file. Use ]c and [c to move between changes. Keymaps
--- are prefixed with '<leader>h' (for hunk), and there is a lot of 
+-- are prefixed with '<leader>h' (for hunk), and there is a lot of
 -- functionality available.
 --
 -- https://github.com/lewis6991/gitsigns.nvim
-return {
-	"lewis6991/gitsigns.nvim",
-	enabled = true,
-	lazy = true,
-	event = "BufReadPre",
-	config = function()
+plugin("gitsigns", {
+	events = { "BufReadPre" },
+	setup = function()
 		require("gitsigns").setup({
 			on_attach = function(bufnr)
 				local gs = package.loaded.gitsigns
@@ -49,10 +46,14 @@ return {
 				map("n", "<leader>hu", gs.undo_stage_hunk, { desc = "Undo stage hunk" })
 				map("n", "<leader>hR", gs.reset_buffer, { desc = "Reset buffer" })
 				map("n", "<leader>hp", gs.preview_hunk, { desc = "Preview hunk" })
-				map("n", "<leader>hb", function() gs.blame_line({ full = true }) end, { desc = "Blame line" })
+				map("n", "<leader>hb", function()
+					gs.blame_line({ full = true })
+				end, { desc = "Blame line" })
 				map("n", "<leader>hB", gs.toggle_current_line_blame, { desc = "Toggle current line blame" })
 				map("n", "<leader>hd", gs.diffthis, { desc = "Diff this" })
-				map("n", "<leader>hD", function() gs.diffthis("~") end, { desc = "Diff this" })
+				map("n", "<leader>hD", function()
+					gs.diffthis("~")
+				end, { desc = "Diff this" })
 				map("n", "<leader>he", gs.toggle_deleted, { desc = "Toggle deleted" })
 
 				-- Text object
@@ -60,4 +61,4 @@ return {
 			end,
 		})
 	end,
-}
+})

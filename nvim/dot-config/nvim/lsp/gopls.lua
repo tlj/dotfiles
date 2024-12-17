@@ -1,6 +1,7 @@
-return {
+vim.lsp.config.gopls = {
+	cmd = { "gopls" },
+	filetypes = { "go", "gotempl", "gowork", "gomod" },
 	settings = {
-		-- more settings: https://github.com/golang/tools/blob/master/gopls/doc/settings.md
 		gopls = {
 			analyses = {
 				unusedparams = true,
@@ -36,20 +37,5 @@ return {
 			templateExtensions = { ".tmpl" },
 		},
 	},
-
-	capabilities = {
-		textDocument = {
-			completion = {
-				completionItem = {},
-				contextSupport = true,
-				dynamicRegistration = true,
-			},
-		},
-	},
-
-	server_capabilities = {
-		semanticTokensProvider = {
-			range = true,
-		},
-	},
 }
+
