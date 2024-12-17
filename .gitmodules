@@ -64,3 +64,6 @@
 [submodule "nvim/dot-config/nvim/pack/vendor/start/nvim-notify"]
 	path = nvim/dot-config/nvim/pack/vendor/start/nvim-notify
 	url = https://github.com/rcarriga/nvim-notify
+[submodule "nvim/dot-config/nvim/pack/vendor/opt/snacks"]
+	path = nvim/dot-config/nvim/pack/vendor/opt/snacks
+	url = https://github.com/folke/snacks.nvim
