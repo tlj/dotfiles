@@ -7,7 +7,7 @@ vim.lsp.config.jsonls = {
 	},
 	settings = {
 		json = {
-			schemas = require("plugins.config.schemas").jsonls,
+			schemas = require("config.plugins.schemas").jsonls,
 			validate = { enable = true },
 		},
 	},

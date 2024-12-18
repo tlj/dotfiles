@@ -12,7 +12,7 @@ vim.lsp.config.yamlls = {
 				enable = true,
 				url = "https://www.schemastore.org/api/json/catalog.json",
 			},
-			schemas = require("plugins.config.schemas").yamlls,
+			schemas = require("config.plugins.schemas").yamlls,
 		},
 		redhat = {
 			telemetry = {
