@@ -1,5 +1,5 @@
 return {
-	setting = {},
+	settings = {},
 	keys = {
 		["<leader>tt"] = {
 			cmd = function()
