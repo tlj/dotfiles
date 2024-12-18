@@ -15,6 +15,7 @@ require("config.autocmds")
 
 local plugins = {
 	"catppuccin",
+	"nvim-web-devicons",
 	"notify",
 	"copilot",
 	"blink-cmp-copilot",
@@ -23,6 +24,16 @@ local plugins = {
 	"nvim-tmux-navigation",
 	"conform",
 	"gitsigns",
+	"fzf-lua",
+	"oil",
+	"grug-far",
+	"nvim-treesitter",
+	"treewalker",
+	"dap",
+	"nvim-dap-virtual-text",
+	"dap-go",
+	"nio",
+	"dapui",
 }
 
 for _, plugin in pairs(plugins) do
@@ -30,7 +41,7 @@ for _, plugin in pairs(plugins) do
 	local plugin_cfg = plugin:gsub("%.", "-")
 	local hasconfig, config = pcall(require, "config.plugins." .. plugin_cfg)
 	if not hasconfig then
-		vim.notify("Plugin " .. plugin .. " is missing config.", vim.log.levels.WARNING)
+		vim.notify("Plugin " .. plugin .. " is missing config.")
 		config = { settings = {} }
 	end
 	local p = require(plugin)
@@ -40,7 +51,14 @@ for _, plugin in pairs(plugins) do
 	if config.setup then
 		config.setup()
 	end
+	if config.keys then
+		for key, opts in pairs(config.keys) do
+			vim.keymap.set("n", key, opts.cmd, { desc = opts.desc, noremap = true, silent = true })
+		end
+	end
 end
+
+require("config.lsp")
 
 -- if neovim is started with a directory as an argument, change to that directory
 if vim.fn.isdirectory(vim.v.argv[2]) == 1 then

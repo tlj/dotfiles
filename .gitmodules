@@ -67,3 +67,18 @@
 [submodule "nvim/dot-config/nvim/pack/vendor/start/notify"]
 	path = nvim/dot-config/nvim/pack/vendor/start/notify
 	url = https://github.com/rcarriga/nvim-notify
+[submodule "nvim/dot-config/nvim/pack/vendor/opt/dap"]
+	path = nvim/dot-config/nvim/pack/vendor/opt/dap
+	url = https://github.com/mfussenegger/nvim-dap
+[submodule "nvim/dot-config/nvim/pack/vendor/opt/dap-go"]
+	path = nvim/dot-config/nvim/pack/vendor/opt/dap-go
+	url = https://github.com/leoluz/nvim-dap-go
+[submodule "nvim/dot-config/nvim/pack/vendor/opt/nio"]
+	path = nvim/dot-config/nvim/pack/vendor/opt/nio
+	url = https://github.com/nvim-neotest/nvim-nio
+[submodule "nvim/dot-config/nvim/pack/vendor/opt/dap-ui"]
+	path = nvim/dot-config/nvim/pack/vendor/opt/dap-ui
+	url = https://github.com/rcarriga/nvim-dap-ui
+[submodule "nvim/dot-config/nvim/pack/vendor/opt/dapui"]
+	path = nvim/dot-config/nvim/pack/vendor/opt/dapui
+	url = https://github.com/rcarriga/nvim-dap-ui
