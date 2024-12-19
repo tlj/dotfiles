@@ -5,6 +5,9 @@
 
 print_header "Neovim Plugins"
 
+OLDDIR=$(pwd)
+
 cd nvim/dot-config/nvim
 ./update.sh
-cd - > /dev/null
+echo "cd to $OLDDIR"
+cd $OLDDIR
