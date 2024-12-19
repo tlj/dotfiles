@@ -9,3 +9,8 @@ nvim/.config/nvim/plugin/packer_compiled.lua
 lazygit/.config/lazygit/state.yml
 .aider*
 .env
+.yarn
+.yarnrc.yml
+package.json
+yarn.lock
+node_modules/
