@@ -1,4 +1,0 @@
-return {
-	when = { "dap" },
-	settings = {},
-}

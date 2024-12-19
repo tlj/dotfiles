@@ -1,4 +1,0 @@
-return {
-	when = { "copilot" },
-	settings = {},
-}
