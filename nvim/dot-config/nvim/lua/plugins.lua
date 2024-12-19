@@ -22,13 +22,13 @@ require('plugins').setup({
     later = {
         -- Basic lazy loading on command
         { "telescope.nvim", cmd = "Telescope" },
-        
+
         -- Load when another plugin loads
         { "telescope-fzf-native.nvim", when = "telescope.nvim" },
-        
+
         -- Load on filetype
         { "rust-tools.nvim", ft = "rust" },
-        
+
         -- Load on events
         { "lualine.nvim", events = { "VimEnter" } }
     }
@@ -102,7 +102,7 @@ M.load_config = function(plugin)
 	local plugin_cfg = plugin:gsub("%.", "-")
 	local hasconfig, config = pcall(require, "config.plugins." .. plugin_cfg)
 	if not hasconfig then
-		config = { settings = {} }
+		config = {}
 	end
 	return config
 end
@@ -113,6 +113,7 @@ M.load = function(plugin)
 	if M.is_loaded[plugin] then
 		return
 	end
+	M.is_loaded[plugin] = true
 
 	-- Load dependencies first
 	-- Dependencies can be defined either as a string or as a table
@@ -130,25 +131,25 @@ M.load = function(plugin)
 
 	-- Load and configure the plugin
 	pcall(function() vim.cmd("packadd " .. plugin) end)
-	local config = M.load_config(plugin)
+	local config = M.plugins[plugin]
+
 	local p = require(plugin)
-	if p.setup and not config.setup then
-		p.setup(config.settings or {})
-	end
-	if config.setup then
+
+	if config.setup and type(config.setup) == "function" then
 		config.setup()
+	elseif p.setup and type(p.setup) == "function" then
+		p.setup(config.settings or {})
 	end
 
 	-- Setup keymaps from config
 	if config.keys then
 		for key, opts in pairs(config.keys) do
-				---@diagnostic disable-next-line: missing-fields
+			---@diagnostic disable-next-line: missing-fields
 			vim.keymap.set("n", key, opts.cmd, { desc = opts.desc, noremap = true, silent = true })
 		end
 	end
 
 	vim.api.nvim_exec_autocmds("User", { pattern = plugin })
-	M.is_loaded[plugin] = true
 end
 
 ---Create a lazy-loaded keymap
@@ -179,7 +180,9 @@ M.load_on_command = function(cmd, plugin, opts)
 
 	vim.api.nvim_create_user_command(cmd, function(args)
 		vim.api.nvim_del_user_command(cmd)
+
 		M.load(plugin)
+
 		vim.cmd(string.format("%s %s", cmd, args.args))
 	end, {
 		nargs = opts.nargs or "*",
@@ -192,10 +195,10 @@ M.setup = function(plugins)
 	-- Load immediate plugins
 	if plugins.now then
 		for _, plugin in pairs(plugins.now) do
-			-- The immediate plugins must have their configuration in a file 
+			-- The immediate plugins must have their configuration in a file
 			-- so we only support string here
 			if type(plugin) == "string" then
-				M.plugins[plugin] = {}
+				M.plugins[plugin] = M.load_config(plugin)
 				M.load(plugin)
 			end
 		end

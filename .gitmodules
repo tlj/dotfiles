@@ -67,3 +67,6 @@
 [submodule "nvim/dot-config/nvim/pack/vendor/opt/blink.cmp"]
 	path = nvim/dot-config/nvim/pack/vendor/opt/blink.cmp
 	url = https://github.com/saghen/blink.cmp
+[submodule "nvim/dot-config/nvim/pack/vendor/opt/CopilotChat"]
+	path = nvim/dot-config/nvim/pack/vendor/opt/CopilotChat
+	url = https://github.com/CopilotC-Nvim/CopilotChat.nvim

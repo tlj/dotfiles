@@ -37,7 +37,7 @@ require("plugins").setup({
 	later = {
 		{ "nvim-web-devicons", settings = { color_icons = true }, events = { "UIEnter" } },
 		"copilot",
-		"copilotchat",
+		"CopilotChat",
 		{ "blink-cmp-copilot", when = { "copilot" } },
 		"snacks",
 		"nvim-tmux-navigation",
@@ -51,8 +51,9 @@ require("plugins").setup({
 		"dap",
 		"nvim-dap-virtual-text",
 		"dap-go",
-		{ "nio", when = { "dap" } },
+		"nio",
 		"dapui",
+		"plenary",
 	},
 })
 

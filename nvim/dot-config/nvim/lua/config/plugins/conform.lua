@@ -10,7 +10,8 @@ return {
 			shfmt = { preprend_args = { "-i", "2" } },
 		},
 	},
-	setup = function()
+	setup = function(opts)
+		require("conform").setup(opts)
 		vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
 	end,
 	keys = {

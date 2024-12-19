@@ -1,5 +1,6 @@
 return {
-	when = { "nio" },
+	requires = { "nio", "dap" },
+	when = { "dap" },
 	settings = {
 		layouts = {
 			{
@@ -20,8 +21,10 @@ return {
 			},
 		},
 	},
-	setup = function()
+	setup = function(opts)
 		local dap, dapui = require("dap"), require("dapui")
+
+		require("dapui").setup(opts)
 		dap.listeners.after.event_initialized["dapui_config"] = function()
 			vim.notify("Debug session started.")
 			dapui.open()
@@ -35,4 +38,7 @@ return {
 			dapui.close()
 		end
 	end,
+	keys = {
+		["<leader>dap"] = { cmd = '<cmd>lua require"dapui".toggle()<cr>', desc = "DapUI Toggle" },
+	}
 }

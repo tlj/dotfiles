@@ -62,9 +62,8 @@ return {
 		["<leader>ds"] = { cmd = '<cmd>lua require"dap".terminate()<CR>', desc = "Stop debugging" },
 		["<leader>do"] = { cmd = '<cmd>lua require"dap".step_over()<CR>', desc = "Step over" },
 		["<leader>di"] = { cmd = '<cmd>lua require"dap".step_into()<CR>', desc = "Step into" },
-		["<leader>dw"] = { cmd = '<cmd>lua require"dap.ui.widgets".hover()<CR>', desc = "Hover widgets" },
 		["<leader>dt"] = { cmd = "<cmd>FzfLua dap_commands<CR>", desc = "Telescope DAP commands" },
 		["<leader>dv"] = { cmd = "<cmd>FzfLua dap_variables<CR>", desc = "Telescope DAP active session variables" },
-		["<leader>dap"] = { cmd = '<cmd>lua require"dapui".toggle()<cr>', desc = "DapUI Toggle" },
+		["<leader>dw"] = { cmd = '<cmd>lua require"dap.ui.widgets".hover()<CR>', desc = "Hover widgets" },
 	},
 }
