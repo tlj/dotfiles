@@ -1,8 +1,14 @@
 return {
 	settings = nil,
+	-- cmd = { "FzfLua" },
 	setup = function()
 		require("fzf-lua").setup({
 			"fzf-native",
+			oldfiles = {
+				include_current_session = true,
+				cwd_only = true,
+				stat_file = true,
+			},
 			winopts = {
 				height = 0.9,
 				width = 0.9,
@@ -17,6 +23,7 @@ return {
 			},
 			previewers = {
 				builtin = {
+					syntax_limit_b = 1024 * 100, -- 100KB
 					extensions = {
 						["png"] = { "viu", "-b" },
 						["jpg"] = { "viu", "-b" },
@@ -57,6 +64,7 @@ return {
 					["ctrl-a"] = "beginning-of-line",
 					["ctrl-e"] = "end-of-line",
 					["alt-j"] = "toggle-all",
+					["ctrl-q"] = "select-all+accept",
 					-- Only valid with fzf previewers (bat/cat/git/etc)
 					["f3"] = "toggle-preview-wrap",
 					["f4"] = "toggle-preview",
@@ -65,6 +73,7 @@ return {
 				},
 			},
 		})
+		require("fzf-lua").register_ui_select()
 	end,
 	keys = {
 		["<leader>ff"] = { cmd = "<cmd>FzfLua files<cr>", desc = "Fuzzyfind files" },

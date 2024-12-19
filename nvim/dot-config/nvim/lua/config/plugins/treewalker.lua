@@ -9,6 +9,7 @@
 --
 -- https://github.com/aaronik/treewalker.nvim
 return {
+	events = { "BufReadPre", "BufNewFile" },
 	settings = {
 		highlight = true,
 	},

@@ -1,4 +1,5 @@
 return {
+	events = { "VimEnter" },
 	settings = {
 		keymap = {
 			preset = "default",

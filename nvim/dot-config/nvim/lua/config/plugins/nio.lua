@@ -1,1 +1,4 @@
-return { settings = {} }
+return {
+	when = { "dap" },
+	settings = {},
+}

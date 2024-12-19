@@ -1,4 +1,5 @@
 return {
+	when = { "dap" },
 	settings = {
 		dap_configurations = {
 			{

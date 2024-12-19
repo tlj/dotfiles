@@ -45,7 +45,7 @@ echo "Installing tree-sitter-cli..."
 cargo install -q tree-sitter-cli
 
 echo "Installing LSPs..."
-npm i -g vscode-langservers-extracted
+npm i -g vscode-langservers-extracted intelephense
 
 echo "Installing PHP DAP adapter..."
 install_with_git ~/src/vscode-php-debug https://github.com/xdebug/vscode-php-debug.git 

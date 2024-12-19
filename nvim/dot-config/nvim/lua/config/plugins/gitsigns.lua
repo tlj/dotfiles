@@ -1,4 +1,5 @@
 return {
+	events = { "BufReadPre" },
 	settings = {
 		on_attach = function(bufnr)
 			local gs = package.loaded.gitsigns

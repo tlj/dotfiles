@@ -1,4 +1,6 @@
 return {
+	-- cmd = {},
+	requires = { "fzf-lua" },
 	settings = {},
 	setup = function()
 		local dap = require("dap")

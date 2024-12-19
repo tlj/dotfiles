@@ -4,6 +4,7 @@
 --
 -- https://github.com/nvim-treesitter/nvim-treesitter
 return {
+	events = { "BufReadPre", "BufNewFile" },
 	settings = {
 		ensure_installed = {
 			"bash",

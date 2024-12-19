@@ -1,4 +1,6 @@
 return {
+	events = { "BufReadPre", "BufNewFile" },
+	cmd = { "ConformInfo" },
 	settings = {
 		formatters_by_ft = {
 			lua = { "stylua" },

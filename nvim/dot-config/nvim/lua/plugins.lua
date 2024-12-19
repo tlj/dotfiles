@@ -2,6 +2,8 @@ local M = {}
 
 M.plugin_augroup = vim.api.nvim_create_augroup("plugins", { clear = true })
 M.is_loaded = {}
+M.commands = {}
+M.plugins = {}
 
 M.load_config = function(plugin)
 	local plugin_cfg = plugin:gsub("%.", "-")
@@ -18,6 +20,19 @@ end
 M.load = function(plugin)
 	if M.is_loaded[plugin] then
 		return
+	end
+	local requires = M.plugins[plugin].requires
+	if requires then
+		if type(requires) == "table" then
+			for _, r in ipairs(requires) do
+				vim.notify("Loading required plugin " .. r)
+				M.load(r)
+			end
+		end
+		if type(requires) == "string" then
+			vim.notify("Loading required plugin " .. requires)
+			M.load(requires)
+		end
 	end
 	pcall(vim.cmd, "packadd " .. plugin)
 	local config = M.load_config(plugin)
@@ -48,63 +63,111 @@ M.load_on_key = function(key, plugin, actual)
 	end)
 end
 
-M.setup = function(plugins)
-	for _, plugin in pairs(plugins) do
-		if type(plugin) == "string" then
-			M.load(plugin)
+M.load_on_commands = function(cmd, plugin)
+	if type(cmd) == "string" then
+		M.load_on_command(cmd, plugin, { nargs = "*" })
+	end
+	if type(cmd) == "table" then
+		for _, c in ipairs(cmd) do
+			M.load_on_command(c, plugin, { nargs = "*" })
 		end
-		if type(plugin) == "table" then
-			local name = plugin[1]
-			if type(name) ~= "string" then
-				error("First element of plugin " .. vim.inspect(plugin) .. " must be a string")
-			end
+	end
+end
 
-			local options = {}
-			for k, v in pairs(plugin) do
-				if type(k) ~= "number" then
-					options[k] = v
+M.load_on_command = function(cmd, plugin, opts)
+	M.commands[cmd] = { plugin = plugin, opts = opts }
+
+	vim.api.nvim_create_user_command(cmd, function(args)
+		vim.api.nvim_del_user_command(cmd)
+
+		M.load(plugin)
+
+		vim.cmd(string.format("%s %s", cmd, args.args))
+	end, {
+		nargs = opts.nargs or "*",
+		complete = opts.complete,
+	})
+end
+
+M.setup = function(plugins)
+	if plugins.now then
+		for _, plugin in pairs(plugins.now) do
+			if type(plugin) == "string" then
+				M.plugins[plugin] = {}
+				M.load(plugin)
+			end
+		end
+		if plugins.later then
+			for _, plugin in pairs(plugins.later) do
+				local name = ""
+				local options = {}
+				if type(plugin) == "string" then
+					name = plugin
 				end
-			end
+				if type(plugin) == "table" then
+					name = plugin[1]
+					if type(name) ~= "string" then
+						error("First element of plugin " .. vim.inspect(plugin) .. " must be a string")
+					end
 
-			local pattern = options.pattern or "*"
-			if options.events then
-				vim.api.nvim_create_autocmd(options.events, {
-					group = M.plugin_augroup,
-					pattern = pattern,
-					callback = function(ev)
-						M.load(name)
-					end,
-					once = true,
-				})
-			end
+					for k, v in pairs(plugin) do
+						if type(k) ~= "number" then
+							options[k] = v
+						end
+					end
+				end
 
-			if options.ft then
-				vim.api.nvim_create_autocmd("FileType", {
-					group = M.plugin_augroup,
-					pattern = pattern,
-					ft = options.ft,
-					callback = function(ev)
-						M.load(name)
-					end,
-					once = true,
-				})
-			end
+				local config = M.load_config(name)
+				options = vim.tbl_deep_extend("force", config, options)
 
-			if options.depends_on then
-				vim.api.nvim_create_autocmd("User", {
-					group = M.plugin_augroup,
-					pattern = options.depends_on,
-					callback = function(ev)
-						M.load(name)
-					end,
-					once = true,
-				})
-			end
+				M.plugins[name] = options
 
-			local config = M.load_config(name)
-			if config.keys then
-				for key, _ in pairs(config.keys) do
-					M.load_on_key(key, name, key)
+				local pattern = options.pattern or "*"
+				if options.events then
+					vim.api.nvim_create_autocmd(options.events, {
+						group = M.plugin_augroup,
+						pattern = pattern,
+						callback = function()
+							M.load(name)
+						end,
+						once = true,
+					})
+				end
+
+				if options.ft then
+					vim.api.nvim_create_autocmd("FileType", {
+						group = M.plugin_augroup,
+						pattern = pattern,
+						ft = options.ft,
+						callback = function()
+							M.load(name)
+						end,
+						once = true,
+					})
+				end
+
+				-- Whenever another plugin is loaded, load this one after
+				if options.when then
+					vim.api.nvim_create_autocmd("User", {
+						group = M.plugin_augroup,
+						pattern = options.when,
+						callback = function()
+							M.load(name)
+						end,
+						once = true,
+					})
+				end
+
+				-- Register keys
+				if config.keys then
+					for key, _ in pairs(config.keys) do
+						M.load_on_key(key, name, key)
+					end
+				end
+
+				-- Register commands
+				if config.cmd then
+					M.load_on_commands(config.cmd, name)
 				end
 			end
 		end

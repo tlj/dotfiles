@@ -1,4 +1,5 @@
 return {
+	cmd = { "GrugFar" },
 	settings = {
 		headerMaxWidth = 80,
 	},
