@@ -44,7 +44,6 @@ end
 
 -- Function to setup the commands
 function M.setup()
-	vim.notify("Loading lazygit")
 	-- Command to open lazygit normally
 	vim.api.nvim_create_user_command('Lazygit', function()
 		create_float_term('lazygit')
