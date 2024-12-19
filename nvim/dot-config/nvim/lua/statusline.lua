@@ -1,8 +1,11 @@
 -- Customize the statusline without using a plugin
-local icons = require("config.icons")
-local lsp_update = ""
+local M = {}
 
-local function lsp_clients()
+
+M.icons = require("config.icons")
+M.lsp_update = ""
+
+M.lsp_clients = function()
 	local clients = {}
 
 	for _, client in ipairs(vim.lsp.get_clients({ bufnr = vim.api.nvim_get_current_buf() })) do
@@ -15,10 +18,10 @@ local function lsp_clients()
 		return ""
 	end
 
-	return string.format(" %s %s", icons.kinds.Server, table.concat(clients, ","))
+	return string.format(" %s %s", M.icons.kinds.Server, table.concat(clients, ","))
 end
 
-local function get_diagnostic_counts()
+M.get_diagnostic_counts = function()
 	local diagnostics = vim.diagnostic.get(0)
 	local counts = {
 		errors = 0,
@@ -40,12 +43,12 @@ local function get_diagnostic_counts()
 	end
 
 	local parts = {}
-	local signs = icons.lsp.diagnostic.signs
+	local signs = M.icons.lsp.diagnostic.signs
 	if counts.errors > 0 then
 		table.insert(parts, "%#DiagnosticError#" .. signs.Error .. " " .. counts.errors .. "%*")
 	end
 	if counts.warnings > 0 then
-		table.insert(parts, "%#DiagnosticWarn#" .. signs.Warn ..  " " .. counts.warnings .. "%*")
+		table.insert(parts, "%#DiagnosticWarn#" .. signs.Warn .. " " .. counts.warnings .. "%*")
 	end
 	if counts.info > 0 then
 		table.insert(parts, "%#DiagnosticInfo#" .. signs.Info .. " " .. counts.info .. "%*")
@@ -61,17 +64,17 @@ local function get_diagnostic_counts()
 end
 
 -- Function to get git branch using gitsigns
-local function git_branch()
+M.git_branch = function()
 	local gitsigns = vim.b.gitsigns_status_dict
 
 	if gitsigns and gitsigns.head then
-		return string.format(" %s %s", icons.kinds.Git, gitsigns.head)
+		return string.format(" %s %s", M.icons.kinds.Git, gitsigns.head)
 	end
 
 	return ""
 end
 
-local function git_status()
+M.git_status = function()
 	local signs = vim.b.gitsigns_status_dict
 	if not signs then
 		return ""
@@ -95,52 +98,25 @@ local function git_status()
 	return " " .. table.concat(parts, " ")
 end
 
-Statusline = {}
-
-Statusline.active = function()
+M.active = function()
 	return table.concat({
 		"%t",
 		'%{&modified ? " [+]" : ""}', -- Modified flag
-		get_diagnostic_counts(),
+		M.get_diagnostic_counts(),
 		"%=",
-		git_branch(),
-		git_status(),
-		lsp_clients(),
-		" " .. lsp_update,
-		" " .. icons.kinds.File .. "%{&filetype}",
+		M.git_branch(),
+		M.git_status(),
+		M.lsp_clients(),
+		" " .. M.lsp_update,
+		" " .. M.icons.kinds.File .. "%{&filetype}",
 		" %2p%%",
 		" %3l:%-2c",
 	})
 end
 
-function Statusline.inactive()
+M.inactive = function()
 	return " %F"
 end
-
-local status_group = vim.api.nvim_create_augroup("StatusLine", { clear = true })
-vim.api.nvim_create_autocmd({ "WinEnter", "BufEnter", "FileType", "DiagnosticChanged", "LspAttach", "LspDetach" }, {
-	callback = function()
-		vim.wo.statusline = Statusline.active()
-	end,
-	pattern = "*",
-	group = status_group,
-})
-
-vim.api.nvim_create_autocmd("User", {
-	callback = function()
-		vim.wo.statusline = Statusline.active()
-	end,
-	pattern = "GitSignsUpdate",
-	group = status_group,
-})
-
-vim.api.nvim_create_autocmd({ "WinLeave" }, {
-	callback = function()
-		vim.wo.statusline = Statusline.inactive()
-	end,
-	pattern = "*",
-	group = status_group,
-})
 
 -- Update LSP progress in statusbar, next to the LSP client name
 -- Some of this code is inspired by the LSP progress example for
@@ -148,13 +124,43 @@ vim.api.nvim_create_autocmd({ "WinLeave" }, {
 -- so distracted by that popup that I moved it to the statusline
 -- instead. Using the simple one, since most codebases I work on
 -- are small enough that a % doesn't necessarily matter.
-local progress = vim.defaulttable()
-vim.api.nvim_create_autocmd("LspProgress", {
-	---@param ev {data: {client_id: integer, params: lsp.ProgressParams}}
-	callback = function(ev)
-		local spinner = { "⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏" }
-		lsp_update = ev.data.params.value.kind == "end" and " "
-			or spinner[math.floor(vim.uv.hrtime() / (1e6 * 80)) % #spinner + 1]
-		vim.wo.statusline = Statusline.active()
-	end,
-})
+M.progress = vim.defaulttable()
+
+M.setup = function()
+	local status_group = vim.api.nvim_create_augroup("StatusLine", { clear = true })
+	vim.api.nvim_create_autocmd({ "WinEnter", "BufEnter", "FileType", "DiagnosticChanged", "LspAttach", "LspDetach" }, {
+		callback = function()
+			vim.wo.statusline = require("statusline").active()
+		end,
+		pattern = "*",
+		group = status_group,
+	})
+
+	vim.api.nvim_create_autocmd("User", {
+		callback = function()
+			vim.wo.statusline = require("statusline").active()
+		end,
+		pattern = "GitSignsUpdate",
+		group = status_group,
+	})
+
+	vim.api.nvim_create_autocmd({ "WinLeave" }, {
+		callback = function()
+			vim.wo.statusline = require("statusline").inactive()
+		end,
+		pattern = "*",
+		group = status_group,
+	})
+
+	vim.api.nvim_create_autocmd("LspProgress", {
+		---@param ev {data: {client_id: integer, params: lsp.ProgressParams}}
+		callback = function(ev)
+			local spinner = { "⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏" }
+			M.lsp_update = ev.data.params.value.kind == "end" and " "
+					or spinner[math.floor(vim.uv.hrtime() / (1e6 * 80)) % #spinner + 1]
+			vim.wo.statusline = require("statusline").active()
+		end,
+	})
+end
+
+return M

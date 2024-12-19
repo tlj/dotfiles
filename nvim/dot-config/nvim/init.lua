@@ -4,9 +4,6 @@ require("config.options")
 -- Set default Neovim options
 require("config.mappings")
 
--- Set custom statusline
-require("config.statusline")
-
 -- Load autocommands
 require("config.autocmds")
 
@@ -17,6 +14,7 @@ require("plugins").setup({
 	-- only as string. Any configuration needs to be in lua/config/plugins/(name).lua
 	now = {
 		"catppuccin",
+		"statusline",
 		"notify",
 		"blink.cmp",
 	},
