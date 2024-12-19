@@ -40,9 +40,6 @@
 [submodule "nvim/dot-config/nvim/pack/vendor/opt/nvim-dap-virtual-text"]
 	path = nvim/dot-config/nvim/pack/vendor/opt/nvim-dap-virtual-text
 	url = https://github.com/theHamsta/nvim-dap-virtual-text
-[submodule "nvim/dot-config/nvim/pack/vendor/opt/snacks"]
-	path = nvim/dot-config/nvim/pack/vendor/opt/snacks
-	url = https://github.com/folke/snacks.nvim
 [submodule "nvim/dot-config/nvim/pack/vendor/opt/dap"]
 	path = nvim/dot-config/nvim/pack/vendor/opt/dap
 	url = https://github.com/mfussenegger/nvim-dap

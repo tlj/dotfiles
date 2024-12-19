@@ -282,16 +282,16 @@ M.setup = function(plugins)
 
 				-- Use the keymaps defined in the options to load the plugin
 				-- when a keymap is used
-				if config.keys then
-					for key, _ in pairs(config.keys) do
+				if options.keys then
+					for key, _ in pairs(options.keys) do
 						M.load_on_key(key, name, key)
 					end
 				end
 
 				-- Use the commands defined in the options to load the plugin
 				-- when a command is called.
-				if config.cmd then
-					M.load_on_commands(config.cmd, name)
+				if options.cmd then
+					M.load_on_commands(options.cmd, name)
 				end
 			end
 		end

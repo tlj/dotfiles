@@ -21,7 +21,7 @@ require("plugins").setup({
 		"blink.cmp",
 	},
 	-- These plugins are loaded later. If there is a minimal config, it should be added here
-	-- to avoid config file noise. If there are several settings and keys which need to be 
+	-- to avoid config file noise. If there are several settings and keys which need to be
 	-- added they should go into the config file in lua/config/plugins/(name).lua
 	--
 	-- TRIGGERS
@@ -39,7 +39,6 @@ require("plugins").setup({
 		"copilot",
 		"CopilotChat",
 		{ "blink-cmp-copilot", when = { "copilot" } },
-		"snacks",
 		"nvim-tmux-navigation",
 		"conform",
 		"gitsigns",
@@ -54,6 +53,7 @@ require("plugins").setup({
 		"nio",
 		"dapui",
 		"plenary",
+		{ "lazygit", cmd = { "Lazygit" }, keys = { ["<leader>lg"] = { cmd = ":Lazygit<cr>" } } },
 	},
 })
 
