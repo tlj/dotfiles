@@ -12,3 +12,5 @@ else
   sudo apt-get -qq update -y
   sudo apt-get -qq install -y golang-go
 fi
+
+go install github.com/go-delve/delve/cmd/dlv@latest

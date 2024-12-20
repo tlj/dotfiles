@@ -45,6 +45,7 @@ return {
 			desc = "Eval debug",
 			mode = { "n", "v" },
 		},
+		["<leader>db"] = { cmd = '<cmd>lua require"dap".toggle_breakpoint()<CR>', desc = "Set breakpoint" },
 		["<leader>dB"] = {
 			cmd = '<cmd>lua require"dap".set_breakpoint(vim.fn.input("Breakpoint condition: "))<cr>',
 			desc = "Conditional breakpoint",
