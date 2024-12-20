@@ -4,11 +4,12 @@ return {
 	settings = {},
 	setup = function()
 		local dap = require("dap")
-		--dap.adapters.php = {
-		--  type = 'executable',
-		--  command = 'node',
-		--  args = { '/Users/tjohnsen/src/vscode-php-debug/out/phpDebug.js' }
-		--}
+
+		dap.adapters.php = {
+		 type = 'executable',
+		 command = 'node',
+		 args = { vim.fn.expand('$HOME') .. '/src/vscode-php-debug/out/phpDebug.js' }
+		}
 
 		dap.configurations.php = {
 			{

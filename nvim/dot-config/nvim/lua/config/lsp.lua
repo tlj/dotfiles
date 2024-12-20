@@ -9,10 +9,7 @@ vim.lsp.config("*", {
 	root_markers = { ".git" },
 })
 
---   local capabilities = require('cmp_nvim_lsp').default_capabilities()
-
--- vim.lsp.enable({ "luals", "gopls", "jsonls", "yamlls", "intelephense" })
-vim.lsp.enable({ "luals", "gopls", "yamlls", "jsonls" })
+vim.lsp.enable({ "luals", "gopls", "yamlls", "jsonls", "intelephense" })
 
 local lspgroup = vim.api.nvim_create_augroup("lsp", { clear = true })
 vim.api.nvim_create_autocmd("LspAttach", {
