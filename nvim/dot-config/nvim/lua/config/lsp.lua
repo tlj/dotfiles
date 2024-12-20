@@ -5,9 +5,11 @@ vim.lsp.config("*", {
 				multilineTokenSupport = true,
 			},
 		},
-	}, require("blink.cmp").get_lsp_capabilities()),
+	}, require("cmp_nvim_lsp").default_capabilities()),
 	root_markers = { ".git" },
 })
+
+--   local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
 -- vim.lsp.enable({ "luals", "gopls", "jsonls", "yamlls", "intelephense" })
 vim.lsp.enable({ "luals", "gopls", "yamlls", "jsonls" })
@@ -79,7 +81,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
 		vim.diagnostic.config(diagnostic_config)
 		vim.lsp.handlers["textDocument/publishDiagnostics"] =
-			vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, diagnostic_config)
+				vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, diagnostic_config)
 		vim.lsp.handlers["workspace/diagnostic/refresh"] = function(_, _, ctx)
 			local ns = vim.lsp.diagnostic.get_namespace(ctx.client_id)
 			pcall(vim.diagnostic.reset, ns)
@@ -87,4 +89,3 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		end
 	end,
 })
-
