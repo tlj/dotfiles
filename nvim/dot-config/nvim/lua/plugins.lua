@@ -133,11 +133,14 @@ M.load = function(plugin)
 	pcall(function() vim.cmd("packadd " .. plugin) end)
 	local config = M.plugins[plugin]
 
-	local p = require(plugin)
+	local ok, p = pcall(require, plugin)
+	if not ok then
+		p = nil
+	end
 
 	if config.setup and type(config.setup) == "function" then
 		config.setup()
-	elseif p.setup and type(p.setup) == "function" then
+	elseif p ~= nil and p.setup and type(p.setup) == "function" then
 		p.setup(config.settings or {})
 	end
 
@@ -190,6 +193,104 @@ M.load_on_command = function(cmd, plugin, opts)
 	})
 end
 
+M.register = function(plugin)
+	local name = ""
+	local options = {}
+
+	-- Handle string or table plugin spec
+	if type(plugin) == "string" then
+		name = plugin
+	end
+
+	-- If it's a table we take the first string as the
+	-- name of the plugin, and remove it from the options
+	-- table.
+	if type(plugin) == "table" then
+		name = plugin[1]
+		if type(name) ~= "string" then
+			error("First element of plugin " .. vim.inspect(plugin) .. " must be a string")
+		end
+
+		for k, v in pairs(plugin) do
+			if type(k) ~= "number" then
+				options[k] = v
+			end
+		end
+	end
+
+	-- Merge plugin options with config
+	-- The configuration given in setup() is given priority over the
+	-- configuration loaded from file.
+	local config = M.load_config(name)
+	options = vim.tbl_deep_extend("force", config, options)
+	M.plugins[name] = options
+
+	local pattern = options.pattern or "*"
+
+	-- Set up autocommands for automatically loading the plugin for
+	-- defined events.
+	if options.events then
+		vim.api.nvim_create_autocmd(options.events, {
+			group = M.plugin_augroup,
+			pattern = pattern,
+			callback = function()
+				M.load(name)
+			end,
+			once = true,
+		})
+	end
+
+	-- Set up autocommands for automatically loading the plugin for
+	-- defined filetypes.
+	if options.ft then
+		vim.api.nvim_create_autocmd("FileType", {
+			group = M.plugin_augroup,
+			pattern = pattern,
+			ft = options.ft,
+			callback = function()
+				M.load(name)
+			end,
+			once = true,
+		})
+	end
+
+	-- Every plugin which is loaded will send an event. To load a plugin
+	-- after another event we can define it in the `when` table, and it
+	-- will be loaded after the defined plugins.
+	if options.when then
+		vim.api.nvim_create_autocmd("User", {
+			group = M.plugin_augroup,
+			pattern = options.when,
+			callback = function()
+				M.load(name)
+			end,
+			once = true,
+		})
+	end
+
+	-- Use the keymaps defined in the options to load the plugin
+	-- when a keymap is used
+	if options.keys then
+		for key, _ in pairs(options.keys) do
+			M.load_on_key(key, name, key)
+		end
+	end
+
+	-- Use the commands defined in the options to load the plugin
+	-- when a command is called.
+	if options.cmd then
+		M.load_on_commands(options.cmd, name)
+	end
+
+	if options.requires then
+		for _, r in ipairs(options.requires) do
+			if not M.plugins[r] then
+				M.register(r)
+			end
+		end
+	end
+end
+
 ---Initialize plugin system
 M.setup = function(plugins)
 	-- Load immediate plugins
@@ -206,93 +307,7 @@ M.setup = function(plugins)
 		-- Setup lazy-loaded plugins
 		if plugins.later then
 			for _, plugin in pairs(plugins.later) do
-				local name = ""
-				local options = {}
-
-				-- Handle string or table plugin spec
-				if type(plugin) == "string" then
-					name = plugin
-				end
-
-				-- If it's a table we take the first string as the
-				-- name of the plugin, and remove it from the options
-				-- table.
-				if type(plugin) == "table" then
-					name = plugin[1]
-					if type(name) ~= "string" then
-						error("First element of plugin " .. vim.inspect(plugin) .. " must be a string")
-					end
-
-					for k, v in pairs(plugin) do
-						if type(k) ~= "number" then
-							options[k] = v
-						end
-					end
-				end
-
-				-- Merge plugin options with config
-				-- The configuration given in setup() is given priority over the
-				-- configuration loaded from file.
-				local config = M.load_config(name)
-				options = vim.tbl_deep_extend("force", config, options)
-				M.plugins[name] = options
-
-				local pattern = options.pattern or "*"
-
-				-- Set up autocommands for automatically loading the plugin for
-				-- defined events.
-				if options.events then
-					vim.api.nvim_create_autocmd(options.events, {
-						group = M.plugin_augroup,
-						pattern = pattern,
-						callback = function()
-							M.load(name)
-						end,
-						once = true,
-					})
-				end
-
-				-- Set up autocommands for automatically loading the plugin for
-				-- defined filetypes.
-				if options.ft then
-					vim.api.nvim_create_autocmd("FileType", {
-						group = M.plugin_augroup,
-						pattern = pattern,
-						ft = options.ft,
-						callback = function()
-							M.load(name)
-						end,
-						once = true,
-					})
-				end
-
-				-- Every plugin which is loaded will send an event. To load a plugin
-				-- after another event we can define it in the `when` table, and it
-				-- will be loaded after the defined plugins.
-				if options.when then
-					vim.api.nvim_create_autocmd("User", {
-						group = M.plugin_augroup,
-						pattern = options.when,
-						callback = function()
-							M.load(name)
-						end,
-						once = true,
-					})
-				end
-
-				-- Use the keymaps defined in the options to load the plugin
-				-- when a keymap is used
-				if options.keys then
-					for key, _ in pairs(options.keys) do
-						M.load_on_key(key, name, key)
-					end
-				end
-
-				-- Use the commands defined in the options to load the plugin
-				-- when a command is called.
-				if options.cmd then
-					M.load_on_commands(options.cmd, name)
-				end
+				M.register(plugin)
 			end
 		end
 	end

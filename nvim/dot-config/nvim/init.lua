@@ -16,7 +16,7 @@ require("plugins").setup({
 		"catppuccin",
 		"statusline",
 		"notify",
-		"blink.cmp",
+		"cmp_nvim_lsp",
 	},
 	-- These plugins are loaded later. If there is a minimal config, it should be added here
 	-- to avoid config file noise. If there are several settings and keys which need to be
@@ -36,7 +36,8 @@ require("plugins").setup({
 		{ "nvim-web-devicons", settings = { color_icons = true }, events = { "UIEnter" } },
 		"copilot",
 		"CopilotChat",
-		{ "blink-cmp-copilot", when = { "copilot" } },
+		{ "copilot_cmp",       when = { "copilot" } },
+		"cmp",
 		"nvim-tmux-navigation",
 		"conform",
 		"gitsigns",
@@ -48,9 +49,7 @@ require("plugins").setup({
 		"dap",
 		"nvim-dap-virtual-text",
 		"dap-go",
-		"nio",
 		"dapui",
-		"plenary",
 		{ "lazygit", cmd = { "Lazygit" }, keys = { ["<leader>lg"] = { cmd = ":Lazygit<cr>" } } },
 	},
 })

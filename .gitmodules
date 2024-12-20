@@ -42,10 +42,6 @@
 	path = nvim/dot-config/nvim/pack/vendor/opt/treewalker
 	url = https://github.com/aaronik/treewalker.nvim
   branch = main
-[submodule "nvim/dot-config/nvim/pack/vendor/opt/blink-cmp-copilot"]
-	path = nvim/dot-config/nvim/pack/vendor/opt/blink-cmp-copilot
-	url = https://github.com/giuxtaposition/blink-cmp-copilot
-  branch = main
 [submodule "nvim/dot-config/nvim/pack/vendor/opt/nvim-dap-virtual-text"]
 	path = nvim/dot-config/nvim/pack/vendor/opt/nvim-dap-virtual-text
 	url = https://github.com/theHamsta/nvim-dap-virtual-text
@@ -74,11 +70,34 @@
 	path = nvim/dot-config/nvim/pack/vendor/opt/nvim-tmux-navigation
 	url = https://github.com/alexghergh/nvim-tmux-navigation
   branch = main
-[submodule "nvim/dot-config/nvim/pack/vendor/opt/blink.cmp"]
-	path = nvim/dot-config/nvim/pack/vendor/opt/blink.cmp
-	url = https://github.com/saghen/blink.cmp
-  branch = main
 [submodule "nvim/dot-config/nvim/pack/vendor/opt/CopilotChat"]
 	path = nvim/dot-config/nvim/pack/vendor/opt/CopilotChat
 	url = https://github.com/CopilotC-Nvim/CopilotChat.nvim
   branch = main
+[submodule "nvim/dot-config/nvim/pack/vendor/opt/cmp"]
+	path = nvim/dot-config/nvim/pack/vendor/opt/cmp
+	url = https://github.com/hrsh7th/nvim-cmp
+[submodule "nvim/dot-config/nvim/pack/vendor/opt/nvim-lsp"]
+	path = nvim/dot-config/nvim/pack/vendor/opt/nvim-lsp
+	url = https://github.com/hrsh7th/cmp-nvim-lsp
+[submodule "nvim/dot-config/nvim/pack/vendor/opt/cmp_buffer"]
+	path = nvim/dot-config/nvim/pack/vendor/opt/cmp_buffer
+	url = https://github.com/hrsh7th/cmp-buffer
+[submodule "nvim/dot-config/nvim/pack/vendor/opt/cmp_nvim_lsp"]
+	path = nvim/dot-config/nvim/pack/vendor/opt/cmp_nvim_lsp
+	url = https://github.com/hrsh7th/cmp-nvim-lsp
+[submodule "nvim/dot-config/nvim/pack/vendor/opt/luasnip"]
+	path = nvim/dot-config/nvim/pack/vendor/opt/luasnip
+	url = https://github.com/L3MON4D3/LuaSnip
+[submodule "nvim/dot-config/nvim/pack/vendor/opt/copilot_cmp"]
+	path = nvim/dot-config/nvim/pack/vendor/opt/copilot_cmp
+	url = https://github.com/zbirenbaum/copilot-cmp
+[submodule "nvim/dot-config/nvim/pack/vendor/opt/cmp_nvim_lua"]
+	path = nvim/dot-config/nvim/pack/vendor/opt/cmp_nvim_lua
+	url = https://github.com/hrsh7th/cmp-nvim-lua
+[submodule "nvim/dot-config/nvim/pack/vendor/opt/cmp_path"]
+	path = nvim/dot-config/nvim/pack/vendor/opt/cmp_path
+	url = https://github.com/hrsh7th/cmp-path
+[submodule "nvim/dot-config/nvim/pack/vendor/opt/cmp_emoji"]
+	path = nvim/dot-config/nvim/pack/vendor/opt/cmp_emoji
+	url = https://github.com/hrsh7th/cmp-emoji
