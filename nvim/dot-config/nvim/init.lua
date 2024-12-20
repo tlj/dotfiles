@@ -13,10 +13,10 @@ require("plugins").setup({
 	-- These are the plugins which are loaded immediately, defined
 	-- only as string. Any configuration needs to be in lua/config/plugins/(name).lua
 	now = {
-		"catppuccin",
+		{ "catppuccin", setup = function() vim.cmd("colorscheme catppuccin-mocha") end },
+		{ "notify", setup = function() vim.notify = require("notify") end },
 		"statusline",
-		"notify",
-		"cmp_nvim_lsp",
+		"cmp_nvim_lsp", -- this is used in lsp.lua to combine capabilities
 	},
 	-- These plugins are loaded later. If there is a minimal config, it should be added here
 	-- to avoid config file noise. If there are several settings and keys which need to be
@@ -53,12 +53,6 @@ require("plugins").setup({
 		{ "lazygit", cmd = { "Lazygit" }, keys = { ["<leader>lg"] = { cmd = ":Lazygit<cr>" } } },
 	},
 })
-
--- Set the colorscheme
-vim.cmd("colorscheme catppuccin-mocha")
-
--- Set the default notifier to the notify plugin
-vim.notify = require("notify")
 
 -- enable LSP
 require("config.lsp")

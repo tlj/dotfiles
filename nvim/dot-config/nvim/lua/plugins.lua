@@ -289,6 +289,8 @@ M.register = function(plugin)
 			end
 		end
 	end
+
+	return name
 end
 
 ---Initialize plugin system
@@ -296,12 +298,11 @@ M.setup = function(plugins)
 	-- Load immediate plugins
 	if plugins.now then
 		for _, plugin in pairs(plugins.now) do
-			-- The immediate plugins must have their configuration in a file
-			-- so we only support string here
-			if type(plugin) == "string" then
-				M.plugins[plugin] = M.load_config(plugin)
-				M.load(plugin)
-			end
+			-- Since the plugin can be either a string or a table,
+			-- we register it and get the name returned from the 
+			-- registration so we can immediately load it
+			local name = M.register(plugin)
+			M.load(name)
 		end
 
 		-- Setup lazy-loaded plugins
