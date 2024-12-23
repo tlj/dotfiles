@@ -86,6 +86,23 @@ Configuration Structure:
 }
 --]]
 
+---@class PluginLoaderSpec
+---@field [1] string Plugin name
+---@field settings? table Configuration passed to plugin's setup() function
+---@field setup? function Custom setup function
+---@field keys? table<string, {cmd: string, desc: string}> Keymaps
+---@field cmd? string|string[] Commands that trigger lazy loading
+---@field requires? string|string[] Dependencies to load first
+---@field events? string[] Events that trigger loading
+---@field ft? string Filetype that triggers loading
+---@field when? string|string[] Plugin to wait for
+---@field pattern? string Pattern for event matching
+
+---@class PluginLoaderSetupConfig
+---@field now? (string|PluginLoaderSpec)[] Plugins to load immediately
+---@field later? (string|PluginLoaderSpec)[] Plugins to load lazily
+
+---@class PluginLoader
 local M = {}
 
 -- Autogroup for plugin-related autocommands
@@ -98,6 +115,8 @@ M.commands = {}
 M.plugins = {}
 
 ---Load plugin configuration from lua/config/plugins/
+---@param plugin string
+---@return table config
 M.load_config = function(plugin)
 	local plugin_cfg = plugin:gsub("%.", "-")
 	local hasconfig, config = pcall(require, "config.plugins." .. plugin_cfg)
@@ -108,6 +127,7 @@ M.load_config = function(plugin)
 end
 
 ---Load a plugin and its dependencies
+---@param plugin string
 M.load = function(plugin)
 	-- Please don't load a plugin which has already been loaded!
 	if M.is_loaded[plugin] then
@@ -156,6 +176,9 @@ M.load = function(plugin)
 end
 
 ---Create a lazy-loaded keymap
+---@param key string
+---@param plugin string
+---@param actual string
 M.load_on_key = function(key, plugin, actual)
 	vim.keymap.set("n", key, function()
 		vim.keymap.del("n", key)
@@ -166,6 +189,8 @@ M.load_on_key = function(key, plugin, actual)
 end
 
 ---Setup lazy-loaded commands
+---@param cmd string|string[]
+---@param plugin string
 M.load_on_commands = function(cmd, plugin)
 	if type(cmd) == "string" then
 		M.load_on_command(cmd, plugin, { nargs = "*" })
@@ -178,6 +203,9 @@ M.load_on_commands = function(cmd, plugin)
 end
 
 ---Create a lazy-loaded command
+---@param cmd string
+---@param plugin string
+---@param opts table
 M.load_on_command = function(cmd, plugin, opts)
 	M.commands[cmd] = { plugin = plugin, opts = opts }
 
@@ -193,6 +221,8 @@ M.load_on_command = function(cmd, plugin, opts)
 	})
 end
 
+---@param plugin string|PluginLoaderSpec
+---@return string plugin_name
 M.register = function(plugin)
 	local name = ""
 	local options = {}
@@ -293,7 +323,14 @@ M.register = function(plugin)
 	return name
 end
 
----Initialize plugin system
+--[[
+Initialize all plugins which will be used in this Neovim configuration. 
+
+There are two sections: ```now``` and ```later```. Plugins listed under
+```now``` are loaded immediately, while the plugins listed under ```later```
+are loaded when one of the triggers are triggered.
+--]]
+---@param plugins PluginLoaderSetupConfig
 M.setup = function(plugins)
 	-- Load immediate plugins
 	if plugins.now then
@@ -315,6 +352,8 @@ M.setup = function(plugins)
 end
 
 ---Add a plugin as a git submodule
+---@param github_path string
+---@param folder_name string
 M.add_plugin = function(github_path, folder_name)
 	local config_path = vim.fn.stdpath("config")
 
@@ -332,6 +371,7 @@ M.add_plugin = function(github_path, folder_name)
 end
 
 ---Remove a plugin submodule
+---@param folder_name string
 M.remove_plugin = function(folder_name)
 	local config_path = vim.fn.stdpath("config")
 	local plugin_path = "pack/vendor/opt/" .. folder_name
