@@ -18,7 +18,11 @@ vim.lsp.config("*", {
 
 -- Enable a list of LSPs  which we have pre-installed on the system
 -- and have configuration for in the lsp/ folder.
-vim.lsp.enable({ "luals", "gopls", "yamlls", "jsonls", "intelephense" })
+if vim.fn.has("nvim-0.11") == 1 then
+	vim.lsp.enable({ "luals", "gopls", "yamlls", "jsonls", "intelephense" })
+else
+	vim.notify("LSP not enabled because of nvim < 0.11")
+end
 
 -- Create autocommands for setting up keymaps and diagnostics when
 -- the LSP has been loaded.

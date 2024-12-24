@@ -1,4 +1,5 @@
-vim.lsp.config.intelephense = {
+---@type vim.lsp.Config
+return {
 	cmd = { "intelephense", "--stdio" },
 	filetypes = { "php" },
 	settings = {

@@ -1,4 +1,5 @@
-vim.lsp.config.arduino_language_server = {
+---@type vim.lsp.Config
+return {
 	cmd = {
 		"arduino-language-server",
 		"-cli-config",

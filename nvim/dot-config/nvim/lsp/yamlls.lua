@@ -1,4 +1,5 @@
-vim.lsp.config.yamlls = {
+---@type vim.lsp.Config
+return {
 	cmd = { "yarn", "dlx", "yaml-language-server", "--stdio" },
 	filetypes = { "yaml", "yaml.docker-compose", "yaml.gitlab" },
 	single_file_support = true,
