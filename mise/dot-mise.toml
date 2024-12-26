@@ -17,5 +17,6 @@ ubi = "latest"
 shfmt = "latest"
 yarn = "latest"
 lua-language-server = "latest"
+lua = "5.1"
 
 "go:github.com/joshmedeski/sesh" = "latest"
