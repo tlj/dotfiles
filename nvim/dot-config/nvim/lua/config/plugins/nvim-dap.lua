@@ -1,14 +1,14 @@
 return {
-	-- cmd = {},
-	requires = { "fzf-lua" },
+	requires = { "ibhagwan/fzf-lua" },
 	settings = {},
-	setup = function()
+	name = "dap",
+	setup = function(_)
 		local dap = require("dap")
 
 		dap.adapters.php = {
-		 type = 'executable',
-		 command = 'node',
-		 args = { vim.fn.expand('$HOME') .. '/src/vscode-php-debug/out/phpDebug.js' }
+			type = "executable",
+			command = "node",
+			args = { vim.fn.expand("$HOME") .. "/src/vscode-php-debug/out/phpDebug.js" },
 		}
 
 		dap.configurations.php = {
@@ -22,10 +22,7 @@ return {
 
 		vim.fn.sign_define("DapBreakpoint", { text = " ", texthl = "", linehl = "", numhl = "" })
 		vim.fn.sign_define("DapBreakpointCondition", { text = " ", texthl = "", linehl = "", numhl = "" })
-		vim.fn.sign_define(
-			"DapBreakpointRejected",
-			{ text = " ", texthl = "DiagnosticError", linehl = "", numhl = "" }
-		)
+		vim.fn.sign_define("DapBreakpointRejected", { text = " ", texthl = "DiagnosticError", linehl = "", numhl = "" })
 		vim.fn.sign_define(
 			"DapStopped",
 			{ text = "󰁕 ", texthl = "DiagnosticWarn", linehl = "DapStoppedLine", numhl = "DapStoppedLine" }
@@ -40,9 +37,7 @@ return {
 		["<F7>"] = { cmd = '<cmd>lua require"dap".step_into()<cr>' },
 		["<F8>"] = { cmd = '<cmd>lua require"dap".step_out()<cr>' },
 		["<leader>de"] = {
-			cmd = function()
-				require("dapui").eval()
-			end,
+			cmd = function() require("dapui").eval() end,
 			desc = "Eval debug",
 			mode = { "n", "v" },
 		},

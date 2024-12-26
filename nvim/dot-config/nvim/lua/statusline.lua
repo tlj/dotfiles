@@ -1,7 +1,6 @@
 -- Customize the statusline without using a plugin
 local M = {}
 
-
 M.icons = require("config.icons")
 M.lsp_update = ""
 
@@ -114,9 +113,7 @@ M.active = function()
 	})
 end
 
-M.inactive = function()
-	return " %F"
-end
+M.inactive = function() return " %F" end
 
 -- Update LSP progress in statusbar, next to the LSP client name
 -- Some of this code is inspired by the LSP progress example for
@@ -129,25 +126,19 @@ M.progress = vim.defaulttable()
 M.setup = function()
 	local status_group = vim.api.nvim_create_augroup("StatusLine", { clear = true })
 	vim.api.nvim_create_autocmd({ "WinEnter", "BufEnter", "FileType", "DiagnosticChanged", "LspAttach", "LspDetach" }, {
-		callback = function()
-			vim.wo.statusline = require("statusline").active()
-		end,
+		callback = function() vim.wo.statusline = require("statusline").active() end,
 		pattern = "*",
 		group = status_group,
 	})
 
 	vim.api.nvim_create_autocmd("User", {
-		callback = function()
-			vim.wo.statusline = require("statusline").active()
-		end,
+		callback = function() vim.wo.statusline = require("statusline").active() end,
 		pattern = "GitSignsUpdate",
 		group = status_group,
 	})
 
 	vim.api.nvim_create_autocmd({ "WinLeave" }, {
-		callback = function()
-			vim.wo.statusline = require("statusline").inactive()
-		end,
+		callback = function() vim.wo.statusline = require("statusline").inactive() end,
 		pattern = "*",
 		group = status_group,
 	})
@@ -157,7 +148,7 @@ M.setup = function()
 		callback = function(ev)
 			local spinner = { "⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏" }
 			M.lsp_update = ev.data.params.value.kind == "end" and " "
-					or spinner[math.floor(vim.uv.hrtime() / (1e6 * 80)) % #spinner + 1]
+				or spinner[math.floor(vim.uv.hrtime() / (1e6 * 80)) % #spinner + 1]
 			vim.wo.statusline = require("statusline").active()
 		end,
 	})

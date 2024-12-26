@@ -1,6 +1,6 @@
 return {
-	cmd = { "CopilotChat", "CopilotChatOpen", "CopilotChatToggle" },
-	requires = { "copilot", "plenary" },
+	cmds = { "CopilotChat", "CopilotChatOpen", "CopilotChatToggle" },
+	requires = { "zbirenbaum/copilot.lua", "nvim-lua/plenary.nvim" },
 	settings = {
 		model = "claude-3.5-sonnet",
 	},

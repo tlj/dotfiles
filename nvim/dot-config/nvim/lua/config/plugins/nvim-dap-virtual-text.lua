@@ -1,5 +1,5 @@
 return {
-	when = { "dap" },
+	after = { "mfussenegger/nvim-dap" },
 	settings = {
 		enabled = true,
 		enabled_commands = true, -- create commands DapVirtualTextEnable, DapVirtualTextDisable, DapVirtualTextToggle, (DapVirtualTextForceRefresh for refreshing when debug adapter did not notify its termination)

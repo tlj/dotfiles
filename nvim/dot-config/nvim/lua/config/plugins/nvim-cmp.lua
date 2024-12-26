@@ -2,7 +2,17 @@ local kind_icons = require("config.icons").kinds
 
 return {
 	events = { "InsertEnter" },
-	requires = { "luasnip", "cmp_buffer", "cmp_nvim_lsp", "copilot_cmp", "cmp_nvim_lua", "cmp_path", "cmp_emoji" },
+	requires = {
+		{ "L3MON4D3/luasnip" },
+		{ "hrsh7th/cmp-buffer", { name = "cmp_buffer", dir = "cmp_buffer" } },
+		{ "hrsh7th/cmp-nvim-lsp", { name = "cmp_nvim_lsp", dir = "cmp-nvim-lsp" } },
+		{ "hrsh7th/cmp-nvim-lua", { name = "cmp_nvim_lua", dir = "cmp_nvim_lua" } },
+		{ "hrsh7th/cmp-path", { name = "cmp_path", dir = "cmp_path" } },
+		{ "hrsh7th/cmp-emoji", { name = "cmp_emoji", dir = "cmp_emoji" } },
+		{ "zbirenbaum/copilot-cmp", { name = "copilot_cmp" } },
+	},
+
+	name = "cmp",
 	setup = function(_)
 		local cmp = require("cmp")
 		local luasnip = require("luasnip")
@@ -20,20 +30,18 @@ return {
 			},
 
 			snippet = {
-				expand = function(args)
-					luasnip.lsp_expand(args.body)
-				end,
+				expand = function(args) luasnip.lsp_expand(args.body) end,
 			},
 
 			preselect = cmp.PreselectMode.None,
 
 			sources = {
-				{ name = "nvim_lsp",               priority = 90 },
-				{ name = "copilot",                priority = 80, keyword_length = 3 },
-				{ name = "nvim_lua",               priority = 70 },
-				{ name = "luasnip",                priority = 30 },
+				{ name = "nvim_lsp", priority = 90 },
+				{ name = "copilot", priority = 80, keyword_length = 3 },
+				{ name = "nvim_lua", priority = 70 },
+				{ name = "luasnip", priority = 30 },
 				{ name = "nvim_lsp_signature_help" },
-				{ name = "buffer",                 keyword_length = 3 },
+				{ name = "buffer", keyword_length = 3 },
 				{ name = "path" },
 				{
 					name = "rg",
@@ -44,7 +52,7 @@ return {
 						additional_arguments = "--max-depth 6 --one-file-system --ignore-file ~/.config/nvim/scripts/rgignore",
 					},
 				},
-				{ name = "emoji",    keyword_length = 2 },
+				{ name = "emoji", keyword_length = 2 },
 				{ name = "nerdfont", keyword_length = 1 },
 			},
 
@@ -113,7 +121,7 @@ return {
 				["<C-Space>"] = cmp.mapping({
 					i = cmp.mapping.complete(),
 					c = function(
-							_ --[[fallback]]
+						_ --[[fallback]]
 					)
 						if cmp.visible() then
 							if not cmp.confirm({ select = true }) then
@@ -161,16 +169,16 @@ return {
 
 			cmp.setup.filetype("gitcommit", {
 				sources = cmp.config.sources({
-					{ name = "git",     priority = 100 },
+					{ name = "git", priority = 100 },
 					{ name = "luasnip", priority = 80 },
-					{ name = "rg",      priority = 50 },
-					{ name = "path",    priority = 10 },
+					{ name = "rg", priority = 50 },
+					{ name = "path", priority = 10 },
 					{ name = "emoji" },
 					{ name = "nerdfont" },
 				}),
 			}),
 
-			vim.keymap.set("n", "<C-Space>", "<cmd>lua require('cmp').complete()<cr>", { noremap = true, silent = true })
+			vim.keymap.set("n", "<C-Space>", "<cmd>lua require('cmp').complete()<cr>", { noremap = true, silent = true }),
 		})
-	end
+	end,
 }

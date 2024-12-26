@@ -32,13 +32,13 @@ keymap("v", "K", ":m .+1<CR>==", opts)
 keymap("x", "<leader>p", [["_dP]])
 
 -- Copy to system clipboard in normal and visual modes
-keymap({"n", "v"}, "<leader>y", [["+y]])
+keymap({ "n", "v" }, "<leader>y", [["+y]])
 
 -- Copy current line to system clipboard in normal mode
 keymap("n", "<leader>Y", [["+Y]])
 
 -- Delete to black hole
-keymap({"n", "v"}, "<leader>d", "\"_d")
+keymap({ "n", "v" }, "<leader>d", '"_d')
 
 -- Exit normal mode with C-c
 keymap("i", "<C-c>", "<Esc>")
@@ -106,4 +106,3 @@ keymap("o", "n", "'Nn'[v:searchforward]", { expr = true, desc = "Next search res
 keymap("n", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev search result" })
 keymap("x", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev search result" })
 keymap("o", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev search result" })
-

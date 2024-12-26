@@ -4,26 +4,20 @@ vim.api.nvim_create_autocmd({ "FocusGained", "TermClose", "TermLeave" }, { comma
 local format_sync_grp = vim.api.nvim_create_augroup("GoFormat", {})
 vim.api.nvim_create_autocmd("BufWritePre", {
 	pattern = "*.go",
-	callback = function()
-		require("go.format").goimport()
-	end,
+	callback = function() require("go.format").goimport() end,
 	group = format_sync_grp,
 })
 
 -- load user mappings (no plugins)
 vim.api.nvim_create_autocmd("User", {
 	pattern = "VeryLazy",
-	callback = function()
-		require("config.mappings")
-	end,
+	callback = function() require("config.mappings") end,
 })
 
 -- Highlight on yank
 vim.api.nvim_create_autocmd("TextYankPost", {
 	desc = "Highlight on yank",
-	callback = function()
-		vim.highlight.on_yank()
-	end,
+	callback = function() vim.highlight.on_yank() end,
 })
 
 -- resize splits if window got resized
@@ -66,4 +60,3 @@ vim.api.nvim_create_autocmd("FileType", {
 		vim.keymap.set("n", "q", "<cmd>close<cr>", { buffer = event.buf, silent = true })
 	end,
 })
-

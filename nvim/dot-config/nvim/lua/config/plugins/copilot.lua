@@ -1,5 +1,5 @@
 return {
-	cmd = { "Copilot" },
+	cmds = { "Copilot" },
 	events = { "InsertEnter" },
 	settings = {
 		suggestion = {

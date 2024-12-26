@@ -1,10 +1,12 @@
 return {
 	events = { "BufReadPre", "BufNewFile" },
-	cmd = { "ConformInfo" },
+	cmds = { "ConformInfo" },
 	settings = {
+		log_level = vim.log.levels.DEBUG,
 		formatters_by_ft = {
 			lua = { "stylua" },
 			sh = { "shfmt" },
+			markdown = { "mdformat" },
 		},
 		formatters = {
 			shfmt = { preprend_args = { "-i", "2" } },
@@ -16,9 +18,7 @@ return {
 	end,
 	keys = {
 		["<leader>oo"] = {
-			cmd = function()
-				require("conform").format({ async = true, lsp_fallback = true })
-			end,
+			cmd = function() require("conform").format({ async = false, lsp_fallback = false }) end,
 			desc = "Format file",
 		},
 	},

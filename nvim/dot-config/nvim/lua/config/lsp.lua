@@ -33,25 +33,10 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		-- Get the detaching client
 		local bufnr = args.buf
 
-		-- Set up keymaps 
-		vim.keymap.set(
-			"n",
-			"gd",
-			"<cmd>FzfLua lsp_definitions<cr>",
-			{ buffer = bufnr, desc = "Fzf Jump to definition" }
-		)
-		vim.keymap.set(
-			"n",
-			"gD",
-			"<cmd>FzfLua lsp_declarations<cr>",
-			{ buffer = bufnr, desc = "Fzf Jump to declaration" }
-		)
-		vim.keymap.set(
-			"n",
-			"gi",
-			"<cmd>FzfLua lsp_implementations<cr>",
-			{ buffer = bufnr, desc = "Fzf Implementations" }
-		)
+		-- Set up keymaps
+		vim.keymap.set("n", "gd", "<cmd>FzfLua lsp_definitions<cr>", { buffer = bufnr, desc = "Fzf Jump to definition" })
+		vim.keymap.set("n", "gD", "<cmd>FzfLua lsp_declarations<cr>", { buffer = bufnr, desc = "Fzf Jump to declaration" })
+		vim.keymap.set("n", "gi", "<cmd>FzfLua lsp_implementations<cr>", { buffer = bufnr, desc = "Fzf Implementations" })
 		vim.keymap.set("n", "gr", "<cmd>FzfLua lsp_references<cr>", { buffer = bufnr, desc = "Fzf References" })
 		vim.keymap.set(
 			"n",
@@ -95,7 +80,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
 		vim.diagnostic.config(diagnostic_config)
 		vim.lsp.handlers["textDocument/publishDiagnostics"] =
-				vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, diagnostic_config)
+			vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, diagnostic_config)
 		vim.lsp.handlers["workspace/diagnostic/refresh"] = function(_, _, ctx)
 			local ns = vim.lsp.diagnostic.get_namespace(ctx.client_id)
 			pcall(vim.diagnostic.reset, ns)

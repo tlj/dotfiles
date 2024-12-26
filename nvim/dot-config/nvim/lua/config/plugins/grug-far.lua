@@ -1,5 +1,5 @@
 return {
-	cmd = { "GrugFar" },
+	cmds = { "GrugFar" },
 	settings = {
 		headerMaxWidth = 80,
 	},

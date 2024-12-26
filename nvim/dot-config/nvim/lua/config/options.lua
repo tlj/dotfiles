@@ -6,7 +6,7 @@ local options = {
 	clipboard = "", -- don't sync with system clipboard, use "+ for clipboard register
 	cmdheight = 2, -- set to 2 to avoid hit-enter prompt
 	completeopt = "menu,menuone,noselect",
-	conceallevel = 0, -- 
+	conceallevel = 0, --
 	confirm = true, -- confirm to save changes before exiting modified buffer
 	cursorline = true, -- enable highlight of current line
 	expandtab = true, -- use space instead of tabs
@@ -33,7 +33,7 @@ local options = {
 	scrolloff = 8, -- number of lines to keep above or below the cursor
 	sessionoptions = { "buffers", "curdir", "tabpages", "winsize", "folds", "globals" },
 	shiftwidth = 2,
-	shortmess = "filnxtToOFWIcC",
+	shortmess = "ltToOCF",
 	showmode = true, -- show mode in the cmd line since we want to avoid using a slow statusline
 	showtabline = 0, -- always show tabs
 	sidescrolloff = 8, -- number of cols to keep to the left or right of cursor
@@ -89,9 +89,7 @@ vim.wo.number = true
 -- https://phelipetls.github.io/posts/extending-vim-with-ripgrep/
 -- and
 -- https://gist.github.com/lalitmee/c379ee6b5163ac3670cfbca9a356b6bb
-local executable = function(e)
-	return vim.fn.executable(e) > 0
-end
+local executable = function(e) return vim.fn.executable(e) > 0 end
 
 local function add(value, str, sep)
 	sep = sep or ","
@@ -114,8 +112,5 @@ vim.api.nvim_create_autocmd("FileType", { pattern = "qf", command = "set nobufli
 vim.api.nvim_create_autocmd("FileType", { pattern = "qf", command = "nnoremap <buffer> q :cclose<cr>", group = qfgrp })
 
 vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
-	callback = function()
-		vim.diagnostic.config({ virtual_text = false, update_in_insert = false })
-	end,
+	callback = function() vim.diagnostic.config({ virtual_text = false, update_in_insert = false }) end,
 })
-

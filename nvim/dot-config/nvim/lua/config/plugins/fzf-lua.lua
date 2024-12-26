@@ -1,6 +1,6 @@
 return {
 	settings = nil,
-	 cmd = { "FzfLua" },
+	cmds = { "FzfLua" },
 	setup = function()
 		require("fzf-lua").setup({
 			"fzf-native",

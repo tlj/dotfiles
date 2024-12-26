@@ -1,6 +1,6 @@
 return {
-	requires = { "nio", "dap" },
-	when = { "dap" },
+	requires = { { "nvim-neotest/nvim-nio", { name = "nio", dir = "nio" } }, "mfussenegger/nvim-dap" },
+	name = "dapui",
 	settings = {
 		layouts = {
 			{
@@ -40,5 +40,5 @@ return {
 	end,
 	keys = {
 		["<leader>dap"] = { cmd = '<cmd>lua require"dapui".toggle()<cr>', desc = "DapUI Toggle" },
-	}
+	},
 }
