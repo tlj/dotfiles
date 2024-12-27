@@ -18,6 +18,8 @@ if vim.fn.isdirectory(graft_path) == 1 then
 	vim.opt.rtp:prepend(graft_path)
 end
 
+require("graft-tools").setup()
+
 -- Load plugins through the graft plugin
 require("graft").setup({
 	now = {
@@ -29,7 +31,7 @@ require("graft").setup({
 		{ "nvim-web-tree/nvim-web-devicons", { settings = { color_icons = true }, events = { "UIEnter" } } },
 		{ "zbirenbaum/copilot.lua", require("config/plugins/copilot") },
 		{ "CopilotC-Nvim/CopilotChat.nvim", require("config/plugins/CopilotChat") },
-		{ "zbirenbaum/copilot-cmp", { when = { "zbirenbaum/copilot-cmp" } } },
+		{ "zbirenbaum/copilot-cmp", { name = "copilot_cmp", after = { "zbirenbaum/copilot" } } },
 		{ "hrsh7th/nvim-cmp", require("config/plugins/nvim-cmp") },
 		{ "alexghergh/nvim-tmux-navigation", require("config/plugins/nvim-tmux-navigation") },
 		{ "stevearc/conform.nvim", require("config/plugins/conform") },
@@ -43,7 +45,7 @@ require("graft").setup({
 		{ "theHamsta/nvim-dap-virtual-text" },
 		{ "leoluz/nvim-dap-go", require("config/plugins/nvim-dap-go") },
 		{ "rcarriga/nvim-dap-ui", require("config/plugins/nvim-dap-ui") },
-		{ "lazygit", { cmd = { "Lazygit" }, keys = { ["<leader>lg"] = { cmd = ":Lazygit<cr>" } } } },
+		{ "lazygit", { cmds = { "Lazygit" }, keys = { ["<leader>lg"] = { cmd = ":Lazygit<cr>" } } } },
 	},
 })
 
