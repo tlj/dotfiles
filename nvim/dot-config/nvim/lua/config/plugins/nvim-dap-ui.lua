@@ -1,5 +1,5 @@
 return {
-	requires = { { "nvim-neotest/nvim-nio", { name = "nio", dir = "nio" } }, "mfussenegger/nvim-dap" },
+	requires = { { "nvim-neotest/nvim-nio", { name = "nio" } }, "mfussenegger/nvim-dap" },
 	name = "dapui",
 	settings = {
 		layouts = {

@@ -1,7 +1,11 @@
 # A minimal left prompt
 #format = """$character"""
+format = """$hostname$directory$sudo$status$character"""
+
+add_newline = false
 
 # move the rest of the prompt to the right
+right_format = """$cmd_duration"""
 #right_format = """$all"""
 
 # A continuation prompt that displays two filled in arrows
@@ -12,71 +16,71 @@ min_time = 500
 format = 'underwent [$duration](bold yellow)'
 
 [hostname]
-ssh_only = false
+ssh_only = true
 
-[git_commit]
-commit_hash_length = 7
-tag_symbol = '🔖 '
+# [git_commit]
+# commit_hash_length = 7
+# tag_symbol = '🔖 '
 
-[git_branch]
-symbol = '🌱 '
-truncation_length = 15
-truncation_symbol = ''
-ignore_branches = ['master', 'main']
+# [git_branch]
+# symbol = '🌱 '
+# truncation_length = 15
+# truncation_symbol = ''
+# ignore_branches = ['master', 'main']
 
-[git_metrics]
-added_style = 'bold blue'
-format = '[+$added]($added_style)/[-$deleted]($deleted_style) '
+# [git_metrics]
+# added_style = 'bold blue'
+# format = '[+$added]($added_style)/[-$deleted]($deleted_style) '
 
-[git_state]
-format = '[\($state( $progress_current of $progress_total)\)]($style) '
-cherry_pick = '[🍒 PICKING](bold red)'
+# [git_state]
+# format = '[\($state( $progress_current of $progress_total)\)]($style) '
+# cherry_pick = '[🍒 PICKING](bold red)'
 
-[git_status]
-conflicted = '🏳'
-ahead = '🏎💨'
-behind = '😰'
-diverged = '😵'
-up_to_date = '✓'
-untracked = '🤷'
-stashed = '📦'
-modified = '📝'
-staged = '[++\($count\)](green)'
-renamed = '👅'
-deleted = '🗑'
+# [git_status]
+# conflicted = '🏳'
+# ahead = '🏎💨'
+# behind = '😰'
+# diverged = '😵'
+# up_to_date = '✓'
+# untracked = '🤷'
+# stashed = '📦'
+# modified = '📝'
+# staged = '[++\($count\)](green)'
+# renamed = '👅'
+# deleted = '🗑'
 
-[golang]
-format = 'via [🏎💨 $version](bold cyan) '
+# [golang]
+# format = 'via [🏎💨 $version](bold cyan) '
 
-[lua]
-format = 'via [🌕 $version](bold blue) '
+# [lua]
+# format = 'via [🌕 $version](bold blue) '
 
-[package]
-format = 'via [🎁 $version](208 bold) '
+# [package]
+# format = 'via [🎁 $version](208 bold) '
 
-[ruby]
-symbol = '🔺 '
+# [ruby]
+# symbol = '🔺 '
 
-[status]
-style = 'bg:blue'
-symbol = '🔴 '
-success_symbol = '🟢 SUCCESS'
-format = '[\[$symbol$common_meaning$signal_name$maybe_int\]]($style) '
-map_symbol = true
-disabled = true
-
-[sudo]
-style = 'bold green'
-symbol = '👩‍💻 '
-disabled = true
-
-[terraform]
-format = '[🏎💨 $workspace]($style) '
-
-[time]
-disabled = true
-format = '🕙[\[ $time \]]($style) '
-time_format = '%T'
-utc_time_offset = '-5'
-time_range = '10:00:00-14:00:00'
-
+# [status]
+# style = 'bg:blue'
+# symbol = '🔴 '
+# success_symbol = '🟢 SUCCESS'
+# format = '[\[$symbol$common_meaning$signal_name$maybe_int\]]($style) '
+# map_symbol = true
+# disabled = true
+#
+# [sudo]
+# style = 'bold green'
+# symbol = '👩‍💻 '
+# disabled = true
+#
+# # [terraform]
+# # format = '[🏎💨 $workspace]($style) '
+#
+# [time]
+# disabled = true
+# format = '🕙[\[ $time \]]($style) '
+# time_format = '%T'
+# utc_time_offset = '-5'
+# time_range = '10:00:00-14:00:00'
+#

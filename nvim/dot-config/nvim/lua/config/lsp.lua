@@ -49,7 +49,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		-- Set up diagnostics
 		local signs = require("config.icons").lsp.diagnostic.signs
 		local diagnostic_config = {
-			virtual_text = true,
+			virtual_text = false,
 			underline = true,
 			update_in_insert = false,
 			float = {
