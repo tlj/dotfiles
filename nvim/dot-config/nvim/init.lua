@@ -36,7 +36,7 @@ local function graft(e)
 	end
 	vim.cmd("packloadall!")
 end
-graft({ "git" })
+graft({ "git", "ui" })
 
 -- Use graft tools to automatically
 require("graft-git").setup({ install_plugins = true, remove_plugins = true })
