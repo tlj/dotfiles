@@ -31,6 +31,10 @@ return {
 					ueberzug_scaler = "cover",
 				},
 			},
+			files = {
+				git_icons = false,
+				file_icons = false,
+			},
 			grep = {
 				rg_opts = "--column --hidden --line-number --no-heading --color=always --smart-case --ignore-file ~/.config/nvim/scripts/rgignore --max-columns=4096 -e",
 			},

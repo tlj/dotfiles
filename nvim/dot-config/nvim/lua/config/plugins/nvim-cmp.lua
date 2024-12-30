@@ -4,11 +4,11 @@ return {
 	events = { "InsertEnter" },
 	requires = {
 		{ "L3MON4D3/luasnip" },
-		{ "hrsh7th/cmp-buffer", { name = "cmp_buffer", dir = "cmp_buffer" } },
-		{ "hrsh7th/cmp-nvim-lsp", { name = "cmp_nvim_lsp", dir = "cmp-nvim-lsp" } },
-		{ "hrsh7th/cmp-nvim-lua", { name = "cmp_nvim_lua", dir = "cmp_nvim_lua" } },
-		{ "hrsh7th/cmp-path", { name = "cmp_path", dir = "cmp_path" } },
-		{ "hrsh7th/cmp-emoji", { name = "cmp_emoji", dir = "cmp_emoji" } },
+		{ "hrsh7th/cmp-buffer", { name = "cmp_buffer" } },
+		{ "hrsh7th/cmp-nvim-lsp", { name = "cmp_nvim_lsp" } },
+		{ "hrsh7th/cmp-nvim-lua", { name = "cmp_nvim_lua" } },
+		{ "hrsh7th/cmp-path", { name = "cmp_path" } },
+		{ "hrsh7th/cmp-emoji", { name = "cmp_emoji" } },
 		{ "zbirenbaum/copilot-cmp", { name = "copilot_cmp" } },
 	},
 

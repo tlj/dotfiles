@@ -3,7 +3,7 @@
 git submodule init
 git submodule update --remote
 
-cd pack/vendor/opt/CopilotChat 
+cd pack/graft/opt/CopilotChat 
 make tiktoken
 cd - > /dev/null
 
