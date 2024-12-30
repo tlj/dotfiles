@@ -12,4 +12,5 @@ go/pkg/
 .npm/
 .cargo/
 .git/
+pack/
 

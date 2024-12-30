@@ -29,7 +29,7 @@ local function graft(e)
 		end
 		local n = x ~= "" and "-" .. x or ""
 		if not pcall(require, "graft" .. n) then
-			vim.fn.system( string.format( "git -C %s submodule add -f https://github.com/tlj/graft%s.nvim.git pack/graft/start/graft%s.nvim", c, n, n))
+			vim.fn.system(string.format("git -C %s submodule add -f https://github.com/tlj/graft%s.nvim.git pack/graft/start/graft%s.nvim", c, n, n))
 			if vim.v.shell_error ~= 0 then error("Failed: graft" .. n .. ".nvim") end
 			package.loaded["graft" .. n] = nil
 		end
@@ -45,10 +45,7 @@ require("graft-ui").setup()
 -- Load plugins through the graft plugin
 require("graft").setup({
 	now = {
-		{
-			"catppuccin/nvim",
-			{ name = "catppuccin", dir = "catppuccin", setup = function() vim.cmd("colorscheme catppuccin-mocha") end },
-		},
+		{ "luisiacc/gruvbox-baby", { setup = function() vim.cmd("colorscheme gruvbox-baby") end } },
 		{
 			"rcarriga/nvim-notify",
 			{ name = "notify", tag = "v3.14.1", setup = function() vim.notify = require("notify") end },
@@ -80,7 +77,9 @@ require("graft").setup({
 -- enable LSP
 require("config.lsp")
 
+-- Force the statusline to be transparent since it is distracting
+vim.cmd('highlight StatusLine guibg=NONE')
+vim.cmd('highlight StatusLineNC guibg=NONE')
+
 -- if neovim is started with a directory as an argument, change to that directory
-if vim.fn.isdirectory(vim.v.argv[2]) == 1 then
-	vim.api.nvim_set_current_dir(vim.v.argv[2])
-end
+if vim.fn.isdirectory(vim.v.argv[2]) == 1 then vim.api.nvim_set_current_dir(vim.v.argv[2]) end

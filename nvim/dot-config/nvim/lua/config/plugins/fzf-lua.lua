@@ -4,6 +4,9 @@ return {
 	setup = function()
 		require("fzf-lua").setup({
 			"fzf-native",
+			file_ignore_patterns = {
+				"pack/graft",
+			},
 			oldfiles = {
 				include_current_session = true,
 				cwd_only = true,

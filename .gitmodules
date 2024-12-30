@@ -76,6 +76,6 @@
 [submodule "nvim/dot-config/nvim/pack/graft/start/cmp-nvim-lsp"]
 	path = nvim/dot-config/nvim/pack/graft/start/cmp-nvim-lsp
 	url = https://github.com/hrsh7th/cmp-nvim-lsp
-[submodule "nvim/dot-config/nvim/pack/graft/start/catppuccin"]
-	path = nvim/dot-config/nvim/pack/graft/start/catppuccin
-	url = https://github.com/catppuccin/nvim
+[submodule "nvim/dot-config/nvim/pack/graft/start/gruvbox-baby"]
+	path = nvim/dot-config/nvim/pack/graft/start/gruvbox-baby
+	url = https://github.com/luisiacc/gruvbox-baby

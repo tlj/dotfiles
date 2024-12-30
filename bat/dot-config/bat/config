@@ -26,5 +26,6 @@
 #--map-syntax ".ignore:Git Ignore"
 
 #--theme="Catppuccin-macchiato"
---theme="Catppuccin-mocha"
+#--theme="Catppuccin-mocha"
 #--theme="gruvbox-material-dark"
+--theme="gruvbox-dark"

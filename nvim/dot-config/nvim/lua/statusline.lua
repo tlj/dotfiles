@@ -104,7 +104,7 @@ M.active = function()
 		M.get_diagnostic_counts(),
 		"%=",
 		M.git_branch(),
-		M.git_status(),
+		-- M.git_status(),
 		M.lsp_clients(),
 		" " .. M.lsp_update,
 		" " .. M.icons.kinds.File .. "%{&filetype}",

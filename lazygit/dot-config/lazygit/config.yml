@@ -2,23 +2,27 @@ gui:
   language: 'en'
   theme:
     activeBorderColor:
-      - '#89b4fa'
+      - '#928374'
       - bold
     inactiveBorderColor:
-      - '#a6adc8'
+      - '#504945'
     optionsTextColor:
       - '#89b4fa'
     selectedLineBgColor:
-      - '#313244'
+      - '#665c54'
     cherryPickedCommitBgColor:
-      - '#45475a'
+      - '#504945'
     cherryPickedCommitFgColor:
-      - '#89b4fa'
+      - '#d5c4a1'
     unstagedChangesColor:
-      - '#f38ba8'
+      - '#d79921'
     defaultFgColor:
-      - '#cdd6f4'
+      - '#ebdbb2'
     searchingActiveBorderColor:
       - '#f9e2af'
   authorColors:
-    '*': '#b4befe'
+    '*': '#b8bb26'
+git:
+  paging:
+    colorArg: always
+    pager: delta --dark --paging=never --syntax-theme=gruvbox-dark
