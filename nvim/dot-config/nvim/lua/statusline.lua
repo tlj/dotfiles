@@ -82,13 +82,13 @@ M.git_status = function()
 	local parts = {}
 
 	if signs.added and signs.added > 0 then
-		table.insert(parts, "%#GitSignsAdd#+" .. signs.added .. "%*")
+		table.insert(parts, "+" .. signs.added .. " ")
 	end
 	if signs.removed and signs.removed > 0 then
-		table.insert(parts, "%#GitSignsDelete#-" .. signs.removed .. "%*")
+		table.insert(parts, "-" .. signs.removed .. " ")
 	end
 	if signs.changed and signs.changed > 0 then
-		table.insert(parts, "%#GitSignsChange#~" .. signs.changed .. "%*")
+		table.insert(parts, "~" .. signs.changed .. " ")
 	end
 
 	if #parts == 0 then
@@ -104,7 +104,7 @@ M.active = function()
 		M.get_diagnostic_counts(),
 		"%=",
 		M.git_branch(),
-		-- M.git_status(),
+		M.git_status(),
 		M.lsp_clients(),
 		" " .. M.lsp_update,
 		" " .. M.icons.kinds.File .. "%{&filetype}",
