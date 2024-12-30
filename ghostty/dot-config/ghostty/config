@@ -12,5 +12,6 @@ auto-update-channel = tip
 # MacOs
 #macos-titlebar-style = hidden
 macos-option-as-alt = true
+macos-titlebar-proxy-icon = hidden
 
 

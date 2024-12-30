@@ -1,7 +1,7 @@
 local kind_icons = require("config.icons").kinds
 
 return {
-	events = { "InsertEnter" },
+	events = { "BufReadPost" },
 	requires = {
 		{ "L3MON4D3/luasnip" },
 		{ "hrsh7th/cmp-buffer", { name = "cmp_buffer" } },
