@@ -7,7 +7,7 @@ theme = GruvboxDark
 bold-is-bright = true
 window-height = 50
 window-width = 160
-auto-update-channel = tip
+auto-update-channel = stable
 quit-after-last-window-closed = true
 
 # MacOs
