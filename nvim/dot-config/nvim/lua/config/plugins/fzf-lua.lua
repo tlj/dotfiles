@@ -3,7 +3,6 @@ return {
 	cmds = { "FzfLua" },
 	setup = function()
 		require("fzf-lua").setup({
-			"fzf-native",
 			file_ignore_patterns = {
 				"pack/graft",
 			},
@@ -26,7 +25,6 @@ return {
 			},
 			previewers = {
 				builtin = {
-					syntax_limit_b = 1024 * 100, -- 100KB
 					extensions = {
 						["png"] = { "viu", "-b" },
 						["jpg"] = { "viu", "-b" },
@@ -106,14 +104,26 @@ return {
 		["<leader>gd"] = { cmd = "<cmd>FzfLua lsp_definitions<cr>", desc = "Fzf Definitions" },
 		["<leader>gD"] = { cmd = "<cmd>FzfLua lsp_declarations<cr>", desc = "Fzf Declarations" },
 		["<leader>gt"] = { cmd = "<cmd>FzfLua lsp_typedefs<cr>", desc = "Fzf Type Definitions" },
-		["<leader>gl"] = { cmd = "<cmd>FzfLua lsp_document_diagnostics<cr>", desc = "Fzf Document Diagnostics" },
+		["<leader>gl"] = {
+			cmd = "<cmd>FzfLua lsp_document_diagnostics<cr>",
+			desc = "Fzf Document Diagnostics",
+		},
 		["<leader>gs"] = { cmd = "<cmd>FzfLua lsp_document_symbols<cr>", desc = "Fzf Document Symbols" },
 
 		["<leader>gj"] = { cmd = "<cmd>FzfLua jumps<cr>", desc = "Fzf Jumps" },
 		["<leader>gh"] = { cmd = "<cmd>FzfLua changes<cr>", desc = "FZf Changes" },
 
-		["<leader>gwl"] = { cmd = "<cmd>FzfLua lsp_workspace_diagnostics<cr>", desc = "Fzf Workspace Diagnostics" },
-		["<leader>gws"] = { cmd = "<cmd>FzfLua lsp_workspace_symbols<cr>", desc = "Fzf Workspace Symbols" },
-		["<leader>gwy"] = { cmd = "<cmd>FzfLua lsp_live_workspace_symbols<cr>", desc = "Fzf Live Workspace Symbols" },
+		["<leader>gwl"] = {
+			cmd = "<cmd>FzfLua lsp_workspace_diagnostics<cr>",
+			desc = "Fzf Workspace Diagnostics",
+		},
+		["<leader>gws"] = {
+			cmd = "<cmd>FzfLua lsp_workspace_symbols<cr>",
+			desc = "Fzf Workspace Symbols",
+		},
+		["<leader>gwy"] = {
+			cmd = "<cmd>FzfLua lsp_live_workspace_symbols<cr>",
+			desc = "Fzf Live Workspace Symbols",
+		},
 	},
 }
