@@ -1,6 +1,5 @@
 return {
 	after = { "mfussenegger/nvim-dap" },
-	name = "dap-go",
 	settings = {
 		dap_configurations = {
 			{

@@ -5,8 +5,8 @@ local M = {}
 
 -- Configuration for the floating window
 local function create_float_config()
-	local width = math.floor(vim.o.columns * 0.8)
-	local height = math.floor(vim.o.lines * 0.8)
+	local width = math.floor(vim.o.columns * 0.9)
+	local height = math.floor(vim.o.lines * 0.9)
 	return {
 		relative = "editor",
 		row = math.floor((vim.o.lines - height) / 2),
@@ -48,7 +48,11 @@ function M.setup()
 	vim.api.nvim_create_user_command("Lazygit", function() create_float_term("lazygit") end, {})
 
 	-- Command to show git log
-	vim.api.nvim_create_user_command("LazygitLog", function() create_float_term("lazygit log") end, {})
+	vim.api.nvim_create_user_command(
+		"LazygitLog",
+		function() create_float_term("lazygit log") end,
+		{}
+	)
 end
 
 return M

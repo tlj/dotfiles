@@ -1,7 +1,6 @@
 return {
 	requires = { "ibhagwan/fzf-lua" },
 	settings = {},
-	name = "dap",
 	setup = function(_)
 		local dap = require("dap")
 
@@ -21,11 +20,22 @@ return {
 		}
 
 		vim.fn.sign_define("DapBreakpoint", { text = " ", texthl = "", linehl = "", numhl = "" })
-		vim.fn.sign_define("DapBreakpointCondition", { text = " ", texthl = "", linehl = "", numhl = "" })
-		vim.fn.sign_define("DapBreakpointRejected", { text = " ", texthl = "DiagnosticError", linehl = "", numhl = "" })
+		vim.fn.sign_define(
+			"DapBreakpointCondition",
+			{ text = " ", texthl = "", linehl = "", numhl = "" }
+		)
+		vim.fn.sign_define(
+			"DapBreakpointRejected",
+			{ text = " ", texthl = "DiagnosticError", linehl = "", numhl = "" }
+		)
 		vim.fn.sign_define(
 			"DapStopped",
-			{ text = "󰁕 ", texthl = "DiagnosticWarn", linehl = "DapStoppedLine", numhl = "DapStoppedLine" }
+			{
+				text = "󰁕 ",
+				texthl = "DiagnosticWarn",
+				linehl = "DapStoppedLine",
+				numhl = "DapStoppedLine",
+			}
 		)
 		vim.fn.sign_define("DapLogPoint", { text = ".>", texthl = "", linehl = "", numhl = "" })
 		vim.api.nvim_set_hl(0, "DapStoppedLine", { default = true, link = "Visual" })
@@ -41,7 +51,10 @@ return {
 			desc = "Eval debug",
 			mode = { "n", "v" },
 		},
-		["<leader>db"] = { cmd = '<cmd>lua require"dap".toggle_breakpoint()<CR>', desc = "Set breakpoint" },
+		["<leader>db"] = {
+			cmd = '<cmd>lua require"dap".toggle_breakpoint()<CR>',
+			desc = "Set breakpoint",
+		},
 		["<leader>dB"] = {
 			cmd = '<cmd>lua require"dap".set_breakpoint(vim.fn.input("Breakpoint condition: "))<cr>',
 			desc = "Conditional breakpoint",
@@ -60,7 +73,13 @@ return {
 		["<leader>do"] = { cmd = '<cmd>lua require"dap".step_over()<CR>', desc = "Step over" },
 		["<leader>di"] = { cmd = '<cmd>lua require"dap".step_into()<CR>', desc = "Step into" },
 		["<leader>dt"] = { cmd = "<cmd>FzfLua dap_commands<CR>", desc = "Telescope DAP commands" },
-		["<leader>dv"] = { cmd = "<cmd>FzfLua dap_variables<CR>", desc = "Telescope DAP active session variables" },
-		["<leader>dw"] = { cmd = '<cmd>lua require"dap.ui.widgets".hover()<CR>', desc = "Hover widgets" },
+		["<leader>dv"] = {
+			cmd = "<cmd>FzfLua dap_variables<CR>",
+			desc = "Telescope DAP active session variables",
+		},
+		["<leader>dw"] = {
+			cmd = '<cmd>lua require"dap.ui.widgets".hover()<CR>',
+			desc = "Hover widgets",
+		},
 	},
 }

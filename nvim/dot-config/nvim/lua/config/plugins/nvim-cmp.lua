@@ -1,7 +1,7 @@
 local kind_icons = require("config.icons").kinds
 
 return {
-	events = { "BufReadPost" },
+	events = { "BufReadPost", "InsertEnter" },
 	requires = {
 		{ "L3MON4D3/luasnip" },
 		{ "hrsh7th/cmp-buffer", { name = "cmp_buffer" } },
@@ -11,8 +11,6 @@ return {
 		{ "hrsh7th/cmp-emoji", { name = "cmp_emoji" } },
 		{ "zbirenbaum/copilot-cmp", { name = "copilot_cmp" } },
 	},
-
-	name = "cmp",
 	setup = function(_)
 		local cmp = require("cmp")
 		local luasnip = require("luasnip")
@@ -124,9 +122,7 @@ return {
 						_ --[[fallback]]
 					)
 						if cmp.visible() then
-							if not cmp.confirm({ select = true }) then
-								return
-							end
+							if not cmp.confirm({ select = true }) then return end
 						else
 							cmp.complete()
 						end
@@ -178,7 +174,12 @@ return {
 				}),
 			}),
 
-			vim.keymap.set("n", "<C-Space>", "<cmd>lua require('cmp').complete()<cr>", { noremap = true, silent = true }),
+			vim.keymap.set(
+				"n",
+				"<C-Space>",
+				"<cmd>lua require('cmp').complete()<cr>",
+				{ noremap = true, silent = true }
+			),
 		})
 	end,
 }

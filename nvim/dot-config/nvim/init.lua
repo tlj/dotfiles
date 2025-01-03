@@ -14,7 +14,7 @@ require("statusline").setup()
 require("config.dev")
 
 -- Ensure that graft and its plugins are installed
-require("config.plugins").graft({"git", "ui"})
+require("config.plugins").graft({ "git", "ui" })
 
 -- Use graft tools to automatically install and remove plugins
 require("graft-git").setup({ install_plugins = true, remove_plugins = true })
@@ -22,18 +22,18 @@ require("graft-ui").setup()
 
 -- Load plugins through the graft plugin
 require("graft").setup({
-	now = {
+	start = {
 		{ "luisiacc/gruvbox-baby", { setup = function() vim.cmd("colorscheme gruvbox-baby") end } },
 		{
 			"rcarriga/nvim-notify",
-			{ name = "notify", tag = "v3.14.1", setup = function() vim.notify = require("notify") end },
+			{ tag = "v3.14.1", setup = function() vim.notify = require("notify") end },
 		},
-		{ "hrsh7th/cmp-nvim-lsp", { name = "cmp_nvim_lsp" } }, -- this is used in lsp.lua to combine capabilities
+		{ "hrsh7th/cmp-nvim-lsp" }, -- this is used in lsp.lua to combine capabilities
 	},
-	later = {
+	opt = {
 		{
 			"nvim-tree/nvim-web-devicons",
-			{ settings = { color_icons = true }, events = { "UIEnter" } },
+			{ settings = { color_icons = true } },
 		},
 		{ "zbirenbaum/copilot.lua", require("config/plugins/copilot") },
 		{ "CopilotC-Nvim/CopilotChat.nvim", require("config/plugins/CopilotChat") },
