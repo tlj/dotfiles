@@ -1,4 +1,5 @@
 return {
+	repo = "zbirenbaum/copilot.lua",
 	cmds = { "Copilot" },
 	events = { "InsertEnter" },
 	settings = {
@@ -8,4 +9,5 @@ return {
 		},
 		panel = { enabled = false },
 	},
+	setup = function(settings) require("copilot").setup(settings) end,
 }

@@ -4,7 +4,9 @@
 --
 -- https://github.com/nvim-treesitter/nvim-treesitter
 return {
+	repo = "nvim-treesitter/nvim-treesitter",
 	events = { "BufReadPre", "BufNewFile" },
+	setup = function(settings) require("nvim-treesitter").setup(settings) end,
 	settings = {
 		ensure_installed = {
 			"bash",

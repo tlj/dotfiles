@@ -1,57 +1,96 @@
--- Set default Neovim options
 require("config.options")
-
--- Set default Neovim options
 require("config.mappings")
-
--- Load autocommands
 require("config.autocmds")
-
--- Load our custom statusline
 require("statusline").setup()
+require("lazygit").setup()
 
--- Set up some things for local development of lua plugins
-require("config.dev")
-
--- Ensure that graft and its plugins are installed
-require("config.plugins").graft({ "git", "ui" })
-
--- Use graft tools to automatically install and remove plugins
-require("graft-git").setup({ install_plugins = true, remove_plugins = true })
-require("graft-ui").setup()
-
--- Load plugins through the graft plugin
+-- Lazy load plugins as they are needed
+local include = require("graft").include
 require("graft").setup({
 	start = {
-		{ "luisiacc/gruvbox-baby", { setup = function() vim.cmd("colorscheme gruvbox-baby") end } },
 		{
-			"rcarriga/nvim-notify",
-			{ tag = "v3.14.1", setup = function() vim.notify = require("notify") end },
+			repo = "luisiacc/gruvbox-baby",
+			setup = function() vim.cmd("colorscheme gruvbox-baby") end,
 		},
-		{ "hrsh7th/cmp-nvim-lsp" }, -- this is used in lsp.lua to combine capabilities
+		{
+			repo = "rcarriga/nvim-notify",
+			setup = function() vim.notify = require("notify") end,
+		},
+		{
+			-- LSP completions for CMP
+			-- Has to be loaded at startup so it can be used in lsp config
+			repo = "hrsh7th/cmp-nvim-lsp",
+		},
 	},
 	opt = {
 		{
-			"nvim-tree/nvim-web-devicons",
-			{ settings = { color_icons = true } },
+			-- Icons for the plugins which require them
+			repo = "nvim-tree/nvim-web-devicons",
+			settings = { color_icons = true },
+			setup = function(settings) require("nvim-web-devicons").setup(settings) end,
 		},
-		{ "zbirenbaum/copilot.lua", require("config/plugins/copilot") },
-		{ "CopilotC-Nvim/CopilotChat.nvim", require("config/plugins/CopilotChat") },
-		{ "zbirenbaum/copilot-cmp", { name = "copilot_cmp", after = { "zbirenbaum/copilot" } } },
-		{ "hrsh7th/nvim-cmp", require("config/plugins/nvim-cmp") },
-		{ "alexghergh/nvim-tmux-navigation", require("config/plugins/nvim-tmux-navigation") },
-		{ "stevearc/conform.nvim", require("config/plugins/conform") },
-		{ "lewis6991/gitsigns.nvim", require("config/plugins/gitsigns") },
-		{ "ibhagwan/fzf-lua", require("config/plugins/fzf-lua") },
-		{ "stevearc/oil.nvim", require("config/plugins/oil") },
-		{ "MagicDuck/grug-far.nvim", require("config/plugins/grug-far") },
-		{ "nvim-treesitter/nvim-treesitter", require("config/plugins/nvim-treesitter") },
-		{ "aaronik/treewalker.nvim", require("config/plugins/treewalker") },
-		{ "mfussenegger/nvim-dap", require("config/plugins/nvim-dap") },
-		{ "theHamsta/nvim-dap-virtual-text" },
-		{ "leoluz/nvim-dap-go", require("config/plugins/nvim-dap-go") },
-		{ "rcarriga/nvim-dap-ui", require("config/plugins/nvim-dap-ui") },
-		{ "lazygit", { cmds = { "Lazygit" }, keys = { ["<leader>lg"] = { cmd = ":Lazygit<cr>" } } } },
+
+		-- AI stuff
+		include("zbirenbaum/copilot.lua"),
+		include("CopilotC-Nvim/CopilotChat.nvim"),
+
+		-- nvim-cmp stuff
+		{
+			repo = "zbirenbaum/copilot-cmp",
+			setup = function(_) require("copilot_cmp").setup() end,
+			after = { "zbirenbaum/copilot.lua" },
+		},
+		include("hrsh7th/nvim-cmp"),
+		{
+			repo = "hrsh7th/cmp-buffer",
+			after = { "hrsh7th/nvim-cmp" },
+			setup = function() require("cmp").register_source("buffer", require("cmp_buffer")) end,
+		},
+		{
+			repo = "hrsh7th/cmp-nvim-lua",
+			after = { "hrsh7th/nvim-cmp" },
+			setup = function() require("cmp").register_source("nvim_lua", require("cmp_nvim_lua").new()) end,
+		},
+		{
+			repo = "hrsh7th/cmp-path",
+			after = { "hrsh7th/nvim-cmp" },
+			setup = function() require("cmp").register_source("path", require("cmp_path").new()) end,
+		},
+		{
+			repo = "hrsh7th/cmp-emoji",
+			after = { "hrsh7th/nvim-cmp" },
+			setup = function() require("cmp").register_source("emoji", require("cmp_emoji").new()) end,
+		},
+
+		-- Code formatting
+		include("stevearc/conform.nvim"),
+
+		-- Git
+		include("lewis6991/gitsigns.nvim"),
+
+		-- File management and fuzzy finding
+		include("ibhagwan/fzf-lua"),
+		include("stevearc/oil.nvim"),
+
+		-- TMUX navigation (ctrl-hjkl to switch between nvim and tmux
+		include("alexghergh/nvim-tmux-navigation"),
+
+		-- search and replace
+		include("MagicDuck/grug-far"),
+
+		-- treesitter
+		include("nvim-treesitter/nvim-treesitter"),
+		include("aaronik/treewalker.nvim"),
+
+		-- dap debugger
+		include("mfussenegger/nvim-dap"),
+		{
+			repo = "theHamsta/nvim-dap-virtual-text",
+			after = { "mfussenegger/nvim-dap" },
+			setup = function() require("nvim-dap-virtual-text").setup() end,
+		},
+		include("leoluz/nvim-dap-go"),
+		include("rcarriga/nvim-dap-ui"),
 	},
 })
 

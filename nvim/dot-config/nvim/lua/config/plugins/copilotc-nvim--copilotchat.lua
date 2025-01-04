@@ -1,6 +1,8 @@
 return {
+	repo = "CopilotC-Nvim/CopilotChat.nvim",
 	cmds = { "CopilotChat", "CopilotChatOpen", "CopilotChatToggle" },
 	requires = { "zbirenbaum/copilot.lua", "nvim-lua/plenary.nvim" },
+	setup = function(settings) require("CopilotChat").setup(settings) end,
 	settings = {
 		model = "claude-3.5-sonnet",
 	},
@@ -10,7 +12,7 @@ return {
 			cmd = function()
 				local input = vim.fn.input("Quick Chat: ")
 				if input ~= "" then
-					require("CopilotChat").ask(input, { selection = require("CopilotChat.select").buffer })
+					require("lua.config.plugins.copilotc-nvim--copilotchat").ask(input, { selection = require("CopilotChat.select").buffer })
 				end
 			end,
 			desc = "CopilotChat - Quick chat",

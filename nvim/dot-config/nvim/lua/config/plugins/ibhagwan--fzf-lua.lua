@@ -1,4 +1,5 @@
 return {
+	repo = "ibhagwan/fzf-lua",
 	settings = nil,
 	cmds = { "FzfLua" },
 	setup = function()

@@ -9,7 +9,7 @@
       "${3rd}/luv/library"
     ],
     "checkThirdParty": false,
-    "maxPreload": 2000,
+    "maxPreload": 4000,
     "preloadFileSize": 1000
   },
   "diagnostics": {

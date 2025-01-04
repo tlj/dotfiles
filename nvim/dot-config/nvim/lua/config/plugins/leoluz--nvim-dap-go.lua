@@ -1,5 +1,7 @@
 return {
+	repo = "leoluz/nvim-dap-go",
 	after = { "mfussenegger/nvim-dap" },
+	setup = function(settings) require("dap-go").setup(settings) end,
 	settings = {
 		dap_configurations = {
 			{

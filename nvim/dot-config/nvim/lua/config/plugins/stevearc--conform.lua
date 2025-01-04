@@ -1,4 +1,5 @@
 return {
+	repo = "stevearc/conform.nvim",
 	events = { "BufReadPre", "BufNewFile" },
 	cmds = { "ConformInfo" },
 	settings = {

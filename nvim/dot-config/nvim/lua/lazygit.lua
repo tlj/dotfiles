@@ -53,6 +53,9 @@ function M.setup()
 		function() create_float_term("lazygit log") end,
 		{}
 	)
+
+	vim.keymap.set("n", "<leader>lg", ":Lazygit<cr>", { desc = "LazyGit", noremap = false, silent = true })
+	vim.keymap.set("n", "<leader>ll", ":LazygitLog<cr>", { desc = "LazyGit Log", noremap = false, silent = true })
 end
 
 return M

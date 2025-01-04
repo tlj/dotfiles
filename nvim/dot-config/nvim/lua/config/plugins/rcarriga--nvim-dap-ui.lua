@@ -1,5 +1,6 @@
 return {
-	requires = { { "nvim-neotest/nvim-nio", { name = "nio" } }, "mfussenegger/nvim-dap" },
+	repo = "rcarriga/nvim-dap-ui",
+	requires = { "nvim-neotest/nvim-nio", "mfussenegger/nvim-dap" },
 	settings = {
 		layouts = {
 			{

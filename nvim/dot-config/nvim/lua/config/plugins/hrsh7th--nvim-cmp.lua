@@ -1,15 +1,11 @@
 local kind_icons = require("config.icons").kinds
 
 return {
+	repo = "hrsh7th/nvim-cmp",
 	events = { "BufReadPost", "InsertEnter" },
 	requires = {
-		{ "L3MON4D3/luasnip" },
-		{ "hrsh7th/cmp-buffer", { name = "cmp_buffer" } },
-		{ "hrsh7th/cmp-nvim-lsp", { name = "cmp_nvim_lsp" } },
-		{ "hrsh7th/cmp-nvim-lua", { name = "cmp_nvim_lua" } },
-		{ "hrsh7th/cmp-path", { name = "cmp_path" } },
-		{ "hrsh7th/cmp-emoji", { name = "cmp_emoji" } },
-		{ "zbirenbaum/copilot-cmp", { name = "copilot_cmp" } },
+		{ repo = "L3MON4D3/luasnip", setup = function() require("luasnip").setup() end },
+		-- { repo = "zbirenbaum/copilot-cmp" },
 	},
 	setup = function(_)
 		local cmp = require("cmp")

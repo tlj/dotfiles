@@ -79,3 +79,12 @@
 [submodule "nvim/dot-config/nvim/pack/graft/opt/plenary.nvim"]
 	path = nvim/dot-config/nvim/pack/graft/opt/plenary.nvim
 	url = https://github.com/nvim-lua/plenary.nvim
+[submodule "nvim/dot-config/nvim/pack/graft/opt/CopilotC-Nvim--CopilotChat.nvim"]
+	path = nvim/dot-config/nvim/pack/graft/opt/CopilotC-Nvim--CopilotChat.nvim
+	url = https://github.com/CopilotC-Nvim/CopilotChat.nvim
+[submodule "nvim/dot-config/nvim/pack/graft/opt/MagicDuck--grug-far.nvim"]
+	path = nvim/dot-config/nvim/pack/graft/opt/MagicDuck--grug-far.nvim
+	url = https://github.com/MagicDuck/grug-far.nvim
+[submodule "nvim/dot-config/nvim/pack/graft/opt/copilotc-nvim--copilotchat.nvim"]
+	path = nvim/dot-config/nvim/pack/graft/opt/copilotc-nvim--copilotchat.nvim
+	url = https://github.com/CopilotC-Nvim/CopilotChat.nvim

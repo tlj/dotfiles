@@ -1,5 +1,7 @@
 return {
+	repo = "lewis6991/gitsigns.nvim",
 	events = { "BufReadPre" },
+	setup = function(settings) require("gitsigns").setup(settings) end,
 	settings = {
 		on_attach = function(bufnr)
 			local gs = package.loaded.gitsigns
@@ -11,17 +13,13 @@ return {
 
 			-- navigation
 			map("n", "]c", function()
-				if vim.wo.diff then
-					return "]c"
-				end
+				if vim.wo.diff then return "]c" end
 				vim.schedule(function() gs.next_hunk() end)
 				return "<Ignore>"
 			end, { expr = true, desc = "Next git hunk" })
 
 			map("n", "[c", function()
-				if vim.wo.diff then
-					return "[c"
-				end
+				if vim.wo.diff then return "[c" end
 				vim.schedule(function() gs.prev_hunk() end)
 				return "<Ignore>"
 			end, { expr = true, desc = "Prev git hunk" })

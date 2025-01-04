@@ -1,4 +1,5 @@
 return {
+	repo = "mfussenegger/nvim-dap",
 	requires = { "ibhagwan/fzf-lua" },
 	settings = {},
 	setup = function(_)
