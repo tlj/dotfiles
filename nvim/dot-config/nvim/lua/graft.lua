@@ -215,17 +215,17 @@ local function url(repo) return "https://github.com/" .. repo end
 ---@return boolean
 M.install = function(repo)
 	if vim.fn.isdirectory(path(repo)) == 0 then
-		local nid = vim.notify("Installing plugin... ", "info", { title = repo, timeout = 1000 })
+		local nid = vim.notify(repo .. ": installing plugin... ", "info", { title = "Plugins", timeout = 1000 })
 
 		local success, output = git({ "submodule", "add", "-f", url(repo), pack_dir(repo) })
 		if not success then
-			vim.notify("Error: " .. vim.inspect(output), "error", { title = repo, replace = nid, timeout = 5000 })
+			vim.notify(repo .. ": Error: " .. vim.inspect(output), "error", { title = "Plugins", replace = nid, timeout = 5000 })
 			return false
 		end
 
 		vim.cmd("helptags ALL")
 
-		vim.notify("Installed.", "info", { title = repo, replace = nid, timeout = 1000 })
+		vim.notify(repo .. ": installed.", "info", { title = "Plugins", replace = nid, timeout = 1000 })
 	end
 
 	return true

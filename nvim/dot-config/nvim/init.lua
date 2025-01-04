@@ -1,18 +1,27 @@
+-- Set up some Neovim options, mappings and auto commands
 require("config.options")
 require("config.mappings")
 require("config.autocmds")
+
+-- Load my own embedded plugins
 require("statusline").setup()
 require("lazygit").setup()
 
--- Lazy load plugins as they are needed
+-- Use the include() method as shorthand for including a plugin spec defined
+-- in the lua/config/plugins folder. Use this if the spec is more than ~5 lines
+-- to keep the init file clean, but for smaller definitions we define them
+-- here. We don't do automatic loading of spec files, since we want to be explicit
+-- about what we load.
 local include = require("graft").include
 require("graft").setup({
 	start = {
 		{
+			-- gruvbox is objectively the best colorscheme, as it is not blue
 			"luisiacc/gruvbox-baby",
 			function() vim.cmd("colorscheme gruvbox-baby") end,
 		},
 		{
+			-- pretty notifications - not strictly nece
 			"rcarriga/nvim-notify",
 			function()
 				local notify = require("notify")
@@ -21,20 +30,20 @@ require("graft").setup({
 			end,
 		},
 		-- LSP completions for CMP
-		-- Has to be loaded at startup so it can be used in lsp config
+		-- Has to be loaded at startup so it can be used in v0.11 style lsp config
 		"hrsh7th/cmp-nvim-lsp",
 	},
 	opt = {
 		{
-			-- Icons for the plugins which require them
+			-- Icons for the plugins which require them - currently only Oil.nvim
 			"nvim-tree/nvim-web-devicons",
 			function(settings) require("nvim-web-devicons").setup(settings) end,
 			settings = { color_icons = true },
 		},
 
 		-- AI stuff
-		include("zbirenbaum/copilot.lua"),
-		include("CopilotC-Nvim/CopilotChat.nvim"),
+		include("zbirenbaum/copilot.lua"), -- for autocomplete
+		include("CopilotC-Nvim/CopilotChat.nvim"), -- for chat
 
 		-- nvim-cmp stuff
 		{
@@ -43,36 +52,16 @@ require("graft").setup({
 			after = { "zbirenbaum/copilot.lua" },
 		},
 		include("hrsh7th/nvim-cmp"),
-		{
-			"hrsh7th/cmp-buffer",
-			function() require("cmp").register_source("buffer", require("cmp_buffer")) end,
-			after = { "hrsh7th/nvim-cmp" },
-		},
-		{
-			"hrsh7th/cmp-nvim-lua",
-			function() require("cmp").register_source("nvim_lua", require("cmp_nvim_lua").new()) end,
-			after = { "hrsh7th/nvim-cmp" },
-		},
-		{
-			"hrsh7th/cmp-path",
-			function() require("cmp").register_source("path", require("cmp_path").new()) end,
-			after = { "hrsh7th/nvim-cmp" },
-		},
-		{
-			"hrsh7th/cmp-emoji",
-			function() require("cmp").register_source("emoji", require("cmp_emoji").new()) end,
-			after = { "hrsh7th/nvim-cmp" },
-		},
 
 		-- Code formatting
 		include("stevearc/conform.nvim"),
 
-		-- Git
+		-- Git signs
 		include("lewis6991/gitsigns.nvim"),
 
 		-- File management and fuzzy finding
-		include("ibhagwan/fzf-lua"),
-		include("stevearc/oil.nvim"),
+		include("ibhagwan/fzf-lua"), -- fuzzy finding
+		include("stevearc/oil.nvim"), -- file management
 
 		-- TMUX navigation (ctrl-hjkl to switch between nvim and tmux
 		include("alexghergh/nvim-tmux-navigation"),
@@ -82,7 +71,7 @@ require("graft").setup({
 
 		-- treesitter
 		include("nvim-treesitter/nvim-treesitter"),
-		include("aaronik/treewalker.nvim"),
+		include("aaronik/treewalker.nvim"), -- navigate through elements on the same indent level
 
 		-- dap debugger
 		include("mfussenegger/nvim-dap"),

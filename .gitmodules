@@ -157,3 +157,9 @@
 [submodule "nvim/dot-config/nvim/pack/graft/opt/zbirenbaum--copilot.lua"]
 	path = nvim/dot-config/nvim/pack/graft/opt/zbirenbaum--copilot.lua
 	url = https://github.com/zbirenbaum/copilot.lua
+[submodule "nvim/dot-config/nvim/pack/graft/opt/hrsh7th--cmp-nvim-lsp-signature-help"]
+	path = nvim/dot-config/nvim/pack/graft/opt/hrsh7th--cmp-nvim-lsp-signature-help
+	url = https://github.com/hrsh7th/cmp-nvim-lsp-signature-help
+[submodule "nvim/dot-config/nvim/pack/graft/opt/lukas-reineke--cmp-rg"]
+	path = nvim/dot-config/nvim/pack/graft/opt/lukas-reineke--cmp-rg
+	url = https://github.com/lukas-reineke/cmp-rg

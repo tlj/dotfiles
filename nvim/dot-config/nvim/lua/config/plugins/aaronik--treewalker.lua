@@ -20,5 +20,9 @@ return {
 		["<Down>"] = { cmd = "<cmd>:Treewalker Down<cr>", desc = "Next node" },
 		["<Left>"] = { cmd = "<cmd>:Treewalker Left<cr>", desc = "Outer node" },
 		["<Right>"] = { cmd = "<cmd>:Treewalker Right<cr>", desc = "Inner node" },
+		["<S-Up>"] = { cmd = "<cmd>Treewalker SwapUp<cr>", desc = "Swap with previous node" },
+		["<S-Down>"] = { cmd = "<cmd>:Treewalker SwapDown<cr>", desc = "Swap with next node" },
+		["<S-Left>"] = { cmd = "<cmd>:Treewalker SwapLeft<cr>", desc = "Swap with left node" },
+		["<S-Right>"] = { cmd = "<cmd>:Treewalker SwapRight<cr>", desc = "Swap with right node" },
 	},
 }

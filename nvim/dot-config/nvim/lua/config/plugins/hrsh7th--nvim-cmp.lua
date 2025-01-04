@@ -4,14 +4,29 @@ return {
 	repo = "hrsh7th/nvim-cmp",
 	events = { "BufReadPost", "InsertEnter" },
 	requires = {
-		{ repo = "L3MON4D3/luasnip", setup = function() require("luasnip").setup() end },
-		-- { repo = "zbirenbaum/copilot-cmp" },
+		{ "L3MON4D3/luasnip", setup = function() require("luasnip").setup() end },
+		"hrsh7th/cmp-buffer",
+		"hrsh7th/cmp-nvim-lua",
+		"hrsh7th/cmp-nvim-lsp-signature-help",
+		"hrsh7th/cmp-path",
+		"hrsh7th/cmp-emoji",
 	},
 	setup = function(_)
 		local cmp = require("cmp")
 		local luasnip = require("luasnip")
 
 		vim.api.nvim_set_hl(0, "CmpItemKindCopilot", { fg = "#6CC644" })
+
+		-- Make autocomplete from text int he current buffer
+		cmp.register_source("buffer", require("cmp_buffer"))
+		-- Autocomplete for neovim lua api
+		cmp.register_source("nvim_lua", require("cmp_nvim_lua").new())
+		-- Show signature help when inside of method arguments
+		cmp.register_source("nvim_lsp_signature_help", require("cmp_nvim_lsp_signature_help").new())
+		-- Autocomplete file system paths
+		cmp.register_source("path", require("cmp_path").new())
+		-- Example :heart:<c-space> will replace the text with a emoji heart ❤️
+		cmp.register_source("emoji", require("cmp_emoji").new())
 
 		cmp.setup({
 			completion = {
@@ -40,8 +55,7 @@ return {
 				{
 					name = "rg",
 					keyword_length = 3,
-					priority = 5,
-					group_index = 5,
+					-- priority = 5,
 					option = {
 						additional_arguments = "--max-depth 6 --one-file-system --ignore-file ~/.config/nvim/scripts/rgignore",
 					},
