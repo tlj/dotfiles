@@ -12,6 +12,7 @@ local M = {
 ---@field settings? table
 ---@field auto_install? boolean Defaults to true
 ---@field events? string[] Events which triggers loading of plugin
+---@field cmds? string[] A list of commands which will load the plugin
 ---@field pattern? string[] Patterns which are required for loading the plugin
 ---@field after? string[] Plugins which trigger loading of this plugin (list of repos)
 ---@field keys? table<string, {cmd:string|function, desc: string}> Keymaps with commands (string or function) and description
@@ -32,12 +33,20 @@ end
 
 ---@param arg string|tlj.Plugin
 ---@return tlj.Plugin
-local function repo_or_spec(arg)
+local function normalize_spec(arg)
 	local spec = {}
 
 	if type(arg) == "string" then
 		spec.repo = arg
 	elseif type(arg) == "table" then
+		if type(arg[1]) == "string" then
+			arg.repo = arg[1]
+			arg[1] = nil
+		end
+		if type(arg[2]) == "function" then
+			arg.setup = arg[2]
+			arg[2] = nil
+		end
 		spec = arg
 	else
 		vim.notify("Argument to add() should be string or table.", vim.log.levels.ERROR)
@@ -63,6 +72,27 @@ local function register_events(spec)
 			pattern = spec.pattern or "*",
 			callback = function() M.load(spec.repo) end,
 			once = true, -- we only need this to happen once
+		})
+	end
+end
+
+-- Register a proxy user command which will load the plugin and then
+-- trigger the command on the plugin
+---@param spec tlj.Plugin
+local function register_cmds(spec)
+	for _, cmd in ipairs(spec.cmds or {}) do
+		-- Register a command for each given commands
+		vim.api.nvim_create_user_command(cmd, function(args)
+			-- When triggered, delete this command
+			vim.api.nvim_del_user_command(cmd)
+
+			-- Then load the plugin
+			M.load(spec.repo)
+
+			-- Then trigger the original command
+			vim.cmd(string.format("%s %s", cmd, args.args))
+		end, {
+			nargs = "*",
 		})
 	end
 end
@@ -105,7 +135,7 @@ M.add = function(arg)
 
 	-- argument can be either just the repo path, or the
 	-- full spec, so let's handle both.
-	local spec = repo_or_spec(arg)
+	local spec = normalize_spec(arg)
 	spec = vim.tbl_extend("force", defaults, spec)
 
 	-- If repo is already registered, then ignore it
@@ -118,6 +148,9 @@ M.add = function(arg)
 			M.add(req)
 		end
 	end
+
+	-- Register commands for lazy loading the plugin
+	register_cmds(spec)
 
 	-- Register lazy loading events
 	register_events(spec)
@@ -147,19 +180,15 @@ M.load = function(repo)
 	-- If this plugin is not installed yet, let's just skip it
 	if vim.fn.isdirectory(path(repo)) == 0 then
 		if spec.auto_install then
-			vim.notify("Installing " .. path(repo), vim.log.levels.INFO)
 			local success = M.install(repo)
-			if not success then
-				vim.notify("Failed install", vim.log.levels.ERROR)
-				return
-			end
+			if not success then return end
 		else
 			return
 		end
 	end
 
 	for _, req in ipairs(spec.requires or {}) do
-		local req_spec = repo_or_spec(req)
+		local req_spec = normalize_spec(req)
 		M.load(req_spec.repo)
 	end
 
@@ -181,26 +210,22 @@ end
 
 local function url(repo) return "https://github.com/" .. repo end
 
--- Update status in neovim without user input
----@param msg string
-local function show_status(msg)
-	vim.cmd.redraw()
-	vim.cmd.echo("'" .. msg .. "'")
-end
-
 -- Ensure all plugins are installed
 ---@param repo string
 ---@return boolean
 M.install = function(repo)
 	if vim.fn.isdirectory(path(repo)) == 0 then
-		show_status("Installing " .. repo .. "...")
+		local nid = vim.notify("Installing plugin... ", "info", { title = repo, timeout = 1000 })
+
 		local success, output = git({ "submodule", "add", "-f", url(repo), pack_dir(repo) })
 		if not success then
-			vim.notify("Error installing " .. repo .. ": " .. vim.inspect(output), vim.log.levels.ERROR)
+			vim.notify("Error: " .. vim.inspect(output), "error", { title = repo, replace = nid, timeout = 5000 })
 			return false
 		end
 
 		vim.cmd("helptags ALL")
+
+		vim.notify("Installed.", "info", { title = repo, replace = nid, timeout = 1000 })
 	end
 
 	return true
