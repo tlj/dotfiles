@@ -97,12 +97,21 @@
 [submodule "nvim/dot-config/nvim/pack/graft/opt/alexghergh--nvim-tmux-navigation"]
 	path = nvim/dot-config/nvim/pack/graft/opt/alexghergh--nvim-tmux-navigation
 	url = https://github.com/alexghergh/nvim-tmux-navigation
-[submodule "nvim/dot-config/nvim/pack/graft/opt/zbirenbaum--copilot.lua"]
-	path = nvim/dot-config/nvim/pack/graft/opt/zbirenbaum--copilot.lua
-	url = https://github.com/zbirenbaum/copilot.lua
-[submodule "nvim/dot-config/nvim/pack/graft/opt/zbirenbaum--copilot-cmp"]
-	path = nvim/dot-config/nvim/pack/graft/opt/zbirenbaum--copilot-cmp
-	url = https://github.com/zbirenbaum/copilot-cmp
+[submodule "nvim/dot-config/nvim/pack/graft/opt/ibhagwan--fzf-lua"]
+	path = nvim/dot-config/nvim/pack/graft/opt/ibhagwan--fzf-lua
+	url = https://github.com/ibhagwan/fzf-lua
+[submodule "nvim/dot-config/nvim/pack/graft/opt/stevearc--conform.nvim"]
+	path = nvim/dot-config/nvim/pack/graft/opt/stevearc--conform.nvim
+	url = https://github.com/stevearc/conform.nvim
+[submodule "nvim/dot-config/nvim/pack/graft/opt/lewis6991--gitsigns.nvim"]
+	path = nvim/dot-config/nvim/pack/graft/opt/lewis6991--gitsigns.nvim
+	url = https://github.com/lewis6991/gitsigns.nvim
+[submodule "nvim/dot-config/nvim/pack/graft/opt/nvim-treesitter--nvim-treesitter"]
+	path = nvim/dot-config/nvim/pack/graft/opt/nvim-treesitter--nvim-treesitter
+	url = https://github.com/nvim-treesitter/nvim-treesitter
+[submodule "nvim/dot-config/nvim/pack/graft/opt/aaronik--treewalker.nvim"]
+	path = nvim/dot-config/nvim/pack/graft/opt/aaronik--treewalker.nvim
+	url = https://github.com/aaronik/treewalker.nvim
 [submodule "nvim/dot-config/nvim/pack/graft/opt/hrsh7th--nvim-cmp"]
 	path = nvim/dot-config/nvim/pack/graft/opt/hrsh7th--nvim-cmp
 	url = https://github.com/hrsh7th/nvim-cmp
@@ -121,30 +130,15 @@
 [submodule "nvim/dot-config/nvim/pack/graft/opt/hrsh7th--cmp-emoji"]
 	path = nvim/dot-config/nvim/pack/graft/opt/hrsh7th--cmp-emoji
 	url = https://github.com/hrsh7th/cmp-emoji
-[submodule "nvim/dot-config/nvim/pack/graft/opt/ibhagwan--fzf-lua"]
-	path = nvim/dot-config/nvim/pack/graft/opt/ibhagwan--fzf-lua
-	url = https://github.com/ibhagwan/fzf-lua
 [submodule "nvim/dot-config/nvim/pack/graft/opt/stevearc--oil.nvim"]
 	path = nvim/dot-config/nvim/pack/graft/opt/stevearc--oil.nvim
 	url = https://github.com/stevearc/oil.nvim
 [submodule "nvim/dot-config/nvim/pack/graft/opt/nvim-tree--nvim-web-devicons"]
 	path = nvim/dot-config/nvim/pack/graft/opt/nvim-tree--nvim-web-devicons
 	url = https://github.com/nvim-tree/nvim-web-devicons
-[submodule "nvim/dot-config/nvim/pack/graft/opt/stevearc--conform.nvim"]
-	path = nvim/dot-config/nvim/pack/graft/opt/stevearc--conform.nvim
-	url = https://github.com/stevearc/conform.nvim
-[submodule "nvim/dot-config/nvim/pack/graft/opt/lewis6991--gitsigns.nvim"]
-	path = nvim/dot-config/nvim/pack/graft/opt/lewis6991--gitsigns.nvim
-	url = https://github.com/lewis6991/gitsigns.nvim
-[submodule "nvim/dot-config/nvim/pack/graft/opt/nvim-treesitter--nvim-treesitter"]
-	path = nvim/dot-config/nvim/pack/graft/opt/nvim-treesitter--nvim-treesitter
-	url = https://github.com/nvim-treesitter/nvim-treesitter
-[submodule "nvim/dot-config/nvim/pack/graft/opt/aaronik--treewalker.nvim"]
-	path = nvim/dot-config/nvim/pack/graft/opt/aaronik--treewalker.nvim
-	url = https://github.com/aaronik/treewalker.nvim
-[submodule "nvim/dot-config/nvim/pack/graft/opt/magicduck--grug-far.nvim"]
-	path = nvim/dot-config/nvim/pack/graft/opt/magicduck--grug-far.nvim
-	url = https://github.com/MagicDuck/grug-far.nvim
+[submodule "nvim/dot-config/nvim/pack/graft/opt/zbirenbaum--copilot-cmp"]
+	path = nvim/dot-config/nvim/pack/graft/opt/zbirenbaum--copilot-cmp
+	url = https://github.com/zbirenbaum/copilot-cmp
 [submodule "nvim/dot-config/nvim/pack/graft/opt/rcarriga--nvim-dap-ui"]
 	path = nvim/dot-config/nvim/pack/graft/opt/rcarriga--nvim-dap-ui
 	url = https://github.com/rcarriga/nvim-dap-ui
@@ -160,3 +154,6 @@
 [submodule "nvim/dot-config/nvim/pack/graft/opt/leoluz--nvim-dap-go"]
 	path = nvim/dot-config/nvim/pack/graft/opt/leoluz--nvim-dap-go
 	url = https://github.com/leoluz/nvim-dap-go
+[submodule "nvim/dot-config/nvim/pack/graft/opt/zbirenbaum--copilot.lua"]
+	path = nvim/dot-config/nvim/pack/graft/opt/zbirenbaum--copilot.lua
+	url = https://github.com/zbirenbaum/copilot.lua
