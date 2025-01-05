@@ -1,4 +1,5 @@
 return {
+	repo = "theHamsta/nvim-dap-virtual-text",
 	after = { "mfussenegger/nvim-dap" },
 	settings = {
 		enabled = true,

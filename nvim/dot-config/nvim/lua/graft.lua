@@ -165,6 +165,13 @@ M.add = function(arg)
 end
 
 ---@param repo string
+---@return string
+local function get_repo_require_path(repo)
+	local name = repo:match("[^/]+$")
+	return name:gsub("%.lua$", ""):gsub("%.nvim$", "")
+end
+
+---@param repo string
 M.load = function(repo)
 	-- Don't load again if already loaded
 	if M.loaded[repo] then return end
@@ -196,7 +203,13 @@ M.load = function(repo)
 	vim.cmd("packadd " .. repo_dir(repo))
 
 	-- Run setup function if it exists
-	if spec.setup and type(spec.setup) == "function" then spec.setup(spec.settings or {}) end
+	if spec.setup and type(spec.setup) == "function" then
+		spec.setup(spec.settings or {})
+	else
+		-- Let's just make a guess at the correct setup name
+		local ok, p = pcall(require, get_repo_require_path(spec.repo))
+		if ok and type(p.setup) == "function" then p.setup(spec.settings or {}) end
+	end
 
 	-- Setup keymaps from config
 	for key, opts in pairs(spec.keys or {}) do
@@ -215,11 +228,16 @@ local function url(repo) return "https://github.com/" .. repo end
 ---@return boolean
 M.install = function(repo)
 	if vim.fn.isdirectory(path(repo)) == 0 then
-		local nid = vim.notify(repo .. ": installing plugin... ", "info", { title = "Plugins", timeout = 1000 })
+		local nid =
+			vim.notify(repo .. ": installing plugin... ", "info", { title = "Plugins", timeout = 1000 })
 
 		local success, output = git({ "submodule", "add", "-f", url(repo), pack_dir(repo) })
 		if not success then
-			vim.notify(repo .. ": Error: " .. vim.inspect(output), "error", { title = "Plugins", replace = nid, timeout = 5000 })
+			vim.notify(
+				repo .. ": Error: " .. vim.inspect(output),
+				"error",
+				{ title = "Plugins", replace = nid, timeout = 5000 }
+			)
 			return false
 		end
 
@@ -254,13 +272,23 @@ M.setup = function(opts)
 	end
 end
 
+---@param name string
+---@return string
+local function normalize_require_name(name)
+	-- First remove .lua or .nvim extension if present
+	name = name:gsub("%.lua$", ""):gsub("%.nvim$", "")
+	-- Then replace remaining dots with dashes
+	name = name:gsub("%.", "-")
+	return name
+end
+
 -- Include a spec file with a plugin definition
 ---@param repo string
 M.include = function(repo)
 	-- change the slash to -- for filename
 	local f = repo_dir(repo)
 	-- remove extension and add the load path
-	local fp = "config/plugins/" .. (f:match("(.+)%.") or f)
+	local fp = "config/plugins/" .. normalize_require_name(f)
 
 	-- try to load it
 	local hasspec, spec = pcall(require, fp)

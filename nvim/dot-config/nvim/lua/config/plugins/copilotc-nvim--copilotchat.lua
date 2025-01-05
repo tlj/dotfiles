@@ -2,7 +2,6 @@ return {
 	repo = "CopilotC-Nvim/CopilotChat.nvim",
 	cmds = { "CopilotChat", "CopilotChatOpen", "CopilotChatToggle" },
 	requires = { "zbirenbaum/copilot.lua", "nvim-lua/plenary.nvim" },
-	setup = function(settings) require("CopilotChat").setup(settings) end,
 	settings = {
 		model = "claude-3.5-sonnet",
 	},

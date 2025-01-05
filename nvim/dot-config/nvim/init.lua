@@ -37,7 +37,6 @@ require("graft").setup({
 		{
 			-- Icons for the plugins which require them - currently only Oil.nvim
 			"nvim-tree/nvim-web-devicons",
-			function(settings) require("nvim-web-devicons").setup(settings) end,
 			settings = { color_icons = true },
 		},
 
@@ -60,7 +59,8 @@ require("graft").setup({
 		include("lewis6991/gitsigns.nvim"),
 
 		-- File management and fuzzy finding
-		include("ibhagwan/fzf-lua"), -- fuzzy finding
+		include("echasnovski/mini.pick"),
+		{ "echasnovski/mini.extra", after = { "echasnovski/mini.pick" } },
 		include("stevearc/oil.nvim"), -- file management
 
 		-- TMUX navigation (ctrl-hjkl to switch between nvim and tmux
@@ -69,17 +69,14 @@ require("graft").setup({
 		-- search and replace
 		include("MagicDuck/grug-far"),
 
-		-- treesitter
+		-- treesitterk
 		include("nvim-treesitter/nvim-treesitter"),
+		include("nvim-treesitter/nvim-treesitter-textobjects"), -- extend treesitter
 		include("aaronik/treewalker.nvim"), -- navigate through elements on the same indent level
 
 		-- dap debugger
 		include("mfussenegger/nvim-dap"),
-		{
-			"theHamsta/nvim-dap-virtual-text",
-			function() require("nvim-dap-virtual-text").setup() end,
-			after = { "mfussenegger/nvim-dap" },
-		},
+		include("theHamsta/nvim-dap-virtual-text"),
 		include("leoluz/nvim-dap-go"),
 		include("rcarriga/nvim-dap-ui"),
 	},

@@ -5,6 +5,8 @@
 --
 -- https://github.com/nvim-treesitter/nvim-treesitter-textobjects
 return {
+	repo = "nvim-treesitter/nvim-treesitter-textobjects",
+	after = { "nvim-treesitter/nvim-treesitter" },
 	settings = {
 		textobjects = {
 			select = {
@@ -16,8 +18,14 @@ return {
 					["l="] = { query = "@assignment.lhs", desc = "Select left hand side of an assignment" },
 					["r="] = { query = "@assignment.rhs", desc = "Select right hand side of an assignment" },
 
-					["aa"] = { query = "@parameter.outer", desc = "Select outer part of a parameter/argument" },
-					["ia"] = { query = "@parameter.inner", desc = "Select inner part of a parameter/argument" },
+					["aa"] = {
+						query = "@parameter.outer",
+						desc = "Select outer part of a parameter/argument",
+					},
+					["ia"] = {
+						query = "@parameter.inner",
+						desc = "Select inner part of a parameter/argument",
+					},
 
 					["ai"] = { query = "@conditional.outer", desc = "Select outer part of a conditional" },
 					["ii"] = { query = "@conditional.inner", desc = "Select inner part of a conditional" },
@@ -75,7 +83,8 @@ return {
 			},
 		},
 	},
-	setup = function()
+	setup = function(settings)
+		require("nvim-treesitter.configs").setup(settings)
 		-- local ts_repeat_move = require("nvim-treesitter.textobjects.repeatable_move")
 
 		-- vim way: use ; and , to repeat motions

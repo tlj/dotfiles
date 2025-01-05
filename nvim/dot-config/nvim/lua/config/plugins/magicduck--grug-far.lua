@@ -4,7 +4,6 @@ return {
 	settings = {
 		headerMaxWidth = 80,
 	},
-	setup = function(settings) require("grug-far").setup(settings) end,
 	keys = {
 		["<leader>rs"] = {
 			cmd = function()

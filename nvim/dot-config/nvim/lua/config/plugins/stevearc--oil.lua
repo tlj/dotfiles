@@ -1,6 +1,11 @@
 return {
 	repo = "stevearc/oil.nvim",
-	settings = {},
+	settings = {
+		float = {
+			max_width = 90,
+			max_height = 30,
+		},
+	},
 	cmds = { "Oil" },
 	requires = { "nvim-tree/nvim-web-devicons" },
 	setup = function(settings) require("oil").setup(settings) end,

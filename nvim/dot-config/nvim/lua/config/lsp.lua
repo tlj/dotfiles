@@ -42,26 +42,26 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		vim.keymap.set(
 			"n",
 			"gd",
-			"<cmd>FzfLua lsp_definitions<cr>",
-			{ buffer = bufnr, desc = "Fzf Jump to definition" }
+			"<cmd>Pick lsp scope='definition'<cr>",
+			{ buffer = bufnr, desc = "Jump to definition" }
 		)
 		vim.keymap.set(
 			"n",
 			"gD",
-			"<cmd>FzfLua lsp_declarations<cr>",
+			"<cmd>Pick lsp scope='declaration'<cr>",
 			{ buffer = bufnr, desc = "Fzf Jump to declaration" }
 		)
 		vim.keymap.set(
 			"n",
 			"gi",
-			"<cmd>FzfLua lsp_implementations<cr>",
-			{ buffer = bufnr, desc = "Fzf Implementations" }
+			"<cmd>Pick lsp scope='implementation'<cr>",
+			{ buffer = bufnr, desc = "Pick Implementations" }
 		)
 		vim.keymap.set(
 			"n",
 			"gr",
-			"<cmd>FzfLua lsp_references<cr>",
-			{ buffer = bufnr, desc = "Fzf References" }
+			"<cmd>Pick lsp scope='references'<cr>",
+			{ buffer = bufnr, desc = "Pick References" }
 		)
 		vim.keymap.set(
 			"n",
@@ -74,6 +74,12 @@ vim.api.nvim_create_autocmd("LspAttach", {
 			"<leader>rn",
 			"<cmd>lua vim.lsp.buf.rename()<cr>",
 			{ buffer = bufnr, desc = "Rename" }
+		)
+		vim.keymap.set(
+			"n",
+			"<leader>ga",
+			"<cmd>lua vim.lsp.buf.code_action()<cr>",
+			{ buffer = bufnr, desc = "Code actions" }
 		)
 
 		-- Set up diagnostics

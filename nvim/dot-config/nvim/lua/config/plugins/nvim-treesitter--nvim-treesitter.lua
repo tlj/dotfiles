@@ -6,7 +6,12 @@
 return {
 	repo = "nvim-treesitter/nvim-treesitter",
 	events = { "BufReadPre", "BufNewFile" },
-	setup = function(settings) require("nvim-treesitter").setup(settings) end,
+	setup = function(settings)
+		require("nvim-treesitter.configs").setup(settings)
+
+		-- local ts_update = require("nvim-treesitter.install").update({ with_sync = true })
+		-- ts_update()
+	end,
 	settings = {
 		ensure_installed = {
 			"bash",
@@ -34,8 +39,8 @@ return {
 			enable = true, -- false will disable the whole extension
 			disable = {}, -- list of language that will be disabled
 		},
-		sync_install = false,
-		auto_install = false,
+		sync_install = true,
+		auto_install = true,
 		ignore_install = { "help" },
 		indent = { enable = true },
 		incremental_selection = {

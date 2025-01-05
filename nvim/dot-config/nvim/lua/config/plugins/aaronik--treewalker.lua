@@ -14,7 +14,6 @@ return {
 	settings = {
 		highlight = true,
 	},
-	setup = function(settings) require("treewalker").setup(settings) end,
 	keys = {
 		["<Up>"] = { cmd = "<cmd>Treewalker Up<cr>", desc = "Previous node" },
 		["<Down>"] = { cmd = "<cmd>:Treewalker Down<cr>", desc = "Next node" },
