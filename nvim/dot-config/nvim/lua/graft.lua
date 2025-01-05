@@ -3,6 +3,7 @@ local M = {
 	pack_dir = "pack/graft/opt/",
 	plugins = {},
 	loaded = {},
+	installed = {},
 }
 
 ---@class tlj.Plugin
@@ -16,6 +17,7 @@ local M = {
 ---@field pattern? string[] Patterns which are required for loading the plugin
 ---@field after? string[] Plugins which trigger loading of this plugin (list of repos)
 ---@field keys? table<string, {cmd:string|function, desc: string}> Keymaps with commands (string or function) and description
+---@field build? string A command (vim cmd if it starts with :, system otherwise) to run after install
 
 ---@param args string[]
 local function git(args)
@@ -216,6 +218,17 @@ M.load = function(repo)
 		vim.keymap.set("n", key, opts.cmd, { desc = opts.desc or "", noremap = false, silent = true })
 	end
 
+	if M.installed[spec.repo] then
+		if spec.build then
+			if spec.build:match("^:") ~= nil then
+				vim.cmd(spec.build)
+			else
+				vim.cmd("cd " .. path(repo))
+				vim.fn.system(spec.build)
+			end
+		end
+	end
+
 	-- Trigger an event saying plugin is loaded, so other plugins
 	-- which are waiting for us can trigger.
 	vim.api.nvim_exec_autocmds("User", { pattern = spec.repo })
@@ -241,6 +254,8 @@ M.install = function(repo)
 			return false
 		end
 
+		M.installed[repo] = true
+
 		vim.cmd("helptags ALL")
 
 		vim.notify(repo .. ": installed.", "info", { title = "Plugins", replace = nid, timeout = 1000 })
@@ -260,7 +275,7 @@ M.start = function(arg)
 end
 
 M.setup = function(opts)
-	local defaults = { start = {}, opt = {} }
+	local defaults = { install = false, start = {}, opt = {} }
 	local plugins = vim.tbl_deep_extend("force", defaults, opts or {})
 
 	for _, p in ipairs(plugins.start) do
@@ -269,6 +284,12 @@ M.setup = function(opts)
 
 	for _, p in ipairs(plugins.opt) do
 		M.opt(p)
+	end
+
+	if plugins.install then
+		for repo, _ in pairs(M.plugins) do
+			M.install(repo)
+		end
 	end
 end
 

@@ -5,12 +5,9 @@
 -- https://github.com/nvim-treesitter/nvim-treesitter
 return {
 	repo = "nvim-treesitter/nvim-treesitter",
-	events = { "BufReadPre", "BufNewFile" },
+	build = ":TSUpdate",
 	setup = function(settings)
 		require("nvim-treesitter.configs").setup(settings)
-
-		-- local ts_update = require("nvim-treesitter.install").update({ with_sync = true })
-		-- ts_update()
 	end,
 	settings = {
 		ensure_installed = {
@@ -39,7 +36,7 @@ return {
 			enable = true, -- false will disable the whole extension
 			disable = {}, -- list of language that will be disabled
 		},
-		sync_install = true,
+		sync_install = false,
 		auto_install = true,
 		ignore_install = { "help" },
 		indent = { enable = true },

@@ -32,6 +32,9 @@ require("graft").setup({
 		-- LSP completions for CMP
 		-- Has to be loaded at startup so it can be used in v0.11 style lsp config
 		"hrsh7th/cmp-nvim-lsp",
+		-- treesitterk
+		include("nvim-treesitter/nvim-treesitter"),
+		include("nvim-treesitter/nvim-treesitter-textobjects"), -- extend treesitter
 	},
 	opt = {
 		{
@@ -69,9 +72,7 @@ require("graft").setup({
 		-- search and replace
 		include("MagicDuck/grug-far"),
 
-		-- treesitterk
-		include("nvim-treesitter/nvim-treesitter"),
-		include("nvim-treesitter/nvim-treesitter-textobjects"), -- extend treesitter
+		-- treesitter
 		include("aaronik/treewalker.nvim"), -- navigate through elements on the same indent level
 
 		-- dap debugger
