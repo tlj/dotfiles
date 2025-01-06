@@ -166,3 +166,9 @@
 [submodule "nvim/dot-config/nvim/pack/graft/opt/nvim-tree--nvim-web-devicons"]
 	path = nvim/dot-config/nvim/pack/graft/opt/nvim-tree--nvim-web-devicons
 	url = https://github.com/nvim-tree/nvim-web-devicons
+[submodule "nvim/dot-config/nvim/pack/graft/opt/copilotc-nvim--copilotchat.nvim"]
+	path = nvim/dot-config/nvim/pack/graft/opt/copilotc-nvim--copilotchat.nvim
+	url = https://github.com/CopilotC-Nvim/CopilotChat.nvim
+[submodule "nvim/dot-config/nvim/pack/graft/opt/nvim-lua--plenary.nvim"]
+	path = nvim/dot-config/nvim/pack/graft/opt/nvim-lua--plenary.nvim
+	url = https://github.com/nvim-lua/plenary.nvim
