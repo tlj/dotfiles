@@ -6,6 +6,9 @@ local M = {
 	installed = {},
 }
 
+local to_install = 0
+local installed = 0
+
 ---@class tlj.Plugin
 ---@field repo string The github repo path
 ---@field requires? (string|tlj.Plugin)[]
@@ -65,40 +68,6 @@ local function pack_dir(repo) return M.pack_dir .. repo_dir(repo) end
 ---@return string
 local function path(repo) return M.root_dir .. "/" .. pack_dir(repo) end
 
--- Register events which will trigger loading of the plugin
----@param spec tlj.Plugin
-local function register_events(spec)
-	if spec.events then
-		vim.api.nvim_create_autocmd(spec.events, {
-			group = M.autogroup,
-			pattern = spec.pattern or "*",
-			callback = function() M.load(spec.repo) end,
-			once = true, -- we only need this to happen once
-		})
-	end
-end
-
--- Register a proxy user command which will load the plugin and then
--- trigger the command on the plugin
----@param spec tlj.Plugin
-local function register_cmds(spec)
-	for _, cmd in ipairs(spec.cmds or {}) do
-		-- Register a command for each given commands
-		vim.api.nvim_create_user_command(cmd, function(args)
-			-- When triggered, delete this command
-			vim.api.nvim_del_user_command(cmd)
-
-			-- Then load the plugin
-			M.load(spec.repo)
-
-			-- Then trigger the original command
-			vim.cmd(string.format("%s %s", cmd, args.args))
-		end, {
-			nargs = "*",
-		})
-	end
-end
-
 -- Register plugins which this plugin will load after, through listening
 -- to user events emitted by plugins being loaded
 ---@param spec tlj.Plugin
@@ -110,23 +79,6 @@ local function register_after(spec)
 			callback = function() M.load(spec.repo) end,
 			once = true, -- we only need this to happen once
 		})
-	end
-end
-
--- Register keys which will load the plugin and trigger an action
----@param spec tlj.Plugin
-local function register_keys(spec)
-	if not spec.keys then return end
-
-	for key, _ in pairs(spec.keys) do
-		local callback = function()
-			vim.keymap.del("n", key)
-			M.load(spec.repo)
-			local keys = vim.api.nvim_replace_termcodes(key, true, true, true)
-			vim.api.nvim_feedkeys(keys, "m", false)
-		end
-
-		vim.keymap.set("n", key, callback, {})
 	end
 end
 
@@ -151,17 +103,8 @@ M.add = function(arg)
 		end
 	end
 
-	-- Register commands for lazy loading the plugin
-	register_cmds(spec)
-
-	-- Register lazy loading events
-	register_events(spec)
-
-	-- Register plugins which will trigger the loading of this plugin
+	-- -- Register plugins which will trigger the loading of this plugin
 	register_after(spec)
-
-	-- Register keys which will load plugin and trigger action
-	register_keys(spec)
 
 	return spec
 end
@@ -223,8 +166,10 @@ M.load = function(repo)
 			if spec.build:match("^:") ~= nil then
 				vim.cmd(spec.build)
 			else
+				local prev_dir = vim.fn.getcwd()
 				vim.cmd("cd " .. path(repo))
 				vim.fn.system(spec.build)
+				vim.cmd("cd " .. prev_dir)
 			end
 		end
 	end
@@ -236,20 +181,27 @@ end
 
 local function url(repo) return "https://github.com/" .. repo end
 
+-- Update status in neovim without user input
+---@param msg string
+local function show_status(msg)
+	vim.cmd.redraw()
+	vim.cmd.echo("'" .. msg .. "'")
+end
+
 -- Ensure all plugins are installed
 ---@param repo string
 ---@return boolean
 M.install = function(repo)
 	if vim.fn.isdirectory(path(repo)) == 0 then
-		local nid =
-			vim.notify(repo .. ": installing plugin... ", "info", { title = "Plugins", timeout = 1000 })
+		installed = installed + 1
+		show_status(string.format("[%d/%d] Installing plugin %s...", installed, to_install, repo))
 
 		local success, output = git({ "submodule", "add", "-f", url(repo), pack_dir(repo) })
 		if not success then
 			vim.notify(
 				repo .. ": Error: " .. vim.inspect(output),
 				"error",
-				{ title = "Plugins", replace = nid, timeout = 5000 }
+				{ title = "Plugins", timeout = 5000 }
 			)
 			return false
 		end
@@ -257,11 +209,41 @@ M.install = function(repo)
 		M.installed[repo] = true
 
 		vim.cmd("helptags ALL")
-
-		vim.notify(repo .. ": installed.", "info", { title = "Plugins", replace = nid, timeout = 1000 })
 	end
 
 	return true
+end
+
+---@param dir string The repo directory to remove
+M.uninstall = function(dir)
+	show_status(string.format("Uninstalling %s...", dir))
+
+	git({ "submodule", "deinit", "-f", dir })
+	git({ "rm", "-f", dir })
+end
+
+-- Remove any plugins in our pack_dir which are not defined in our list of plugins
+M.cleanup = function()
+	local desired = {}
+	for _, spec in pairs(M.plugins) do
+		local dir = pack_dir(spec.repo)
+		if dir ~= nil then table.insert(desired, dir) end
+	end
+
+	local full_pack_dir = M.root_dir .. "/" .. M.pack_dir
+	if vim.fn.isdirectory(full_pack_dir) == 1 then
+		local handle = vim.loop.fs_scandir(full_pack_dir)
+		if handle then
+			while true do
+				local name, ftype = vim.loop.fs_scandir_next(handle)
+				if not name then break end
+				if ftype == "directory" then
+					local dir = M.pack_dir .. name
+					if not vim.tbl_contains(desired, dir) then M.uninstall(dir) end
+				end
+			end
+		end
+	end
 end
 
 ---@param arg string|tlj.Plugin
@@ -272,6 +254,21 @@ M.start = function(arg)
 	local spec = M.add(arg)
 
 	if spec.repo ~= nil and spec.repo ~= "" then M.load(spec.repo) end
+end
+
+local function after_start()
+	vim.schedule(function()
+		for repo, _ in pairs(M.plugins) do
+			if vim.fn.isdirectory(path(repo)) == 0 then to_install = to_install + 1 end
+		end
+
+		for repo, spec in pairs(M.plugins) do
+			if not spec.after then M.load(repo) end
+		end
+
+		M.cleanup()
+		show_status("")
+	end)
 end
 
 M.setup = function(opts)
@@ -291,6 +288,12 @@ M.setup = function(opts)
 			M.install(repo)
 		end
 	end
+
+	vim.api.nvim_create_autocmd("VimEnter", {
+		group = M.autogroup,
+		callback = after_start,
+		once = true,
+	})
 end
 
 ---@param name string
@@ -314,7 +317,7 @@ M.include = function(repo)
 	-- try to load it
 	local hasspec, spec = pcall(require, fp)
 	if not hasspec then
-		vim.notify("Could not include " .. fp .. ".lua", vim.log.levels.ERROR)
+		vim.notify("Could not include " .. fp .. ".lua", "error")
 		return
 	end
 
