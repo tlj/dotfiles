@@ -127,12 +127,6 @@
 [submodule "nvim/dot-config/nvim/pack/graft/opt/nvim-tree--nvim-web-devicons"]
 	path = nvim/dot-config/nvim/pack/graft/opt/nvim-tree--nvim-web-devicons
 	url = https://github.com/nvim-tree/nvim-web-devicons
-[submodule "nvim/dot-config/nvim/pack/graft/opt/echasnovski--mini.pick"]
-	path = nvim/dot-config/nvim/pack/graft/opt/echasnovski--mini.pick
-	url = https://github.com/echasnovski/mini.pick
-[submodule "nvim/dot-config/nvim/pack/graft/opt/echasnovski--mini.extra"]
-	path = nvim/dot-config/nvim/pack/graft/opt/echasnovski--mini.extra
-	url = https://github.com/echasnovski/mini.extra
 [submodule "nvim/dot-config/nvim/pack/graft/opt/zbirenbaum--copilot.lua"]
 	path = nvim/dot-config/nvim/pack/graft/opt/zbirenbaum--copilot.lua
 	url = https://github.com/zbirenbaum/copilot.lua
@@ -175,3 +169,12 @@
 [submodule "nvim/dot-config/nvim/pack/graft/opt/alexghergh--nvim-tmux-navigation"]
 	path = nvim/dot-config/nvim/pack/graft/opt/alexghergh--nvim-tmux-navigation
 	url = https://github.com/alexghergh/nvim-tmux-navigation
+[submodule "nvim/dot-config/nvim/pack/graft/opt/echasnovski--mini.pick"]
+	path = nvim/dot-config/nvim/pack/graft/opt/echasnovski--mini.pick
+	url = https://github.com/echasnovski/mini.pick
+[submodule "nvim/dot-config/nvim/pack/graft/opt/echasnovski--mini.extra"]
+	path = nvim/dot-config/nvim/pack/graft/opt/echasnovski--mini.extra
+	url = https://github.com/echasnovski/mini.extra
+[submodule "nvim/dot-config/nvim/pack/graft/opt/hrsh7th--nvim-deck"]
+	path = nvim/dot-config/nvim/pack/graft/opt/hrsh7th--nvim-deck
+	url = https://github.com/hrsh7th/nvim-deck

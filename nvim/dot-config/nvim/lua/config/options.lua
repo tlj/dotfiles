@@ -99,7 +99,7 @@ local function add(value, str, sep)
 end
 
 if executable("rg") then
-	vim.o.grepprg = [[rg --hidden --smart-case --vimgrep ]]
+	vim.o.grepprg = [[rg --hidden --smart-case --vimgrep --ignore-file ~/.config/nvim/scripts/rgignore]]
 	vim.o.grepformat = add("%f:%l:%c:%m", vim.o.grepformat)
 end
 
