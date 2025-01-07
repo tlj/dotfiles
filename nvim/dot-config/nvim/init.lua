@@ -7,6 +7,7 @@ require("config.autocmds")
 require("statusline").setup()
 require("lazygit").setup()
 require("mapviewer").setup()
+require("diagnostics").setup()
 
 -- Use the include() method as shorthand for including a plugin spec defined
 -- in the lua/config/plugins folder. Use this if the spec is more than ~5 lines

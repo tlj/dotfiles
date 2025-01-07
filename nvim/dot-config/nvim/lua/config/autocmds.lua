@@ -54,6 +54,7 @@ vim.api.nvim_create_autocmd("FileType", {
 		"PlenaryTestPopup",
 		"grug-far",
 		"oil",
+		"deck",
 	},
 	callback = function(event)
 		vim.bo[event.buf].buflisted = false
