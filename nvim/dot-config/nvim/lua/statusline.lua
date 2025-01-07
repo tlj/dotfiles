@@ -171,8 +171,15 @@ M.setup = function(opts)
 			---@param ev {data: {client_id: integer, params: lsp.ProgressParams}}
 			callback = function(ev)
 				local spinner = { "⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏" }
-				M.lsp_update = ev.data.params.value.kind == "end" and " "
-					or spinner[math.floor(vim.uv.hrtime() / (1e6 * 80)) % #spinner + 1]
+				if ev.data.params.value.kind == "end" then
+					M.lsp_update = " "
+				else
+					M.lsp_update = string.format(
+						"%d%%%% %s",
+						ev.data.params.value.percentage,
+						spinner[math.floor(vim.uv.hrtime() / (1e6 * 80)) % #spinner + 1]
+					)
+				end
 				vim.wo.statusline = require("statusline").active()
 			end,
 		})

@@ -35,26 +35,26 @@ return {
 				ctx.keymap("n", "<C-d>", deck.action_mapping("scroll_preview_down"))
 
 				-- If you want to start the filter by default, call ctx.prompt() here
-				ctx.prompt()
+				-- ctx.prompt()
 			end,
 		})
 
 		-- Example key bindings for launching nvim-deck sources. (These mapping required `deck.easy` calls.)
-		-- vim.keymap.set(
-		-- 	"n",
-		-- 	"<Leader>ff",
-		-- 	"<Cmd>Deck files<CR>",
-		-- 	{ desc = "Show recent files, buffers, and more" }
-		-- )
+		vim.keymap.set(
+			"n",
+			"<Leader>ff",
+			"<Cmd>Deck files<CR>",
+			{ desc = "Show recent files, buffers, and more" }
+		)
 		-- -- vim.keymap.set("n", "<Leader>fg", "<Cmd>Deck grep<CR>", { desc = "Start grep search" })
-		-- vim.keymap.set("n", "<Leader>fb", "<Cmd>Deck buffers<CR>", { desc = "Show buffers" })
+		vim.keymap.set("n", "<Leader>fb", "<Cmd>Deck buffers<CR>", { desc = "Show buffers" })
 		-- vim.keymap.set("n", "<Leader>fi", "<Cmd>Deck git<CR>", { desc = "Open git launcher" })
-		-- vim.keymap.set(
-		-- 	"n",
-		-- 	"<Leader>fh",
-		-- 	"<Cmd>Deck helpgrep<CR>",
-		-- 	{ desc = "Live grep all help tags" }
-		-- )
+		vim.keymap.set(
+			"n",
+			"<Leader>fh",
+			"<Cmd>Deck helpgrep<CR>",
+			{ desc = "Live grep all help tags" }
+		)
 		--
 		-- Show the latest deck context.
 		vim.keymap.set("n", "<Leader>;", function()
