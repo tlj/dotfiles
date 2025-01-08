@@ -6,7 +6,6 @@ require("config.autocmds")
 -- Load my own embedded plugins
 require("statusline").setup()
 require("lazygit").setup()
-require("mapviewer").setup()
 
 -- Use the include() method as shorthand for including a plugin spec defined
 -- in the lua/config/plugins folder. Use this if the spec is more than ~5 lines
@@ -65,6 +64,8 @@ require("graft").setup({
 		-- File management and fuzzy finding
 		include("echasnovski/mini.pick"),
 		{ "echasnovski/mini.extra", after = { "echasnovski/mini.pick" } },
+		include("hrsh7th/nvim-deck"), -- I like this approach, but it is a bit lacking at this moment
+
 		include("stevearc/oil.nvim"), -- file management
 
 		-- TMUX navigation (ctrl-hjkl to switch between nvim and tmux

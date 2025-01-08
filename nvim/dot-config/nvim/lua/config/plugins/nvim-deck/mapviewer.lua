@@ -9,7 +9,7 @@ local function get_all_keymaps()
 			local lhs = map.lhs
 			if lhs ~= nil and lhs:sub(1, 1) == " " then lhs = "<Leader>" .. lhs:sub(2) end
 
-			map["text"] = string.format(
+			map["display_text"] = string.format(
 				"%s | %s → %s %s",
 				mode,
 				lhs,
@@ -28,7 +28,7 @@ local function get_all_keymaps()
 			local lhs = map.lhs
 			if lhs ~= nil and lhs:sub(1, 1) == " " then lhs = "<Leader>" .. lhs:sub(2) end
 
-			map["text"] = string.format(
+			map["display_text"] = string.format(
 				"%s | %s → %s %s (buffer)",
 				mode,
 				lhs,
@@ -43,31 +43,41 @@ local function get_all_keymaps()
 end
 
 local function show_keymap_picker()
-	local ok, mini_pick = pcall(require, "mini.pick")
+	local ok, deck = pcall(require, "deck")
 	if not ok then
-		vim.notify("mini.pick is not installed", vim.log.levels.ERROR)
+		vim.notify("nvim-deck is not installed", vim.log.levels.ERROR)
 		return
 	end
 
 	local maps = get_all_keymaps()
 
-	mini_pick.start({
-		source = {
-			name = "Key mappings",
-			items = maps,
-			choose = function(item)
-				local keys = vim.api.nvim_replace_termcodes(item.lhs, true, true, true)
-				vim.api.nvim_feedkeys(keys, "m", false)
-			end,
+	deck.start({
+		name = "Mappings",
+		execute = function(ctx)
+			for _, map in ipairs(maps) do
+				ctx.item(map)
+			end
+			ctx.done()
+		end,
+		actions = {
+			{
+				name = "default",
+				resolve = function(ctx)
+					-- Action is available only if there is exactly one action item with a key map.
+					local is_resolve = #ctx.get_action_items() == 1 and ctx.get_action_items()[1].lhs
+					return is_resolve
+				end,
+				execute = function(ctx)
+					ctx.hide()
+					local lhs = ctx.get_action_items()[1].lhs
+					local keys = vim.api.nvim_replace_termcodes(lhs, true, true, true)
+					vim.api.nvim_feedkeys(keys, "m", false)
+				end,
+			},
 		},
 	})
 end
 
 -- Export the function
-return {
-	show_keymap_picker = show_keymap_picker,
-	setup = function()
-		vim.api.nvim_create_user_command("KeymapPicker", function() show_keymap_picker() end, {})
-		vim.keymap.set("n", "<leader>km", ":KeymapPicker<CR>")
-	end,
-}
+vim.api.nvim_create_user_command("KeymapPicker", function() show_keymap_picker() end, {})
+vim.keymap.set("n", "<leader>km", ":KeymapPicker<CR>")

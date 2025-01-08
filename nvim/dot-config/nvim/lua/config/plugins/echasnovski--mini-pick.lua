@@ -2,15 +2,15 @@ return {
 	"echasnovski/mini.pick",
 	cmds = { "Pick" },
 	keys = {
-		["<leader>ff"] = { cmd = "<cmd>Pick git_files<cr>", desc = "Fuzzyfind git files" },
+		-- ["<leader>ff"] = { cmd = "<cmd>Pick git_files<cr>", desc = "Fuzzyfind git files" },
 		["<leader>fa"] = { cmd = "<cmd>Pick files<cr>", desc = "Fuzzyfind all files" },
 		["<leader>fg"] = { cmd = "<cmd>Pick grep_live<cr>", desc = "Live grep content" },
 		--
 		["<leader>*"] = { cmd = "<cmd>Pick grep pattern='<cword>'<cr>", desc = "grep_cword" },
 		["<leader>fw"] = { cmd = "<cmd>Pick grep pattern='<cword>'<cr>", desc = "grep_cword" },
 		["<leader>fW"] = { cmd = "<cmd>Pick grep pattern='<cWORD>'<cr>", desc = "grep_cWORD" },
-		["<leader>fb"] = { cmd = "<cmd>Pick buffers<cr>", desc = "Navigate Buffers" },
-		["<leader>fh"] = { cmd = "<cmd>Pick help<cr>", desc = "Help Tags" },
+		-- ["<leader>fb"] = { cmd = "<cmd>Pick buffers<cr>", desc = "Navigate Buffers" },
+		-- ["<leader>fh"] = { cmd = "<cmd>Pick help<cr>", desc = "Help Tags" },
 		["<leader>qf"] = { cmd = "<cmd>Pick list scope='quickfix'<cr>", desc = "Quickfix List" },
 		-- ["<leader>q:"] = { cmd = "<cmd>FzfLua command_history<cr>", desc = "Fzf Command History" },
 		-- ["<leader>tm"] = { cmd = "<cmd>FzfLua tmux_buffers<cr>", desc = "Fzf Tmux Buffers" },
@@ -35,10 +35,10 @@ return {
 			cmd = "<cmd>Pick lsp scope='type_definition'<cr>",
 			desc = "Fzf Type Definitions",
 		},
-		["<leader>gl"] = {
-			cmd = "<cmd>Pick diagnostic scope='current'<cr>",
-			desc = "Document Diagnostics",
-		},
+		-- ["<leader>gl"] = {
+		-- 	cmd = "<cmd>Pick diagnostic scope='current'<cr>",
+		-- 	desc = "Document Diagnostics",
+		-- },
 		-- ["<leader>gs"] = {
 		-- 	cmd = "<cmd>FzfLua lsp_document_symbols<cr>",
 		-- 	desc = "Fzf Document Symbols",
