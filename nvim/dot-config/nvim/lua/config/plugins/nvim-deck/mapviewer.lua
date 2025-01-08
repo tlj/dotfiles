@@ -79,10 +79,5 @@ local function show_keymap_picker()
 end
 
 -- Export the function
-return {
-	show_keymap_picker = show_keymap_picker,
-	setup = function()
-		vim.api.nvim_create_user_command("KeymapPicker", function() show_keymap_picker() end, {})
-		vim.keymap.set("n", "<leader>km", ":KeymapPicker<CR>")
-	end,
-}
+vim.api.nvim_create_user_command("KeymapPicker", function() show_keymap_picker() end, {})
+vim.keymap.set("n", "<leader>km", ":KeymapPicker<CR>")

@@ -1,6 +1,15 @@
 return {
 	repo = "hrsh7th/nvim-deck",
 	setup = function(settings)
+		settings = settings or {}
+		if not settings.start_prompt then
+			settings.start_prompt = {
+				"recent_files+buffers+files",
+				"Mappings",
+				"helpgrep",
+			}
+		end
+
 		local deck = require("deck")
 
 		require("deck.easy").setup({
@@ -10,6 +19,10 @@ return {
 				"**/pack/graft/**",
 			},
 		})
+
+		require("config.plugins.nvim-deck.mapviewer")
+		require("config.plugins.nvim-deck.quickfix")
+		require("config.plugins.nvim-deck.diagnostics")
 
 		-- Set up buffer-specific key mappings for nvim-deck.
 		vim.api.nvim_create_autocmd("User", {
@@ -34,8 +47,12 @@ return {
 				ctx.keymap("n", "<C-u>", deck.action_mapping("scroll_preview_up"))
 				ctx.keymap("n", "<C-d>", deck.action_mapping("scroll_preview_down"))
 
-				-- If you want to start the filter by default, call ctx.prompt() here
-				-- ctx.prompt()
+				ctx.keymap("n", "Q", deck.action_mapping("to_qf"))
+
+				-- I want to only show the prompt for certain contexts
+				if settings.start_prompt and vim.tbl_contains(settings.start_prompt, ctx.name) then
+					ctx.prompt()
+				end
 			end,
 		})
 
@@ -46,7 +63,7 @@ return {
 			"<Cmd>Deck files<CR>",
 			{ desc = "Show recent files, buffers, and more" }
 		)
-		-- -- vim.keymap.set("n", "<Leader>fg", "<Cmd>Deck grep<CR>", { desc = "Start grep search" })
+		-- vim.keymap.set("n", "<Leader>fg", "<Cmd>Deck grep<CR>", { desc = "Start grep search" })
 		vim.keymap.set("n", "<Leader>fb", "<Cmd>Deck buffers<CR>", { desc = "Show buffers" })
 		-- vim.keymap.set("n", "<Leader>fi", "<Cmd>Deck git<CR>", { desc = "Open git launcher" })
 		vim.keymap.set(
@@ -55,7 +72,7 @@ return {
 			"<Cmd>Deck helpgrep<CR>",
 			{ desc = "Live grep all help tags" }
 		)
-		--
+
 		-- Show the latest deck context.
 		vim.keymap.set("n", "<Leader>;", function()
 			local ctx = require("deck").get_history()[1]

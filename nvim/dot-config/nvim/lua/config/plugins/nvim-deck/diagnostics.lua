@@ -18,7 +18,7 @@ end
 local function show_buf_diagnostics()
 	local bufnr = vim.api.nvim_get_current_buf()
 	local diags = get_buf_diagnostics(bufnr)
-	local bufname = vim.api.nvim_buf_get_name(bufnr)
+	local filename = vim.api.nvim_buf_get_name(bufnr)
 
 	if not diags or #diags == 0 then
 		vim.print("No diagnostics for this buffer.")
@@ -26,14 +26,16 @@ local function show_buf_diagnostics()
 	end
 
 	local deck = require("deck")
+
 	deck.start({
 		name = "buffer diagnostics",
 		execute = function(ctx)
-			bufname = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(bufnr), ":t")
+			local bufname = vim.fn.fnamemodify(filename, ":t")
 
 			for _, diag in ipairs(diags) do
 				ctx.item({
 					data = {
+						filename = filename,
 						bufname = bufname,
 						bufnr = diag.bufnr,
 						lnum = diag.lnum + 1,
@@ -77,56 +79,48 @@ local function show_buf_diagnostics()
 	})
 end
 
-return {
-	setup = function()
-		vim.api.nvim_create_autocmd("User", {
-			pattern = "hrsh7th/nvim-deck",
-			callback = function()
-				local signs = require("config.icons").lsp.diagnostic.signs
-				local icons = {
-					[vim.diagnostic.severity.ERROR] = signs.Error,
-					[vim.diagnostic.severity.WARN] = signs.Warn,
-					[vim.diagnostic.severity.HINT] = signs.Hint,
-					[vim.diagnostic.severity.INFO] = signs.Info,
-				}
-				local hls = {
-					[vim.diagnostic.severity.ERROR] = "DiagnosticSignError",
-					[vim.diagnostic.severity.WARN] = "DiagnosticSignWarn",
-					[vim.diagnostic.severity.HINT] = "DiagnosticSignHint",
-					[vim.diagnostic.severity.INFO] = "DiagnosticSignInfo",
-				}
-				require("deck").register_decorator({
-					name = "diagnostics",
-					resolve = function(_, item) return item.data.diagnostics end,
-					decorate = function(_, item, row)
-						local bufname = item.data.bufname
-						local icon = icons[item.data.diagnostics.severity]
-						local hl = hls[item.data.diagnostics.severity]
-
-						return {
-							{
-								row = row,
-								col = 0,
-								virt_text = { { "  " .. icon .. "  ", hl } },
-								virt_text_pos = "inline",
-							},
-							{
-								row = row,
-								col = 0,
-								virt_text = { { bufname, "Comment" } },
-								virt_text_pos = "right_align",
-							},
-						}
-					end,
-				})
-			end,
-		})
-
-		vim.keymap.set(
-			"n",
-			"<leader>gl",
-			function() show_buf_diagnostics() end,
-			{ desc = "Show buffer diagnostics" }
-		)
-	end,
+local signs = require("config.icons").lsp.diagnostic.signs
+local icons = {
+	[vim.diagnostic.severity.ERROR] = signs.Error,
+	[vim.diagnostic.severity.WARN] = signs.Warn,
+	[vim.diagnostic.severity.HINT] = signs.Hint,
+	[vim.diagnostic.severity.INFO] = signs.Info,
 }
+local hls = {
+	[vim.diagnostic.severity.ERROR] = "DiagnosticSignError",
+	[vim.diagnostic.severity.WARN] = "DiagnosticSignWarn",
+	[vim.diagnostic.severity.HINT] = "DiagnosticSignHint",
+	[vim.diagnostic.severity.INFO] = "DiagnosticSignInfo",
+}
+
+require("deck").register_decorator({
+	name = "diagnostics",
+	resolve = function(_, item) return item.data.diagnostics end,
+	decorate = function(_, item, row)
+		local bufname = item.data.bufname
+		local icon = icons[item.data.diagnostics.severity]
+		local hl = hls[item.data.diagnostics.severity]
+
+		return {
+			{
+				row = row,
+				col = 0,
+				virt_text = { { "  " .. icon .. "  ", hl } },
+				virt_text_pos = "inline",
+			},
+			{
+				row = row,
+				col = 0,
+				virt_text = { { bufname, "Comment" } },
+				virt_text_pos = "right_align",
+			},
+		}
+	end,
+})
+
+vim.keymap.set(
+	"n",
+	"<leader>gl",
+	function() show_buf_diagnostics() end,
+	{ desc = "Show buffer diagnostics" }
+)
