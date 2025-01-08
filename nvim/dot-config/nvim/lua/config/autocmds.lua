@@ -8,10 +8,11 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 	group = format_sync_grp,
 })
 
--- load user mappings (no plugins)
-vim.api.nvim_create_autocmd("User", {
-	pattern = "VeryLazy",
-	callback = function() require("config.mappings") end,
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = {"help"},
+	callback = function(opts)
+		vim.keymap.set("n", "gd", "<C-]>", { silent = true, buffer = opts.buf })
+	end,
 })
 
 -- Highlight on yank
