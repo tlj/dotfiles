@@ -3,8 +3,9 @@ local deck = require("deck")
 local decorator = {
 	name = "lsp_decorator",
 	decorate = function(_, item, row)
+		local relfilename = vim.fn.fnamemodify(item.data.filename, ":~:.")
 		local filename = vim.fn.fnamemodify(item.data.filename, ":t")
-		local dirname = vim.fn.fnamemodify(item.data.filename, ":h")
+		local dirname = vim.fn.fnamemodify(relfilename, ":r")
 		return {
 			{
 				row = row,
