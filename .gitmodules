@@ -145,36 +145,36 @@
 [submodule "nvim/dot-config/nvim/pack/graft/opt/echasnovski--mini.extra"]
 	path = nvim/dot-config/nvim/pack/graft/opt/echasnovski--mini.extra
 	url = https://github.com/echasnovski/mini.extra
-[submodule "nvim/dot-config/nvim/pack/graft/opt/nvim-neotest--nvim-nio"]
-	path = nvim/dot-config/nvim/pack/graft/opt/nvim-neotest--nvim-nio
-	url = https://github.com/nvim-neotest/nvim-nio
-[submodule "nvim/dot-config/nvim/pack/graft/opt/magicduck--grug-far.nvim"]
-	path = nvim/dot-config/nvim/pack/graft/opt/magicduck--grug-far.nvim
-	url = https://github.com/MagicDuck/grug-far.nvim
-[submodule "nvim/dot-config/nvim/pack/graft/opt/alexghergh--nvim-tmux-navigation"]
-	path = nvim/dot-config/nvim/pack/graft/opt/alexghergh--nvim-tmux-navigation
-	url = https://github.com/alexghergh/nvim-tmux-navigation
-[submodule "nvim/dot-config/nvim/pack/graft/opt/ibhagwan--fzf-lua"]
-	path = nvim/dot-config/nvim/pack/graft/opt/ibhagwan--fzf-lua
-	url = https://github.com/ibhagwan/fzf-lua
 [submodule "nvim/dot-config/nvim/pack/graft/opt/hrsh7th--nvim-deck"]
 	path = nvim/dot-config/nvim/pack/graft/opt/hrsh7th--nvim-deck
 	url = https://github.com/hrsh7th/nvim-deck
+[submodule "nvim/dot-config/nvim/pack/graft/opt/stevearc--oil.nvim"]
+	path = nvim/dot-config/nvim/pack/graft/opt/stevearc--oil.nvim
+	url = https://github.com/stevearc/oil.nvim
+[submodule "nvim/dot-config/nvim/pack/graft/opt/nvim-neotest--nvim-nio"]
+	path = nvim/dot-config/nvim/pack/graft/opt/nvim-neotest--nvim-nio
+	url = https://github.com/nvim-neotest/nvim-nio
+[submodule "nvim/dot-config/nvim/pack/graft/opt/aaronik--treewalker.nvim"]
+	path = nvim/dot-config/nvim/pack/graft/opt/aaronik--treewalker.nvim
+	url = https://github.com/aaronik/treewalker.nvim
 [submodule "nvim/dot-config/nvim/pack/graft/opt/mfussenegger--nvim-dap"]
 	path = nvim/dot-config/nvim/pack/graft/opt/mfussenegger--nvim-dap
 	url = https://github.com/mfussenegger/nvim-dap
-[submodule "nvim/dot-config/nvim/pack/graft/opt/rcarriga--nvim-dap-ui"]
-	path = nvim/dot-config/nvim/pack/graft/opt/rcarriga--nvim-dap-ui
-	url = https://github.com/rcarriga/nvim-dap-ui
+[submodule "nvim/dot-config/nvim/pack/graft/opt/ibhagwan--fzf-lua"]
+	path = nvim/dot-config/nvim/pack/graft/opt/ibhagwan--fzf-lua
+	url = https://github.com/ibhagwan/fzf-lua
 [submodule "nvim/dot-config/nvim/pack/graft/opt/thehamsta--nvim-dap-virtual-text"]
 	path = nvim/dot-config/nvim/pack/graft/opt/thehamsta--nvim-dap-virtual-text
 	url = https://github.com/theHamsta/nvim-dap-virtual-text
 [submodule "nvim/dot-config/nvim/pack/graft/opt/leoluz--nvim-dap-go"]
 	path = nvim/dot-config/nvim/pack/graft/opt/leoluz--nvim-dap-go
 	url = https://github.com/leoluz/nvim-dap-go
-[submodule "nvim/dot-config/nvim/pack/graft/opt/aaronik--treewalker.nvim"]
-	path = nvim/dot-config/nvim/pack/graft/opt/aaronik--treewalker.nvim
-	url = https://github.com/aaronik/treewalker.nvim
-[submodule "nvim/dot-config/nvim/pack/graft/opt/stevearc--oil.nvim"]
-	path = nvim/dot-config/nvim/pack/graft/opt/stevearc--oil.nvim
-	url = https://github.com/stevearc/oil.nvim
+[submodule "nvim/dot-config/nvim/pack/graft/opt/rcarriga--nvim-dap-ui"]
+	path = nvim/dot-config/nvim/pack/graft/opt/rcarriga--nvim-dap-ui
+	url = https://github.com/rcarriga/nvim-dap-ui
+[submodule "nvim/dot-config/nvim/pack/graft/opt/magicduck--grug-far.nvim"]
+	path = nvim/dot-config/nvim/pack/graft/opt/magicduck--grug-far.nvim
+	url = https://github.com/MagicDuck/grug-far.nvim
+[submodule "nvim/dot-config/nvim/pack/graft/opt/alexghergh--nvim-tmux-navigation"]
+	path = nvim/dot-config/nvim/pack/graft/opt/alexghergh--nvim-tmux-navigation
+	url = https://github.com/alexghergh/nvim-tmux-navigation
