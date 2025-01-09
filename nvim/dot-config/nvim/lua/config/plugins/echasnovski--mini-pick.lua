@@ -19,22 +19,22 @@ return {
 		--
 		-- ["<leader>ga"] = { cmd = "<cmd>FzfLua lsp_code_actions<cr>", desc = "Fzf Code Actions" },
 		-- ["<leader>gf"] = { cmd = "<cmd>FzfLua lsp_finder<cr>", desc = "Fzf LSP Finder" },
-		["<leader>gi"] = {
-			cmd = "<cmd>Pick lsp scope='implementation'<cr>",
-			desc = "LSP Implementations",
-		},
+		-- ["<leader>gi"] = {
+		-- 	cmd = "<cmd>Pick lsp scope='implementation'<cr>",
+		-- 	desc = "LSP Implementations",
+		-- },
 		-- ["<leader>go"] = { cmd = "<cmd>FzfLua lsp_outgoing_calls<cr>", desc = "Fzf Outgoing Calls" },
 		-- ["<leader>gc"] = { cmd = "<cmd>FzfLua lsp_incoming_calls<cr>", desc = "Fzf Incoming Calls" },
-		["<leader>gr"] = { cmd = "<cmd>Pick lsp scope='references'<cr>", desc = "Fzf References" },
-		["<leader>gd"] = { cmd = "<cmd>Pick lsp scope='definition'<cr>", desc = "Fzf Definitions" },
+		-- ["<leader>gr"] = { cmd = "<cmd>Pick lsp scope='references'<cr>", desc = "Fzf References" },
+		-- ["<leader>gd"] = { cmd = "<cmd>Pick lsp scope='definition'<cr>", desc = "Fzf Definitions" },
 		["<leader>gD"] = {
 			cmd = "<cmd>Pick lsp scope='declaration'<cr>",
 			desc = "Fzf Declarations",
 		},
-		["<leader>gt"] = {
-			cmd = "<cmd>Pick lsp scope='type_definition'<cr>",
-			desc = "Fzf Type Definitions",
-		},
+		-- ["<leader>gt"] = {
+		-- 	cmd = "<cmd>Pick lsp scope='type_definition'<cr>",
+		-- 	desc = "Fzf Type Definitions",
+		-- },
 		-- ["<leader>gl"] = {
 		-- 	cmd = "<cmd>Pick diagnostic scope='current'<cr>",
 		-- 	desc = "Document Diagnostics",

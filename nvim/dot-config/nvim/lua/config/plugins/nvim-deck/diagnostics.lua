@@ -8,13 +8,6 @@ local function get_buf_diagnostics(bufnr)
 	return diag
 end
 
-local function goto_diagnostic(diagnostics)
-	local win_id = vim.fn.bufwinid(diagnostics.bufnr)
-	if win_id ~= -1 then vim.api.nvim_set_current_win(win_id) end
-	vim.api.nvim_set_current_buf(diagnostics.bufnr)
-	vim.api.nvim_win_set_cursor(0, { diagnostics.lnum + 1, diagnostics.col + 1 })
-end
-
 local function show_buf_diagnostics()
 	local bufnr = vim.api.nvim_get_current_buf()
 	local diags = get_buf_diagnostics(bufnr)
@@ -39,7 +32,7 @@ local function show_buf_diagnostics()
 						bufname = bufname,
 						bufnr = diag.bufnr,
 						lnum = diag.lnum + 1,
-						col = diag.col + 1,
+						col = diag.col,
 						diagnostics = diag,
 					},
 					display_text = {
@@ -50,31 +43,7 @@ local function show_buf_diagnostics()
 			ctx.done()
 		end,
 		actions = {
-			{
-				name = "default",
-				resolve = function(ctx)
-					-- Action is available only if there is exactly one action item with a key map.
-					local is_resolve = #ctx.get_action_items() == 1 and ctx.get_action_items()[1].data
-					return is_resolve
-				end,
-				execute = function(ctx)
-					local item = ctx.get_action_items()[1].data.diagnostics
-					ctx.hide()
-					goto_diagnostic(item)
-				end,
-			},
-			{
-				name = "open_keep",
-				resolve = function(ctx)
-					-- Action is available only if there is exactly one action item with a key map.
-					local is_resolve = #ctx.get_action_items() == 1 and ctx.get_action_items()[1].data
-					return is_resolve
-				end,
-				execute = function(ctx)
-					local item = ctx.get_action_items()[1].data.diagnostics
-					goto_diagnostic(item)
-				end,
-			},
+			require("deck").alias_action("default", "open"),
 		},
 	})
 end
@@ -118,9 +87,4 @@ require("deck").register_decorator({
 	end,
 })
 
-vim.keymap.set(
-	"n",
-	"<leader>gl",
-	function() show_buf_diagnostics() end,
-	{ desc = "Show buffer diagnostics" }
-)
+vim.keymap.set("n", "<leader>gl", function() show_buf_diagnostics() end, { desc = "Show buffer diagnostics" })

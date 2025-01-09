@@ -208,7 +208,7 @@ M.install = function(repo)
 
 		M.installed[repo] = true
 
-		vim.cmd("helptags ALL")
+		-- vim.cmd("helptags ALL")
 	end
 
 	return true
