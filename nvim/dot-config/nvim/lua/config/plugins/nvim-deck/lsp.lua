@@ -79,30 +79,34 @@ local function create_lsp_source(method, name)
 			local bufnr = vim.api.nvim_get_current_buf()
 			local params = vim.lsp.util.make_position_params(0, vim.lsp.util._get_offset_encoding(bufnr))
 
-			vim.lsp.buf_request(0, method, params, function(_, result)
-				if not result or vim.tbl_isempty(result) then return ctx.done() end
+			vim.lsp.buf_request_all(0, method, params, function(results)
+				if not results or vim.tbl_isempty(results) then return ctx.done() end
 
-				local locations = vim.islist(result) and result or { result }
+				for _, result in pairs(results) do
+					if result.result then
+						local locations = vim.tbl_islist(result.result) and result.result or { result.result }
 
-				for _, location in ipairs(locations) do
-					local uri = location.uri or location.targetUri
-					local range = location.range or location.targetRange
-					local filename = vim.uri_to_fname(uri)
+						for _, location in ipairs(locations) do
+							local uri = location.uri or location.targetUri
+							local range = location.range or location.targetRange
+							local filename = vim.uri_to_fname(uri)
 
-					-- Get the line content if the file exists
-					local line_text = ""
-					local lines = vim.fn.readfile(filename)
-					if lines and #lines >= (range.start.line + 1) then line_text = " " .. vim.trim(lines[range.start.line + 1]) end
+							-- Get the line content if the file exists
+							local line_text = ""
+							local lines = vim.fn.readfile(filename)
+							if lines and #lines >= (range.start.line + 1) then line_text = " " .. vim.trim(lines[range.start.line + 1]) end
 
-					ctx.item({
-						display_text = string.format("%s:%d", vim.fn.fnamemodify(filename, ":~:."), range.start.line + 1),
-						data = {
-							filename = filename,
-							lnum = range.start.line + 1,
-							col = range.start.character + 1,
-							text = line_text,
-						},
-					})
+							ctx.item({
+								display_text = string.format("%s:%d", vim.fn.fnamemodify(filename, ":~:."), range.start.line + 1),
+								data = {
+									filename = filename,
+									lnum = range.start.line + 1,
+									col = range.start.character + 1,
+									text = line_text,
+								},
+							})
+						end
+					end
 				end
 
 				ctx.done()
@@ -136,21 +140,15 @@ vim.api.nvim_create_autocmd("LspAttach", {
 	callback = function(args)
 		-- Get the detaching client
 		local bufnr = args.buf
+		vim.keymap.set("n", "gd", show_lsp_source(sources.definitions, "Definitions"), { desc = "Show LSP definitions" })
+		vim.keymap.set("n", "gi", show_lsp_source(sources.implementations, "Implementations"), { desc = "Show LSP implementations" })
+		vim.keymap.set("n", "gt", show_lsp_source(sources.type_definitions, "Type Definitions"), { desc = "Show LSP type definitions" })
+		vim.keymap.set("n", "gr", show_references, { noremap = true, silent = true })
 
 		-- Set up keybindings
 		vim.keymap.set("n", "<leader>gd", show_lsp_source(sources.definitions, "Definitions"), { desc = "Show LSP definitions" })
-		vim.keymap.set(
-			"n",
-			"<leader>gi",
-			show_lsp_source(sources.implementations, "Implementations"),
-			{ desc = "Show LSP implementations" }
-		)
-		vim.keymap.set(
-			"n",
-			"<leader>gt",
-			show_lsp_source(sources.type_definitions, "Type Definitions"),
-			{ desc = "Show LSP type definitions" }
-		)
+		vim.keymap.set("n", "<leader>gi", show_lsp_source(sources.implementations, "Implementations"), { desc = "Show LSP implementations" })
+		vim.keymap.set("n", "<leader>gt", show_lsp_source(sources.type_definitions, "Type Definitions"), { desc = "Show LSP type definitions" })
 		vim.keymap.set("n", "<leader>gr", show_references, { noremap = true, silent = true })
 	end,
 })
