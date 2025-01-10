@@ -11,7 +11,7 @@ return {
 	setup = function(settings) require("oil").setup(settings) end,
 	keys = {
 		["<leader>tt"] = {
-			cmd = function() require("oil").open_float() end,
+			cmd = function() require("oil").open() end,
 			desc = "Oil file explorer",
 		},
 	},

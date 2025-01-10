@@ -23,6 +23,7 @@ return {
 		require("config.plugins.nvim-deck.mapviewer")
 		require("config.plugins.nvim-deck.quickfix")
 		require("config.plugins.nvim-deck.diagnostics")
+		require("config.plugins.nvim-deck.lsp")
 
 		-- Set up buffer-specific key mappings for nvim-deck.
 		vim.api.nvim_create_autocmd("User", {

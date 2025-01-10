@@ -39,30 +39,30 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		local bufnr = args.buf
 
 		-- Set up keymaps
-		vim.keymap.set(
-			"n",
-			"gd",
-			"<cmd>Pick lsp scope='definition'<cr>",
-			{ buffer = bufnr, desc = "Jump to definition" }
-		)
+		-- vim.keymap.set(
+		-- 	"n",
+		-- 	"gd",
+		-- 	"<cmd>Pick lsp scope='definition'<cr>",
+		-- 	{ buffer = bufnr, desc = "Jump to definition" }
+		-- )
 		vim.keymap.set(
 			"n",
 			"gD",
 			"<cmd>Pick lsp scope='declaration'<cr>",
 			{ buffer = bufnr, desc = "Fzf Jump to declaration" }
 		)
-		vim.keymap.set(
-			"n",
-			"gi",
-			"<cmd>Pick lsp scope='implementation'<cr>",
-			{ buffer = bufnr, desc = "Pick Implementations" }
-		)
-		vim.keymap.set(
-			"n",
-			"gr",
-			"<cmd>Pick lsp scope='references'<cr>",
-			{ buffer = bufnr, desc = "Pick References" }
-		)
+		-- vim.keymap.set(
+		-- 	"n",
+		-- 	"gi",
+		-- 	"<cmd>Pick lsp scope='implementation'<cr>",
+		-- 	{ buffer = bufnr, desc = "Pick Implementations" }
+		-- )
+		-- vim.keymap.set(
+		-- 	"n",
+		-- 	"gr",
+		-- 	"<cmd>Pick lsp scope='references'<cr>",
+		-- 	{ buffer = bufnr, desc = "Pick References" }
+		-- )
 		vim.keymap.set(
 			"n",
 			"gl",
