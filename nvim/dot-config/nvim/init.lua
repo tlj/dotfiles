@@ -80,6 +80,15 @@ require("graft").setup({
 		include("theHamsta/nvim-dap-virtual-text"),
 		include("leoluz/nvim-dap-go"),
 		include("rcarriga/nvim-dap-ui"),
+
+		-- Quickfix improvements
+		{
+			"stevearc/quicker.nvim",
+			keys = {
+				[">"] = { cmd = function() require("quicker").expand({ before = 2, after = 2, add_to_existing = true }) end },
+				["<"] = { cmd = function() require("quicker").collapse() end },
+			},
+		},
 	},
 })
 
