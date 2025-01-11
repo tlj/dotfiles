@@ -16,7 +16,7 @@ if vim.fn.has("nvim-0.11") == 1 then
 						multilineTokenSupport = true,
 					},
 				},
-			}, require("cmp_nvim_lsp").default_capabilities()),
+			}, cmp_nvim_lsp.default_capabilities()),
 
 			-- Set root directory markers for LSP workspace
 			-- In this case, looking for .git directory as project root
@@ -25,6 +25,14 @@ if vim.fn.has("nvim-0.11") == 1 then
 	else
 		vim.notify("cmp_nvim_lsp not loaded, not aded to LSP capabilities.")
 	end
+
+	local hover = vim.lsp.buf.hover
+	---@diagnostic disable-next-line: duplicate-set-field
+	vim.lsp.buf.hover = function() return hover({ border = "rounded" }) end
+
+	local signature_help = vim.lsp.buf.signature_help
+	---@diagnostic disable-next-line: duplicate-set-field
+	vim.lsp.buf.signature_help = function() return signature_help({ border = "rounded" }) end
 else
 	vim.notify("LSP not enabled because of nvim < 0.11")
 end
@@ -45,12 +53,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		-- 	"<cmd>Pick lsp scope='definition'<cr>",
 		-- 	{ buffer = bufnr, desc = "Jump to definition" }
 		-- )
-		vim.keymap.set(
-			"n",
-			"gD",
-			"<cmd>Pick lsp scope='declaration'<cr>",
-			{ buffer = bufnr, desc = "Fzf Jump to declaration" }
-		)
+		vim.keymap.set("n", "gD", "<cmd>Pick lsp scope='declaration'<cr>", { buffer = bufnr, desc = "Fzf Jump to declaration" })
 		-- vim.keymap.set(
 		-- 	"n",
 		-- 	"gi",
@@ -69,18 +72,8 @@ vim.api.nvim_create_autocmd("LspAttach", {
 			'<cmd>lua vim.diagnostic.open_float(0, { scope = "line" })<cr>',
 			{ buffer = bufnr, desc = "Show diagnostics" }
 		)
-		vim.keymap.set(
-			"n",
-			"<leader>rn",
-			"<cmd>lua vim.lsp.buf.rename()<cr>",
-			{ buffer = bufnr, desc = "Rename" }
-		)
-		vim.keymap.set(
-			"n",
-			"<leader>ga",
-			"<cmd>lua vim.lsp.buf.code_action()<cr>",
-			{ buffer = bufnr, desc = "Code actions" }
-		)
+		vim.keymap.set("n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<cr>", { buffer = bufnr, desc = "Rename" })
+		vim.keymap.set("n", "<leader>ga", "<cmd>lua vim.lsp.buf.code_action()<cr>", { buffer = bufnr, desc = "Code actions" })
 
 		-- Set up diagnostics
 		local signs = require("config.icons").lsp.diagnostic.signs
@@ -115,8 +108,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		}
 
 		vim.diagnostic.config(diagnostic_config)
-		vim.lsp.handlers["textDocument/publishDiagnostics"] =
-			vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, diagnostic_config)
+		vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, diagnostic_config)
 		vim.lsp.handlers["workspace/diagnostic/refresh"] = function(_, _, ctx)
 			local ns = vim.lsp.diagnostic.get_namespace(ctx.client_id)
 			pcall(vim.diagnostic.reset, ns)
