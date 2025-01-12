@@ -58,9 +58,7 @@ local options = {
 	writebackup = false, -- if a file is being edited by another program, it is not allwed to be edited
 }
 
-if vim.fn.has("nvim-0.10") == 1 then
-	options.smoothscroll = true
-end
+if vim.fn.has("nvim-0.10") == 1 then options.smoothscroll = true end
 
 if vim.fn.has("nvim-0.11") == 1 then
 	options.messagesopt = "hit-enter,history:2000"
@@ -75,9 +73,15 @@ end
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
--- disable netrw for nvim tree to work
+-- disable plugins we don't need
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
+-- vim.g.loaded_gzip = 1
+-- vim.g.loaded_rplugin = 1
+-- vim.g.loaded_tarPlugin = 1
+-- vim.g.loaded_tohtml = 1
+-- vim.g.loaded_tutor = 1
+-- vim.g.loaded_zipPlugin = 1
 
 -- Fix markdown indentation settings
 vim.g.markdown_recommended_style = 0

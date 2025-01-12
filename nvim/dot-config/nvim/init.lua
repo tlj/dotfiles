@@ -14,6 +14,7 @@ require("lazygit").setup()
 -- about what we load.
 local include = require("graft").include
 require("graft").setup({
+	debug = false,
 	start = {
 		{
 			-- gruvbox is objectively the best colorscheme, as it is not blue

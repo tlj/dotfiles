@@ -4,6 +4,7 @@ local M = {
 	config = {
 		submodules = false,
 		install = false,
+		debug = false,
 		start = {},
 		opt = {},
 	},
@@ -134,6 +135,11 @@ local function get_repo_require_path(repo)
 	return name:gsub("%.lua$", ""):gsub("%.nvim$", "")
 end
 
+M.debug = function(msg)
+	-- if M.config.debug then vim.notify(msg, "info", { title = "Graft Debug" }) end
+	if M.config.debug then vim.print(msg) end
+end
+
 ---@param repo string
 M.load = function(repo)
 	-- Don't load again if already loaded
@@ -147,6 +153,8 @@ M.load = function(repo)
 		return
 	end
 
+	M.debug("Loading " .. repo)
+
 	-- If this plugin is not installed yet, let's just skip it
 	if vim.fn.isdirectory(path(repo)) == 0 then
 		if spec.auto_install then
@@ -159,6 +167,7 @@ M.load = function(repo)
 
 	for _, req in ipairs(spec.requires or {}) do
 		local req_spec = normalize_spec(req)
+		M.debug(" * Requires " .. req_spec.repo)
 		M.load(req_spec.repo)
 	end
 
@@ -170,20 +179,28 @@ M.load = function(repo)
 		spec.setup(spec.settings or {})
 	else
 		-- Let's just make a guess at the correct setup name
-		local ok, p = pcall(require, get_repo_require_path(spec.repo))
-		if ok and type(p.setup) == "function" then p.setup(spec.settings or {}) end
+		local require_path = get_repo_require_path(spec.repo)
+		local ok, p = pcall(require, require_path)
+		if ok and type(p.setup) == "function" then
+			p.setup(spec.settings or {})
+		else
+			M.debug(" * Failed calling setup() on " .. spec.repo .. ". require passed: " .. vim.inspect(ok) .. " path " .. require_path)
+		end
 	end
 
 	-- Setup keymaps from config
 	for key, opts in pairs(spec.keys or {}) do
+		M.debug(" * Setting keymap " .. key)
 		vim.keymap.set("n", key, opts.cmd, { desc = opts.desc or "", noremap = false, silent = true })
 	end
 
 	if M.installed[spec.repo] then
 		if spec.build then
 			if spec.build:match("^:") ~= nil then
+				M.debug(" * Building with nvim command " .. spec.build)
 				vim.cmd(spec.build)
 			else
+				M.debug(" * Building with system command " .. spec.build)
 				local prev_dir = vim.fn.getcwd()
 				vim.cmd("cd " .. path(repo))
 				vim.fn.system(spec.build)
