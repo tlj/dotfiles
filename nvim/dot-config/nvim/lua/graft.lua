@@ -1,6 +1,12 @@
 local M = {
-	root_dir = vim.fn.stdpath("config"),
+	root_dir = vim.fn.stdpath("data") .. "/site", -- config for dotfiles repo, data for ~/.local/share/nvim/site
 	pack_dir = "pack/graft/opt/",
+	config = {
+		submodules = false,
+		install = false,
+		start = {},
+		opt = {},
+	},
 	plugins = {},
 	loaded = {},
 	installed = {},
@@ -26,7 +32,15 @@ local installed = 0
 local function git(args)
 	local base = { "git", "-C", M.root_dir }
 
-	return vim.fn.system(vim.list_extend(base, args))
+	local result = vim.system(vim.list_extend(base, args), { text = true }, nil):wait()
+	local output = {}
+	local stdout = result.stdout .. "\n" .. result.stderr
+
+	for line in stdout:gmatch("[^\n]+") do
+		output[#output + 1] = line
+	end
+
+	return result.code == 0, output
 end
 
 ---@param repo string
@@ -192,17 +206,26 @@ end
 ---@param repo string
 ---@return boolean
 M.install = function(repo)
+	vim.fn.mkdir(M.root_dir .. "/" .. M.pack_dir, "p")
 	if vim.fn.isdirectory(path(repo)) == 0 then
 		installed = installed + 1
 		show_status(string.format("[%d/%d] Installing plugin %s...", installed, to_install, repo))
 
-		local success, output = git({ "submodule", "add", "-f", url(repo), pack_dir(repo) })
+		local cmd = {}
+		if M.config.submodules then
+			cmd = { "submodule", "add", "-f", url(repo), pack_dir(repo) }
+		else
+			cmd = { "clone", "--depth", "1", url(repo), pack_dir(repo) }
+		end
+
+		local success, output = git(cmd)
 		if not success then
-			vim.notify(
-				repo .. ": Error: " .. vim.inspect(output),
-				"error",
-				{ title = "Plugins", timeout = 5000 }
-			)
+			local hasnotify, notify = pcall(require, "notify")
+			if hasnotify then
+				notify(vim.list_extend({ repo .. ": Error: " }, output), "error", { title = "Plugins", timeout = 5000 })
+			else
+				vim.notify("Error installing " .. repo .. ".")
+			end
 			return false
 		end
 
@@ -218,8 +241,14 @@ end
 M.uninstall = function(dir)
 	show_status(string.format("Uninstalling %s...", dir))
 
-	git({ "submodule", "deinit", "-f", dir })
-	git({ "rm", "-f", dir })
+	if M.config.submodules then
+		git({ "submodule", "deinit", "-f", dir })
+		git({ "rm", "-f", dir })
+	else
+		local rmdir = M.root_dir .. "/" .. dir
+		vim.notify("Removing " .. rmdir)
+		vim.fn.delete(rmdir, "rf")
+	end
 end
 
 -- Remove any plugins in our pack_dir which are not defined in our list of plugins
@@ -272,18 +301,17 @@ local function after_start()
 end
 
 M.setup = function(opts)
-	local defaults = { install = false, start = {}, opt = {} }
-	local plugins = vim.tbl_deep_extend("force", defaults, opts or {})
+	M.config = vim.tbl_deep_extend("force", M.config, opts or {})
 
-	for _, p in ipairs(plugins.start) do
+	for _, p in ipairs(M.config.start) do
 		M.start(p)
 	end
 
-	for _, p in ipairs(plugins.opt) do
+	for _, p in ipairs(M.config.opt) do
 		M.opt(p)
 	end
 
-	if plugins.install then
+	if M.config.install then
 		for repo, _ in pairs(M.plugins) do
 			M.install(repo)
 		end
