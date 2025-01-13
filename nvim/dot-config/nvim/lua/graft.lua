@@ -29,23 +29,36 @@ local installed = 0
 ---@field keys? table<string, {cmd:string|function, desc: string}> Keymaps with commands (string or function) and description
 ---@field build? string A command (vim cmd if it starts with :, system otherwise) to run after install
 
----@param args string[]
-local function git(args, root_dir)
-	root_dir = root_dir or M.root_dir
-
-	local cmd = { "git", "-C", root_dir }
-
-	vim.list_extend(cmd, args)
-
-	local result = vim.system(cmd, { text = true }, nil):wait()
+local function parse_git_result(obj)
 	local output = {}
-	local stdout = result.stdout .. "\n" .. result.stderr
+	local stdout = obj.stdout .. "\n" .. obj.stderr
 
 	for line in stdout:gmatch("[^\n]+") do
 		output[#output + 1] = line
 	end
 
-	return result.code == 0, output
+	return obj.code == 0, output
+end
+
+---@param args string[]
+local function git(args, opts)
+	local defaults = { root_dir = M.root_dir, async = false }
+	opts = vim.tbl_deep_extend("force", defaults, opts or {})
+
+	local cmd = { "git", "-C", opts.root_dir }
+
+	vim.list_extend(cmd, args)
+
+	if opts.async then
+		vim.system(cmd, { text = true }, function(obj)
+			local success, output = parse_git_result(obj)
+			if success and type(opts.on_success) == "function" then opts.on_success(output) end
+			if not success and type(opts.on_failure) == "function" then opts.on_failure(output) end
+		end)
+	else
+		local result = vim.system(cmd, { text = true }, nil):wait()
+		return parse_git_result(result)
+	end
 end
 
 ---@param repo string
@@ -273,34 +286,28 @@ M.uninstall = function(dir)
 end
 
 M.update_all = function()
-	vim.schedule(function()
-		for repo, _ in pairs(M.plugins) do
-			M.update(repo)
-		end
-		show_status("")
-	end)
+	for repo, _ in pairs(M.plugins) do
+		M.update(repo)
+	end
 end
 
 M.update = function(repo)
-	show_status(string.format("Updating plugin %s...", repo))
-
 	if M.config.submodules then
 	else
-		local ok, output = git({ "pull" }, path(repo))
-		if not ok then
-			local hasnotify, notify = pcall(require, "notify")
-			if hasnotify then
-				notify(vim.list_extend({ repo .. ": Error: " }, output), "error", { title = "Plugins", timeout = 5000 })
-			else
-				vim.notify("Error installing " .. repo .. ".")
-			end
-		else
-			local updated = true
-			for _, line in ipairs(output) do
-				if line == "Already up to date." then updated = false end
-			end
-			if updated then vim.notify(repo .. " updated.") end
-		end
+		git({ "pull" }, {
+			root_dir = path(repo),
+			async = true,
+			on_success = function(output)
+				local updated = true
+				for _, line in ipairs(output) do
+					if line == "Already up to date." then updated = false end
+				end
+				if updated then vim.notify(repo .. " updated.") end
+			end,
+			on_failure = function(output)
+				require("notify")(vim.list_extend({ repo .. ": Error: " }, output), "error", { title = "Plugins", timeout = 5000 })
+			end,
+		})
 	end
 end
 
@@ -349,7 +356,6 @@ local function after_start()
 		end
 
 		M.cleanup()
-		show_status("")
 	end)
 end
 
