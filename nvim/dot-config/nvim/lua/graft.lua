@@ -29,10 +29,14 @@ local installed = 0
 ---@field build? string A command (vim cmd if it starts with :, system otherwise) to run after install
 
 ---@param args string[]
-local function git(args)
-	local base = { "git", "-C", M.root_dir }
+local function git(args, root_dir)
+	root_dir = root_dir or M.root_dir
 
-	local result = vim.system(vim.list_extend(base, args), { text = true }, nil):wait()
+	local cmd = { "git", "-C", root_dir }
+
+	vim.list_extend(cmd, args)
+
+	local result = vim.system(cmd, { text = true }, nil):wait()
 	local output = {}
 	local stdout = result.stdout .. "\n" .. result.stderr
 
@@ -251,6 +255,38 @@ M.uninstall = function(dir)
 	end
 end
 
+M.update_all = function()
+	vim.schedule(function()
+		for repo, _ in pairs(M.plugins) do
+			M.update(repo)
+		end
+		show_status("")
+	end)
+end
+
+M.update = function(repo)
+	show_status(string.format("Updating plugin %s...", repo))
+
+	if M.config.submodules then
+	else
+		local ok, output = git({ "pull" }, path(repo))
+		if not ok then
+			local hasnotify, notify = pcall(require, "notify")
+			if hasnotify then
+				notify(vim.list_extend({ repo .. ": Error: " }, output), "error", { title = "Plugins", timeout = 5000 })
+			else
+				vim.notify("Error installing " .. repo .. ".")
+			end
+		else
+			local updated = true
+			for _, line in ipairs(output) do
+				if line == "Already up to date." then updated = false end
+			end
+			if updated then vim.notify(repo .. " updated.") end
+		end
+	end
+end
+
 -- Remove any plugins in our pack_dir which are not defined in our list of plugins
 M.cleanup = function()
 	local desired = {}
@@ -316,6 +352,8 @@ M.setup = function(opts)
 			M.install(repo)
 		end
 	end
+
+	vim.api.nvim_create_user_command("GraftUpdate", function() require("graft").update_all() end, {})
 
 	vim.api.nvim_create_autocmd("VimEnter", {
 		group = M.autogroup,
