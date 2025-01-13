@@ -13,6 +13,7 @@ return {
 		ensure_installed = {
 			"bash",
 			"comment",
+			"diff",
 			"gitignore",
 			"go",
 			"gowork",

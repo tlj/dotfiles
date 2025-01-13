@@ -63,7 +63,7 @@ if vim.fn.has("nvim-0.10") == 1 then
 end
 
 if vim.fn.has("nvim-0.11") == 1 then
-	options.messagesopt = "wait:1000,history:2000"
+	options.messagesopt = "hit-enter,history:2000"
 	options.cmdheight = 0
 end
 

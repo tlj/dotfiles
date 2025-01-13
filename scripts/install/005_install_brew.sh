@@ -12,6 +12,9 @@ if isMac; then
     eval "$(/opt/homebrew/bin/brew shellenv)"
     PATH="/opt/homebrew/bin:$PATH"
   else
-    echo "Homebrew already installed."
+    echo "Homebrew already installed - upgrading."
+    brew update
+    brew upgrade
+    brew cleanup
   fi
 fi
