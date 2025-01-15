@@ -54,18 +54,10 @@ M.get_diagnostic_counts = function()
 
 	local parts = {}
 	local signs = M.icons.lsp.diagnostic.signs
-	if counts.errors > 0 then
-		table.insert(parts, "%#DiagnosticError#" .. signs.Error .. " " .. counts.errors .. "%*")
-	end
-	if counts.warnings > 0 then
-		table.insert(parts, "%#DiagnosticWarn#" .. signs.Warn .. " " .. counts.warnings .. "%*")
-	end
-	if counts.info > 0 then
-		table.insert(parts, "%#DiagnosticInfo#" .. signs.Info .. " " .. counts.info .. "%*")
-	end
-	if counts.hints > 0 then
-		table.insert(parts, "%#DiagnosticHint#" .. signs.Hint .. " " .. counts.hints .. "%*")
-	end
+	if counts.errors > 0 then table.insert(parts, "%#DiagnosticError#" .. signs.Error .. " " .. counts.errors .. "%*") end
+	if counts.warnings > 0 then table.insert(parts, "%#DiagnosticWarn#" .. signs.Warn .. " " .. counts.warnings .. "%*") end
+	if counts.info > 0 then table.insert(parts, "%#DiagnosticInfo#" .. signs.Info .. " " .. counts.info .. "%*") end
+	if counts.hints > 0 then table.insert(parts, "%#DiagnosticHint#" .. signs.Hint .. " " .. counts.hints .. "%*") end
 
 	if #parts > 0 then return " " .. table.concat(parts, " ") end
 	return ""
@@ -77,9 +69,7 @@ M.git_branch = function()
 
 	local gitsigns = vim.b.gitsigns_status_dict
 
-	if gitsigns and gitsigns.head then
-		return string.format(" %s %s", M.icons.kinds.Git, gitsigns.head)
-	end
+	if gitsigns and gitsigns.head then return string.format(" %s %s", M.icons.kinds.Git, gitsigns.head) end
 
 	return ""
 end
@@ -131,14 +121,11 @@ M.setup = function(opts)
 	M.opts = vim.tbl_extend("force", M.opts, opts or {})
 
 	local status_group = vim.api.nvim_create_augroup("StatusLine", { clear = true })
-	vim.api.nvim_create_autocmd(
-		{ "WinEnter", "BufEnter", "FileType", "DiagnosticChanged", "LspAttach", "LspDetach" },
-		{
-			callback = function() vim.wo.statusline = require("statusline").active() end,
-			pattern = "*",
-			group = status_group,
-		}
-	)
+	vim.api.nvim_create_autocmd({ "WinEnter", "BufEnter", "FileType", "DiagnosticChanged", "LspAttach", "LspDetach" }, {
+		callback = function() vim.wo.statusline = require("statusline").active() end,
+		pattern = "*",
+		group = status_group,
+	})
 
 	-- Force the statusline to be transparent since it is distracting
 	if M.opts.transparent then
@@ -173,12 +160,11 @@ M.setup = function(opts)
 				local spinner = { "⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏" }
 				if ev.data.params.value.kind == "end" then
 					M.lsp_update = " "
+				elseif ev.data.params.value.kind == "begin" then
+					M.lsp_update = "⠋"
 				else
-					M.lsp_update = string.format(
-						"%d%%%% %s",
-						ev.data.params.value.percentage,
-						spinner[math.floor(vim.uv.hrtime() / (1e6 * 80)) % #spinner + 1]
-					)
+					M.lsp_update =
+						string.format("%d%%%% %s", ev.data.params.value.percentage, spinner[math.floor(vim.uv.hrtime() / (1e6 * 80)) % #spinner + 1])
 				end
 				vim.wo.statusline = require("statusline").active()
 			end,
