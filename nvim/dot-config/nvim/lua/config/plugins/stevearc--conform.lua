@@ -5,6 +5,7 @@ return {
 	settings = {
 		log_level = vim.log.levels.DEBUG,
 		formatters_by_ft = {
+			go = { "goimports" },
 			lua = { "stylua" },
 			sh = { "shfmt" },
 			markdown = { "mdformat" },
