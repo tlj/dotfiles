@@ -1,13 +1,16 @@
-font-family = JetBrains Mono Regular
-font-family-bold = JetBrains Mono Bold
-font-family-italic = JetBrains Mono Italic
-font-family-bold-italic = JetBrains Mono Bold Italic
-
 font-size = 16.0
+
+# font-feature = +ss06 +ss03 +ss01 +ss07
+font-family = VictorMono NFM
+font-style = Medium
+font-style-bold = Bold
+font-style-italic = Italic
+font-style-bold-italic = Bold Italic
+
 theme = GruvboxDark
 bold-is-bright = true
-window-height = 50
-window-width = 160
+window-height = 45
+window-width = 180
 auto-update-channel = stable
 quit-after-last-window-closed = true
 
