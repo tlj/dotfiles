@@ -29,7 +29,7 @@ require("graft").setup({
 			end,
 		},
 		{
-			-- pretty notifications - not strictly nece
+			-- pretty notifications - not strictly neccessary
 			"rcarriga/nvim-notify",
 			function()
 				local notify = require("notify")
@@ -66,8 +66,22 @@ require("graft").setup({
 		-- Code formatting
 		include("stevearc/conform.nvim"),
 
-		-- Git signs
+		-- Git stuff
 		include("lewis6991/gitsigns.nvim"),
+		{
+			"sindrets/diffview.nvim",
+			setup = function(_)
+				require("diffview").setup()
+
+				vim.api.nvim_create_autocmd("FileType", {
+					pattern = "DiffviewFileHistory",
+					callback = function(event) vim.keymap.set("n", "q", "<cmd>DiffviewClose<cr>", { buffer = event.buf, silent = true }) end,
+				})
+			end,
+			keys = {
+				["<leader>hl"] = { cmd = "<cmd>DiffviewFileHistory %<cr>", desc = "File git history" },
+			},
+		},
 
 		-- File management and fuzzy finding
 		include("echasnovski/mini.pick"),
@@ -85,9 +99,36 @@ require("graft").setup({
 
 		-- dap debugger
 		include("mfussenegger/nvim-dap"),
-		include("theHamsta/nvim-dap-virtual-text"),
+		{
+			"igorlfs/nvim-dap-view",
+			after = { "mfussenegger/nvim-dap" },
+			settings = {
+				windows = { width = 1 },
+			},
+			setup = function(settings)
+				require("dap-view").setup(settings)
+				local dap, dapview = require("dap"), require("dap-view")
+				dap.listeners.after.event_initialized["dap-view"] = function()
+					vim.notify("Debug session started.")
+					dapview.open()
+				end
+				dap.listeners.before.event_terminated["dap-view"] = function()
+					vim.notify("Debug session stopped.")
+					dapview.close()
+				end
+				dap.listeners.before.event_exited["dap-view"] = function()
+					vim.notify("Debug session stopped.")
+					dapview.close()
+				end
+			end,
+			keys = {
+				["<leader>dap"] = { cmd = "<cmd>DapViewToggle<cr>", desc = "DapView Toggle" },
+				["<leader>dw"] = { cmd = "<cmd>DapViewWatch<CR>", desc = "DapView Add to Watch" },
+			},
+		},
+		-- include("theHamsta/nvim-dap-virtual-text"),
 		include("leoluz/nvim-dap-go"),
-		include("rcarriga/nvim-dap-ui"),
+		-- include("rcarriga/nvim-dap-ui"),
 
 		-- Quickfix improvements
 		{
