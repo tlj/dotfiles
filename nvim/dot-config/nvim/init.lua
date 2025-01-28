@@ -63,8 +63,7 @@ require("graft").setup({
 		include("lewis6991/gitsigns.nvim"),
 
 		-- File management and fuzzy finding
-		include("echasnovski/mini.pick"),
-		include("hrsh7th/nvim-deck"), -- I like this approach, but it is a bit lacking at this moment
+		include("ibhagwan/fzf-lua"),
 		include("stevearc/oil.nvim"), -- file management
 
 		-- TMUX navigation (ctrl-hjkl to switch between nvim and tmux
