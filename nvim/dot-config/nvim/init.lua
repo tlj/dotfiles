@@ -100,10 +100,15 @@ require("graft").setup({
 		-- dap debugger
 		include("mfussenegger/nvim-dap"),
 		{
-			"igorlfs/nvim-dap-view",
+			-- Forked from igorlfs/nvim-dap-view. Using the fork until some of my PRs are
+			-- merged.
+			"tlj/nvim-dap-view",
 			after = { "mfussenegger/nvim-dap" },
 			settings = {
-				windows = { width = 1 },
+				windows = {
+					width = 1,
+					position = "below",
+				},
 			},
 			setup = function(settings)
 				require("dap-view").setup(settings)
