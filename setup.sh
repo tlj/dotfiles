@@ -45,7 +45,7 @@ mkdir -p ~/src
 
 echo "Installing nvim config..." 
 NVIM_CONFIG_LOCATION="$XDG_CONFIG_HOME/nvim"
-if ! cd "$NVIM_CONFIG_LOCATION" &> /dev/null; then
+if [[ ! -d "$NVIM_CONFIG_LOCATION" ]]; then
   git clone -b master https://github.com/tlj/nvim.git "$NVIM_CONFIG_LOCATION" > /dev/null
 fi
 
