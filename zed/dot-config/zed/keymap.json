@@ -1,0 +1,73 @@
+// Zed keymap
+//
+// For information on binding keys, see the Zed
+// documentation: https://zed.dev/docs/key-bindings
+//
+// To see the default key bindings run `zed: open default keymap`
+// from the command palette.
+[
+  // Bring up terminal
+  {
+    "context": "Workspace",
+    "bindings": {
+      "ctrl-e t": "projects::OpenRecent"
+    }
+  },
+  {
+    "context": "Dock || Terminal || Editor",
+    "bindings": {
+      "ctrl-h": "workspace::ActivatePaneLeft",
+      "ctrl-l": "workspace::ActivatePaneRight",
+      "ctrl-k": "workspace::ActivatePaneUp",
+      "ctrl-j": "workspace::ActivatePaneDown"
+    }
+  },
+  {
+    "context": "Workspace",
+    "bindings": {
+      // "space a a": "workspace::ToggleRightDock"
+      // "shift shift": "file_finder::Toggle"
+    }
+  },
+  {
+    "context": "Editor",
+    "bindings": {
+      "ctrl-s": "workspace::Save",
+      "space f b": "tab_switcher::ToggleAll"
+      // "j k": ["workspace::SendKeystrokes", "escape"]
+    }
+  },
+  {
+    "context": "GitPanel",
+    "bindings": {
+      "q": "git_panel::Close"
+    }
+  },
+  {
+    "context": "Editor && vim_mode == visual && !VimWaiting && !VimObject",
+    "bindings": {
+      "shift-j": "editor::MoveLineDown",
+      "shift-k": "editor::MoveLineUp",
+      ">": "vim::Indent",
+      "<": "vim::Outdent"
+    }
+  },
+  {
+    "context": "Editor && vim_mode == normal && !VimWaiting && !menu",
+    "bindings": {
+      ".": "vim::Repeat",
+      "space f t": "workspace::ToggleBottomDock",
+      "space l g": [
+        "task::Spawn",
+        {
+          "task_name": "Lazygit",
+          "reveal_target": "center"
+        }
+      ],
+      "space f f": "file_finder::Toggle",
+      "space a a": "workspace::ToggleRightDock",
+      "space a e": "assistant::InlineAssist"
+      // "j k": ["workspace::SendKeystrokes", "escape"]
+    }
+  }
+]
