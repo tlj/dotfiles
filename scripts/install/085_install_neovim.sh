@@ -38,6 +38,9 @@ cd - > /dev/null
 INSTALLED_NVIM_VERSION=$($HOME/.local/neovim/bin/nvim --version | head -n1 | cut -d' ' -f2 | cut -d'+' -f1)
 echo "Installed Neovim ${INSTALLED_NVIM_VERSION}"
 
+echo "Installing Graft plugin manager..."
+install_with_git ~/.local/share/nvim/site/pack/graft/start/graft.nvim git@github.com:tlj/graft.nvim
+
 echo "Installing stylua..."
 ubi -v -i ~/.local/bin -p JohnnyMorganz/stylua
 
