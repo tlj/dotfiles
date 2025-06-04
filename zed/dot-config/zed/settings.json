@@ -22,7 +22,7 @@
     "metrics": false
   },
   "tab_bar": {
-    "show": false
+    "show": true
   },
   "title_bar": {
     "show_sign_in": false,
@@ -50,7 +50,7 @@
     "dark": "One Dark"
   },
   "scrollbar": {
-    "show": "never"
+    "show": "auto"
   },
   "terminal": {
     "font_family": "VictorMono Nerd Font",
