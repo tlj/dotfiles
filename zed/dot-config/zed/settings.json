@@ -7,56 +7,163 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
-  "agent": {
-    "always_allow_tool_actions": true,
-    "default_model": {
-      "provider": "zed.dev",
-      "model": "claude-sonnet-4-thinking-latest"
+    "edit_predictions": {
+        "disabled_globs": [
+            "**/.git",
+            "**/.svn",
+            "**/.hg",
+            "**/CVS",
+            "**/.DS_Store",
+            "**/Thumbs.db",
+            "**/.classpath",
+            "**/.settings",
+            "**/.vscode",
+            "**/.idea",
+            "**/node_modules",
+            "**/.serverless",
+            "**/build",
+            "**/dist",
+            "**/coverage",
+            "**/.venv",
+            "**/__pycache__",
+            "**/.ropeproject",
+            "**/.pytest_cache",
+            "**/.ruff_cache"
+        ],
+        "mode": "eager",
+        "copilot": {
+            "proxy": null,
+            "proxy_no_verify": null
+        },
+        "enabled_in_text_threads": false
     },
-    "model_parameters": [],
-    "default_profile": "write",
-    "version": "2"
-  },
-  "telemetry": {
-    "diagnostics": false,
-    "metrics": false
-  },
-  "tab_bar": {
-    "show": true
-  },
-  "title_bar": {
-    "show_sign_in": false,
-    "show_user_picture": false
-  },
-  "base_keymap": "JetBrains",
-  "vim_mode": true,
-  "cursor_blink": false,
-  "relative_line_numbers": true,
-  "buffer_font_family": "VictorMono Nerd Font",
-  "ui_font_size": 16,
-  "buffer_font_size": 16,
-  "buffer_line_height": {
-    "custom": 1.5
-  },
-  "hover_popover_enabled": false,
-  "show_completions_on_input": false,
-  "show_completion_documentation": true,
-  "inlay_hints": {
-    "show": true
-  },
-  "theme": {
-    "mode": "system",
-    "light": "Gruvbox Dark Hard",
-    "dark": "One Dark"
-  },
-  "scrollbar": {
-    "show": "auto"
-  },
-  "terminal": {
-    "font_family": "VictorMono Nerd Font",
-    "font_size": 16,
-    "line_height": {
-      "custom": 1.5
+    "notification_panel": {
+        "button": false,
+        "dock": null
+    },
+    "agent": {
+        "always_allow_tool_actions": true,
+        "default_model": {
+            "provider": "copilot_chat",
+            "model": "claude-3.7-sonnet"
+        },
+        "model_parameters": [],
+        "default_profile": "write",
+        "version": "2"
+    },
+    "telemetry": {
+        "diagnostics": false,
+        "metrics": false
+    },
+    "tab_bar": {
+        "show": true,
+        "show_nav_history_buttons": false
+    },
+    "title_bar": {
+        "show_sign_in": false,
+        "show_user_picture": false
+    },
+    "base_keymap": "JetBrains",
+    "vim_mode": true,
+    "cursor_blink": false,
+    "relative_line_numbers": true,
+    "buffer_font_family": "VictorMono Nerd Font",
+    "ui_font_size": 16,
+    "buffer_font_size": 16,
+    "buffer_line_height": {
+        "custom": 1.5
+    },
+    "autosave": "on_focus_change",
+    "preferred_line_length": 120,
+    "hover_popover_enabled": false,
+    "show_edit_predictions": true,
+    "show_completions_on_input": true,
+    "show_completion_documentation": true,
+    "inlay_hints": {
+        "show": true
+    },
+    "indent_guides": {
+        "enabled": true,
+        "coloring": "indent_aware"
+    },
+    "tab_size": 4,
+    "tabs": {
+        "file_icons": true,
+        "git_status": true
+    },
+    "theme": {
+        "mode": "system",
+        "light": "Gruvbox Dark Hard",
+        "dark": "One Dark"
+    },
+    "scrollbar": {
+        "show": "never"
+    },
+    "terminal": {
+        "font_family": "VictorMono Nerd Font",
+        "font_size": 16,
+        "line_height": {
+            "custom": 1.5
+        },
+        "env": {
+            "EDITOR": "zed --wait"
+        },
+        "button": false
+    },
+    "toolbar": {
+        "title": false,
+        "quick_actions": false
+    },
+    "centered_layout": {
+        "left_padding": 0.15,
+        "right_padding": 0.15
+    },
+    "file_scan_exclusions": [
+        "**/.git",
+        "**/.svn",
+        "**/.hg",
+        "**/CVS",
+        "**/.DS_Store",
+        "**/Thumbs.db",
+        "**/.classpath",
+        "**/.settings",
+        "**/.vscode",
+        "**/.idea",
+        "**/node_modules",
+        "**/.serverless",
+        "**/build",
+        "**/dist",
+        "**/coverage",
+        "**/.venv",
+        "**/__pycache__",
+        "**/.ropeproject",
+        "**/.pytest_cache",
+        "**/.ruff_cache"
+    ],
+    "file_scan_inclusions": [".env"],
+    "project_panel": {
+        "button": false,
+        "default_width": 200,
+        "dock": "left",
+        "file_icons": true,
+        "folder_icons": true,
+        "git_status": true,
+        "scrollbar": {
+            "show": "never"
+        }
+    },
+    "outline_panel": {
+        "dock": "right",
+        "button": false
+    },
+    "collaboration_panel": {
+        "dock": "left",
+        "button": false
+    },
+    "chat_panel": {
+        "dock": "right"
+    },
+    "git_panel": {
+        "button": false
     }
-  }
 }
