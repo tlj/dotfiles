@@ -56,7 +56,7 @@
         "metrics": false
     },
     "tab_bar": {
-        "show": true,
+        "show": false,
         "show_nav_history_buttons": false
     },
     "title_bar": {
@@ -165,5 +165,11 @@
     },
     "git_panel": {
         "button": false
+    },
+    "languages": {
+        "PHP": {
+            "format_on_save": "off",
+            "language_servers": ["intelephense", "!phpactor", "..."]
+        }
     }
 }

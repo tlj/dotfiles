@@ -6,7 +6,6 @@
 // To see the default key bindings run `zed: open default keymap`
 // from the command palette.
 [
-    // Bring up terminal
     {
         "context": "Workspace",
         "bindings": {
@@ -19,7 +18,8 @@
             "ctrl-h": "workspace::ActivatePaneLeft",
             "ctrl-l": "workspace::ActivatePaneRight",
             "ctrl-k": "workspace::ActivatePaneUp",
-            "ctrl-j": "workspace::ActivatePaneDown"
+            "ctrl-j": "workspace::ActivatePaneDown",
+            "ctrl-o": "pane::GoBack"
         }
     },
     {
@@ -45,11 +45,11 @@
     {
         "context": "OutlinePanel",
         "bindings": {
-            "escape": "outline_panel::ToggleFocus"
+            "escape": "workspace::ToggleRightDock"
         }
     },
     {
-        "context": "ProjectPanel",
+        "context": "ProjectPanel && !editing",
         "bindings": {
             "q": "workspace::ToggleLeftDock",
             "d": "project_panel::Delete",
@@ -93,8 +93,7 @@
             "ctrl-u": ["workspace::SendKeystrokes", "ctrl-u z z"],
             "n": ["workspace::SendKeystrokes", "n z z z v"],
             "shift-n": ["workspace::SendKeystrokes", "shift-n z z z v"],
-            "shift-g": ["workspace::SendKeystrokes", "shift-g z z"],
-            "g r": "editor::FindAllReferences"
+            "shift-g": ["workspace::SendKeystrokes", "shift-g z z"]
         }
     },
     {
@@ -108,8 +107,9 @@
         "context": "Editor && VimControl && !VimWaiting && !menu",
         "bindings": {
             ".": "vim::Repeat",
+            "ctrl-e t": "projects::OpenRecent",
             // AI things
-            "space a a": "workspace::ToggleRightDock",
+            "space a a": "agent::ToggleFocus",
             "space a e": "assistant::InlineAssist",
             // File/buffer navigation
             "space f t": "workspace::ToggleBottomDock",
@@ -146,11 +146,16 @@
             // File explorer / Project pane
             "space t t": "workspace::ToggleLeftDock",
             // Search
-            "*": "buffer_search::Deploy",
+            "*": "editor::SelectAllMatches",
             "space *": "pane::DeploySearch",
             // LSP
             "space g a": "editor::ToggleCodeActions",
-            "space g l": "editor::ToggleInlineDiagnostics",
+            "space g l": "diagnostics::Deploy",
+            "g l": "editor::ToggleInlineDiagnostics",
+            "g b": "editor::ToggleGitBlameInline",
+            // Outline
+            "g shift-o": "outline::Toggle",
+            "space shift-o": "outline_panel::ToggleFocus",
             //
             "space q q": "zed::Quit"
         }
