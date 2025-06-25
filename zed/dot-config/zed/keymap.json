@@ -37,7 +37,13 @@
         }
     },
     {
-        "context": "GitPanel",
+        "context": "AgentPanel && not_editing",
+        "bindings": {
+            "q": "workspace::ToggleRightDock"
+        }
+    },
+    {
+        "context": "GitPanel && !editing",
         "bindings": {
             "q": "git_panel::Close"
         }
@@ -112,7 +118,7 @@
             "space a a": "agent::ToggleFocus",
             "space a e": "assistant::InlineAssist",
             // File/buffer navigation
-            "space f t": "workspace::ToggleBottomDock",
+            "space f t": "terminal_panel::ToggleFocus",
             "space f b": "tab_switcher::ToggleAll",
             "space f g": "pane::DeploySearch",
             "space f p": "projects::OpenRecent",
@@ -157,7 +163,20 @@
             "g shift-o": "outline::Toggle",
             "space shift-o": "outline_panel::ToggleFocus",
             //
-            "space q q": "zed::Quit"
+            "space q q": "zed::Quit",
+            // debugger
+            "space d s": "debugger::Start",
+            "space d b": "editor::ToggleBreakpoint"
+        }
+    },
+    {
+        "context": "Editor && VimControl && !VimWaiting && !menu && !debugger_stopped",
+        "use_key_equivalents": true,
+        "bindings": {
+            "space d s": "debugger::Stop",
+            "space d c": "debugger::Continue",
+            "space d o": "debugger::StepOver",
+            "space d i": "debugger::StepInto"
         }
     }
 ]

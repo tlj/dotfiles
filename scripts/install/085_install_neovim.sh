@@ -50,6 +50,9 @@ cargo install -q tree-sitter-cli
 echo "Installing LSPs..."
 npm i -g vscode-langservers-extracted intelephense
 
+echo "Installing Claude Code..."
+npm i -g @anthropic-ai/claude-code
+
 echo "Installing PHP DAP adapter..."
 install_with_git ~/src/vscode-php-debug https://github.com/xdebug/vscode-php-debug.git 
 cd ~/src/vscode-php-debug

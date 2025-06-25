@@ -45,7 +45,7 @@
         "always_allow_tool_actions": true,
         "default_model": {
             "provider": "copilot_chat",
-            "model": "claude-3.7-sonnet"
+            "model": "claude-sonnet-4"
         },
         "model_parameters": [],
         "default_profile": "write",
@@ -74,6 +74,7 @@
         "custom": 1.5
     },
     "autosave": "on_focus_change",
+    "format_on_save": "off",
     "preferred_line_length": 120,
     "hover_popover_enabled": false,
     "show_edit_predictions": true,
@@ -168,8 +169,13 @@
     },
     "languages": {
         "PHP": {
-            "format_on_save": "off",
             "language_servers": ["intelephense", "!phpactor", "..."]
+        },
+        "Go": {
+            "format_on_save": "on",
+            "code_actions_on_format": {
+                "source.organizeImports": true
+            }
         }
     }
 }
