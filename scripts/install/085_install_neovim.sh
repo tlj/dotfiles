@@ -53,6 +53,9 @@ npm i -g vscode-langservers-extracted intelephense
 echo "Installing Claude Code..."
 npm i -g @anthropic-ai/claude-code
 
+echo "Installing OpenCode..."
+curl -fsSL https://raw.githubusercontent.com/opencode-ai/opencode/refs/heads/main/install | bash
+
 echo "Installing PHP DAP adapter..."
 install_with_git ~/src/vscode-php-debug https://github.com/xdebug/vscode-php-debug.git 
 cd ~/src/vscode-php-debug
