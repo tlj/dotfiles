@@ -76,7 +76,7 @@
         "bindings": {
             "space f f": "file_finder::Toggle",
             "space b n": "workspace::NewFile",
-            "space f p": "projects::OpenRecent",
+            "space f p": ["projects::OpenRecent", { "create_new_window": false }],
             "space f g": "workspace::NewSearch",
             "space q q": "zed::Quit"
         }

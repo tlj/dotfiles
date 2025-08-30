@@ -18,5 +18,6 @@ shfmt = "latest"
 yarn = "latest"
 lua-language-server = "latest"
 lua = "5.1"
+pnpm = "latest"
 
 #"go:github.com/joshmedeski/sesh" = "latest"
