@@ -107,5 +107,3 @@ case ":$PATH:" in
 esac
 # pnpm end
 
-# opencode
-export PATH=$HOME/.opencode/bin:$PATH

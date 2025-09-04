@@ -45,10 +45,10 @@ echo "Installing tree-sitter-cli..."
 cargo install -q tree-sitter-cli
 
 echo "Installing LSPs..."
-npm i -g vscode-langservers-extracted intelephense
+npm i -g vscode-langservers-extracted intelephense @github/copilot-language-server
 
 echo "Installing OpenCode..."
-curl -fsSL https://raw.githubusercontent.com/opencode-ai/opencode/refs/heads/main/install | bash
+brew install sst/tap/opencode
 
 echo "Installing PHP DAP adapter..."
 install_with_git ~/src/vscode-php-debug https://github.com/xdebug/vscode-php-debug.git 
