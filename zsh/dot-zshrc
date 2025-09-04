@@ -108,4 +108,4 @@ esac
 # pnpm end
 
 # opencode
-export PATH=/Users/thomas/.opencode/bin:$PATH
+export PATH=$HOME/.opencode/bin:$PATH
