@@ -3,9 +3,10 @@
 . scripts/lib/detect_os.sh
 . scripts/lib/print_utils.sh
 
-print_header "Hyperland"
+print_header "Hyprland"
 
 if isArch; then
+  sudo pacman -S --noconfirm --quiet hyprland
   stow --target=$HOME --dotfiles -v --restow hypr/ waybar/
 fi
 
