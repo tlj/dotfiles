@@ -8,6 +8,8 @@ print_header "Tmux"
 
 if isMac; then
   brew install -q tmux
+elif isArch; then
+  sudo pacman -S --noconfirm --quiet tmux
 else
   sudo apt-get -qq install -y tmux
 fi

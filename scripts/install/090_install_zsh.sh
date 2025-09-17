@@ -6,7 +6,9 @@
 
 print_header "Zsh"
 
-if ! isMac; then
+if isArch; then
+  sudo pacman -S --noconfirm --quiet zsh
+elif ! isMac; then
   sudo apt-get -qq install -y zsh
 fi
 

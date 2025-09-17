@@ -45,6 +45,10 @@ isAmd64() {
   [[ $(uname -m) == "x86_64" ]]
 }
 
+isArch() {
+  [[ -f /etc/arch-release ]]
+}
+
 if isMac; then
   PLATFORM=Darwin
 elif isLinux; then

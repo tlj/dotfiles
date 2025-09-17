@@ -7,6 +7,10 @@ print_header "Basic tools and libraries"
 
 if isMac; then
   brew install -q stow btop bat sqlite cmake fortune cowsay
+elif isArch; then
+  sudo pacman -Syu --noconfirm --quiet
+
+  sudo pacman -S --noconfirm --quiet curl stow fuse3 bat sqlite3 cmake ca-certificates lsd btop
 else
   sudo apt-get -qq update -y -q
 

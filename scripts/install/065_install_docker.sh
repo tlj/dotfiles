@@ -7,6 +7,13 @@ print_header "Docker"
 
 if isMac; then
   brew install orbstack
+elif isArch; then
+  sudo pacman -S --noconfirm --quiet docker docker-compose docker-buildx
+
+  sudo systemctl enable docker.service
+  sudo systemctl enable containerd.service
+  sudo systemctl start docker containerd
+  sudo usermod -aG docker $USER
 else
   sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
   sudo chmod a+r /etc/apt/keyrings/docker.asc

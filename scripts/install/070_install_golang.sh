@@ -7,6 +7,8 @@ print_header "Golang"
 
 if isMac; then
   brew install -q go
+elif isArch; then
+  sudo pacman -S --noconfirm --quiet go
 else
   sudo add-apt-repository -y ppa:longsleep/golang-backports
   sudo apt-get -qq update -y

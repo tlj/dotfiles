@@ -12,6 +12,9 @@ print_header "Neovim"
 if isMac; then
   [[ $VERBOSE -eq 1 ]] && echo "  Installing Neovim dependencies..."
   brew install -q ripgrep fd luacheck gnu-sed gsed bash silicon ninja cmake gettext curl mdformat
+elif isArch; then
+  [[ $VERBOSE -eq 1 ]] && echo "  Installing Neovim dependencies for arch..."
+  sudo pacman -S --noconfirm --quiet ripgrep fd luarocks ninja gettext cmake unzip curl
 else
   [[ $VERBOSE -eq 1 ]] && echo "  Installing Neovim dependencies..."
   sudo apt-get -qq install -y ripgrep fd-find luarocks ninja-build gettext cmake unzip curl build-essential

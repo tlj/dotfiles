@@ -34,7 +34,7 @@ echo "Installing dotfiles for ${PLATFORM} ${ARCH}..."
 [[ $DEBUG -eq 1 ]] && echo "Debug mode enabled"
 [[ $VERBOSE -eq 1 ]] && echo "Verbose mode enabled"
 
-if ! isMac; then
+if ! isMac && ! isArch; then
   # Ensure computer doesn't go to sleep or lock while installing
   gsettings set org.gnome.desktop.screensaver lock-enabled false
   gsettings set org.gnome.desktop.session idle-delay 0
@@ -70,7 +70,7 @@ else
   done
 fi
 
-if ! isMac; then
+if ! isMac && ! isArch; then
   # Revert to normal idle and lock settings
   gsettings set org.gnome.desktop.screensaver lock-enabled true
   gsettings set org.gnome.desktop.session idle-delay 300
