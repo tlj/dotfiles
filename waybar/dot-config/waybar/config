@@ -6,15 +6,36 @@
   "modules-center": [],
   "modules-right": [
     "network",
+    "backlight",
+    "cpu",
     "battery",
     "clock",
     "custom/power"
   ],
+      "backlight": {
+        "device": "intel_backlight",
+        "format": "{icon} {percent}%",
+        "format-alt": "{percent}% {icon}",
+        "format-alt-click": "click-right",
+        //"format-icons": ["", ""],
+        "format-icons": ["", ""],
+        "on-scroll-down": "brightnessctl s 5%-",
+        "on-scroll-up": "brightnessctl s +5%"
+    },
+
   "custom/power": {
     "format": " 󰐥 ",
     "tooltip": false,
     "on-click": "wlogout"
   },
+      "cpu": {
+        "interval": 1,
+        //"format": " {}%", // Icon: microchip
+        "format": "{max_frequency}GHz <span color=\"darkgray\">| {usage}%</span>",
+        "max-length": 13,
+        "min-length": 13
+    },
+
     "battery": {
         "interval": 2,
         "states": {

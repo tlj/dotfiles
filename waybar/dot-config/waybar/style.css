@@ -21,6 +21,8 @@
 }
 
 #battery,
+#cpu,
+#backlight,
 #clock {
   padding: 6px;
 }

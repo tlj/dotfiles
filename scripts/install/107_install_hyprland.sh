@@ -7,7 +7,7 @@ print_header "Hyprland"
 
 if isArch; then
   sudo pacman -S --noconfirm --quiet hyprland
-  stow --target=$HOME --dotfiles -v --restow hypr/ waybar/
+  stow --target=$HOME --dotfiles -v --restow hypr/ waybar/ wofi/
 fi
 
 
