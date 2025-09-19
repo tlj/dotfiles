@@ -7,7 +7,7 @@ font-style-bold = Bold
 font-style-italic = Italic
 font-style-bold-italic = Bold Italic
 
-theme = GruvboxDark
+theme = Gruvbox Dark
 bold-is-bright = true
 window-height = 45
 window-width = 180
