@@ -15,7 +15,7 @@ if isMac; then
   commitizen-go install
 elif isArch; then
   echo "Not installing anything for arch..."
-  pacman -S --noconfirm --quiet git-delta
+  sudo pacman -S --noconfirm --quiet git-delta
 else
   echo "Installing git and gh..."
   sudo mkdir -p -m 755 /etc/apt/keyrings 
