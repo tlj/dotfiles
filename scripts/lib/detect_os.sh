@@ -49,6 +49,10 @@ isArch() {
   [[ -f /etc/arch-release ]]
 }
 
+isOmarchy() {
+  [[ -d ~/.config/omarchy ]]
+}
+
 if isMac; then
   PLATFORM=Darwin
 elif isLinux; then

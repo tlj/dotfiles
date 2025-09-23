@@ -6,8 +6,12 @@
 print_header "Hyprland"
 
 if isArch; then
-  sudo pacman -S --noconfirm --quiet hyprland waybar wofi
-  stow --target=$HOME --dotfiles -v --restow hypr/ waybar/ wofi/
+  if isOmarchy; then
+    echo "Omarchy found. Not overwriting any config yet."
+  else
+    sudo pacman -S --noconfirm --quiet hyprland waybar wofi
+    stow --target=$HOME --dotfiles -v --restow hypr/ waybar/ wofi/
+  fi
 fi
 
 
