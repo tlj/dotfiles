@@ -10,7 +10,28 @@ if isMac; then
 elif isArch; then
   sudo pacman -Syu --noconfirm --quiet
 
-  sudo pacman -S --noconfirm --quiet curl stow fuse3 bat sqlite3 cmake ca-certificates lsd btop
+  sudo pacman -S --noconfirm --quiet curl stow fuse3 bat sqlite3 cmake ca-certificates lsd btop interception-caps2esc
+
+  cat << EOF | sudo tee /etc/udevmon.yaml
+- JOB: "intercept -g \$DEVNODE | caps2esc -m 1 | uinput -d \$DEVNODE"
+  DEVICE:
+    EVENTS:
+      EV_KEY: [KEY_CAPSLOCK, KEY_ESC]
+EOF
+  cat << EOF | sudo tee /etc/systemd/system/udevmon.service
+[Unit]
+Description=udevmon
+Wants=systemd-udev-settle.service
+After=systemd-udev-settle.service
+
+[Service]
+ExecStart=/usr/bin/nice -n 20 /usr/bin/udevmon -c /etc/udevmon.yaml
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
+  sudo systemctl enable --now udevmon.service
 else
   sudo apt-get -qq update -y -q
 
