@@ -1,0 +1,2 @@
+event=video/switchmode.*VMOD
+action=/etc/acpi/check-lid-on-startup.sh

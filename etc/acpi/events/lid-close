@@ -1,0 +1,2 @@
+event=button/lid.*close
+action=/etc/acpi/lid-close.sh
