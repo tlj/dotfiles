@@ -12,6 +12,7 @@ check_command() {
 
 check_command git || missing_deps=1
 check_command bzip2 || missing_deps=1
+check_command stow || missing_deps=1
 
 if [ "$missing_deps" = 1 ]; then
   echo "Please install the missing dependencies and try again."
