@@ -45,9 +45,10 @@ EOF
 dns=none
 EOF
 
-    echo "Replacing /etc/resolv.conf to point to local resolver (127.0.0.1)"
-    sudo rm -f /etc/resolv.conf
-    echo -e "# /etc/resolv.conf - managed by dotfiles install script\nnameserver 127.0.0.1" | sudo tee /etc/resolv.conf > /dev/null
+    # we use tailscale, which should take care of resolve.conf
+    # echo "Replacing /etc/resolv.conf to point to local resolver (127.0.0.1)"
+    # sudo rm -f /etc/resolv.conf
+    # echo -e "# /etc/resolv.conf - managed by dotfiles install script\nnameserver 127.0.0.1" | sudo tee /etc/resolv.conf > /dev/null
 
     echo "Restarting NetworkManager to apply the configuration"
     sudo systemctl restart NetworkManager
