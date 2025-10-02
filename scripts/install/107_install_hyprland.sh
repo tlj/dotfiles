@@ -16,7 +16,10 @@ install() {
 
         sudo stow -v -t /etc etc || true
 
-        echo 'ALL ALL=(root) NOPASSWD: /etc/acpi/check-lid-on-startup.sh' | sudo tee /etc/sudoers.d/check-lid-on-startup >/dev/null && sudo chmod 0440 /etc/sudoers.d/check-lid-on-startup || true
+        cat <<'EOF' | safe_write_root /etc/sudoers.d/check-lid-on-startup || true
+ALL ALL=(root) NOPASSWD: /etc/acpi/check-lid-on-startup.sh
+EOF
+        sudo chmod 0440 /etc/sudoers.d/check-lid-on-startup || true
       fi
 
       echo "Installing dotfiles"
@@ -53,9 +56,9 @@ install() {
       local repo_monitors_laptop="$repo_root/omarchy/dot-config/hypr/monitors.laptop.conf"
       local repo_monitors_desktop="$repo_root/omarchy/dot-config/hypr/monitors.desktop.conf"
 
-      mkdir -p "$hypr_conf_dir"
+      safe_mkdir "$hypr_conf_dir"
 
-      # Helper: atomically replace a file with a symlink to a repo variant, preserving original as .orig
+      # Helper: use safe helpers to link a variant
       _link_variant() {
         local dest="$1"
         local src="$2"
@@ -69,11 +72,11 @@ install() {
         fi
         # Backup existing dest if it's a regular file
         if [ -f "$dest" ] && [ ! -L "$dest" ]; then
-          mv "$dest" "$dest.orig" 2>/dev/null || true
+          safe_backup "$dest" || true
         elif [ -L "$dest" ]; then
-          rm -f "$dest" || true
+          safe_rm "$dest" || true
         fi
-        ln -s "$src" "$dest" || true
+        safe_symlink "$src" "$dest" || true
       }
 
       if has_trait "laptop"; then

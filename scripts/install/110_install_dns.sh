@@ -20,7 +20,7 @@ install() {
 
     echo "Writing stubby config to /etc/stubby/stubby.yml"
     sudo mkdir -p /etc/stubby
-    sudo tee /etc/stubby/stubby.yml > /dev/null <<EOF
+    cat <<EOF | safe_write_root /etc/stubby/stubby.yml
 resolution_type: GETDNS_RESOLUTION_STUB
 round_robin_upstreams: 1
 # Use TLS for upstream queries
@@ -41,7 +41,7 @@ EOF
     if command -v nmcli >/dev/null 2>&1; then
       echo "Configuring NetworkManager to not manage /etc/resolv.conf"
       sudo mkdir -p /etc/NetworkManager/conf.d
-      sudo tee /etc/NetworkManager/conf.d/99-dns-none.conf > /dev/null <<EOF
+      cat <<EOF | safe_write_root /etc/NetworkManager/conf.d/99-dns-none.conf
 [main]
 dns=none
 EOF

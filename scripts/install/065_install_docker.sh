@@ -17,10 +17,10 @@ install() {
     sudo chmod a+r /etc/apt/keyrings/docker.asc || true
 
     echo "Adding apt source for docker engine..."
-    echo \
+    echo \ 
       "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
-      $(. /etc/os-release && echo "$UBUNTU_CODENAME") stable" | \
-      sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+      $(. /etc/os-release && echo \"$UBUNTU_CODENAME\") stable" | \
+      safe_write_root /etc/apt/sources.list.d/docker.list || true
 
     sudo apt-get -qq update || true
 
@@ -33,7 +33,7 @@ install() {
     sudo usermod -aG docker "$USER" || true
 
     # Limit log size to avoid running out of disk
-    echo '{"log-driver":"json-file","log-opts":{"max-size":"10m","max-file":"5"}}' | sudo tee /etc/docker/daemon.json
+    echo '{"log-driver":"json-file","log-opts":{"max-size":"10m","max-file":"5"}}' | safe_write_root /etc/docker/daemon.json || true
   fi
 
   echo "Installing lazydocker..."

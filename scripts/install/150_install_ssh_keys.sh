@@ -36,13 +36,18 @@ install() {
     norm=$(printf "%s" "$line" | awk '{print $1 " " $2}')
     if awk '{print $1 " " $2}' "$auth" | grep -F -x -q -- "$norm"; then
       [[ ${DEBUG:-0} -eq 1 ]] && echo "Key already present: $norm"
-    else
-      echo "$line" >> "$auth"
+      else
+      if [[ ${DRY_RUN:-0} -eq 1 ]]; then
+        printf "[DRY-RUN] append to %s: %s\n" "$auth" "$line"
+      else
+        echo "$line" >> "$auth"
+      fi
       echo "Added SSH key: $norm"
     fi
   done < "$tmp"
 
   chmod 600 "$auth" || true
 }
+
 
 # No actions on source — setup.sh calls install()

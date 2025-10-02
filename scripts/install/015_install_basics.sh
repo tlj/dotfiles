@@ -14,14 +14,14 @@ install() {
     sudo pacman -S --noconfirm --quiet \
       curl stow fuse3 bat sqlite3 cmake ca-certificates lsd btop interception-caps2esc
 
-    sudo tee /etc/udevmon.yaml >/dev/null <<'EOF'
+    cat <<'EOF' | safe_write_root /etc/udevmon.yaml
 - JOB: "intercept -g $DEVNODE | caps2esc -m 1 | uinput -d $DEVNODE"
   DEVICE:
     EVENTS:
       EV_KEY: [KEY_CAPSLOCK, KEY_ESC]
 EOF
 
-    sudo tee /etc/systemd/system/udevmon.service >/dev/null <<'EOF'
+    cat <<'EOF' | safe_write_root /etc/systemd/system/udevmon.service
 [Unit]
 Description=udevmon
 Wants=systemd-udev-settle.service

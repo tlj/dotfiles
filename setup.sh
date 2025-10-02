@@ -5,14 +5,21 @@ set -e
 # Define flags with default values
 DEBUG=0
 VERBOSE=0
+DRY_RUN=0
 
 # Parse command line arguments
-while getopts "dv" opt; do
+while getopts "dvn-:" opt; do
   case $opt in
   d) DEBUG=1 ;;
   v) VERBOSE=1 ;;
+  n) DRY_RUN=1 ;;
+  -)
+    case "$OPTARG" in
+      dry-run) DRY_RUN=1 ;;
+      *) echo "Unknown option --$OPTARG" >&2; exit 1 ;;
+    esac ;;
   *)
-    echo "Usage: $0 [-d] [-v] [script_filter]" >&2
+    echo "Usage: $0 [-d] [-v] [-n|--dry-run] [script_filter]" >&2
     exit 1
     ;;
   esac
@@ -20,6 +27,13 @@ done
 
 # Shift the options so $1 becomes the first non-option argument
 shift $((OPTIND - 1))
+
+# Export DRY_RUN so sourced scripts can see it
+export DRY_RUN
+
+. scripts/lib/dry_run.sh
+
+. scripts/lib/safe_helpers.sh
 
 # Print Dotfiles Logo
 echo "CgogXyAuLScpIF8gICAgICAgICAgICAgICAgLi0nKSBfICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICgnLS4gICAgLi0nKSAgICAKKCAoICBPTykgKSAgICAgICAgICAgICAgKCAgT08pICkgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgXyggIE9PKSAgKCBPTyApLiAgCiBcICAgICAuJ18gIC4tJyksLS0tLS0uIC8gICAgICcuXyAgICAsLS0tLS0tLiwtLi0nKSAgLC0tLiAgICAgKCwtLS0tLS0uKF8pLS0tXF8pIAogLGAnLS0uLi5fKSggT08nICAuLS4gICd8Jy0tLi4uX18pKCctfCBfLi0tLSd8ICB8T08pIHwgIHwuLScpICB8ICAuLS0tJy8gICAgXyB8ICAKIHwgIHwgIFwgICcvICAgfCAgfCB8ICB8Jy0tLiAgLi0tJyhPT3woX1wgICAgfCAgfCAgXCB8ICB8IE9PICkgfCAgfCAgICBcICA6YCBgLiAgCiB8ICB8ICAgJyB8XF8pIHwgIHxcfCAgfCAgIHwgIHwgICAvICB8ICAnLS0uIHwgIHwoXy8gfCAgfGAtJyB8KHwgICctLS4gICcuLmAnJy4pIAogfCAgfCAgIC8gOiAgXCB8ICB8IHwgIHwgICB8ICB8ICAgXF8pfCAgLi0tJyx8ICB8Xy4nKHwgICctLS0uJyB8ICAuLS0nIC4tLl8pICAgXCAKIHwgICctLScgIC8gICBgJyAgJy0nICAnICAgfCAgfCAgICAgXHwgIHxfKShffCAgfCAgICB8ICAgICAgfCAgfCAgYC0tLS5cICAgICAgIC8gCiBgLS0tLS0tLScgICAgICBgLS0tLS0nICAgIGAtLScgICAgICBgLS0nICAgIGAtLScgICAgYC0tLS0tLScgIGAtLS0tLS0nIGAtLS0tLScgIAoKCg==" | base64 -d | printf "\033[34m%s\033[0m" "$(cat -)"

@@ -1,4 +1,5 @@
 
+# Simple helper to clone or update a repo
 install_with_git() {
   DIR=$1
   REPO=$2
@@ -8,3 +9,5 @@ install_with_git() {
     git -C "$DIR" pull --quiet
   fi
 }
+
+

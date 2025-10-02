@@ -21,9 +21,9 @@ install() {
   elif isLinux; then
     echo "Installing git and gh..."
     sudo mkdir -p -m 755 /etc/apt/keyrings
-    wget -qO- https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo tee /etc/apt/keyrings/githubcli-archive-keyring.gpg >/dev/null
+    wget -qO- https://cli.github.com/packages/githubcli-archive-keyring.gpg | safe_write_root /etc/apt/keyrings/githubcli-archive-keyring.gpg || true
     sudo chmod go+r /etc/apt/keyrings/githubcli-archive-keyring.gpg
-    echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list >/dev/null
+    echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | safe_write_root /etc/apt/sources.list.d/github-cli.list || true
     sudo apt-get -qq update -y
     sudo apt-get -qq install -y git gh || true
   fi
