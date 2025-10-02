@@ -1,24 +1,27 @@
 #!/usr/bin/env bash
 
-. scripts/lib/detect_os.sh
-. scripts/lib/print_utils.sh
+install() {
+  print_header "Basic tools and libraries"
 
-print_header "Basic tools and libraries"
+  mkdir -p "$HOME/.local/bin"
 
-if isMac; then
-  brew install -q stow btop bat sqlite cmake fortune cowsay
-elif isArch; then
-  sudo pacman -Syu --noconfirm --quiet
+  if isMac; then
+    brew install -q stow btop bat sqlite cmake fortune cowsay
 
-  sudo pacman -S --noconfirm --quiet curl stow fuse3 bat sqlite3 cmake ca-certificates lsd btop interception-caps2esc
+  elif isArch; then
+    sudo pacman -Syu --noconfirm --quiet
 
-  cat << EOF | sudo tee /etc/udevmon.yaml
-- JOB: "intercept -g \$DEVNODE | caps2esc -m 1 | uinput -d \$DEVNODE"
+    sudo pacman -S --noconfirm --quiet \
+      curl stow fuse3 bat sqlite3 cmake ca-certificates lsd btop interception-caps2esc
+
+    sudo tee /etc/udevmon.yaml >/dev/null <<'EOF'
+- JOB: "intercept -g $DEVNODE | caps2esc -m 1 | uinput -d $DEVNODE"
   DEVICE:
     EVENTS:
       EV_KEY: [KEY_CAPSLOCK, KEY_ESC]
 EOF
-  cat << EOF | sudo tee /etc/systemd/system/udevmon.service
+
+    sudo tee /etc/systemd/system/udevmon.service >/dev/null <<'EOF'
 [Unit]
 Description=udevmon
 Wants=systemd-udev-settle.service
@@ -31,26 +34,34 @@ ExecStart=/usr/bin/nice -n 20 /usr/bin/udevmon -c /etc/udevmon.yaml
 WantedBy=multi-user.target
 EOF
 
-  sudo systemctl enable --now udevmon.service
-else
-  sudo apt-get -qq update -y -q
+    sudo systemctl enable --now udevmon.service
 
-  echo "Installing basics..."
-  sudo apt-get -qq install -y -q curl stow fuse3 bat sqlite3 cmake ca-certificates fortune cowsay
-  sudo install -m 0755 -d /etc/apt/keyrings
+  elif isLinux; then
+    sudo apt-get update -qq
 
-  echo "Installing btop..."
-  ubi -v -i ~/.local/bin -p aristocratos/btop
+    echo "Installing basics..."
+    sudo apt-get install -y -qq \
+      curl stow fuse3 bat sqlite3 cmake ca-certificates fortune cowsay
+    sudo install -m 0755 -d /etc/apt/keyrings
 
-  ln -sfn /usr/bin/batcat ~/.local/bin/bat
+    echo "Installing btop..."
+    ubi -v -i "$HOME/.local/bin" -p aristocratos/btop || true
 
-  echo "Install LSD..."
-  curl -sLo /tmp/lsd.deb https://github.com/Peltoche/lsd/releases/download/v1.1.2/lsd-musl_1.1.2_${ARCH}.deb
+    ln -sfn /usr/bin/batcat "$HOME/.local/bin/bat" || true
 
-  sudo dpkg -i /tmp/lsd.deb
-fi
+    echo "Install LSD..."
+    local lsd_deb
+    lsd_deb="$(mktemp -u /tmp/lsdXXXXXX).deb"
+    curl -fsSL -o "$lsd_deb" "https://github.com/Peltoche/lsd/releases/download/v1.1.2/lsd-musl_1.1.2_${ARCH}.deb" || lsd_deb=""
+    if [[ -n "$lsd_deb" && -f "$lsd_deb" ]]; then
+      sudo dpkg -i "$lsd_deb" || true
+    fi
+  fi
 
-echo "Building bat cache..."
-bat cache --build > /dev/null
+  echo "Building bat cache..."
+  bat cache --build >/dev/null 2>&1 || true
 
-stow --target=$HOME --dotfiles -v --restow btop/ bat/ lsd/
+  stow --target="$HOME" --dotfiles -v --restow btop/ bat/ lsd/ || true
+}
+
+# No actions on source — setup.sh calls install()

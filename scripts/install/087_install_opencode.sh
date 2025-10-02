@@ -1,12 +1,14 @@
 #!/usr/bin/env bash
 
-. scripts/lib/detect_os.sh
-. scripts/lib/install_with_git.sh
-. scripts/lib/print_utils.sh
+install() {
+  require_trait "client" "Skipping Opencode install — host is not client" || return 0
 
-print_header "Opencode"
+  print_header "Opencode"
 
-echo "Installing OpenCode..."
-ubi -v -i ~/.local/bin -p sst/opencode
+  echo "Installing OpenCode..."
+  ubi -v -i "$HOME/.local/bin" -p sst/opencode || true
 
-stow --target=$HOME --dotfiles -v --restow opencode/
+  stow --target="$HOME" --dotfiles -v --restow opencode/ || true
+}
+
+# No actions on source — setup.sh calls install()

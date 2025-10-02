@@ -1,14 +1,17 @@
 #!/usr/bin/env bash
 
-. scripts/lib/detect_os.sh
-. scripts/lib/print_utils.sh
+install() {
+  require_trait "client" "Skipping Golang install — host is not client" || return 0
 
-print_header "Rust"
+  print_header "Rust"
 
-if isMac; then
-  brew install -q rust
-elif isArch; then
-  sudo pacman -S --noconfirm --quiet rust cargo
-else
-  sudo apt-get -qq install -y rustc cargo
-fi
+  if isMac; then
+    brew install -q rust || true
+  elif isArch; then
+    sudo pacman -S --noconfirm --quiet rust cargo || true
+  elif isLinux; then
+    sudo apt-get -qq install -y rustc cargo || true
+  fi
+}
+
+# No actions on source — setup.sh calls install()

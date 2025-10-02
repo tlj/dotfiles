@@ -1,14 +1,13 @@
 #!/usr/bin/env bash
 
-. scripts/lib/detect_os.sh
-. scripts/lib/print_utils.sh
+install() {
+  require_trait "client" "Skipping Obsidian install — host is not client" || return 0
 
-print_header "Obsidian"
+  print_header "Obsidian"
 
-if isArch; then
-  sudo pacman -S --noconfirm --quiet obsidian
+  if isArch; then
+    sudo pacman -S --noconfirm --quiet obsidian || true
+  fi
+}
 
-  # ubi -v -i ~/.local/bin -p syncthing/syncthing
-fi
-
-
+# No actions on source — setup.sh calls install()

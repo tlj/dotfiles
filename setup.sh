@@ -27,6 +27,9 @@ echo "CgogXyAuLScpIF8gICAgICAgICAgICAgICAgLi0nKSBfICAgICAgICAgICAgICAgICAgICAgIC
 echo ""
 
 . scripts/lib/detect_os.sh
+. scripts/lib/print_utils.sh
+. scripts/lib/traits.sh
+. scripts/lib/install_with_git.sh
 
 echo "Installing dotfiles for ${PLATFORM} ${ARCH}..."
 
@@ -43,26 +46,42 @@ fi
 mkdir -p ~/.local/bin
 mkdir -p ~/src
 
-echo "Installing nvim config..." 
-NVIM_CONFIG_LOCATION="$XDG_CONFIG_HOME/nvim"
-if [[ ! -d "$NVIM_CONFIG_LOCATION" ]]; then
-  git clone -b master https://github.com/tlj/nvim.git "$NVIM_CONFIG_LOCATION" > /dev/null
+if has_trait "client"; then
+  echo "Installing nvim config..." 
+  NVIM_CONFIG_LOCATION="$XDG_CONFIG_HOME/nvim"
+  if [[ ! -d "$NVIM_CONFIG_LOCATION" ]]; then
+    git clone -b master https://github.com/tlj/nvim.git "$NVIM_CONFIG_LOCATION" > /dev/null
+  fi
+else
+  echo "Skipping nvim install - host is not client"
 fi
 
 PATH=$HOME/.local/bin:$PATH
 
+run_install_script() {
+  local script="$1"
+  [[ $DEBUG -eq 1 ]] && echo "Loading: $script"
+  # shellcheck disable=SC1090
+  source "$script"
+  if declare -f install >/dev/null 2>&1; then
+    [[ $DEBUG -eq 1 ]] && echo "Running install() from: $script"
+    install
+    unset -f install
+  else
+    [[ $DEBUG -eq 1 ]] && echo "No install() function found in $script — skipping"
+  fi
+}
+
 if [ $# -eq 0 ]; then
   # No arguments provided, run all scripts
   for script in scripts/install/*.sh; do
-    [[ $DEBUG -eq 1 ]] && echo "Sourcing: $script"
-    source "$script"
+    run_install_script "$script"
   done
 else
   # Filter script by argument
   for script in scripts/install/*${1}*.sh; do
     if [ -f "$script" ]; then
-      [[ $DEBUG -eq 1 ]] && echo "Sourcing: $script"
-      source "$script"
+      run_install_script "$script"
     else
       echo "No installation script found matching: ${1}"
       exit 1
@@ -75,3 +94,4 @@ if ! isMac && ! isArch; then
   gsettings set org.gnome.desktop.screensaver lock-enabled true
   gsettings set org.gnome.desktop.session idle-delay 300
 fi
+

@@ -1,21 +1,22 @@
 #!/usr/bin/env bash
 
-. scripts/lib/detect_os.sh
-. scripts/lib/print_utils.sh
+install() {
+  require_trait "client" "Skipping 1Password install — host is not client" || return 0
 
-print_header "1Password"
+  print_header "1Password"
 
-if isArch; then
-  curl -sS https://downloads.1password.com/linux/keys/1password.asc | gpg --import
-  rm -rf ~/tmp/1password > /dev/null
-  git clone https://aur.archlinux.org/1password.git ~/tmp/1password
-  cd ~/tmp/1password
-  makepkg -si
-  cd -
+  if isArch; then
+    curl -sS https://downloads.1password.com/linux/keys/1password.asc | gpg --import || true
+    rm -rf ~/tmp/1password >/dev/null 2>&1 || true
+    git clone https://aur.archlinux.org/1password.git ~/tmp/1password || true
+    pushd ~/tmp/1password >/dev/null || true
+    makepkg -si || true
+    popd >/dev/null || true
 
-  yay -S 1password-cli
-if isMac; then
-  brew install --cash 1password-cli
-fi
+    yay -S 1password-cli || true
+  elif isMac; then
+    brew install --cask 1password-cli || true
+  fi
+}
 
-
+# No actions on source — setup.sh calls install()

@@ -1,20 +1,9 @@
 #!/usr/bin/env bash
 
-. scripts/lib/detect_os.sh
-. scripts/lib/print_utils.sh
+install() {
+  print_header "Yazi"
 
-print_header "Yazi"
+  ubi -v -i "$HOME/.local/bin" -p sxyazi/yazi || true
+}
 
-YAZI_PLATFORM="unknown-linux-musl"
-if isMac; then
-  YAZI_PLATFORM="apple-darwin"
-fi
-
-YAZI_ARCH="x86_64"
-if isArm64; then
-  YAZI_ARCH="aarch64"
-fi
-
-ubi -v -i ~/.local/bin -p sxyazi/yazi
-
-
+# No actions on source — setup.sh calls install()
