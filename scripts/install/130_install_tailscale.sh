@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 
 install() {
+  require_trait "private" "Skipping Tailscale install — host is not private" || return 0
+
   print_header "Tailscale VPN"
 
   if isLinux; then

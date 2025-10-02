@@ -2,5 +2,19 @@
 
 declare -A HOSTS
 
+# client linux computers
 HOSTS["omarchybox"]='arch desktop private client internal'
+HOSTS["lenovomarchy"]='arch laptop private client internal'
+
+# linux internal servers
+HOSTS["macminux"]='linux server private internal'
+
+# mac laptops
+HOSTS["MBA13.local"]='mac laptop private client internal'
+HOSTS["TRD-M-RYV9RXYYJ5"]='mac laptop work client'
+
+# linux external facing servers
+HOSTS["dns1"]='linux server private'
+HOSTS["dns2"]='linux server private'
+HOSTS["caddy"]='linux server private'
 
