@@ -12,6 +12,10 @@ if isArch; then
   cd ~/tmp/1password
   makepkg -si
   cd -
+
+  yay -S 1password-cli
+if isMac; then
+  brew install --cash 1password-cli
 fi
 
 
