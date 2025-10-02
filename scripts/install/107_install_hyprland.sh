@@ -25,13 +25,15 @@ if isArch; then
       sudo pacman -S --noconfirm --quiet meson cpio
       
       hyprpm update
-      hyprpm add https://github.com/Duckonaut/split-monitor-workspaces
-      hyprpm enable split-monitor-workspaces
+      hyprpm add https://github.com/shezdy/hyprsplit
+      hyprpm enable hyprsplit
     else
       hyprpm update
     fi
 
     hyprpm reload -n
+
+    echo 'ALL ALL=(root) NOPASSWD: /etc/acpi/check-lid-on-startup.sh' | sudo tee /etc/sudoers.d/check-lid-on-startup > /dev/null && sudo chmod 0440 /etc/sudoers.d/check-lid-on-startup
   else
     sudo pacman -S --noconfirm --quiet hyprland waybar wofi
     stow --target=$HOME --dotfiles -v --restow hypr/ waybar/ wofi/
