@@ -5,6 +5,10 @@ nvim/.config/nvim/swap
 nvim/.config/nvim/sessions
 nvim/.config/nvim/plugin/packer_compiled.lua
 
+# symlinked based on traits
+omarchy/dot-config/hypr/autostart.conf
+omarchy/dot-config/hypr/monitors.conf
+
 #lazygit
 lazygit/dot-config/lazygit/state.yml
 .aider*

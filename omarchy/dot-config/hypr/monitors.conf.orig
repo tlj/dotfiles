@@ -7,9 +7,7 @@
 env = GDK_SCALE,2
 #monitor=,preferred,auto,auto
 #
-monitor = DP-8, 3440x1440@100, 1376x-1216, 1
-monitor = DP-9, 3440x1440@100, 1376x-1216, 1
-monitor = eDP-1, 1920x1200@60, 0x0, 1.5
+monitor = DP-1, 3440x1440@165, 0x0, 1
 
 plugin {
   split-monitor-workspaces {
