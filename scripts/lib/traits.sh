@@ -87,4 +87,87 @@ hosts_with_trait() {
   done
 }
 
+# Check whether the current host has all supplied traits.
+# Usage:
+#   has_all_traits trait1 trait2 ...
+#   has_all_traits "trait1 trait2"    # single quoted string also supported
+has_all_traits() {
+  local -a traits=()
+  if [[ $# -eq 0 ]]; then
+    return 1
+  fi
+  if [[ $# -eq 1 ]]; then
+    IFS=' ' read -r -a traits <<< "$1"
+  else
+    traits=("$@")
+  fi
+
+  local tr
+  for tr in "${traits[@]}"; do
+    if ! has_trait "$tr"; then
+      return 1
+    fi
+  done
+  return 0
+}
+
+# Check whether the current host has at least one of the supplied traits.
+# Usage:
+#   has_any_trait trait1 trait2 ...
+#   has_any_trait "trait1 trait2"    # single quoted string also supported
+has_any_trait() {
+  local -a traits=()
+  if [[ $# -eq 0 ]]; then
+    return 1
+  fi
+  if [[ $# -eq 1 ]]; then
+    IFS=' ' read -r -a traits <<< "$1"
+  else
+    traits=("$@")
+  fi
+
+  local tr
+  for tr in "${traits[@]}"; do
+    if has_trait "$tr"; then
+      return 0
+    fi
+  done
+  return 1
+}
+
+# Require that all traits are present. Accepts a space-separated list of traits
+# as the first argument (or multiple args) and an optional message as the
+# second argument. If the requirement is not met the message is printed and
+# the function returns non-zero.
+# Usage:
+#   require_all_traits "private client" "not a private + client host"
+require_all_traits() {
+  local traits_arg="$1"
+  local msg="${2:-}"
+  if ! has_all_traits "$traits_arg"; then
+    if [[ -n "$msg" ]]; then
+      echo "$msg"
+    fi
+    return 1
+  fi
+  return 0
+}
+
+# Require that at least one of the supplied traits is present. Accepts a
+# space-separated list of traits as the first argument (or multiple args) and
+# an optional message as the second argument.
+# Usage:
+#   require_any_trait "private client" "neither private nor client"
+require_any_trait() {
+  local traits_arg="$1"
+  local msg="${2:-}"
+  if ! has_any_trait "$traits_arg"; then
+    if [[ -n "$msg" ]]; then
+      echo "$msg"
+    fi
+    return 1
+  fi
+  return 0
+}
+
 # End of traits.sh

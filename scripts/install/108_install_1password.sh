@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 install() {
-  require_trait "client" "Skipping 1Password install — host is not client" || return 0
+  require_all_traits "private client" "Skipping 1Password install — host is not private client" || return 0
 
   print_header "1Password"
 

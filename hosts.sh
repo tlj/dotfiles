@@ -10,8 +10,8 @@ HOSTS["lenovomarchy"]='arch laptop private client internal'
 HOSTS["macminux"]='linux server private internal'
 
 # mac laptops
-HOSTS["MBA13.local"]='mac laptop private client internal'
-HOSTS["TRD-M-RYV9RXYYJ5"]='mac laptop work client'
+HOSTS["mba13.local"]='mac laptop private client internal'
+HOSTS["trd-m-ryv9rxyyj5"]='mac laptop work client'
 
 # linux external facing servers
 HOSTS["dns1"]='linux server private'

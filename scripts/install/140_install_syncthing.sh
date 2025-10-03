@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 install() {
-  require_trait "client" "Skipping Syncthing install — host is not internal" || return 0
+  require_all_traits "private client" "Skipping Tailscale install — host is not private client" || return 0
 
   print_header "Syncthing"
 
