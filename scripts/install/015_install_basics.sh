@@ -47,23 +47,23 @@ EOF
     sudo install -m 0755 -d /etc/apt/keyrings
 
     echo "Installing btop..."
-    ubi -v -i "$HOME/.local/bin" -p aristocratos/btop || true
+    ubi -v -i "$HOME/.local/bin" -p aristocratos/btop
 
-    ln -sfn /usr/bin/batcat "$HOME/.local/bin/bat" || true
+    ln -sfn /usr/bin/batcat "$HOME/.local/bin/bat"
 
     echo "Install LSD..."
     local lsd_deb
     lsd_deb="$(mktemp -u /tmp/lsdXXXXXX).deb"
     curl -fsSL -o "$lsd_deb" "https://github.com/Peltoche/lsd/releases/download/v1.1.2/lsd-musl_1.1.2_${ARCH}.deb" || lsd_deb=""
     if [[ -n "$lsd_deb" && -f "$lsd_deb" ]]; then
-      sudo dpkg -i "$lsd_deb" || true
+      sudo dpkg -i "$lsd_deb"
     fi
   fi
 
   echo "Building bat cache..."
-  bat cache --build >/dev/null 2>&1 || true
+  bat cache --build >/dev/null 2>&1
 
-  stow --target="$HOME" --dotfiles -v --restow btop/ bat/ lsd/ || true
+  stow --target="$HOME" --dotfiles -v --restow btop/ bat/ lsd/
 }
 
 # No actions on source — setup.sh calls install()

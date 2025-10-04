@@ -12,35 +12,35 @@ install() {
     echo "Installing commitizen-go"
     brew tap lintingzhen/tap
     brew install -q commitizen-go
-    commitizen-go install || true
+    commitizen-go install
 
   elif isArch; then
     echo "Not installing anything for arch..."
-    sudo pacman -S --noconfirm --quiet git-delta || true
+    sudo pacman -S --noconfirm --quiet git-delta
 
   elif isLinux; then
     echo "Installing git and gh..."
     sudo mkdir -p -m 755 /etc/apt/keyrings
-    wget -qO- https://cli.github.com/packages/githubcli-archive-keyring.gpg | safe_write_root /etc/apt/keyrings/githubcli-archive-keyring.gpg || true
+    wget -qO- https://cli.github.com/packages/githubcli-archive-keyring.gpg | safe_write_root /etc/apt/keyrings/githubcli-archive-keyring.gpg
     sudo chmod go+r /etc/apt/keyrings/githubcli-archive-keyring.gpg
-    echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | safe_write_root /etc/apt/sources.list.d/github-cli.list || true
+    echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | safe_write_root /etc/apt/sources.list.d/github-cli.list
     sudo apt-get -qq update -y
-    sudo apt-get -qq install -y git gh || true
+    sudo apt-get -qq install -y git gh
   fi
 
-  ubi -v -i "$HOME/.local/bin" -p lintingzhen/commitizen-go || true
-  ubi -v -i "$HOME/.local/bin" -p jesseduffield/lazygit || true
-  ubi -v -i "$HOME/.local/bin" -p mislav/hub || true
+  ubi -v -i "$HOME/.local/bin" -p lintingzhen/commitizen-go
+  ubi -v -i "$HOME/.local/bin" -p jesseduffield/lazygit
+  ubi -v -i "$HOME/.local/bin" -p mislav/hub
 
   echo "Installing gh cli extensions..."
   if [[ -z "$GITHUB_TOKEN" ]]; then
     echo "  * GITHUB_TOKEN is not set. Set it and rerun if github extensions are needed."
   else
-    gh extension install dlvhdr/gh-dash || true
-    gh extension install meiji163/gh-notify || true
+    gh extension install dlvhdr/gh-dash
+    gh extension install meiji163/gh-notify
   fi
 
-  stow --target="$HOME" --dotfiles -v --restow lazygit/ || true
+  stow --target="$HOME" --dotfiles -v --restow lazygit/
 }
 
 # No actions on source — setup.sh calls install()

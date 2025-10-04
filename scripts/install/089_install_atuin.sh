@@ -6,12 +6,12 @@ install() {
   print_header "Atuin"
 
   if isMac; then
-    brew install -q atuin || true
+    brew install -q atuin
   else
-    cargo install atuin || true
+    cargo install atuin
   fi
 
-  stow --target="$HOME" --adopt --dotfiles -v --restow atuin/ || true
+  stow --target="$HOME" --adopt --dotfiles -v --restow atuin/
 }
 
 # No actions on source — setup.sh calls install()

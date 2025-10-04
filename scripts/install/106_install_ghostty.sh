@@ -6,12 +6,12 @@ install() {
   print_header "Ghostty"
 
   if isMac; then
-    brew install -q --cask ghostty || true
+    brew install -q --cask ghostty
   elif isArch; then
-    sudo pacman -S --noconfirm --quiet ghostty || true
+    sudo pacman -S --noconfirm --quiet ghostty
   fi
 
-  stow --target="$HOME" --dotfiles -v --restow ghostty/ || true
+  stow --target="$HOME" --dotfiles -v --restow ghostty/
 }
 
 # No actions on source — setup.sh calls install()

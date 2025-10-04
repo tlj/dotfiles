@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 install() {
-  require_trait "arch" "Skipping Hyprland install — host is not arch" || return 0
+  require_trait "omarchy" "Skipping Hyprland install — host is not omarchy" || return 0
 
   print_header "Hyprland"
 
@@ -11,34 +11,34 @@ install() {
 
       if has_trait "laptop"; then
         echo "Installing ACPI"
-        sudo pacman -S --noconfirm --quiet --needed acpid || true
-        sudo systemctl enable --now acpid || true
+        sudo pacman -S --noconfirm --quiet --needed acpid
+        sudo systemctl enable --now acpid
 
-        sudo stow -v -t /etc etc || true
+        sudo stow -v -t /etc etc
 
-        cat <<'EOF' | safe_write_root /etc/sudoers.d/check-lid-on-startup || true
+        cat <<'EOF' | safe_write_root /etc/sudoers.d/check-lid-on-startup
 ALL ALL=(root) NOPASSWD: /etc/acpi/check-lid-on-startup.sh
 EOF
-        sudo chmod 0440 /etc/sudoers.d/check-lid-on-startup || true
+        sudo chmod 0440 /etc/sudoers.d/check-lid-on-startup
       fi
 
       echo "Installing dotfiles"
-      stow --target="$HOME" --dotfiles -v --restow --ignore ".*\.bak.*" omarchy/ || true
+      stow --target="$HOME" --dotfiles -v --restow --ignore ".*\.bak.*" omarchy/
 
-      hyprctl reload || true
+      hyprctl reload
 
       if ! hyprpm list | grep -q split-monitor-workspaces; then
         echo "Installing split-monitor-workspaces plugin"
-        sudo pacman -S --noconfirm --quiet meson cpio || true
+        sudo pacman -S --noconfirm --quiet meson cpio
 
-        hyprpm update || true
-        hyprpm add https://github.com/shezdy/hyprsplit || true
-        hyprpm enable hyprsplit || true
+        hyprpm update
+        hyprpm add https://github.com/shezdy/hyprsplit
+        hyprpm enable hyprsplit
       else
-        hyprpm update || true
+        hyprpm update
       fi
 
-      hyprpm reload -n || true
+      hyprpm reload -n
 
       # Configure Hypr config files based on traits (laptop vs desktop)
       local hypr_conf_dir="$HOME/.config/hypr"
@@ -72,11 +72,11 @@ EOF
         fi
         # Backup existing dest if it's a regular file
         if [ -f "$dest" ] && [ ! -L "$dest" ]; then
-          safe_backup "$dest" || true
+          safe_backup "$dest"
         elif [ -L "$dest" ]; then
-          safe_rm "$dest" || true
+          safe_rm "$dest"
         fi
-        safe_symlink "$src" "$dest" || true
+        safe_symlink "$src" "$dest"
       }
 
       if has_trait "laptop"; then
@@ -89,8 +89,8 @@ EOF
         _link_variant "$monitors_file" "$repo_monitors_desktop"
       fi
     else
-      sudo pacman -S --noconfirm --quiet hyprland waybar wofi || true
-      stow --target="$HOME" --dotfiles -v --restow hypr/ waybar/ wofi/ || true
+      sudo pacman -S --noconfirm --quiet hyprland waybar wofi
+      stow --target="$HOME" --dotfiles -v --restow hypr/ waybar/ wofi/
     fi
   fi
 }

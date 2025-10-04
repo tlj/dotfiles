@@ -7,7 +7,7 @@ install() {
 
   if isArch; then
     echo "Updating package database and installing stubby..."
-    sudo pacman -S --noconfirm --quiet stubby || true
+    sudo pacman -S --noconfirm --quiet stubby
 
     echo "Resolving dns2.tlj.no to an IP address..."
     local ip
@@ -36,7 +36,7 @@ upstream_recursive_servers:
 EOF
 
     echo "Enabling and starting stubby service"
-    sudo systemctl enable --now stubby || true
+    sudo systemctl enable --now stubby
 
     if command -v nmcli >/dev/null 2>&1; then
       echo "Configuring NetworkManager to not manage /etc/resolv.conf"
@@ -47,7 +47,7 @@ dns=none
 EOF
 
       echo "Restarting NetworkManager to apply the configuration"
-      sudo systemctl restart NetworkManager || true
+      sudo systemctl restart NetworkManager
     else
       echo "NetworkManager not detected; leaving /etc/resolv.conf unchanged"
     fi

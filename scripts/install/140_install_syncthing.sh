@@ -6,7 +6,7 @@ install() {
   print_header "Syncthing"
 
   if isArch; then
-    sudo pacman -S --noconfirm --quiet syncthing || true
+    sudo pacman -S --noconfirm --quiet syncthing
   else
     echo "Non-Arch system detected; skipping Syncthing setup"
   fi

@@ -12,11 +12,11 @@ install() {
   local tmp
 
   mkdir -p "$sshdir"
-  chmod 700 "$sshdir" || true
+  chmod 700 "$sshdir"
 
   # Ensure authorized_keys exists with correct perms
   touch "$auth"
-  chmod 600 "$auth" || true
+  chmod 600 "$auth"
 
   tmp=$(mktemp) || return 1
   trap 'rm -f "$tmp"' RETURN
@@ -46,7 +46,7 @@ install() {
     fi
   done < "$tmp"
 
-  chmod 600 "$auth" || true
+  chmod 600 "$auth"
 }
 
 

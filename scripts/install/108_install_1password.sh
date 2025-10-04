@@ -6,16 +6,16 @@ install() {
   print_header "1Password"
 
   if isArch; then
-    curl -sS https://downloads.1password.com/linux/keys/1password.asc | gpg --import || true
-    rm -rf ~/tmp/1password >/dev/null 2>&1 || true
-    git clone https://aur.archlinux.org/1password.git ~/tmp/1password || true
-    pushd ~/tmp/1password >/dev/null || true
-    makepkg -si || true
-    popd >/dev/null || true
+    curl -sS https://downloads.1password.com/linux/keys/1password.asc | gpg --import
+    rm -rf ~/tmp/1password >/dev/null 2>&1
+    git clone https://aur.archlinux.org/1password.git ~/tmp/1password
+    pushd ~/tmp/1password >/dev/null
+    makepkg -si
+    popd >/dev/null
 
-    yay -S 1password-cli || true
+    yay -S 1password-cli
   elif isMac; then
-    brew install --cask 1password-cli || true
+    brew install --cask 1password-cli
   fi
 }
 

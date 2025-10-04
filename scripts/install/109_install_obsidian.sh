@@ -6,7 +6,7 @@ install() {
   print_header "Obsidian"
 
   if isArch; then
-    sudo pacman -S --noconfirm --quiet obsidian || true
+    sudo pacman -S --noconfirm --quiet obsidian
   fi
 }
 

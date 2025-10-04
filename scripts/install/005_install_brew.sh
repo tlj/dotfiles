@@ -7,7 +7,7 @@ install() {
 
   if isMac; then
     local brew_cmd
-    brew_cmd=$(command -v brew || true)
+    brew_cmd=$(command -v brew)
     if [[ -z $brew_cmd ]]; then
       /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
       eval "$(/opt/homebrew/bin/brew shellenv)"

@@ -6,12 +6,12 @@ install() {
   print_header "Opencode"
 
   echo "Installing OpenCode..."
-  ubi -v -i "$HOME/.local/bin" -p sst/opencode || true
+  ubi -v -i "$HOME/.local/bin" -p sst/opencode
   
   echo "Installing pplx (Perplexity cli)..."
   ubi -v -i ~/.local/bin -p sgaunet/pplx
 
-  stow --target="$HOME" --dotfiles -v --restow opencode/ || true
+  stow --target="$HOME" --dotfiles -v --restow opencode/
 }
 
 # No actions on source — setup.sh calls install()
