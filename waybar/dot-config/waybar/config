@@ -21,9 +21,9 @@
     ],
 
     "modules-right": [
+        "battery",
         "network",
         "bluetooth",
-        "tray",
         "pulseaudio",
         "clock",
         "custom/exit"
