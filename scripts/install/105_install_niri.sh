@@ -5,7 +5,7 @@ install() {
 
   print_header "Niri"
 
-  sudo pacman -Syu --noconfirm --quiet niri waybar wofi
+  sudo pacman -Syu --noconfirm --quiet niri waybar wofi waylock wayidle mako
 
   stow --target="$HOME" --dotfiles -v --restow niri/ waybar/ wofi/
 }
