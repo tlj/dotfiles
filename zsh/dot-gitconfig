@@ -1,3 +1,10 @@
 [user]
 	name = tlj
 	email = tlj@tlj.no
+[pull]
+	rebase = true
+[alias]
+	co = checkout
+	br = branch
+	ci = commit
+	st = status
