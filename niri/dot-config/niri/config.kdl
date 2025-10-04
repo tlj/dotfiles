@@ -26,6 +26,13 @@ input {
 // You will have to remove "/-" and edit it before it takes effect.
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Outputs
 
+output "Lenovo Group Limited 0x403D Unknown" {
+    mode "19200x1200@60.003" // Set resolution and refresh rate
+    scale 1.25 // No scaling (use 2 for HiDPI)
+    focus-at-startup
+    variable-refresh-rate on-demand=true
+}
+
 output "ASUSTek COMPUTER INC ASUS VG34V R3LMTF040381" {
     mode "3440x1440@164.999" // Set resolution and refresh rate
     scale 1 // No scaling (use 2 for HiDPI)
