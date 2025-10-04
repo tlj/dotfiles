@@ -1,51 +1,137 @@
 * {
-  font-family: "VictorMono NFM", Roboto, Helvetica, Arial, sans-serif;
-  font-size: 12px;
-  font-weight: 900;
-  margin: 0;
-  padding: 0;
+    font-family: "Fira Sans Semibold", "Font Awesome 6 Free", FontAwesome, Roboto, Helvetica, Arial, sans-serif;
 }
 
-#waybar {
-  background-color: #282828;
-  color: #ebdbb2;
+window#waybar {
+    background-color: #282828;
+    color: #a89984;
+    font-size: 14px;
+    border-radius: 0px;
+    margin: 0px;
+    padding: 0;
+}
+
+/* Left-most: Arch icon */
+/* #custom-appmenu { */
+/*   font-size: 4; */
+/*   background-image: url('/usr/share/icons/cachyos.svg'); */
+/*   background-color: #1e222a; */
+/*   background-position: center; */
+/*   background-repeat: no-repeat; */
+/*   background-size: contain; */
+/*   padding: 0px 12px; */
+/**/
+/* } */
+
+/* Right-most: Clock */
+#clock {
+    /* font-size: 14px; */
+    background-color: transparent;
+    /* color: #ebdbb2; */
+    border-radius: 0px;
+    padding: 0px 8px;
+}
+
+/* Active window title */
+#window {
+    font-size: 14px;
+    font-weight: 800;
+    /* color: #e0e0e0; */
+    border-radius: 0px;
+    padding: 4px 12px;
+    /* background-color: #1e222a; */
+}
+
+/* Workspace container */
+#workspaces {
+    /* background-color: #3c3836; */
+    /* color: #ebdbb2; */
+    /* font-weight: bold; */
+    border-radius: 0px;
+    /* font-size: 8px; */
+}
+
+/* Individual workspace buttons */
+#workspaces button {
+    border-radius: 0px;
+    background: transparent;
+    color: #a89984;
+    /* font-size: 12px; */
+  margin: 0;
+  padding: 0 0.5em;
 }
 
 #workspaces button.active {
-  color: #ebdbb2;
-  background-color: #665c43;
+    border-radius: 0px;
+    color: #d65d0e;
+    font-weight: bold;
+    /* color: #ebdbb2; */
+    /* background: #98971a; */
 }
 
-#workspaces {
-  padding: 3px 6px;
+#workspaces button:hover {
+    border-radius: 0px;
+    background: #b8bb26;
+    border-width: 0px;
 }
 
-#battery,
-#cpu,
+/* Power/exit button */
+#custom-exit {
+    /* background-color: #00ac89; */
+    /* font-size: 14px; */
+    font-weight: 800;
+    /* color: #0f1117; */
+    padding: 0px 6px;
+    margin: 2px 2px 2px 0;
+}
+
+/* Tooltips */
+tooltip {
+    border-radius: 12px;
+    background-color: #0f1117;
+    color: #c0c0c0;
+    padding: 4px 8px;
+}
+
+/* Taskbar */
+#taskbar {
+    background-color: #1e222a;
+    margin: 0px;
+    border-radius: 0px;
+    font-weight: normal;
+}
+
+/* All system info modules */
 #backlight,
-#clock {
-  padding: 6px;
-}
-
-#battery {
-    color: #fabd2f;
-}
-
-#battery.charging,
-#battery.full,
-#battery.plugged {
-    color: #b8bb26;
-}
-  
-#custom-power {
-  padding: 6px;
-}
-
-#network {
+#pulseaudio,
+#network,
+#bluetooth,
+#battery,
+#tray,
+#custom-updates,
+#custom-notification {
+    background-color: transparent;
+    /* font-size: 14px; */
+    /* font-weight: 800; */
+    /* color: #c0c0c0; */
+    border-radius: 0px;
+    padding: 4px 10px;
 }
 
 #network.disconnected {
-    color: #fb4934;
+  color: #cc241d;
 }
 
+/* Battery critical warning */
+#battery.critical:not(.charging) {
+    background-color: #e65100;
+    color: #ffffff;
+    animation: blink 0.5s linear infinite alternate;
+}
 
+@keyframes blink {
+    to {
+        background-color: #0f1117;
+        color: #ffffff;
+    }
+}

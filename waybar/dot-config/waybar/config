@@ -1,72 +1,31 @@
 {
-  "layer": "top",
-  "height": 25,
-  "spacing": 0,
-  "modules-left": ["hyprland/workspaces"],
-  "modules-center": [],
-  "modules-right": [
-    "network",
-    "backlight",
-    "cpu",
-    "battery",
-    "clock",
-    "custom/power"
-  ],
-      "backlight": {
-        "device": "intel_backlight",
-        "format": "{icon} {percent}%",
-        "format-alt": "{percent}% {icon}",
-        "format-alt-click": "click-right",
-        //"format-icons": ["", ""],
-        "format-icons": ["", ""],
-        "on-scroll-down": "brightnessctl s 5%-",
-        "on-scroll-up": "brightnessctl s +5%"
-    },
+    "layer": "top",
+    "margin-top": 0,
+    "margin-bottom": 0,
+    "margin-left": 0,
+    "margin-right": 0,
+    "spacing": 0,
 
-  "custom/power": {
-    "format": " 󰐥 ",
-    "tooltip": false,
-    "on-click": "wlogout"
-  },
-      "cpu": {
-        "interval": 1,
-        //"format": " {}%", // Icon: microchip
-        "format": "{max_frequency}GHz <span color=\"darkgray\">| {usage}%</span>",
-        "max-length": 13,
-        "min-length": 13
-    },
+    "include": [
+        "~/.config/waybar/modules.json"
+    ],
 
-    "battery": {
-        "interval": 2,
-        "states": {
-            "good": 95,
-            "warning": 30,
-            "critical": 15
-        },
-        "format": "{icon} {capacity}%",
-        "format-charging": " {capacity}%",
-        "format-plugged": " {capacity}%",
-        "format-icons": [
-            "",
-            "",
-            "",
-            "",
-            ""
-        ]
-    },
-      "network": {
-        "format-wifi": " {essid} ({signalStrength}%)",
-        "format-ethernet": "{ifname}: {ipaddr}/{cidr} ",
-        "format-linked": "{ifname} (No IP) ",
-        "format": "",
-        "format-disconnected": "",
-        "format-alt": "{ifname}: {ipaddr}/{cidr}",
-        "on-click": "wl-copy $(ip address show up scope global | grep inet | head -n1 | cut -d/ -f 1 | tr -d [:space:] | cut -c5-)",
-        "on-click-right": "wl-copy $(ip address show up scope global | grep inet6 | head -n1 | cut -d/ -f 1 | tr -d [:space:] | cut -c6-)",
-        "tooltip-format": " {bandwidthUpBits}  {bandwidthDownBits}\n{ifname}\n{ipaddr}/{cidr}\n",
-        "tooltip-format-wifi": " {essid} {frequency}MHz\nStrength: {signaldBm}dBm ({signalStrength}%)\nIP: {ipaddr}/{cidr}\n {bandwidthUpBits}  {bandwidthDownBits}",
-        "interval": 10
-    }
+    "modules-left": [
+//        "custom/appmenu",
+        // "wlr/taskbar",
+        // "niri/window"
+        "niri/workspaces"
+    ],
 
+    "modules-center": [
+    ],
 
+    "modules-right": [
+        "network",
+        "bluetooth",
+        "tray",
+        "pulseaudio",
+        "clock",
+        "custom/exit"
+    ]
 }

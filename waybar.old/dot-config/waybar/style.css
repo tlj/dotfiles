@@ -1,0 +1,51 @@
+* {
+  font-family: "VictorMono NFM", Roboto, Helvetica, Arial, sans-serif;
+  font-size: 12px;
+  font-weight: 900;
+  margin: 0;
+  padding: 0;
+}
+
+#waybar {
+  background-color: #282828;
+  color: #ebdbb2;
+}
+
+#workspaces button.active {
+  color: #ebdbb2;
+  background-color: #665c43;
+}
+
+#workspaces {
+  padding: 3px 6px;
+}
+
+#battery,
+#cpu,
+#backlight,
+#clock {
+  padding: 6px;
+}
+
+#battery {
+    color: #fabd2f;
+}
+
+#battery.charging,
+#battery.full,
+#battery.plugged {
+    color: #b8bb26;
+}
+  
+#custom-power {
+  padding: 6px;
+}
+
+#network {
+}
+
+#network.disconnected {
+    color: #fb4934;
+}
+
+
