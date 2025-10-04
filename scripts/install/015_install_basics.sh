@@ -12,7 +12,9 @@ install() {
     sudo pacman -Syu --noconfirm --quiet
 
     sudo pacman -S --noconfirm --quiet \
-      curl stow fuse3 bat sqlite3 cmake ca-certificates lsd btop interception-caps2esc
+      curl stow fuse3 bat sqlite3 cmake ca-certificates lsd btop interception-caps2esc yay
+
+    yay -S --noconfirm --quiet blueman
 
     cat <<'EOF' | safe_write_root /etc/udevmon.yaml
 - JOB: "intercept -g $DEVNODE | caps2esc -m 1 | uinput -d $DEVNODE"

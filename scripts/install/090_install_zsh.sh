@@ -23,6 +23,8 @@ install() {
   echo "Installing zsh-autosuggestions..."
   install_with_git ~/.zsh/zsh-autosuggestions https://github.com/zsh-users/zsh-autosuggestions || true
 
+  chsh -s $(which zsh)
+
   stow --target="$HOME" --dotfiles -v --restow zsh/ starship/ || true
 }
 

@@ -3,7 +3,7 @@
 declare -A HOSTS
 
 # client linux computers
-HOSTS["omarchybox"]='arch desktop private client internal'
+HOSTS["cachybox"]='arch desktop private client internal'
 HOSTS["lenovomarchy"]='arch laptop private client internal'
 
 # linux internal servers
