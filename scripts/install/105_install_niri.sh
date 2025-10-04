@@ -5,9 +5,9 @@ install() {
 
   print_header "Niri"
 
-  sudo pacman -Syu --noconfirm --quiet niri waybar
+  sudo pacman -Syu --noconfirm --quiet niri waybar wofi
 
-  stow --target="$HOME" --dotfiles -v --restow niri/ waybar/
+  stow --target="$HOME" --dotfiles -v --restow niri/ waybar/ wofi/
 }
 
 # No actions on source — setup.sh calls install()
