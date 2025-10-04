@@ -7,6 +7,9 @@ install() {
 
   echo "Installing OpenCode..."
   ubi -v -i "$HOME/.local/bin" -p sst/opencode || true
+  
+  echo "Installing pplx (Perplexity cli)..."
+  ubi -v -i ~/.local/bin -p sgaunet/pplx
 
   stow --target="$HOME" --dotfiles -v --restow opencode/ || true
 }
