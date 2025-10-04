@@ -4,7 +4,7 @@ declare -A HOSTS
 
 # client linux computers
 HOSTS["cachybox"]='arch niri desktop private client internal'
-HOSTS["lenovomarchy"]='arch omarchy laptop private client internal'
+HOSTS["cachovo"]='arch niri laptop private client internal'
 
 # linux internal servers
 HOSTS["macminux"]='linux server private internal'

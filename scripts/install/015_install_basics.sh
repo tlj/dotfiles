@@ -5,6 +5,8 @@ install() {
 
   mkdir -p "$HOME/.local/bin"
 
+  curl --silent --location https://raw.githubusercontent.com/houseabsolute/ubi/master/bootstrap/bootstrap-ubi.sh | sudo sh
+
   if isMac; then
     brew install -q stow btop bat sqlite cmake fortune cowsay
 
