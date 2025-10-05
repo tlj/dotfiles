@@ -12,8 +12,14 @@ input {
         numlock // Enable numlock on startup
     }
 
+    trackpoint {
+      accel-speed 0.2
+      accel-profile "flat"
+    }
+
     touchpad {
-        tap // Enable tap-to-click
+        dwt
+        dwtp
         natural-scroll // Enable natural (macOS-style) scrolling
     }
 
