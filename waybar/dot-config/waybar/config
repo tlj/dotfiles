@@ -23,6 +23,7 @@
     "modules-right": [
         "battery",
         "network",
+        "custom/tailscale",
         "bluetooth",
         "pulseaudio",
         "clock",

@@ -7,6 +7,7 @@ install() {
 
   if isLinux; then
     curl -fsSL https://tailscale.com/install.sh | sh
+    sudo tailscale set --operator=$(whoami)
     sudo tailscale up
   elif isMac; then
     echo "Install the standalone version from https://pkgs.tailscale.com/stable/#macos"
