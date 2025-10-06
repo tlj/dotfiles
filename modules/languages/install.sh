@@ -19,6 +19,7 @@ if ! command -v rustup >/dev/null 2>&1; then
 fi
 
 echo " - Rustup update..."
+rustup default stable
 rustup update
 
 echo " - Installing nvm..."

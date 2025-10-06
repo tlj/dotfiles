@@ -39,7 +39,7 @@ cargo install -q tickrs --locked
 
 if isArch && [ ! -d /usr/share/sddm/themes/tlj ]; then
   sudo mkdir -p /etc/sddm.conf.d /usr/share/sddm/themes/tlj
-  sudo cp -r "$TOP_DIR/modules/gui/files/sddm-theme/*" /usr/share/sddm/themes/tlj
+  sudo cp -r $TOP_DIR/modules/gui/files/sddm-theme/* /usr/share/sddm/themes/tlj
   cat <<EOF | safe_write_root /etc/sddm.conf.d/90-tlj.conf
 [Theme]
 Current=tlj
