@@ -1,2 +1,0 @@
-event=button/lid.*open
-action=/etc/acpi/lid-open.sh

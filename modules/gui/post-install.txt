@@ -1,0 +1,4 @@
+Zen Browser
+  - open about:config, and set these to true:
+    - zen.view.compact.enable-at-startup
+    - zen.view.compact.show-sidebar-and-toolbar-on-hover

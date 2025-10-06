@@ -1,111 +1,140 @@
 #!/usr/bin/env bash
+set -euo pipefail
 
-set -e
+# nextgen/setup.sh - main entrypoint (always executed, not sourced)
 
-# Define flags with default values
-DEBUG=0
-VERBOSE=0
-DRY_RUN=0
+# Determine top-level directory for nextgen (this file lives in nextgen/)
+TOP_SCRIPT="${BASH_SOURCE[0]}"
+TOP_DIR="$(dirname "$(realpath "$TOP_SCRIPT")")"
 
-# Parse command line arguments
-while getopts "dvn-:" opt; do
-  case $opt in
-  d) DEBUG=1 ;;
-  v) VERBOSE=1 ;;
-  n) DRY_RUN=1 ;;
-  -)
-    case "$OPTARG" in
-      dry-run) DRY_RUN=1 ;;
-      *) echo "Unknown option --$OPTARG" >&2; exit 1 ;;
-    esac ;;
-  *)
-    echo "Usage: $0 [-d] [-v] [-n|--dry-run] [script_filter]" >&2
-    exit 1
-    ;;
+# Source all library scripts under nextgen/lib
+if [[ -d "$TOP_DIR/lib" ]]; then
+  # avoid literal pattern if no matches
+  shopt -s nullglob
+  for lib in "$TOP_DIR"/lib/*.sh; do
+    # shellcheck disable=SC1090
+    [[ -f "$lib" ]] && source "$lib"
+  done
+  shopt -u nullglob
+fi
+
+# Ensure resolve_modules_for_host is available
+if ! declare -f resolve_modules_for_host >/dev/null; then
+  echo "resolve_modules_for_host not found after sourcing libs"
+  exit 1
+fi
+
+# Get modules for current host (one token per line like "module:name")
+mapfile -t module_tokens < <(resolve_modules_for_host)
+
+# Optional: allow selecting a single module to install via -m/--module or NEXTGEN_MODULE env var
+MODULE_FILTER="${NEXTGEN_MODULE:-}"
+# Parse CLI args for module filter
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+    -m|--module)
+      if [[ -n "${2:-}" ]]; then
+        MODULE_FILTER="$2"
+        shift 2
+      else
+        echo "Missing value for $1"
+        exit 1
+      fi
+      ;;
+    --module=*)
+      MODULE_FILTER="${1#*=}"
+      shift
+      ;;
+    *)
+      echo "Unknown argument: $1"
+      exit 1
+      ;;
   esac
 done
 
-# Shift the options so $1 becomes the first non-option argument
-shift $((OPTIND - 1))
-
-# Export DRY_RUN so sourced scripts can see it
-export DRY_RUN
-
-. scripts/lib/dry_run.sh
-
-. scripts/lib/safe_helpers.sh
-
-# Print Dotfiles Logo
-echo "CgogXyAuLScpIF8gICAgICAgICAgICAgICAgLi0nKSBfICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICgnLS4gICAgLi0nKSAgICAKKCAoICBPTykgKSAgICAgICAgICAgICAgKCAgT08pICkgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgXyggIE9PKSAgKCBPTyApLiAgCiBcICAgICAuJ18gIC4tJyksLS0tLS0uIC8gICAgICcuXyAgICAsLS0tLS0tLiwtLi0nKSAgLC0tLiAgICAgKCwtLS0tLS0uKF8pLS0tXF8pIAogLGAnLS0uLi5fKSggT08nICAuLS4gICd8Jy0tLi4uX18pKCctfCBfLi0tLSd8ICB8T08pIHwgIHwuLScpICB8ICAuLS0tJy8gICAgXyB8ICAKIHwgIHwgIFwgICcvICAgfCAgfCB8ICB8Jy0tLiAgLi0tJyhPT3woX1wgICAgfCAgfCAgXCB8ICB8IE9PICkgfCAgfCAgICBcICA6YCBgLiAgCiB8ICB8ICAgJyB8XF8pIHwgIHxcfCAgfCAgIHwgIHwgICAvICB8ICAnLS0uIHwgIHwoXy8gfCAgfGAtJyB8KHwgICctLS4gICcuLmAnJy4pIAogfCAgfCAgIC8gOiAgXCB8ICB8IHwgIHwgICB8ICB8ICAgXF8pfCAgLi0tJyx8ICB8Xy4nKHwgICctLS0uJyB8ICAuLS0nIC4tLl8pICAgXCAKIHwgICctLScgIC8gICBgJyAgJy0nICAnICAgfCAgfCAgICAgXHwgIHxfKShffCAgfCAgICB8ICAgICAgfCAgfCAgYC0tLS5cICAgICAgIC8gCiBgLS0tLS0tLScgICAgICBgLS0tLS0nICAgIGAtLScgICAgICBgLS0nICAgIGAtLScgICAgYC0tLS0tLScgIGAtLS0tLS0nIGAtLS0tLScgIAoKCg==" | base64 -d | printf "\033[34m%s\033[0m" "$(cat -)"
-
-echo ""
-
-. scripts/lib/detect_os.sh
-. scripts/lib/print_utils.sh
-. scripts/lib/traits.sh
-. scripts/lib/install_with_git.sh
-
-echo "Installing dotfiles for ${PLATFORM} ${ARCH}..."
-
-# Example of using the flags
-[[ $DEBUG -eq 1 ]] && echo "Debug mode enabled"
-[[ $VERBOSE -eq 1 ]] && echo "Verbose mode enabled"
-
-if ! isMac && ! isArch; then
-  # Ensure computer doesn't go to sleep or lock while installing
-  gsettings set org.gnome.desktop.screensaver lock-enabled false
-  gsettings set org.gnome.desktop.session idle-delay 0
-fi
-
-mkdir -p ~/.local/bin
-mkdir -p ~/src
-
-if has_trait "client"; then
-  echo "Installing nvim config..." 
-  NVIM_CONFIG_LOCATION="$XDG_CONFIG_HOME/nvim"
-  if [[ ! -d "$NVIM_CONFIG_LOCATION" ]]; then
-    git clone -b master https://github.com/tlj/nvim.git "$NVIM_CONFIG_LOCATION" > /dev/null
+if [[ -n "$MODULE_FILTER" ]]; then
+  # Filter module_tokens to only the requested module (match tokens like module:name)
+  filtered=()
+for tok in "${module_tokens[@]}"; do
+    if [[ "$tok" == "module:$MODULE_FILTER" ]]; then
+      filtered+=("$tok")
+    fi
+  done
+  if [[ ${#filtered[@]} -eq 0 ]]; then
+    echo "No modules to install for host matching: $MODULE_FILTER"
+    exit 0
   fi
-else
-  echo "Skipping nvim install - host is not client"
+  module_tokens=("${filtered[@]}")
 fi
 
-PATH=$HOME/.local/bin:$PATH
-
-run_install_script() {
-  local script="$1"
-  [[ $DEBUG -eq 1 ]] && echo "Loading: $script"
-  # shellcheck disable=SC1090
-  source "$script"
-  if declare -f install >/dev/null 2>&1; then
-    [[ $DEBUG -eq 1 ]] && echo "Running install() from: $script"
-    install
-    unset -f install
-  else
-    [[ $DEBUG -eq 1 ]] && echo "No install() function found in $script — skipping"
+# Function to run stow for a module. Module install scripts should call this
+# when they want the stow step to run (instead of setup.sh running it
+# automatically). The function accepts a single argument: the module name.
+stow_package() {
+  local module_name="$1"
+  if [[ -z "$module_name" ]]; then
+    echo "stow_package requires a module name"
+    return 1
+  fi
+  local pkg_dir="$TOP_DIR/modules/$module_name"
+  local stow_pkg_dir="$pkg_dir/stow"
+  if [[ -d "$stow_pkg_dir" ]]; then
+    if ! command -v stow >/dev/null 2>&1; then
+      echo "stow not found; skipping stow for module $module_name"
+      return 0
+    fi
+    check_and_backup_links "$stow_pkg_dir"
+    echo " - Running stow for module $module_name"
+    stow --dir="$pkg_dir" --target="$HOME" --dotfiles --adopt stow
   fi
 }
 
-if [ $# -eq 0 ]; then
-  # No arguments provided, run all scripts
-  for script in scripts/install/*.sh; do
-    run_install_script "$script"
-  done
-else
-  # Filter script by argument
-  for script in scripts/install/*${1}*.sh; do
-    if [ -f "$script" ]; then
-      run_install_script "$script"
-    else
-      echo "No installation script found matching: ${1}"
-      exit 1
-    fi
-  done
+if [[ ${#module_tokens[@]} -eq 0 ]]; then
+  echo "No modules to install for host"
+  exit 0
 fi
 
-if ! isMac && ! isArch; then
-  # Revert to normal idle and lock settings
-  gsettings set org.gnome.desktop.screensaver lock-enabled true
-  gsettings set org.gnome.desktop.session idle-delay 300
-fi
+# Track installed modules to display post-install instructions
+installed_modules=()
 
+# Call each module's install.sh by sourcing it so they have access to the libs
+for tok in "${module_tokens[@]}"; do
+  if [[ "$tok" != module:* ]]; then
+    echo "Skipping unexpected token: $tok"
+    continue
+  fi
+
+  module_name="${tok#module:}"
+  install_sh="$TOP_DIR/modules/$module_name/install.sh"
+  if [[ ! -f "$install_sh" ]]; then
+    echo "Module install script not found: $install_sh"
+    exit 1
+  fi
+
+  echo "Sourcing module install: $install_sh"
+  # shellcheck disable=SC1090
+  source "$install_sh"
+
+  # Previously we ran stow automatically here. Instead modules should call
+  # the helper function `stow_package "$module_name"` from their install
+  # scripts when they want the stow step to run. This allows module install
+  # scripts to perform follow-up actions that depend on stowed files.
+  : # no-op placeholder to keep diff minimal
+  installed_modules+=("$module_name")
+done
+
+# Show any post-install instructions provided by modules
+for m in "${installed_modules[@]}"; do
+  post="$TOP_DIR/modules/$m/post-install.txt"
+  if [[ -f "$post" ]]; then
+    echo
+    echo "Post-install instructions for module $m:"
+    echo "--------------------------------------------------"
+    cat "$post"
+    echo "--------------------------------------------------"
+  fi
+done
+
+echo "Setup completed."
+
+exit 0

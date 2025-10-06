@@ -1,0 +1,4 @@
+[submodule "modules/devtools/stow/dot-config/nvim"]
+	path = modules/devtools/stow/dot-config/nvim
+	url = git@github.com:tlj/nvim.git
+	branch = 0.12

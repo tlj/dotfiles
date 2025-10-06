@@ -1,0 +1,22 @@
+[General]
+Font="Noto Sans"
+FontSize=10
+
+PasswordShowLastLetter=0
+
+# [Colors]
+hower     = "#8B8176"
+text      = "#a89984"
+surface2  = "#504945"
+surface1  = "#3c3836"
+surface0  = "#282828"
+overlay   = "#d79921"
+border    = "#98971a"
+base      = "#282828"
+Primary   = "#928374"
+onPrimary = "#ebdbb2"
+
+## [Locale Settings]
+Locale=""
+HourFormat="hh:mm A"
+DateFormat = "ddd dd/MM/yy"

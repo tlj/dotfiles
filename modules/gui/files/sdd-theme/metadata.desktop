@@ -1,0 +1,17 @@
+[SddmGreeterTheme]
+Name=tlj
+Description=TLJ Theme
+Author=tlj
+Copyright=tlj
+License=CC-BY-SA
+Type=sddm-theme
+Version=0.1
+Website=https://github.com/tlj/dotfiles
+Screenshot=
+MainScript=Main.qml
+ConfigFile=theme.conf
+TranslationsDirectory=
+Email=tlj@tlj.no
+Theme-Id=tlj
+Theme-API=2.0
+QtVersion=6
